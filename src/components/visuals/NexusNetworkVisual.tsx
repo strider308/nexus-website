@@ -17,21 +17,6 @@ export function NexusNetworkVisual() {
 
   return (
     <div className="relative w-full max-w-[420px] aspect-[420/200] md:aspect-[420/200] mx-auto flex items-center justify-center">
-      {/* Glow highlight behind central core */}
-      {!shouldReduceMotion && (
-        <motion.div 
-          className="absolute w-36 h-36 rounded-full blur-[48px] bg-[#2E6FAD] opacity-10 pointer-events-none"
-          animate={{
-            scale: [1, 1.12, 1],
-            opacity: [0.1, 0.16, 0.1]
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      )}
 
       {/* Desktop SVG */}
       <svg viewBox="0 0 420 200" className="hidden md:block w-full h-full overflow-visible relative z-10">

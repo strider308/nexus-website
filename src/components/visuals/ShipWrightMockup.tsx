@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
 
 export function ShipWrightMockup() {
   return (
@@ -59,8 +58,8 @@ export function ShipWrightMockup() {
       <text x="314" y="152" font-family="sans-serif" font-size="10" fill="#6B6B6B">Ananya</text>
       <rect x="388" y="142" width="90" height="12" rx="3" fill="#F2F0F8"/>
       
-      {/* Animated active task progress bar */}
-      <motion.rect x="388" y="142" width="65" height="12" rx="3" fill="#5B4B8A" animate={{ opacity: [0.55, 0.85, 0.55] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} />
+      {/* Static task progress bar */}
+      <rect x="388" y="142" width="65" height="12" rx="3" fill="#5B4B8A" opacity="0.7" />
       <text x="484" y="152" font-family="sans-serif" font-size="9" fill="#5B4B8A" font-weight="600" text-anchor="start">72%</text>
  
       <rect x="288" y="176" width="224" height="60" rx="6" fill="white" stroke="#E2E2DE" stroke-width="0.5"/>

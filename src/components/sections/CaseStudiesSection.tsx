@@ -283,12 +283,8 @@ export function CaseStudiesSection() {
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {activeStudy.capabilities.map((cap, idx) => (
-                      <motion.div 
+                      <div 
                         key={cap.title} 
-                        initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-                        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.1 }}
-                        transition={{ duration: 0.45, delay: idx * 0.04, ease: "easeOut" }}
                         className={cn(
                           "border rounded-[6px] p-6 transition-all duration-300",
                           idx === 0 
@@ -311,7 +307,7 @@ export function CaseStudiesSection() {
                             </li>
                           ))}
                         </ul>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>

@@ -116,7 +116,7 @@ export function LayoutExtras() {
         >
           <p className="text-xs md:text-sm text-white/80 max-w-3xl leading-relaxed">
             We use analytics cookies to understand how this site is used and improve it. See our{" "}
-            <a href="/privacy-policy" className="underline hover:text-white interactive-action">
+            <a href="/privacy-policy" className="underline hover:text-white">
               Privacy Policy
             </a>{" "}
             for details.

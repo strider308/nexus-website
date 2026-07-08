@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
 
 export function SafeDateMockup() {
   return (
@@ -13,9 +12,9 @@ export function SafeDateMockup() {
       <text x="16" y="17" font-family="sans-serif" font-size="10" fill="white" opacity=".7">SafeDate</text>
       <text x="16" y="33" font-family="sans-serif" font-size="13" font-weight="700" fill="white">Active plan · Coffee date</text>
       
-      {/* Pulse check-in capsule */}
+      {/* Static check-in capsule */}
       <g>
-        <motion.rect x="660" y="12" width="124" height="22" rx="11" fill="white" animate={{ opacity: [0.15, 0.35, 0.15] }} transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }} />
+        <rect x="660" y="12" width="124" height="22" rx="11" fill="white" opacity="0.2" />
         <text x="722" y="27" font-family="sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">Check-in: 2h 14m</text>
       </g>
  

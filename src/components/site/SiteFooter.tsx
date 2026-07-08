@@ -21,7 +21,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Nexus on X / Twitter"
-            className="text-white/60 hover:text-white text-xs font-semibold tracking-wider uppercase transition-colors interactive-action"
+            className="text-white/60 hover:text-white text-xs font-semibold tracking-wider uppercase transition-colors"
           >
             X (Twitter)
           </a>
@@ -30,7 +30,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Nexus on LinkedIn"
-            className="text-white/60 hover:text-white text-xs font-semibold tracking-wider uppercase transition-colors interactive-action"
+            className="text-white/60 hover:text-white text-xs font-semibold tracking-wider uppercase transition-colors"
           >
             LinkedIn
           </a>
@@ -39,7 +39,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Nexus on GitHub"
-            className="text-white/60 hover:text-white text-xs font-semibold tracking-wider uppercase transition-colors interactive-action"
+            className="text-white/60 hover:text-white text-xs font-semibold tracking-wider uppercase transition-colors"
           >
             GitHub
           </a>
@@ -56,19 +56,19 @@ export function SiteFooter() {
           <div className="flex gap-4">
             <a 
               href="/privacy-policy" 
-              className="hover:text-white underline transition-colors focus-visible:ring-1 focus-visible:ring-white/40 outline-none rounded-[2px] px-1 interactive-action"
+              className="hover:text-white underline transition-colors focus-visible:ring-1 focus-visible:ring-white/40 outline-none rounded-[2px] px-1"
             >
               Privacy Policy
             </a>
             <a 
               href="/terms-of-service" 
-              className="hover:text-white underline transition-colors focus-visible:ring-1 focus-visible:ring-white/40 outline-none rounded-[2px] px-1 interactive-action"
+              className="hover:text-white underline transition-colors focus-visible:ring-1 focus-visible:ring-white/40 outline-none rounded-[2px] px-1"
             >
               Terms of Service
             </a>
             <a 
               href="/sitemap.xml" 
-              className="hover:text-white underline transition-colors focus-visible:ring-1 focus-visible:ring-white/40 outline-none rounded-[2px] px-1 interactive-action"
+              className="hover:text-white underline transition-colors focus-visible:ring-1 focus-visible:ring-white/40 outline-none rounded-[2px] px-1"
             >
               Sitemap
             </a>

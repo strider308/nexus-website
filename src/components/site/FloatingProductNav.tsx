@@ -95,10 +95,7 @@ export function FloatingProductNav() {
             >
               {btn.initials}
 
-              {/* Pulsing indicator for active system */}
-              {isActive && (
-                <span className="absolute inset-0 rounded-full border-2 border-white/80 animate-ping opacity-75" />
-              )}
+
 
               {/* Tooltip */}
               <span className="absolute bottom-[calc(100%+8px)] left-1/2 transform -translate-x-1/2 bg-[#0C1828] border border-white/10 text-white font-sans text-[10px] font-semibold px-2 py-1 rounded-[4px] opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md">

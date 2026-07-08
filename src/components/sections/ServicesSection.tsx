@@ -95,13 +95,7 @@ export function ServicesSection() {
                           borderColor: shouldReduceMotion ? "#2E6FAD" : undefined
                         }}
                       />
-                      <motion.div 
-                        className="absolute w-3.5 h-3.5 rounded-full bg-[#2E6FAD]"
-                        initial={{ scale: shouldReduceMotion ? 1 : 0, opacity: shouldReduceMotion ? 1 : 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        viewport={{ once: true, margin: "-10% 0px -30% 0px" }}
-                        transition={{ duration: 0.3, delay: shouldReduceMotion ? 0 : idx * 0.05 }}
-                      />
+                      <div className="absolute w-3.5 h-3.5 rounded-full bg-[#2E6FAD]" />
                     </div>
 
                     <span className="text-[10px] font-mono font-bold text-muted-foreground group-hover:text-[#2E6FAD] transition-colors block mb-1">
@@ -147,13 +141,7 @@ export function ServicesSection() {
                           borderColor: shouldReduceMotion ? "#2E6FAD" : undefined
                         }}
                       />
-                      <motion.div 
-                        className="absolute w-2.5 h-2.5 rounded-full bg-[#2E6FAD]"
-                        initial={{ scale: shouldReduceMotion ? 1 : 0, opacity: shouldReduceMotion ? 1 : 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        viewport={{ once: true, margin: "-10% 0px -30% 0px" }}
-                        transition={{ duration: 0.3, delay: shouldReduceMotion ? 0 : idx * 0.05 }}
-                      />
+                      <div className="absolute w-2.5 h-2.5 rounded-full bg-[#2E6FAD]" />
                     </div>
 
                     <div>
