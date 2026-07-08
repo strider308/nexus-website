@@ -1,4 +1,4 @@
-import { FOUNDER, METADATA } from "@/lib/content/nexus";
+import { FOUNDER, METADATA, HERO } from "@/lib/content/nexus";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Mail, Globe, MapPin, DollarSign, ExternalLink, ShieldCheck } from "lucide-react";
 
@@ -95,7 +95,9 @@ export function FounderSection() {
                 <div className="col-span-8 px-5 py-4 text-xs md:text-sm font-light text-muted-foreground leading-relaxed">
                   Contact us — pricing is based on product, deployment scale, and configuration.{" "}
                   <a 
-                    href={`${METADATA.canonicalUrl}/contact`} 
+                    href={HERO.ctaUrl} 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-[#2E6FAD] hover:underline font-semibold block mt-1 focus-visible:ring-1 focus-visible:ring-[#2E6FAD]/50 outline-none rounded-[2px]"
                   >
                     Start a conversation &rarr;

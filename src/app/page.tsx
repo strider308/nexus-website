@@ -20,7 +20,7 @@ export default function Home() {
       {/* Sticky Top Header */}
       <SiteHeader />
 
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         {/* Sections */}
         <Hero />
         <ProofStrip />

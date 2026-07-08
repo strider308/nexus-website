@@ -155,6 +155,12 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground animate-fade-in">
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#1A2B4C] text-white px-4 py-2 rounded-[6px] z-[200] font-semibold text-sm outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1A2B4C]/50"
+        >
+          Skip to main content
+        </a>
         {children}
       </body>
     </html>

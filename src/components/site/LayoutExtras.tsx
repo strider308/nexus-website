@@ -54,7 +54,7 @@ export function LayoutExtras() {
           const id = entry.target.id;
           if (PRODUCT_THEMES[id]) {
             setActiveProductColor(PRODUCT_THEMES[id].primary);
-          } else if (id === "cover" || id === "services-brochure" || id === "company-brochure") {
+          } else if (id === "cover" || id === "services-brochure" || id === "company-brochure" || id === "company-founder") {
             setActiveProductColor("#1A2B4C"); // Reset to main navy
           }
         }
@@ -67,7 +67,7 @@ export function LayoutExtras() {
       threshold: 0,
     });
 
-    const sections = ["cover", "services-brochure", "company-brochure", "clinicos", "aarogya", "restaurantos", "shipwright", "securescan", "safedate", "buildpublic"];
+    const sections = ["cover", "services-brochure", "company-brochure", "company-founder", "clinicos", "aarogya", "restaurantos", "shipwright", "securescan", "safedate", "buildpublic"];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) colorObserver.observe(el);

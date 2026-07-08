@@ -15,7 +15,7 @@ export default function TermsOfServicePage() {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
 
-      <main className="flex-grow py-16 md:py-24 bg-background">
+      <main id="main-content" className="flex-grow py-16 md:py-24 bg-background">
         <div className="max-w-3xl mx-auto px-4 md:px-8">
           
           <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-muted-foreground mb-3 block">

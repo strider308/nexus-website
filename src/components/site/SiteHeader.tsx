@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
-import { METADATA } from "@/lib/content/nexus";
+import { HERO } from "@/lib/content/nexus";
 
 interface NavItem {
   label: string;
@@ -24,6 +24,7 @@ const sectionLabels: Record<string, string> = {
   cover: "Overview",
   "services-brochure": "Services",
   "company-brochure": "Company Brochure",
+  "company-founder": "Founder Profile",
   "case-studies": "What We've Built",
   clinicos: "ClinicOS",
   aarogya: "Aarogya",
@@ -64,6 +65,7 @@ export function SiteHeader() {
       "cover",
       "services-brochure",
       "company-brochure",
+      "company-founder",
       "case-studies",
       "clinicos",
       "aarogya",
@@ -110,7 +112,7 @@ export function SiteHeader() {
           </a>
           <span className="text-muted-foreground/40 font-light select-none">|</span>
           <div className="text-xs md:text-sm text-muted-foreground font-medium truncate max-w-[150px] sm:max-w-none">
-            <span className="hidden sm:inline">Nexus &rsaquo; </span><span className="text-foreground transition-colors">{getCrumbLabel()}</span>
+            <span className="hidden sm:inline">Nexus <span aria-hidden="true">&rsaquo;</span> </span><span className="text-foreground transition-colors">{getCrumbLabel()}</span>
           </div>
         </div>
 
@@ -135,7 +137,7 @@ export function SiteHeader() {
             );
           })}
           <a 
-            href={`${METADATA.canonicalUrl}/contact`} 
+            href={HERO.ctaUrl} 
             target="_blank" 
             rel="noopener noreferrer"
             className={cn(buttonVariants({ size: "sm" }), "bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] flex items-center justify-center focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none")}
@@ -176,7 +178,7 @@ export function SiteHeader() {
                   })}
                 </nav>
                 <a 
-                  href={`${METADATA.canonicalUrl}/contact`} 
+                  href={HERO.ctaUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className={cn(buttonVariants({ size: "default" }), "w-full bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] mt-6 flex items-center justify-center focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none")}
