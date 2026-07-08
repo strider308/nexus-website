@@ -27,6 +27,26 @@ const mockupMap: Record<string, React.ComponentType> = {
   buildpublic: BuildPublicMockup
 };
 
+const CAPABILITIES = [
+  { id: "workflow", label: "Multi-role workflow" },
+  { id: "automation", label: "Automation layers" },
+  { id: "dashboard", label: "Dashboard visibility" },
+  { id: "tracking", label: "Data tracking" },
+  { id: "safety", label: "Risk & safety logic" },
+  { id: "mvp", label: "MVP / private beta" },
+  { id: "ux", label: "Customer experience" },
+];
+
+const MAP_SYSTEMS = [
+  { id: "clinicos", label: "ClinicOS", capabilities: ["workflow", "automation", "dashboard", "tracking", "mvp"] },
+  { id: "aarogya", label: "Aarogya", capabilities: ["dashboard", "tracking", "safety", "mvp", "ux"] },
+  { id: "restaurantos", label: "RestaurantOS", capabilities: ["workflow", "automation", "dashboard", "tracking", "ux"] },
+  { id: "shipwright", label: "ShipWright", capabilities: ["workflow", "automation", "tracking", "mvp"] },
+  { id: "securescan", label: "SecureScan", capabilities: ["dashboard", "tracking", "safety", "mvp"] },
+  { id: "safedate", label: "SafeDate", capabilities: ["automation", "safety", "mvp", "ux"] },
+  { id: "buildpublic", label: "BuildPublic", capabilities: ["dashboard", "tracking", "mvp", "ux"] },
+];
+
 export function CaseStudiesSection() {
   const [activeTab, setActiveTab] = useState<string>("clinicos");
   const [salesSheetExpanded, setSalesSheetExpanded] = useState<Record<string, boolean>>({});
@@ -401,6 +421,59 @@ export function CaseStudiesSection() {
             </AnimatePresence>
           </div>
 
+        </div>
+
+        {/* Capability Proof Map */}
+        <div className="mt-16 pt-12 border-t border-border/80">
+          <div className="mb-8">
+            <h3 className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase mb-2">
+              Capability Proof Map
+            </h3>
+            <p className="text-sm font-light text-muted-foreground leading-relaxed max-w-3xl">
+              A matrix view mapping our shipped proof systems against their core architectural capabilities.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto border border-border/60 bg-background/50 rounded-[8px] shadow-sm">
+            <table className="w-full text-left border-collapse min-w-[760px]">
+              <thead>
+                <tr className="border-b border-border bg-muted/20">
+                  <th className="p-4 text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-wider min-w-[120px]">
+                    System
+                  </th>
+                  {CAPABILITIES.map((cap) => (
+                    <th key={cap.id} className="p-4 text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-wider min-w-[100px]">
+                      {cap.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {MAP_SYSTEMS.map((sys) => (
+                  <tr key={sys.id} className="border-b border-border/50 hover:bg-muted/10 transition-colors">
+                    <td className="p-4 text-xs font-bold text-primary">
+                      {sys.label}
+                    </td>
+                    {CAPABILITIES.map((cap) => {
+                      const hasCap = sys.capabilities.includes(cap.id);
+                      return (
+                        <td key={cap.id} className="p-4 text-xs">
+                          {hasCap ? (
+                            <span className="flex items-center gap-1.5 font-semibold text-[#2E6FAD]">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#2E6FAD] shrink-0" />
+                              Active
+                            </span>
+                          ) : (
+                            <span className="opacity-40 text-foreground/40">-</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
       </div>

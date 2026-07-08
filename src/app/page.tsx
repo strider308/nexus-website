@@ -7,6 +7,7 @@ import { ProofStrip } from "@/components/sections/ProofStrip";
 import { ProblemSection } from "@/components/sections/ProblemSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
+import { WorkflowConfigurator } from "@/components/sections/WorkflowConfigurator";
 import { FounderSection } from "@/components/sections/FounderSection";
 import { TrustLimitsSection } from "@/components/sections/TrustLimitsSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -27,6 +28,7 @@ export default function Home() {
         <ProblemSection />
         <ServicesSection />
         <CaseStudiesSection />
+        <WorkflowConfigurator />
         <FounderSection />
         <TrustLimitsSection />
         <FinalCTA />
