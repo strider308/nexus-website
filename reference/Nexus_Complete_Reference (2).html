@@ -1,0 +1,2747 @@
+<!DOCTYPE html>
+<!-- ⚠ PRE-LAUNCH: replace nexus.example.com with your real domain throughout this file.
+     Quick-replace all occurrences and it will update every link, meta tag, and JSON-LD entry.
+     Also update: social handles (twitter.com/nexus, linkedin.com/company/nexus, github.com/nexus)
+     and the contact email (hello@nexus.example.com). -->
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231A2B4C'/><text x='7' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' fill='white'>N</text></svg>">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1A2B4C">
+<link rel="canonical" href="https://nexus.example.com/reference">
+<meta name="robots" content="index, follow">
+<meta name="description" content="Nexus builds custom software and automation for complex workflows. See seven systems we've built end-to-end — clinics, restaurants, security, teams, and more — then bring us yours.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nexus — Custom Software &amp; Automation">
+<meta property="og:description" content="We build custom software and automation for complex workflows. These seven systems are proof of range — see what we've shipped, then tell us what you need built.">
+<meta property="og:image" content="https://nexus.example.com/og-cover.png">
+<meta property="og:url" content="https://nexus.example.com/reference">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nexus — Complete Product Reference">
+<meta name="twitter:description" content="Practical software for complex workflows. Seven products, one reference.">
+<meta name="twitter:image" content="https://nexus.example.com/og-cover.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus — Custom Software &amp; Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&amp;family=DM+Serif+Display:ital@0;1&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&amp;family=DM+Serif+Display:ital@0;1&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"></noscript>
+<style>
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── Tokens ──────────────────────────────────────────────────────────────── */
+:root{
+  --navy:#1A2B4C;
+  --charcoal:#2C2C2C;
+  --mid:#6B6B6B;
+  --light:#F4F4F2;
+  --border:#E2E2DE;
+  --white:#FFFFFF;
+  --accent:#2E6FAD;
+  --current-pc:var(--navy);
+  --c-clinicos:#1A2B4C;
+  --c-aarogya:#5A7F5E;
+  --c-restaurant:#A05C1A;
+  --c-shipwright:#5B4B8A;
+  --c-securescan:#2A7D8A;
+  --c-safedate:#8A2A5A;
+  --c-buildpublic:#2A5A3A;
+  --c-clinicos-dark:#163870;
+  --c-aarogya-dark:#3E6E4A;
+  --c-restaurant-dark:#7A3E10;
+  --c-shipwright-dark:#483A6E;
+  --c-securescan-dark:#1E5E6A;
+  --c-safedate-dark:#6B1F46;
+  --c-buildpublic-dark:#1E4A2C;
+  /* single source of truth for layout */
+  --sidebar-w:272px;
+  --content-w:860px;
+  --content-pad:48px;
+  --section-max:calc(var(--content-w) + var(--content-pad)*2);
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
+html{font-size:16px;scroll-behavior:smooth;scroll-padding-top:64px;overflow-x:hidden}
+body{background:var(--white);color:var(--charcoal);overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--charcoal);display:flex;min-height:100vh}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+#sidebar{
+  position:fixed;top:0;left:0;bottom:0;
+  width:var(--sidebar-w);
+  background:var(--navy);
+  overflow-y:auto;z-index:100;
+  display:flex;flex-direction:column;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.15) transparent;
+}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+
+.sb-logo{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.1);flex-shrink:0}
+.sb-wordmark{font-weight:700;font-size:20px;color:#fff;letter-spacing:-.5px}
+.sb-tagline{font-size:11px;color:rgba(255,255,255,.58);margin-top:4px;line-height:1.4}
+.sb-badge{
+  display:inline-block;margin-top:10px;
+  font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  color:rgba(255,255,255,.55);background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);padding:3px 7px;border-radius:4px;
+}
+
+.nav-group{padding:0}
+.nav-group-label{
+  font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  color:rgba(255,255,255,.5);padding:20px 24px 6px;
+}
+.product-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.nav-link.product-link{display:flex;align-items:center;gap:10px;padding-left:20px}
+
+/* sub-links collapse by default */
+
+.nav-link{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 24px;font-size:13px;font-weight:400;
+  color:rgba(255,255,255,.6);text-decoration:none;
+  border-left:3px solid transparent;
+  transition:color .15s,background .15s;line-height:1.35;
+}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-link.active{color:#fff;font-weight:600;background:rgba(255,255,255,.07)}
+
+/* ── Main ────────────────────────────────────────────────────────────────── */
+#main{margin-left:var(--sidebar-w);flex:1;min-width:0;overflow-x:hidden}
+
+/* ── Topbar ──────────────────────────────────────────────────────────────── */
+.topbar{box-sizing:border-box;width:100%;
+  position:sticky;top:0;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 var(--content-pad);height:52px;
+  display:flex;align-items:center;justify-content:space-between;
+  z-index:110;
+}
+.topbar-crumb{font-size:12px;color:var(--mid)}
+.topbar-crumb span{color:var(--charcoal);font-weight:500}
+.topbar-right{display:flex;align-items:center;gap:16px;font-size:11px;color:var(--mid)}
+
+/* ── Sections ────────────────────────────────────────────────────────────── */
+.doc-section{box-sizing:border-box;width:100%;
+  padding:56px var(--content-pad) 64px;
+  border-bottom:1px solid var(--border);
+  max-width:var(--section-max);
+}
+.doc-section.last{border-bottom:none}
+
+/* ── Typography tokens ───────────────────────────────────────────────────── */
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
+.section-title{font-family:'DM Serif Display',serif;font-size:42px;line-height:1.1;color:var(--navy);margin-bottom:16px;letter-spacing:-1px}
+.section-sub{font-size:17px;font-weight:400;color:var(--mid);line-height:1.5;margin-bottom:40px;max-width:620px}
+
+/* FIX #1: replace broken :first-of-type with explicit class */
+h3.doc-h2{font-size:24px;font-weight:700;color:var(--navy);margin:48px 0 12px;letter-spacing:-.3px;line-height:1.25}
+h3.doc-h2.first{margin-top:0}
+p.doc-p{font-size:16px;line-height:1.7;color:var(--charcoal);margin-bottom:14px;max-width:680px;width:100%}
+p.doc-p:last-child{margin-bottom:0}
+
+/* FIX #2: blockquote width is relative, not fixed */
+blockquote.doc-quote{
+  border-left:4px solid var(--accent);
+  padding:14px 0 14px 24px;margin:32px 0;
+  font-family:'DM Serif Display',serif;
+  font-size:20px;line-height:1.45;color:var(--navy);font-style:italic;
+  width:100%;max-width:600px;width:100%;
+}
+
+/* ── Lists ───────────────────────────────────────────────────────────────── */
+ul.doc-ul{padding-left:0;list-style:none;margin:0 0 16px;max-width:680px;width:100%}
+ul.doc-ul li{
+  font-size:15px;line-height:1.6;color:var(--charcoal);
+  /* FIX #9: use flex so bullet/counter never detaches on wrap */
+  display:flex;align-items:baseline;gap:12px;padding:4px 0;
+}
+ul.doc-ul li::before{
+  content:'';display:block;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);opacity:.7;
+  flex-shrink:0;margin-top:6px;
+}
+
+/* ── Note / Disclaimer ───────────────────────────────────────────────────── */
+.doc-disclaimer{
+  background:#F8F8F6;border:1px solid var(--border);
+  padding:16px 20px;font-size:12px;color:var(--mid);line-height:1.7;
+  border-radius:4px;margin-top:40px;
+}
+.doc-disclaimer strong{font-weight:600;color:var(--charcoal)}
+.doc-disclaimer.compact{
+  background:transparent;border:none;border-left:2px solid var(--border);
+  padding:4px 0 4px 14px;margin-top:24px;font-size:11.5px;
+}
+.doc-disclaimer.compact strong{display:none}
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.doc-table{width:100%;border-collapse:collapse;margin:20px 0 32px;font-size:14px}
+
+/* ── Disclaimer accordion ─────────────────────────────────────────────────── */
+.disclaimer-accordion{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:20px 0 32px}
+.disclaimer-item{border-bottom:1px solid var(--border)}
+.disclaimer-item:last-child{border-bottom:none}
+.disclaimer-toggle{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 18px;background:var(--light);border:none;cursor:pointer;
+  font-family:inherit;font-size:14px;font-weight:600;color:var(--navy);text-align:left;
+  transition:background .15s ease;
+}
+.disclaimer-toggle:hover{background:var(--border)}
+.disclaimer-chevron{width:16px;height:16px;stroke:var(--mid);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.disclaimer-toggle[aria-expanded="true"] .disclaimer-chevron{transform:rotate(180deg)}
+.disclaimer-body-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s cubic-bezier(.16,1,.3,1)}
+.disclaimer-body-wrap.open{grid-template-rows:1fr}
+.disclaimer-body-inner{overflow:hidden}
+.disclaimer-body-inner p{padding:14px 18px;margin:0;font-size:13.5px;line-height:1.6;color:var(--charcoal)}
+.doc-table th{
+  background:var(--navy);color:#fff;font-weight:600;font-size:12px;
+  letter-spacing:.3px;text-align:left;padding:10px 14px;
+}
+.doc-table th:first-child{border-radius:4px 0 0 0}
+.doc-table th:last-child{border-radius:0 4px 0 0}
+.doc-table td{padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}
+.doc-table tr:nth-child(even) td{background:var(--light)}
+.doc-table tr:last-child td{border-bottom:none}
+/* FIX #7: scope first-child bold/navy to a class so dot-cell tables aren't broken */
+.doc-table.styled-first td:first-child{font-weight:500;color:var(--navy)}
+
+/* ── Workflow chain ──────────────────────────────────────────────────────── */
+/* FIX #3: each step is an inline-flex atom so wrapping never splits arrow from label */
+.workflow-chain{display:flex;flex-wrap:wrap;gap:4px;margin:20px 0 32px;align-items:center}
+.wf-step{display:inline-flex;align-items:center;gap:4px}
+.wf-label{max-width:100%;
+  color:#fff;font-size:13px;font-weight:600;
+  padding:9px 16px;white-space:nowrap;letter-spacing:.2px;border-radius:4px;
+}
+.wf-arrow{color:var(--mid);font-size:13px;flex-shrink:0}
+
+/* ── Two-column grid ─────────────────────────────────────────────────────── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 28px}
+.two-col-card{background:var(--light);border:1px solid var(--border);border-radius:6px;padding:20px;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s ease,border-color .2s ease}
+.two-col-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08);border-color:var(--pc,var(--navy))}
+.two-col-card h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.two-col-card ul.doc-ul{margin:0}
+.two-col-card ul.doc-ul li{font-size:15px}
+
+/* ── Cover ───────────────────────────────────────────────────────────────── */
+/* FIX #8: cover max-width override explicit, not relying on inline style */
+#cover{
+  box-sizing:border-box;width:100%;
+  background:var(--navy);
+  padding:80px var(--content-pad) 72px;
+  max-width:none;border-bottom:none;
+  position:relative;overflow:hidden;
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;flex-direction:column;justify-content:center;
+}
+
+/* ── Ambient drifting colour glow ────────────────────────────────────────── */
+.cover-glow{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0}
+.cover-glow-1{width:420px;height:420px;top:-140px;left:8%;background:#5B4B8A;opacity:.32}
+.cover-glow-2{width:380px;height:380px;bottom:-160px;left:38%;background:#2A7D8A;opacity:.28}
+.cover-glow-3{width:340px;height:340px;top:-80px;right:6%;background:#8A2A5A;opacity:.26}
+@media(prefers-reduced-motion:no-preference){
+  .cover-glow-1{animation:drift1 46s ease-in-out infinite alternate}
+  .cover-glow-2{animation:drift2 58s ease-in-out infinite alternate}
+  .cover-glow-3{animation:drift3 52s ease-in-out infinite alternate}
+  @keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,40px)}}
+  @keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-50px,-30px)}}
+  @keyframes drift3{0%{transform:translate(0,0)}100%{transform:translate(-40px,50px)}}
+}
+
+/* ── Grain texture overlay ───────────────────────────────────────────────── */
+#cover::before{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.05;
+}
+
+.cover-content{position:relative;z-index:2}
+
+/* ── Scroll cue ───────────────────────────────────────────────────────────── */
+.scroll-cue{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  z-index:2;color:rgba(255,255,255,.4);text-decoration:none;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
+  transition:color .2s ease;
+}
+.scroll-cue:hover{color:rgba(255,255,255,.75)}
+.scroll-cue svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(prefers-reduced-motion:no-preference){
+  .scroll-cue{opacity:0;animation:cover-rise .6s cubic-bezier(.16,1,.3,1) forwards;animation-delay:.85s}
+  .scroll-cue svg{animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+}
+
+/* ── Staggered on-load reveal ────────────────────────────────────────────── */
+@media(prefers-reduced-motion:no-preference){
+  .cover-content > *{opacity:0;animation:cover-rise .6s cubic-bezier(.16,1,.3,1) forwards}
+  .cover-content > .eyebrow{animation-delay:.05s}
+  .cover-content > .cover-logo-lockup{animation-delay:.15s}
+  .cover-content > .cover-subtitle{animation-delay:.28s}
+  .cover-content > .cover-proof{animation-delay:.38s}
+  .cover-content > .cover-cta{animation-delay:.48s}
+  .cover-content > .cover-pills{animation-delay:.58s}
+  .cover-content > .cover-meta{animation-delay:.68s}
+  @keyframes cover-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+}
+
+.cover-logo-lockup{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+.cover-mark{width:56px;height:56px;flex-shrink:0}
+.cover-title{font-family:'DM Serif Display',serif;font-size:64px;line-height:1;color:#fff;letter-spacing:-2px;max-width:700px;margin-bottom:0}
+.cover-proof{font-size:15px;font-weight:600;color:rgba(255,255,255,.85);letter-spacing:.2px;margin-bottom:28px}
+.cover-cta{display:inline-flex;align-items:center;padding:12px 26px;min-height:44px;background:#fff;color:var(--navy);font-size:14px;font-weight:700;border-radius:6px;text-decoration:none;margin-bottom:32px;transition:opacity .15s,transform .15s cubic-bezier(.16,1,.3,1),box-shadow .15s ease}
+.cover-cta:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.cover-cta:active{transform:translateY(0);box-shadow:none;transition-duration:.05s}
+.cover-subtitle{font-size:20px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.5;max-width:540px;margin-bottom:40px}
+.cover-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px}
+.cover-pill{font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;color:#fff;letter-spacing:.2px;text-decoration:none;cursor:pointer;transition:opacity .15s;display:inline-block}.cover-pill:hover{opacity:.85}
+.cover-meta{font-size:11px;color:rgba(255,255,255,.5);border-top:1px solid rgba(255,255,255,.12);padding-top:24px;display:flex;gap:32px;flex-wrap:wrap}
+
+/* ── Product hero ────────────────────────────────────────────────────────── */
+.product-section{border-top:3px solid var(--pc,var(--navy));position:relative;overflow:hidden}
+.product-section::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:420px;
+  background:linear-gradient(180deg,var(--pc,var(--navy)) 0%,transparent 100%);
+  opacity:.05;pointer-events:none;z-index:0;
+}
+.product-hero{box-sizing:border-box;width:100%;
+  padding:64px var(--content-pad) 0;
+  display:flex;align-items:flex-start;gap:24px;
+  max-width:var(--section-max);
+  position:relative;z-index:1;
+}
+.product-icon{
+  width:52px;height:52px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Serif Display',serif;font-size:20px;
+  color:#fff;flex-shrink:0;margin-top:4px;
+}
+.product-category{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px}
+.case-study-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--pc,var(--navy));background:var(--light);border:1px solid var(--border);padding:3px 9px;border-radius:20px;margin-bottom:12px}
+.case-study-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.product-name{font-family:'DM Serif Display',serif;font-size:38px;line-height:1.1;letter-spacing:-1px;margin-bottom:10px}
+.product-tagline{font-size:16px;font-weight:300;color:var(--mid);line-height:1.5;max-width:560px}
+
+/* ── CTAs ────────────────────────────────────────────────────────────────── */
+.cta-row{display:flex;gap:12px;margin:28px 0 0;flex-wrap:wrap}
+.btn-primary{max-width:100%;
+  display:inline-flex;align-items:center;
+  padding:10px 22px;font-size:14px;font-weight:600;color:#fff;
+  min-height:44px;
+  background:var(--pc,var(--navy));border-radius:6px;
+  text-decoration:none;transition:opacity .15s,transform .15s cubic-bezier(.16,1,.3,1),box-shadow .15s ease;border:none;cursor:pointer;
+}
+.btn-primary:hover{opacity:.88;transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.15)}
+.btn-primary:active{transform:translateY(0);box-shadow:none;transition-duration:.05s}
+.product-section .btn-outline{max-width:100%;color:var(--pc,var(--navy));border-color:var(--pc,var(--navy))}
+.btn-outline{max-width:100%;
+  display:inline-flex;align-items:center;
+  padding:10px 22px;font-size:14px;font-weight:500;
+  min-height:44px;
+  color:var(--pc,var(--navy));background:transparent;
+  border:1.5px solid var(--pc,var(--navy));border-radius:6px;
+  text-decoration:none;transition:background .15s,transform .15s cubic-bezier(.16,1,.3,1),box-shadow .15s ease;cursor:pointer;
+}
+.btn-outline:hover{background:rgba(0,0,0,.04);transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.btn-outline:active{transform:translateY(0);box-shadow:none;transition-duration:.05s}
+
+/* ── Capability tags ─────────────────────────────────────────────────────── */
+.cap-grid{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 24px}
+.cap-tag{
+  font-size:13px;font-weight:500;color:var(--charcoal);
+  background:var(--light);border:1px solid var(--border);
+  padding:5px 11px;border-radius:4px;line-height:1.3;
+}
+
+/* ── State chips ─────────────────────────────────────────────────────────── */
+.states-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 24px}
+
+.state-chip--info{background:#E3F2FD;border-color:#90CAF9;color:#1565C0}
+.state-chip--success{background:#EEF6EE;border-color:#A5D6A7;color:#2E7D32}
+.state-chip--purple{background:#F3E5F5;border-color:#CE93D8;color:#6A1B9A}
+.state-chip--critical{background:#FFEBEE;border-color:#EF9A9A;color:#B71C1C}
+.state-chip--high{background:#FFF3E0;border-color:#FFCC80;color:#7A2E00}
+.state-chip--medium{background:#FFFDE7;border-color:#FFF176;color:#7A4300}
+.state-chip--low{background:#E3F2FD;border-color:#90CAF9;color:#0D47A1}
+.state-chip{
+  font-size:12px;font-weight:500;padding:4px 12px;
+  border-radius:20px;border:1px solid var(--border);
+  color:var(--mid);background:#fff;
+}
+
+/* ── Boundary list ───────────────────────────────────────────────────────── */
+
+/* ── Sales sheet ─────────────────────────────────────────────────────────── */
+/* FIX #4: sales-sheet uses same padding/max-width vars, no duplication */
+.sales-sheet{padding:8px var(--content-pad) 60px;max-width:var(--section-max);box-sizing:border-box;width:100%}
+/* FIX #4 cont: grid + full-width card fixed properly */
+.sales-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.sales-card{border:1px solid var(--border);border-radius:6px;padding:20px;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s ease,border-color .2s ease}
+.sales-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08);border-color:var(--pc,var(--navy))}
+.sales-card h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--mid);margin-bottom:8px}
+.sales-card p{font-size:15px;line-height:1.65;color:var(--charcoal)}
+/* full-width card lives OUTSIDE the grid, not inside it */
+.sales-wide{border:1px solid var(--border);border-radius:6px;padding:20px;margin-bottom:16px}
+.sales-wide h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--mid);margin-bottom:8px}
+.sales-wide p{font-size:15px;line-height:1.65;color:var(--charcoal)}
+
+/* ── Contact table ───────────────────────────────────────────────────────── */
+.contact-table{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:24px 0}
+.contact-row{display:grid;grid-template-columns:120px 1fr;border-bottom:1px solid var(--border)}
+.contact-row:last-child{border-bottom:none}
+.contact-key{background:var(--light);padding:10px 16px;font-size:13px;font-weight:600;color:var(--charcoal)}
+.contact-val{padding:10px 16px;font-size:13px;color:var(--mid)}
+
+/* ── Closing footer ──────────────────────────────────────────────────────── */
+.doc-footer{
+  margin-top:48px;padding:24px;
+  background:var(--navy);border-radius:8px;text-align:center;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+
+/* ── Responsive: ≤900px ─────────────────────────────────────────────────── */
+
+
+/* ── Responsive: ≤600px ─────────────────────────────────────────────────── */
+@media(max-width:600px){
+  :root{--content-pad:16px}
+
+  #cover{padding:36px 16px 36px}
+  .cover-title{font-size:30px}
+  .cover-mark{width:32px;height:32px}
+  .cover-logo-lockup{gap:10px}
+  .cover-meta{flex-direction:column;gap:6px}
+
+  .doc-section{box-sizing:border-box;width:100%;padding:32px 16px 40px}
+  .section-title{font-size:24px}
+  .product-hero{box-sizing:border-box;width:100%;padding:32px 16px 0}
+  .product-name{font-size:24px}
+  .product-icon{width:40px;height:40px;font-size:16px}
+
+  .topbar{box-sizing:border-box;width:100%;height:48px;padding:0 12px}
+  .topbar-crumb{font-size:11px}
+
+  .sales-sheet{padding:0 16px 32px}
+
+  blockquote.doc-quote{font-size:17px;padding:10px 0 10px 16px}
+
+  /* Workflow: allow labels to shrink further */
+  .wf-label{max-width:100%;font-size:10px;padding:6px 8px}
+  .wf-arrow{font-size:11px}
+
+  /* Float nav stacks smaller */
+  #float-nav{right:8px;bottom:8px;padding:4px 6px;gap:3px}
+  .fn-btn{width:44px;height:44px;font-size:12px}
+}
+
+/* ── Responsive: ≤400px (smallest phones) ───────────────────────────────── */
+@media(max-width:400px){
+  .cover-title{font-size:26px}
+  .cover-mark{width:28px;height:28px}
+  .cover-logo-lockup{gap:8px}
+  .section-title{font-size:22px}
+  .product-name{font-size:22px}
+  .doc-h2{font-size:18px}
+  .btn-primary,.btn-outline{max-width:100%;width:100%;justify-content:center}
+  .cta-row{flex-direction:column}
+  #cookie-banner{flex-direction:column;align-items:flex-start}
+  .cookie-actions{width:100%;justify-content:flex-end}
+}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none !important}}
+
+/* ── Focus styles (WCAG 2.4.7) ───────────────────────────────────────────── */
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.nav-link:focus-visible{outline-color:rgba(255,255,255,.8)}
+.btn-primary:focus-visible,.btn-outline:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ── Floating product nav ────────────────────────────────────────────────── */
+#float-nav{display:none;
+  position:fixed;
+  bottom:24px;
+  right:28px;
+  left:auto;
+  transform:none;
+  z-index:120;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(26,43,76,.92);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:40px;
+  padding:7px 10px;
+  box-shadow:0 4px 24px rgba(0,0,0,.28),0 1px 4px rgba(0,0,0,.18);
+  transition:opacity .2s;
+}
+#float-nav:hover{opacity:1}
+.fn-label{
+  font-size:10px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;color:rgba(255,255,255,.55);
+  padding:0 6px 0 4px;white-space:nowrap;
+}
+.fn-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;
+  text-decoration:none;font-family:'DM Serif Display',serif;
+  font-size:11px;font-weight:700;color:#fff;
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+  flex-shrink:0;position:relative;
+  border:2px solid rgba(255,255,255,0);
+}
+.fn-btn:hover{transform:scale(1.18);box-shadow:0 0 0 3px rgba(255,255,255,.25);opacity:1}
+.fn-btn.active{border-color:rgba(255,255,255,.55);transform:scale(1.08)}
+.fn-btn[data-tip]:hover::after{
+  content:attr(data-tip);
+  position:absolute;bottom:calc(100% + 8px);left:50%;
+  transform:translateX(-50%);
+  background:rgba(26,43,76,.97);
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff;font-family:'DM Sans',sans-serif;
+  font-size:11px;font-weight:600;
+  padding:4px 10px;border-radius:6px;
+  white-space:nowrap;pointer-events:none;
+  box-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+
+
+/* ── Responsive: ≤900px ─────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .product-screenshot{margin:24px 0 0}
+
+  #float-nav{display:flex}
+
+  :root{
+    --sidebar-w:0px;
+    --content-pad:20px;
+  }
+
+  /* Layout */
+  #main{margin-left:0}
+  #sidebar{
+    position:fixed;top:0;left:0;bottom:0;
+    width:272px;
+    transform:translateX(-100%);
+    transition:transform .25s;
+    z-index:100;
+  }
+  #sidebar.open{transform:translateX(0)}
+
+  /* Topbar */
+  .topbar{box-sizing:border-box;width:100%;padding:0 16px;gap:8px}
+  .topbar-right span:first-child{display:none}
+  #menu-toggle{display:flex}
+  #menu-toggle svg{width:18px;height:18px}
+
+  /* Cover */
+  #cover{padding:48px 20px 48px}
+  .cover-title{font-size:36px;letter-spacing:-1px}
+  .cover-mark{width:40px;height:40px}
+  .cover-logo-lockup{gap:12px}
+  .cover-subtitle{font-size:15px}
+
+  /* Sections */
+  .doc-section{box-sizing:border-box;width:100%;padding:40px 20px 48px}
+  .section-title{font-size:28px;letter-spacing:-.5px}
+  .section-sub{font-size:15px}
+
+  /* Product hero */
+  .product-hero{box-sizing:border-box;width:100%;
+    padding:40px 20px 0;
+    flex-direction:column;
+    gap:16px;
+  }
+  .product-name{font-size:28px;letter-spacing:-.5px}
+  .product-tagline{font-size:14px}
+  .cta-row{flex-wrap:wrap;gap:8px}
+  .btn-primary,.btn-outline{max-width:100%;font-size:13px;padding:9px 18px}
+
+  /* Grids — all collapse to 1 column */
+  .two-col{grid-template-columns:1fr}
+  .sales-grid{grid-template-columns:1fr}
+
+  /* Tables — scrollable on mobile */
+  .doc-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;table-layout:auto}
+  .doc-table thead,.doc-table tbody,.doc-table tr{display:table;width:100%;table-layout:fixed}
+
+  /* Sales sheet */
+  .sales-sheet{padding:0 20px 40px}
+
+  /* Float nav */
+  #float-nav{right:12px;bottom:12px;padding:5px 8px;gap:4px}
+  .fn-btn{width:40px;height:40px;font-size:13px}
+  .fn-label{display:none}
+
+  /* Copy toast */
+  .copy-toast{right:12px;bottom:64px}
+
+  /* Workflow chains */
+  .workflow-chain{gap:3px}
+  .wf-label{max-width:100%;font-size:11px;padding:7px 10px}
+
+  /* Sidebar overlay */
+    .sb-overlay.active{pointer-events:all}
+
+  /* Cover pills */
+  .cover-pills{gap:6px}
+  .cover-pill{font-size:11px;padding:4px 10px}
+
+  /* Cap grid */
+  .cap-grid{gap:6px}
+  .cap-tag{font-size:12px;padding:4px 9px}
+}
+
+/* ── Responsive: ≤600px ─────────────────────────────────────────────────── */
+
+
+/* ── Responsive: ≤400px (smallest phones) ───────────────────────────────── */
+
+
+
+/* ── Living mockup details ───────────────────────────────────────────────── */
+@media(prefers-reduced-motion:no-preference){
+  @keyframes svg-pulse{0%,100%{opacity:1}50%{opacity:.45}}
+  @keyframes svg-pulse-scale{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.25)}}
+  @keyframes svg-blink{0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}}
+  .svg-pulse{animation:svg-pulse 2.4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+  .svg-pulse-scale{animation:svg-pulse-scale 2.4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+  .svg-blink{animation:svg-blink 1.1s steps(1) infinite}
+}
+
+/* ── Product screenshot zone ─────────────────────────────────────────────── */
+.product-screenshot{
+  margin:32px 0 0;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:var(--light);
+  position:relative;
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,border-color .3s ease;
+}
+.product-screenshot:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 32px rgba(0,0,0,.12);
+  border-color:var(--pc,var(--navy));
+}
+.product-screenshot svg{display:block;width:100%;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.product-screenshot:hover svg{transform:scale(1.015)}
+.screenshot-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(0,0,0,.45);
+  color:rgba(255,255,255,.8);
+  font-size:11px;font-weight:500;letter-spacing:.3px;
+  padding:6px 14px;
+  display:flex;align-items:center;gap:8px;
+}
+.screenshot-label::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.5);flex-shrink:0;
+}
+
+
+
+/* ── Closing invitation card ─────────────────────────────────────────────── */
+.closing-card{
+  margin-top:40px;padding:40px 32px;text-align:center;
+  background:linear-gradient(180deg,var(--light) 0%,var(--white) 100%);
+  border-radius:12px;border:1px solid var(--border);border-top:3px solid var(--navy);
+  box-shadow:0 4px 28px rgba(26,43,76,.07);
+  position:relative;overflow:hidden;
+}
+.closing-card::before{
+  content:'';position:absolute;top:-70px;left:50%;transform:translateX(-50%);
+  width:320px;height:220px;
+  background:radial-gradient(circle,var(--navy) 0%,transparent 70%);
+  opacity:.05;pointer-events:none;
+}
+.closing-card h3{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px;letter-spacing:-.3px;position:relative}
+.closing-card p{font-size:14px;color:var(--mid);margin-bottom:20px;max-width:420px;margin-left:auto;margin-right:auto;position:relative}
+.closing-cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+
+@media print{#float-nav{display:none}}
+
+/* ── Mobile sidebar toggle ───────────────────────────────────────────────── */
+.sb-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.45);z-index:99;
+  opacity:0;transition:opacity .25s;
+}
+.sb-overlay.active{opacity:1}
+#menu-toggle{
+  align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:6px;
+  background:transparent;border:.5px solid var(--border);
+  color:var(--charcoal);cursor:pointer;flex-shrink:0;
+  transition:background .15s;margin-right:10px;
+}
+@media(min-width:901px){
+  #menu-toggle{display:none}
+}
+#menu-toggle svg{width:18px;height:18px;display:block}
+#menu-toggle .icon-close{display:none}
+#menu-toggle.open .icon-burger{display:none}
+#menu-toggle.open .icon-close{display:block}
+#menu-toggle:hover{background:var(--light)}
+#menu-toggle svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round}
+
+
+/* ── Skip to content ────────────────────────────────────────────────────── */
+.skip-link{
+  position:absolute;top:-100%;left:50%;transform:translateX(-50%);
+  background:var(--navy);color:#fff;
+  font-size:13px;font-weight:600;
+  padding:10px 20px;border-radius:0 0 6px 6px;
+  text-decoration:none;z-index:200;
+  transition:top .15s;
+}
+.skip-link:focus{top:0}
+
+
+/* ── Product availability status chips ───────────────────────────────────── */
+.product-status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--mid)}
+.status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.status-dot.available{background:#3A8A4A}
+.status-dot.beta{background:#E07A20}
+.status-dot.waitlist{background:#6B6B6B}
+
+/* ── Page-wide cursor spotlight ──────────────────────────────────────────── */
+#cursor-spotlight{
+  display:none;
+  position:fixed;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(circle 480px at var(--mx,50%) var(--my,30%),var(--accent),transparent 70%);
+  opacity:.07;
+}
+@media(hover:hover) and (pointer:fine){
+  #cursor-spotlight{display:block}
+}
+
+/* ── Scroll progress bar ─────────────────────────────────────────────────── */
+#scroll-progress{
+  position:fixed;top:0;left:0;right:0;height:3px;z-index:140;
+  background:transparent;pointer-events:none;
+}
+#scroll-progress-fill{
+  height:100%;width:0%;
+  background:var(--current-pc);
+  transition:background-color .5s ease;
+}
+@media(prefers-reduced-motion:no-preference){
+  #scroll-progress-fill{transition:width .12s linear,background-color .5s ease}
+}
+
+/* ── Sliding sidebar nav indicator ───────────────────────────────────────── */
+#nav-indicator{
+  position:absolute;left:0;width:3px;
+  background:var(--current-pc);
+  opacity:0;
+  z-index:1;pointer-events:none;
+  transition:background-color .5s ease;
+}
+@media(prefers-reduced-motion:no-preference){
+  #nav-indicator{transition:transform .35s cubic-bezier(.16,1,.3,1),height .35s cubic-bezier(.16,1,.3,1),opacity .2s ease,background-color .5s ease}
+}
+
+/* ── Cookie consent banner ───────────────────────────────────────────────── */
+#cookie-banner{
+  position:fixed;bottom:0;left:0;right:0;z-index:130;
+  background:var(--navy);color:#fff;
+  padding:16px var(--content-pad);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  box-shadow:0 -2px 16px rgba(0,0,0,.18);
+  transform:translateY(100%);opacity:0;
+  transition:transform .3s ease,opacity .3s ease;
+}
+#cookie-banner.visible{transform:translateY(0);opacity:1}
+#cookie-banner p{font-size:13px;color:rgba(255,255,255,.85);max-width:640px;margin:0;line-height:1.5}
+#cookie-banner a{color:#fff;text-decoration:underline}
+.cookie-actions{display:flex;gap:10px;flex-shrink:0}
+.cookie-btn{
+  font-family:inherit;font-size:13px;font-weight:600;
+  padding:8px 18px;border-radius:6px;border:none;cursor:pointer;
+  transition:opacity .15s;
+}
+.cookie-btn:hover{opacity:.85}
+.cookie-btn-accept{background:#fff;color:var(--navy)}
+.cookie-btn-decline{background:rgba(255,255,255,.15);color:#fff}
+
+/* ── Dark mode ────────────────────────────────────────────────────────────── */
+
+.copy-toast{
+  position:fixed;bottom:80px;right:28px;left:auto;transform:none;
+  background:var(--navy);color:#fff;
+  font-size:13px;font-weight:500;
+  padding:7px 16px;border-radius:20px;
+  opacity:0;pointer-events:none;
+  transition:opacity .2s;z-index:150;
+  white-space:nowrap;
+}
+.copy-toast.show{opacity:1}
+
+.doc-table td:last-child{word-break:break-word;hyphens:auto}
+
+/* ── Section copy-link ───────────────────────────────────────────────────── */
+.copy-link-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  opacity:0;margin-left:8px;vertical-align:middle;
+  width:22px;height:22px;border-radius:4px;
+  background:transparent;border:.5px solid var(--border);
+  color:var(--mid);cursor:pointer;font-size:12px;
+  transition:opacity .15s,background .15s;
+  text-decoration:none;
+}
+h3.doc-h2:hover .copy-link-btn,
+h2.section-title:hover .copy-link-btn,
+h2.product-name:hover .copy-link-btn{opacity:1}
+.copy-link-btn:hover{background:var(--light);color:var(--charcoal)}
+
+/* ── Scroll entrance animations ─────────────────────────────────────────── */
+@media(prefers-reduced-motion:no-preference){
+  .product-section,.doc-section{box-sizing:border-box;width:100%;
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1);
+    will-change:opacity,transform;
+  }
+  .product-section.visible,.doc-section.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ── Staggered child reveals (cards, workflow steps, table rows) ─────────── */
+@media(prefers-reduced-motion:no-preference){
+  .two-col > .two-col-card,
+  .workflow-chain > li,
+  .sales-grid > .sales-card,
+  .contact-table > .contact-row,
+  .doc-table tbody tr{
+    opacity:0;
+    translate:0 10px;
+    transition:opacity .5s cubic-bezier(.16,1,.3,1),translate .5s cubic-bezier(.16,1,.3,1);
+  }
+  .stagger-in.two-col > .two-col-card,
+  .stagger-in.workflow-chain > li,
+  .stagger-in.sales-grid > .sales-card,
+  .stagger-in.contact-table > .contact-row,
+  .stagger-in.doc-table tbody tr{
+    opacity:1;
+    translate:0 0;
+  }
+  .stagger-in.two-col > .two-col-card:nth-child(1),
+  .stagger-in.workflow-chain > li:nth-child(1),
+  .stagger-in.sales-grid > .sales-card:nth-child(1),
+  .stagger-in.contact-table > .contact-row:nth-child(1),
+  .stagger-in.doc-table tbody tr:nth-child(1){transition-delay:.02s}
+  .stagger-in.two-col > .two-col-card:nth-child(2),
+  .stagger-in.workflow-chain > li:nth-child(2),
+  .stagger-in.sales-grid > .sales-card:nth-child(2),
+  .stagger-in.contact-table > .contact-row:nth-child(2),
+  .stagger-in.doc-table tbody tr:nth-child(2){transition-delay:.08s}
+  .stagger-in.two-col > .two-col-card:nth-child(3),
+  .stagger-in.workflow-chain > li:nth-child(3),
+  .stagger-in.sales-grid > .sales-card:nth-child(3),
+  .stagger-in.contact-table > .contact-row:nth-child(3),
+  .stagger-in.doc-table tbody tr:nth-child(3){transition-delay:.14s}
+  .stagger-in.two-col > .two-col-card:nth-child(4),
+  .stagger-in.workflow-chain > li:nth-child(4),
+  .stagger-in.sales-grid > .sales-card:nth-child(4),
+  .stagger-in.contact-table > .contact-row:nth-child(4),
+  .stagger-in.doc-table tbody tr:nth-child(4){transition-delay:.20s}
+  .stagger-in.workflow-chain > li:nth-child(5),
+  .stagger-in.doc-table tbody tr:nth-child(5){transition-delay:.26s}
+  .stagger-in.workflow-chain > li:nth-child(6),
+  .stagger-in.doc-table tbody tr:nth-child(6){transition-delay:.32s}
+  .stagger-in.workflow-chain > li:nth-child(7),
+  .stagger-in.doc-table tbody tr:nth-child(7){transition-delay:.38s}
+  .stagger-in.workflow-chain > li:nth-child(n+8),
+  .stagger-in.doc-table tbody tr:nth-child(n+8){transition-delay:.44s}
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --navy:#5B8FD4;
+
+  /* Product accent colours — adjusted for dark backgrounds */
+  --c-clinicos:#4A7BC4;
+  --c-aarogya:#6FA876;
+  --c-restaurant:#C87B3A;
+  --c-shipwright:#8B7BC4;
+  --c-securescan:#3A9EAA;
+  --c-safedate:#C44A7A;
+  --c-buildpublic:#4A8A5A;
+
+    --charcoal:#E2E2E2;
+    --mid:#9A9A9A;
+    --light:#1E1E1E;
+    --border:#2E2E2E;
+    --white:#141414;
+    --accent:#6BAAE8;
+  }
+  body{background:#141414;color:#E2E2E2}
+  #sidebar{background:#0C1828}
+  #cover{background:#0C1828}
+  .topbar{box-sizing:border-box;width:100%;background:rgba(20,20,20,.95);border-bottom-color:#2E2E2E}
+  .doc-table th{background:#0C1828}
+  .two-col-card{background:#1C1C1C;border-color:#2E2E2E}
+  .sales-card,.sales-wide{background:#1C1C1C;border-color:#2E2E2E}
+  .cap-tag{background:#1C1C1C;border-color:#2E2E2E}
+  .state-chip{background:#1C1C1C;border-color:#2E2E2E}
+  .doc-disclaimer{background:#1A1A1A;border-color:#2E2E2E}
+  .contact-table{border-color:#2E2E2E}
+  .contact-key{background:#1C1C1C}
+  .contact-row{border-color:#2E2E2E}
+  .doc-footer{background:#0C1828}
+  
+  
+  #float-nav{background:rgba(12,24,40,.95);border-color:rgba(255,255,255,.1)}
+  .sb-overlay{background:rgba(0,0,0,.65)}
+  #menu-toggle{border-color:#2E2E2E;color:#E2E2E2}
+  #menu-toggle:hover{background:#1C1C1C}
+  .doc-table tr:nth-child(even) td{background:#1A1A1A}
+  .skip-link{background:#0C1828}
+  .copy-toast{background:#0C1828}
+  blockquote.doc-quote{border-left-color:#6BAAE8}
+  .wf-label{max-width:100%;opacity:.9}
+  #cookie-banner{background:#0C1828;border-top:1px solid rgba(255,255,255,.1)}
+  .product-screenshot svg{filter:brightness(.72) saturate(.88)}
+  .product-screenshot{border-color:#2E2E2E}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Nexus",
+  "url": "https://nexus.example.com",
+  "description": "Nexus builds custom software and automation for complex workflows across any industry. The seven systems listed here — spanning clinic operations, personal health, restaurants, team execution, web security, dating safety, and founder tools — are proof-of-work case studies, not a fixed product catalog.",
+  "foundingLocation": { "@type": "Place", "addressCountry": "IN" },
+  "dateModified": "2026-06-22",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@nexus.example.com",
+    "contactType": "sales",
+    "availableLanguage": "English"
+  },
+  "sameAs": [
+    "https://twitter.com/nexus",
+    "https://linkedin.com/company/nexus",
+    "https://github.com/nexus"
+  ],
+  "makesOffer": [
+    {
+      "@type": "Service",
+      "name": "Custom Software & Automation Development",
+      "serviceType": "Software development",
+      "description": "Custom software, automation, and workflow systems built end-to-end for founders, operators, and product teams across any industry. Includes product strategy, multi-role operational systems, UX modernization, private-beta rollout, security-conscious engineering, and AI-assisted workflow features.",
+      "areaServed": "Worldwide",
+      "url": "https://nexus.example.com/services"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "ClinicOS",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Outpatient clinic operations platform covering patient registration, appointment booking, queue management, consultation, diagnostics, billing, and pharmacy.",
+      "featureList": "Patient registration, appointment booking, live queue management, digital prescriptions, diagnostic orders, billing, pharmacy, owner dashboard",
+      "url": "https://nexus.example.com/clinicos"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Aarogya",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "description": "Personal health information and routine tracker for blood pressure, blood glucose, weight, and medication. User-controlled data with export and deletion.",
+      "featureList": "Metric logging, trend visualization, weekly summaries, medication reminders, data export, data deletion",
+      "url": "https://nexus.example.com/aarogya"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "RestaurantOS",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Restaurant ordering and operations platform covering QR menu, table ordering, kitchen queue, billing, and owner dashboard.",
+      "featureList": "QR menu, table ordering, kitchen display, billing, cash reconciliation, inventory management, owner dashboard",
+      "url": "https://nexus.example.com/restaurantos"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "ShipWright",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Async team execution workspace for task ownership, daily check-ins, progress tracking, and team accountability.",
+      "featureList": "Task ownership, daily check-ins, progress tracking, team accountability, async-first workflow",
+      "url": "https://nexus.example.com/shipwright"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "SecureScan",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web",
+      "description": "Developer-focused web-security scanning platform for authorized vulnerability detection, finding reports, and severity classification.",
+      "featureList": "Automated vulnerability scanning, finding severity levels, detailed reports, scan history",
+      "url": "https://nexus.example.com/securescan"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "SafeDate",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Web",
+      "description": "Dating-safety preparation and check-in product. Users share date plans with trusted contacts and set timed check-ins.",
+      "featureList": "Date plan sharing, trusted contact network, timed check-ins, consent-aware sharing",
+      "url": "https://nexus.example.com/safedate"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "BuildPublic",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Founder execution and public-progress workspace. Private task management with a public-facing progress log for accountability and audience building.",
+      "featureList": "Private task management, public progress log, milestone sharing, founder accountability",
+      "url": "https://nexus.example.com/buildpublic"
+    }
+  ]
+}
+</script>
+</head>
+<body data-version="22 June 2026">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div id="scroll-progress" aria-hidden="true"><div id="scroll-progress-fill"></div></div>
+<div id="cursor-spotlight" aria-hidden="true"></div>
+
+<!-- ═══════════════ COOKIE CONSENT ════════════════════════════════════════ -->
+<div id="cookie-banner" role="region" aria-label="Cookie consent" aria-live="polite">
+  <p>We use analytics cookies to understand how this site is used and improve it. See our <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
+  <div class="cookie-actions">
+    <button class="cookie-btn cookie-btn-decline" id="cookie-decline">Decline</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookie-accept">Accept</button>
+  </div>
+</div>
+
+<!-- ═══════════════ SIDEBAR ═══════════════════════════════════════════════ -->
+<div class="sb-overlay" aria-hidden="true"></div>
+<nav id="sidebar" aria-label="Document navigation">
+  <div id="nav-indicator" aria-hidden="true"></div>
+  <div class="sb-logo">
+    <a href="#cover" class="sb-wordmark" style="text-decoration:none">Nexus</a>
+    <div class="sb-tagline">Custom software &amp; automation, built end-to-end.</div>
+    <div class="sb-badge">Last updated 22 Jun 2026</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Overview</div>
+    <a class="nav-link" href="#cover">Cover</a>
+    <a class="nav-link" href="#services-brochure">Services</a>
+    <a class="nav-link" href="#company-brochure">Company Brochure</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">What We've Built</div>
+    <a class="nav-link" href="#case-studies" style="font-size:11px;color:rgba(255,255,255,.5);padding-top:4px;padding-bottom:4px">Overview</a>
+
+    <a class="nav-link product-link" href="#clinicos">
+      <span class="product-dot" style="background:var(--c-clinicos)"></span>ClinicOS
+    </a>
+
+    <a class="nav-link product-link" href="#aarogya">
+      <span class="product-dot" style="background:var(--c-aarogya)"></span>Aarogya
+    </a>
+
+    <a class="nav-link product-link" href="#restaurantos">
+      <span class="product-dot" style="background:var(--c-restaurant)"></span>RestaurantOS
+    </a>
+
+    <a class="nav-link product-link" href="#shipwright">
+      <span class="product-dot" style="background:var(--c-shipwright)"></span>ShipWright
+    </a>
+
+    <a class="nav-link product-link" href="#securescan">
+      <span class="product-dot" style="background:var(--c-securescan)"></span>SecureScan
+    </a>
+
+    <a class="nav-link product-link" href="#safedate">
+      <span class="product-dot" style="background:var(--c-safedate)"></span>SafeDate
+    </a>
+
+    <a class="nav-link product-link" href="#buildpublic">
+      <span class="product-dot" style="background:var(--c-buildpublic)"></span>BuildPublic
+    </a>
+  </div>
+
+  <div class="nav-group" style="margin-bottom:32px">
+    <div class="nav-group-label">Reference</div>
+    <a class="nav-link" href="#disclaimers" style="font-size:11px;color:rgba(255,255,255,.5);padding-top:4px;padding-bottom:4px">Legal &amp; Disclaimers</a>
+    <a class="nav-link" href="privacy-policy.html" style="font-size:11px;color:rgba(255,255,255,.5);padding-top:4px;padding-bottom:4px">Privacy Policy</a>
+    <a class="nav-link" href="terms-of-service.html" style="font-size:11px;color:rgba(255,255,255,.5);padding-top:4px;padding-bottom:4px">Terms of Service</a>
+    <a class="nav-link" href="sitemap.xml" style="font-size:11px;color:rgba(255,255,255,.5);padding-top:4px;padding-bottom:4px">Sitemap</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ MAIN ═══════════════════════════════════════════════════ -->
+<main id="main">
+
+  <header class="topbar">
+    <button id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+      <svg class="icon-burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none">
+        <line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/>
+      </svg>
+    </button>
+    <div class="topbar-crumb">Nexus &rsaquo; <span id="crumb-label">Overview</span></div>
+    <div class="topbar-right">
+      <span><span class="version-date">22 June 2026</span></span>
+    </div>
+  </header>
+
+  <!-- COVER -->
+  <section id="cover">
+    <div class="cover-glow cover-glow-1" aria-hidden="true"></div>
+    <div class="cover-glow cover-glow-2" aria-hidden="true"></div>
+    <div class="cover-glow cover-glow-3" aria-hidden="true"></div>
+    <div class="cover-content">
+      <div class="eyebrow" style="color:rgba(255,255,255,.55)">Capability Reference</div>
+      <div class="cover-logo-lockup">
+        <svg class="cover-mark" viewBox="0 0 56 56" aria-hidden="true">
+          <line x1="28" y1="28" x2="28" y2="8" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+          <line x1="28" y1="28" x2="43.6" y2="15.5" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+          <line x1="28" y1="28" x2="47.5" y2="32.5" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+          <line x1="28" y1="28" x2="36.7" y2="46" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+          <line x1="28" y1="28" x2="19.3" y2="46" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+          <line x1="28" y1="28" x2="8.5" y2="32.5" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+          <line x1="28" y1="28" x2="12.4" y2="15.5" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+          <circle class="svg-pulse-scale" cx="28" cy="8" r="3.5" fill="#1A2B4C" stroke="rgba(255,255,255,.7)" stroke-width="1" style="animation-delay:0s"/>
+          <circle class="svg-pulse-scale" cx="43.6" cy="15.5" r="3.5" fill="#5A7F5E" stroke="rgba(255,255,255,.7)" stroke-width="1" style="animation-delay:.3s"/>
+          <circle class="svg-pulse-scale" cx="47.5" cy="32.5" r="3.5" fill="#A05C1A" stroke="rgba(255,255,255,.7)" stroke-width="1" style="animation-delay:.6s"/>
+          <circle class="svg-pulse-scale" cx="36.7" cy="46" r="3.5" fill="#5B4B8A" stroke="rgba(255,255,255,.7)" stroke-width="1" style="animation-delay:.9s"/>
+          <circle class="svg-pulse-scale" cx="19.3" cy="46" r="3.5" fill="#2A7D8A" stroke="rgba(255,255,255,.7)" stroke-width="1" style="animation-delay:1.2s"/>
+          <circle class="svg-pulse-scale" cx="8.5" cy="32.5" r="3.5" fill="#8A2A5A" stroke="rgba(255,255,255,.7)" stroke-width="1" style="animation-delay:1.5s"/>
+          <circle class="svg-pulse-scale" cx="12.4" cy="15.5" r="3.5" fill="#2A5A3A" stroke="rgba(255,255,255,.7)" stroke-width="1" style="animation-delay:1.8s"/>
+          <circle cx="28" cy="28" r="6" fill="#fff"/>
+        </svg>
+        <h1 class="cover-title">Nexus</h1>
+      </div>
+      <p class="cover-subtitle">We build custom software and automation for complex workflows. The seven systems below are proof of what we can build — not a product menu to choose from. Bring us your workflow.</p>
+      <p class="cover-proof">Seven systems shipped. Five industries. Built by one founder.</p>
+      <a class="cover-cta" href="https://nexus.example.com/contact" target="_blank" rel="noopener">Start a conversation</a>
+      <div class="cover-pills">
+        <a href="#clinicos" class="cover-pill" style="background:var(--c-clinicos)">ClinicOS</a>
+        <a href="#aarogya" class="cover-pill" style="background:var(--c-aarogya)">Aarogya</a>
+        <a href="#restaurantos" class="cover-pill" style="background:var(--c-restaurant)">RestaurantOS</a>
+        <a href="#shipwright" class="cover-pill" style="background:var(--c-shipwright)">ShipWright</a>
+        <a href="#securescan" class="cover-pill" style="background:var(--c-securescan)">SecureScan</a>
+        <a href="#safedate" class="cover-pill" style="background:var(--c-safedate)">SafeDate</a>
+        <a href="#buildpublic" class="cover-pill" style="background:var(--c-buildpublic)">BuildPublic</a>
+      </div>
+      <div class="cover-meta">
+        <span>Version: 22 June 2026</span>
+        <span>7 Products · 10 Documents</span>
+      </div>
+    </div>
+    <a href="#services-brochure" class="scroll-cue" aria-label="Scroll to explore">
+      <span>Explore</span>
+      <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <!-- ═══════════════ SERVICES ═══════════════════════════════════════════════ -->
+  <section id="services-brochure" class="doc-section">
+    <div class="eyebrow">Services Brochure</div>
+    <h2 class="section-title">Custom software and automation for complex workflows.</h2>
+    <p class="section-sub">Bring us a messy workflow — in any industry. We'll help you map it, design it, and build software that makes it easier to operate.</p>
+    <p class="doc-p" style="max-width:580px;margin-top:-20px">Every engagement starts with understanding the real workflow, not a feature list. We've built systems for clinics, restaurants, security teams, async teams, safety products, and solo founders — the industries below are what we've done, not the limit of what we do. If your workflow has roles, handoffs, and a "who owns this?" problem, it's a fit.</p>
+
+    <h3 class="doc-h2 first">Who we work with</h3>
+    <div class="two-col">
+      <div class="two-col-card"><h4>Founders &amp; operators</h4><ul class="doc-ul"><li>You know your domain deeply but need a technical partner who can see the whole system</li><li>You're replacing paper, spreadsheets, or a patchwork of disconnected tools</li><li>You need software built, not just advised on</li></ul></div>
+      <div class="two-col-card"><h4>Product &amp; engineering teams</h4><ul class="doc-ul"><li>You need extra capacity for a defined build, not a headcount commitment</li><li>You're hardening a product before wider rollout or a security-sensitive launch</li><li>You want a team that has shipped in your problem space before</li></ul></div>
+    </div>
+
+    <h3 class="doc-h2">Services</h3>
+    <table class="doc-table styled-first">
+      <thead><tr><th>Service</th><th>Description</th><th>Best fit for</th></tr></thead>
+      <tbody>
+        <tr><td>Product strategy &amp; workflow design</td><td>Turn a messy operational problem into a clear product concept, workflow, prototype, or pilot plan.</td><td>Founders with a product idea · Businesses with manual operations</td></tr>
+        <tr><td>Custom SaaS product development</td><td>Design and build focused SaaS products for role-based, workflow-heavy use cases.</td><td>Founder-led SaaS products · Multi-user web applications</td></tr>
+        <tr><td>Multi-role operational systems</td><td>Create systems where customers, operators, staff, administrators, and owners each see the right part of the same workflow.</td><td>Clinics · Restaurants · Agencies · Operational teams</td></tr>
+        <tr><td>UX &amp; workflow modernization</td><td>Replace fragmented paper, spreadsheets, chats, and disconnected tools with clearer digital journeys.</td><td>Businesses replacing paper registers or spreadsheet-based operations</td></tr>
+        <tr><td>Private-beta &amp; pilot rollout</td><td>Prepare products for real-user validation with controlled access, feedback loops, and rollout boundaries.</td><td>Products approaching first real users</td></tr>
+        <tr><td>Security-conscious engineering</td><td>Design authentication, authorization, tenant isolation, auditability, and safer product workflows.</td><td>Products handling sensitive data or multi-tenant systems</td></tr>
+        <tr><td>Product hardening &amp; reliability review</td><td>Identify failure points and strengthen product behavior before wider rollout.</td><td>Products that work but need more robustness</td></tr>
+        <tr><td>AI-assisted workflow features</td><td>Add carefully scoped AI support for summaries, drafting, prioritization, and operational assistance with human oversight.</td><td>Products with operational complexity that benefits from AI assistance</td></tr>
+      </tbody>
+    </table>
+    <div class="doc-disclaimer"><strong>Disclaimer:</strong> Service scope, deliverables, timelines, integrations, and implementation responsibilities depend on the agreed engagement. Security-conscious engineering does not replace qualified security review, compliance assessment, or penetration testing. AI-assisted features should be designed with appropriate human oversight and should not be used as autonomous decision-makers where professional judgment is required.</div>
+
+    <div class="closing-card" style="margin-top:32px">
+      <h3 style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);margin-bottom:10px">See what we've built, then tell us what you need</h3>
+      <p class="doc-p" style="max-width:520px;margin:0 auto 20px">The seven systems below were each designed and built end-to-end by one founder, across five unrelated industries. They're proof of range, not a menu — read them as evidence of what Nexus can do with your workflow.</p>
+      <a class="btn-primary" style="background:var(--navy)" href="https://nexus.example.com/contact" target="_blank" rel="noopener">Start a conversation</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════ COMPANY BROCHURE ══════════════════════════════════════ -->
+  <section id="company-brochure" class="doc-section">
+    <div class="eyebrow">Company Brochure</div>
+    <h2 class="section-title">Nexus</h2>
+    <p class="section-sub">We build software for workflows that depend on clear roles, reliable handoffs, and the right information reaching the right person.</p>
+
+    <h3 class="doc-h2 first">The Problem</h3>
+    <p class="doc-p">Important work often does not fail because people are careless. It fails because the process is scattered.</p>
+    <p class="doc-p">A clinic runs on phone calls, registers, token slips, patient files, billing notes, diagnostic orders, and pharmacy handoffs. A restaurant moves between table requests, kitchen tickets, staff memory, billing tools, and owner spreadsheets. A team loses decisions between chat threads, task boards, files, meetings, and personal reminders.</p>
+    <blockquote class="doc-quote">Who owns this? What changed? What happens next? Where is the latest information? Can the right person see the right thing at the right time?</blockquote>
+    <p class="doc-p">Nexus builds software for those moments. We turn fragmented workflows into clearer systems.</p>
+
+    <h3 class="doc-h2">How we think about software</h3>
+    <p class="doc-p">Every useful workflow has roles, states, handoffs, and trust boundaries. Most software is described as a list of features. We start somewhere else.</p>
+    <p class="doc-p">We ask: Who is involved? What does each person need to know? What state is the work in? What action should happen next? What should be visible, hidden, confirmed, reviewed, or recorded?</p>
+    <p class="doc-p">A receptionist does not need the same screen as a doctor. A kitchen does not need the same screen as a restaurant owner. A developer does not need a vague security report. The right software gives every role a clearer view of the same journey.</p>
+
+    
+    <h3 class="doc-h2">The founder</h3>
+    <p class="doc-p">Nexus is built and run by one founder — not a large agency, not a studio with account managers between you and the build. I came from operational contexts before engineering ones — clinics, kitchens, security audits, and early-stage startups — which is why the software above is organized around roles and handoffs instead of feature lists.</p>
+    <p class="doc-p">Every case study in this reference was scoped, designed, and built by me end to end. For larger engagements or tighter timelines, I bring in trusted contractors for additional capacity — but I stay hands-on through architecture and delivery on every project. If you work with Nexus, you're working directly with the person who understands your system, not someone relaying to a team you'll never talk to.</p>
+
+    <h3 class="doc-h2">We don't hide our limits</h3>
+    <p class="doc-p">We do not believe software should hide its limits. Health products should not pretend to diagnose. Safety products should not guarantee safety. Security tools should not promise total protection.</p>
+    <p class="doc-p">Trust begins with useful software — and honest communication about what it does.</p>
+
+    <h3 class="doc-h2">Contact</h3>
+    <p class="doc-p">Whether you are running a clinic, restaurant, team, product, safety workflow, or software platform — the right system can make the work easier to understand and easier to operate.</p>
+    <dl class="contact-table">
+      <div class="contact-row"><dt class="contact-key">Website</dt><dd class="contact-val"><a href="https://nexus.example.com" style="color:var(--accent)">nexus.example.com</a></dd></div>
+      <div class="contact-row"><dt class="contact-key">Email</dt><dd class="contact-val"><a href="mailto:hello@nexus.example.com" style="color:var(--accent)">hello@nexus.example.com</a></dd></div>
+      <div class="contact-row"><dt class="contact-key">Demos</dt><dd class="contact-val"><a href="https://nexus.example.com/demo" style="color:var(--accent)">nexus.example.com/demo</a></dd></div>
+      <div class="contact-row"><dt class="contact-key">Pricing</dt><dd class="contact-val">Contact us — pricing is based on product, deployment scale, and configuration. <a href="https://nexus.example.com/contact" style="color:var(--accent)">Request a quote →</a></dd></div>
+      <div class="contact-row"><dt class="contact-key">Location</dt><dd class="contact-val">India</dd></div>
+      <div class="contact-row"><dt class="contact-key">Legal</dt><dd class="contact-val"><a href="privacy-policy.html" style="color:var(--accent)">Privacy Policy</a> · <a href="terms-of-service.html" style="color:var(--accent)">Terms of Service</a></dd></div>
+    </dl>
+    <div class="doc-disclaimer"><strong>Disclaimer:</strong> Product capabilities, integrations, and deployment details may vary by configuration. Health-related products do not provide medical diagnosis, emergency monitoring, or treatment advice. Safety products cannot guarantee personal safety or predict another person's behavior. Automated security scanning cannot guarantee that an application is secure and does not replace qualified security review or penetration testing. Any legal, regulatory, compliance, or certification claims require separate approval before publication.</div>
+  </section>
+
+  <!-- ═══════════════ CASE STUDIES INTRO ══════════════════════════════════════ -->
+  <section id="case-studies" class="doc-section" style="padding-bottom:0">
+    <div class="eyebrow">What We've Built</div>
+    <h2 class="section-title">Seven systems. Five industries. One founder.</h2>
+    <p class="section-sub">These aren't products competing for your subscription — they're evidence. Each one was scoped, designed, and built end-to-end by Nexus, in a different domain, for a different kind of user. Read them as proof of what we can do with your workflow next.</p>
+  </section>
+
+  <!-- ═══════════════ CLINICOS ═══════════════════════════════════════════════ -->
+  <section id="clinicos" class="product-section" aria-labelledby="clinicos-heading" style="--pc:var(--c-clinicos)">
+    <div class="product-hero">
+      <div class="product-icon" style="background:var(--c-clinicos)">C</div>
+      <div>
+        <div class="case-study-tag">Case Study</div>
+        <div class="product-category" style="color:var(--c-clinicos)">Outpatient Clinic Operations Platform</div>
+        <h2 class="product-name" id="clinicos-heading" style="color:var(--c-clinicos)">ClinicOS</h2>
+        <p class="product-tagline">Run the patient journey from enquiry to pharmacy through one connected workflow.</p>
+        <div class="cta-row">
+          <a class="btn-primary" style="background:var(--c-clinicos)" href="https://nexus.example.com/clinicos/demo" target="_blank" rel="noopener">Book a demo</a>
+          <a class="btn-outline"  href="#clinicos-sheet">Map your clinic journey</a>
+        </div>
+        <div class="product-status"><span class="status-dot available"></span>Early access — demos available now</div>
+        <div class="product-screenshot">
+          <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ClinicOS interface preview">
+            <!-- Background -->
+            <rect width="800" height="340" fill="#F4F6FA"/>
+            <!-- Sidebar -->
+            <rect width="160" height="340" fill="#1A2B4C"/>
+            <text x="16" y="30" font-family="sans-serif" font-size="12" font-weight="700" fill="white" opacity=".9">ClinicOS</text>
+            <rect x="8" y="44" width="144" height="28" rx="4" fill="white" opacity=".12"/>
+            <text x="16" y="63" font-family="sans-serif" font-size="11" fill="white">Queue</text>
+            <text x="16" y="90" font-family="sans-serif" font-size="11" fill="white" opacity=".5">Patients</text>
+            <text x="16" y="112" font-family="sans-serif" font-size="11" fill="white" opacity=".5">Billing</text>
+            <text x="16" y="134" font-family="sans-serif" font-size="11" fill="white" opacity=".5">Pharmacy</text>
+            <!-- Queue panel -->
+            <rect x="160" y="0" width="240" height="340" fill="#EEF1F7"/>
+            <text x="172" y="24" font-family="sans-serif" font-size="12" font-weight="700" fill="#1A2B4C">Today's Queue</text>
+            <rect x="168" y="30" width="60" height="20" rx="10" fill="#1A2B4C"/>
+            <text x="198" y="44" font-family="sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">18 waiting</text>
+            <!-- Queue rows -->
+            <rect x="168" y="58" width="224" height="36" rx="5" fill="white"/>
+            <rect x="172" y="65" width="24" height="22" rx="4" fill="#1A2B4C"/>
+            <text x="184" y="80" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">42</text>
+            <text x="204" y="74" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">Rajesh Kumar</text>
+            <text x="204" y="87" font-family="sans-serif" font-size="10" fill="#6B6B6B">GP consult · 9:14 AM</text>
+            <rect x="340" y="65" width="46" height="18" rx="9" fill="#E8F5E9"/>
+            <circle class="svg-pulse" cx="349" cy="74" r="2.5" fill="#3A7A4A"/>
+            <text x="366" y="77" font-family="sans-serif" font-size="9" font-weight="700" fill="#3A7A4A" text-anchor="middle">In room</text>
+
+            <rect x="168" y="100" width="224" height="36" rx="5" fill="white" opacity=".7"/>
+            <rect x="172" y="107" width="24" height="22" rx="4" fill="#E07A20" opacity=".85"/>
+            <text x="184" y="122" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">43</text>
+            <text x="204" y="116" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">Priya Sharma</text>
+            <text x="204" y="129" font-family="sans-serif" font-size="10" fill="#6B6B6B">Diabetes follow-up</text>
+            <rect x="340" y="107" width="46" height="18" rx="9" fill="#FFF3E0"/>
+            <text x="363" y="119" font-family="sans-serif" font-size="9" font-weight="700" fill="#E07A20" text-anchor="middle">Waiting</text>
+
+            <rect x="168" y="142" width="224" height="36" rx="5" fill="white" opacity=".5"/>
+            <rect x="172" y="149" width="24" height="22" rx="4" fill="#6B6B6B" opacity=".6"/>
+            <text x="184" y="164" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">44</text>
+            <text x="204" y="158" font-family="sans-serif" font-size="11" fill="#1A2B4C">Mohammed Irfan</text>
+            <text x="204" y="171" font-family="sans-serif" font-size="10" fill="#6B6B6B">New patient · ENT</text>
+
+            <rect x="168" y="184" width="224" height="36" rx="5" fill="white" opacity=".4"/>
+            <rect x="172" y="191" width="24" height="22" rx="4" fill="#6B6B6B" opacity=".4"/>
+            <text x="184" y="206" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">45</text>
+            <text x="204" y="200" font-family="sans-serif" font-size="11" fill="#1A2B4C">Anita Nair</text>
+            <text x="204" y="213" font-family="sans-serif" font-size="10" fill="#6B6B6B">Blood pressure check</text>
+
+            <!-- Doctor session panel -->
+            <rect x="400" y="0" width="400" height="340" fill="white"/>
+            <rect x="400" y="0" width="400" height="48" fill="#1A2B4C"/>
+            <text x="416" y="20" font-family="sans-serif" font-size="10" fill="white" opacity=".6">NOW CONSULTING</text>
+            <text x="416" y="38" font-family="sans-serif" font-size="14" font-weight="700" fill="white">Token 42 · Rajesh Kumar</text>
+            <text x="750" y="29" font-family="sans-serif" font-size="10" fill="white" opacity=".6" text-anchor="middle">9:22 AM</text>
+
+            <text x="416" y="72" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">PATIENT</text>
+            <text x="416" y="88" font-family="sans-serif" font-size="13" font-weight="600" fill="#1A2B4C">Rajesh Kumar, 54 M</text>
+            <text x="416" y="104" font-family="sans-serif" font-size="11" fill="#6B6B6B">GP Consultation · Returning patient</text>
+
+            <rect x="416" y="116" width="360" height="1" fill="#E5E8ED"/>
+
+            <text x="416" y="134" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">NOTES</text>
+            <rect x="416" y="142" width="360" height="56" rx="4" fill="#F8F8F8"/>
+            <text x="426" y="158" font-family="sans-serif" font-size="11" fill="#2C2C2C">Presenting: mild chest discomfort, shortness</text>
+            <text x="426" y="172" font-family="sans-serif" font-size="11" fill="#2C2C2C">of breath on exertion. BP 138/88. Pulse 76.</text>
+            <text x="426" y="186" font-family="sans-serif" font-size="11" fill="#6B6B6B">History: hypertension (managed). No allergies.</text>
+
+            <rect x="416" y="210" width="110" height="34" rx="6" fill="#1A2B4C"/>
+            <text x="471" y="231" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">Prescription</text>
+            <rect x="534" y="210" width="110" height="34" rx="6" fill="#EEF1F7"/>
+            <text x="589" y="231" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C" text-anchor="middle">Lab order</text>
+            <rect x="652" y="210" width="124" height="34" rx="6" fill="#EEF1F7"/>
+            <text x="714" y="231" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C" text-anchor="middle">Complete &amp; bill</text>
+
+            <rect x="416" y="258" width="360" height="1" fill="#E5E8ED"/>
+            <text x="416" y="278" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">PREVIOUS VISITS</text>
+            <text x="416" y="296" font-family="sans-serif" font-size="11" fill="#6B6B6B">12 Jun — BP 142/90, prescribed amlodipine</text>
+            <text x="416" y="312" font-family="sans-serif" font-size="11" fill="#6B6B6B">28 May — Routine check, all clear</text>
+          </svg>
+          <div class="screenshot-label">Outpatient queue · Patient card · Doctor session view</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="clinicos-detail" class="doc-section" style="border-top:none">
+      <h3 class="doc-h2 first">The Problem</h3>
+      <p class="doc-p">In many outpatient clinics, the patient journey is divided across too many places. A phone enquiry becomes a receptionist note. A same-day booking becomes a token slip. A doctor delay becomes repeated patient questions. A consultation becomes a handwritten prescription. A billing counter recreates the same information. The owner understands the day only after asking multiple people.</p>
+      <blockquote class="doc-quote">The patient journey is connected in real life. The clinic system should be connected too.</blockquote>
+
+      <h3 class="doc-h2">The Workflow</h3>
+      <ol class="workflow-chain" aria-label="Workflow steps">
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-clinicos)">Enquiry</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--accent)">Registration</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-clinicos)">Appointment / Token</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--accent)">Arrival</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-clinicos)">Queue</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--accent)">Consultation</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-clinicos)">Diagnostics</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--accent)">Billing</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-clinicos)">Pharmacy</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--accent)">Follow-up</div></li>
+      </ol>
+
+      <h3 class="doc-h2">Designed for</h3>
+      <div class="cap-grid">
+        <span class="cap-tag">Independent outpatient clinics</span><span class="cap-tag">Family-owned clinics</span><span class="cap-tag">Multi-speciality clinics</span><span class="cap-tag">Doctor-owned clinics</span><span class="cap-tag">Polyclinics</span><span class="cap-tag">Clinics with attached pharmacy</span><span class="cap-tag">Growing clinic groups</span>
+      </div>
+
+      <h3 class="doc-h2">Patient States</h3>
+      <div class="states-row">
+        <span class="state-chip">Expected</span><span class="state-chip">Arrived</span><span class="state-chip">Waiting</span><span class="state-chip">Called</span>
+        <span class="state-chip state-chip--success">In consultation</span>
+        <span class="state-chip">Temporarily skipped</span><span class="state-chip">Delayed</span><span class="state-chip">Cancelled</span><span class="state-chip">No-show</span>
+        <span class="state-chip state-chip--info">Sent to diagnostics</span>
+        <span class="state-chip state-chip--info">Sent to billing</span>
+        <span class="state-chip state-chip--info">Sent to pharmacy</span>
+        <span class="state-chip state-chip--purple">Visit completed</span>
+      </div>
+
+      <h3 class="doc-h2">Core Capabilities</h3>
+      <div class="two-col">
+        <div class="two-col-card"><h4>Front Desk</h4><ul class="doc-ul"><li>Patient and family registration</li><li>One contact number, multiple profiles</li><li>Appointment booking and walk-in handling</li><li>Same-day token issuing</li><li>Doctor schedule visibility</li><li>Arrival confirmation and delay handling</li></ul></div>
+        <div class="two-col-card"><h4>Queue &amp; Consultation</h4><ul class="doc-ul"><li>Live queue movement with audit history</li><li>Multiple doctors, specialities, chambers</li><li>Encounter records and digital prescriptions</li><li>Diagnostic order direction</li><li>Prescription-to-pharmacy handoff</li><li>Follow-up booking</li></ul></div>
+        <div class="two-col-card"><h4>Billing &amp; Pharmacy</h4><ul class="doc-ul"><li>Consultation, diagnostic, and pharmacy charges</li><li>Daily collection summaries and cash reconciliation</li><li>Batch and expiry verification</li><li>Medicine dispensing workflow</li><li>Inventory and procurement management</li></ul></div>
+        <div class="two-col-card"><h4>Owner &amp; Manager View</h4><ul class="doc-ul"><li>Patient volumes and session utilization</li><li>Waiting-time trends and delay visibility</li><li>Revenue by service, doctor, diagnostics, pharmacy</li><li>Near-expiry and stock-out alerts</li><li>Full audit history</li></ul></div>
+      </div>
+      <h3 class="doc-h2">Integrations &amp; Compatibility</h3>
+      <p class="doc-p">ClinicOS connects with the services clinics already depend on. Payment processing is supported via UPI, card terminals, and cash. Appointment reminder SMS can be routed through a configured SMS gateway. Diagnostic order slips are printable to any connected printer. Pharmacy dispensing records are internal by default. Integration with external laboratory information systems or third-party EMRs is available as a deployment configuration — confirm specifics during onboarding.</p>
+
+      <div class="doc-disclaimer compact"><strong>Disclaimer:</strong> ClinicOS is an outpatient clinic operations platform. Product capabilities, integrations, billing, pharmacy, diagnostic, and deployment details may vary by configuration. Queue and arrival times are estimates, not promises. ClinicOS does not provide medical advice. Clinical decisions remain with qualified professionals. Any legal, regulatory, compliance, certification, or medical claims require separate approval before publication.</div>
+    </section>
+
+    <section id="clinicos-sheet" class="sales-sheet">
+      <div class="eyebrow" style="color:var(--c-clinicos)">ClinicOS — Sales Sheet</div>
+      <div class="sales-wide"><h4>The problem</h4><p>Many clinics do not have one shared view of the patient journey. Reception manages calls and arrivals. Doctors manage consultations. Billing manages charges. Diagnostics manages test orders. Pharmacy manages prescriptions. Owners try to understand the day after it has already happened. Every handoff creates another place for information to be repeated, delayed, or lost.</p></div>
+      <div class="sales-grid">
+        <div class="sales-card"><h4>Headline</h4><p>Run the entire outpatient journey through one connected clinic workflow.</p></div>
+        <div class="sales-card"><h4>Differentiators</h4><p>Built around real outpatient flow · Family-aware patient access · Front desk to pharmacy continuity</p></div>
+        <div class="sales-card"><h4>Primary CTA</h4><p>Book a ClinicOS demo</p></div>
+        <div class="sales-card"><h4>Responsible-use note</h4><p>Queue and arrival times are estimates, not promises. ClinicOS does not provide medical advice. Clinical decisions remain with qualified professionals.</p></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ═══════════════ AAROGYA ════════════════════════════════════════════════ -->
+  <section id="aarogya" class="product-section" aria-labelledby="aarogya-heading" style="--pc:var(--c-aarogya)">
+    <div class="product-hero">
+      <div class="product-icon" style="background:var(--c-aarogya)">A</div>
+      <div>
+        <div class="case-study-tag">Case Study</div>
+        <div class="product-category" style="color:var(--c-aarogya)">Personal Health Information &amp; Routine Tracker</div>
+        <h2 class="product-name" id="aarogya-heading" style="color:var(--c-aarogya)">Aarogya</h2>
+        <p class="product-tagline">Organize everyday health information into one clearer personal record.</p>
+        <div class="cta-row">
+          <a class="btn-primary" style="background:var(--c-aarogya)" href="https://nexus.example.com/aarogya" target="_blank" rel="noopener">Explore Aarogya</a>
+          <a class="btn-outline"  href="#aarogya-sheet">Join the waitlist</a>
+        </div>
+        <div class="product-status"><span class="status-dot waitlist"></span>Joining the waitlist now</div>
+        <div class="product-screenshot">
+          <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aarogya interface preview">
+            <!-- Background -->
+            <rect width="800" height="340" fill="#F2F7F3"/>
+            <!-- Header bar -->
+            <rect width="800" height="48" fill="#5A7F5E"/>
+            <text x="20" y="20" font-family="sans-serif" font-size="11" fill="white" opacity=".7">Aarogya</text>
+            <text x="20" y="37" font-family="sans-serif" font-size="14" font-weight="700" fill="white">Good morning, Priya</text>
+            <text x="700" y="29" font-family="sans-serif" font-size="11" fill="white" opacity=".7" text-anchor="middle">2 Jul 2026</text>
+
+            <!-- Metric tiles row -->
+            <rect x="16" y="60" width="174" height="80" rx="8" fill="white"/>
+            <text x="28" y="82" font-family="sans-serif" font-size="10" font-weight="700" fill="#5A7F5E">BLOOD PRESSURE</text>
+            <text x="28" y="108" font-family="sans-serif" font-size="26" font-weight="700" fill="#1A2B4C">120<tspan font-size="14" fill="#6B6B6B">/</tspan>78</text>
+            <text x="28" y="126" font-family="sans-serif" font-size="10" fill="#3A7A4A">↓ Improved from last week</text>
+
+            <rect x="202" y="60" width="174" height="80" rx="8" fill="white"/>
+            <text x="214" y="82" font-family="sans-serif" font-size="10" font-weight="700" fill="#5A7F5E">BLOOD GLUCOSE</text>
+            <text x="214" y="108" font-family="sans-serif" font-size="26" font-weight="700" fill="#1A2B4C">104<tspan font-size="14" fill="#6B6B6B"> mg/dL</tspan></text>
+            <text x="214" y="126" font-family="sans-serif" font-size="10" fill="#6B6B6B">Fasting · this morning</text>
+
+            <rect x="388" y="60" width="174" height="80" rx="8" fill="white"/>
+            <text x="400" y="82" font-family="sans-serif" font-size="10" font-weight="700" fill="#5A7F5E">WEIGHT</text>
+            <text x="400" y="108" font-family="sans-serif" font-size="26" font-weight="700" fill="#1A2B4C">67.2<tspan font-size="14" fill="#6B6B6B"> kg</tspan></text>
+            <text x="400" y="126" font-family="sans-serif" font-size="10" fill="#E07A20">↑ +0.4 from last week</text>
+
+            <rect x="574" y="60" width="210" height="80" rx="8" fill="white"/>
+            <text x="586" y="82" font-family="sans-serif" font-size="10" font-weight="700" fill="#5A7F5E">MEDICATIONS TODAY</text>
+            <text x="586" y="100" font-family="sans-serif" font-size="11" fill="#1A2B4C">✓  Metformin 500mg — 8:00 AM</text>
+            <text x="586" y="116" font-family="sans-serif" font-size="11" fill="#1A2B4C">✓  Amlodipine 5mg — 8:00 AM</text>
+            <text x="586" y="132" font-family="sans-serif" font-size="11" fill="#6B6B6B">○  Metformin 500mg — 8:00 PM</text>
+
+            <!-- Trend chart -->
+            <rect x="16" y="152" width="498" height="172" rx="8" fill="white"/>
+            <text x="28" y="174" font-family="sans-serif" font-size="11" font-weight="700" fill="#1A2B4C">Blood Pressure — Last 4 weeks</text>
+            <text x="480" y="174" font-family="sans-serif" font-size="10" fill="#5A7F5E" text-anchor="end">Systolic</text>
+
+            <!-- Y axis labels -->
+            <text x="28" y="198" font-family="sans-serif" font-size="9" fill="#6B6B6B">150</text>
+            <text x="28" y="228" font-family="sans-serif" font-size="9" fill="#6B6B6B">130</text>
+            <text x="28" y="258" font-family="sans-serif" font-size="9" fill="#6B6B6B">110</text>
+            <text x="28" y="288" font-family="sans-serif" font-size="9" fill="#6B6B6B">90</text>
+            <!-- Grid lines -->
+            <line x1="48" y1="193" x2="500" y2="193" stroke="#E5E8ED" stroke-width="1"/>
+            <line x1="48" y1="223" x2="500" y2="223" stroke="#E5E8ED" stroke-width="1"/>
+            <line x1="48" y1="253" x2="500" y2="253" stroke="#E5E8ED" stroke-width="1"/>
+            <line x1="48" y1="283" x2="500" y2="283" stroke="#E5E8ED" stroke-width="1"/>
+            <!-- BP trend line (systolic) - improving -->
+            <polyline points="60,248 120,238 180,245 240,232 300,228 360,235 420,222 480,213" fill="none" stroke="#5A7F5E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Data point dots -->
+            <circle cx="60" cy="248" r="4" fill="#5A7F5E"/>
+            <circle cx="120" cy="238" r="4" fill="#5A7F5E"/>
+            <circle cx="180" cy="245" r="4" fill="#5A7F5E"/>
+            <circle cx="240" cy="232" r="4" fill="#5A7F5E"/>
+            <circle cx="300" cy="228" r="4" fill="#5A7F5E"/>
+            <circle cx="360" cy="235" r="4" fill="#5A7F5E"/>
+            <circle cx="420" cy="222" r="4" fill="#5A7F5E"/>
+            <circle class="svg-pulse-scale" cx="480" cy="213" r="5" fill="#5A7F5E" stroke="white" stroke-width="2"/>
+            <!-- X axis labels -->
+            <text x="60" y="300" font-family="sans-serif" font-size="9" fill="#6B6B6B" text-anchor="middle">Jun 4</text>
+            <text x="180" y="300" font-family="sans-serif" font-size="9" fill="#6B6B6B" text-anchor="middle">Jun 11</text>
+            <text x="300" y="300" font-family="sans-serif" font-size="9" fill="#6B6B6B" text-anchor="middle">Jun 18</text>
+            <text x="420" y="300" font-family="sans-serif" font-size="9" fill="#6B6B6B" text-anchor="middle">Jun 25</text>
+            <text x="480" y="300" font-family="sans-serif" font-size="9" fill="#5A7F5E" font-weight="700" text-anchor="middle">Today</text>
+            <!-- Weekly summary panel -->
+            <rect x="526" y="152" width="258" height="172" rx="8" fill="white"/>
+            <text x="538" y="174" font-family="sans-serif" font-size="11" font-weight="700" fill="#1A2B4C">Weekly summary</text>
+            <text x="538" y="196" font-family="sans-serif" font-size="10" fill="#6B6B6B">BP readings logged</text>
+            <text x="770" y="196" font-family="sans-serif" font-size="10" font-weight="700" fill="#1A2B4C" text-anchor="end">7 / 7 days</text>
+            <text x="538" y="214" font-family="sans-serif" font-size="10" fill="#6B6B6B">Glucose readings</text>
+            <text x="770" y="214" font-family="sans-serif" font-size="10" font-weight="700" fill="#1A2B4C" text-anchor="end">5 / 7 days</text>
+            <text x="538" y="232" font-family="sans-serif" font-size="10" fill="#6B6B6B">Medication adherence</text>
+            <text x="770" y="232" font-family="sans-serif" font-size="10" font-weight="700" fill="#3A7A4A" text-anchor="end">94%</text>
+            <text x="538" y="250" font-family="sans-serif" font-size="10" fill="#6B6B6B">Avg systolic BP</text>
+            <text x="770" y="250" font-family="sans-serif" font-size="10" font-weight="700" fill="#1A2B4C" text-anchor="end">130 mmHg</text>
+            <rect x="538" y="264" width="232" height="1" fill="#E5E8ED"/>
+            <rect x="538" y="274" width="232" height="36" rx="6" fill="#F2F7F3"/>
+            <text x="654" y="287" font-family="sans-serif" font-size="10" font-weight="700" fill="#5A7F5E" text-anchor="middle">Export this week's data</text>
+            <text x="654" y="300" font-family="sans-serif" font-size="9" fill="#5A7F5E" text-anchor="middle">PDF · CSV · Share with doctor</text>
+          </svg>
+          <div class="screenshot-label">Daily readings · Trend graph · Weekly summary</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="aarogya-detail" class="doc-section" style="border-top:none">
+      <h3 class="doc-h2 first">The Problem</h3>
+      <p class="doc-p">Everyday health information often lives in too many places. A blood-pressure reading is written in a notebook. A glucose value is stored in a device. A prescription is saved as a photo. A lab report is buried in a file. A medicine routine is remembered from habit. A doctor visit happens before the user can summarize what changed.</p>
+      <blockquote class="doc-quote">Your health information should not depend on memory alone.</blockquote>
+
+      <h3 class="doc-h2">The Workflow</h3>
+      <ol class="workflow-chain" aria-label="Workflow steps">
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-aarogya)">Log</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-aarogya-dark)">Track</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-aarogya)">Understand</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-aarogya-dark)">Summarize</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-aarogya)">Share when needed</div></li>
+      </ol>
+
+      <h3 class="doc-h2">Core Capabilities</h3>
+      <div class="two-col">
+        <div class="two-col-card"><h4>Metric Tracking</h4><ul class="doc-ul"><li>Blood-pressure logging</li><li>Blood-glucose logging</li><li>Weight tracking</li><li>Trend visualization</li><li>Source attribution</li><li>Weekly summaries</li></ul></div>
+        <div class="two-col-card"><h4>Routines &amp; Context</h4><ul class="doc-ul"><li>Meal logging with Indian food context</li><li>Medication logging and routine support</li><li>Lifestyle and activity notes</li><li>Time-of-day context</li><li>Reminder direction</li></ul></div>
+        <div class="two-col-card"><h4>Reports &amp; Summaries</h4><ul class="doc-ul"><li>Lab-report upload direction</li><li>Exportable personal health summary</li><li>Doctor-visit preparation view</li><li>Metric trend summaries</li></ul></div>
+        <div class="two-col-card"><h4>Privacy &amp; Sharing</h4><ul class="doc-ul"><li>User-controlled records</li><li>Consent-aware sharing</li><li>Export and deletion direction</li><li>Selected information sharing</li></ul></div>
+      </div>
+      <h3 class="doc-h2">Integrations &amp; Export</h3>
+      <p class="doc-p">Aarogya stores all data locally to the user's account. Readings can be exported as CSV or PDF for sharing with a doctor or for personal records. Future support for wearable device sync (fitness bands, connected glucometers) is on the roadmap — confirm availability at sign-up. Aarogya does not currently integrate with hospital or clinic systems.</p>
+
+      <div class="doc-disclaimer compact"><strong>Disclaimer:</strong> Aarogya is a personal health information and routine tracker. It does not provide medical diagnosis, emergency monitoring, or treatment advice. It does not replace qualified medical care. Users should not change medication or treatment based solely on this product.</div>
+    </section>
+
+    <section id="aarogya-sheet" class="sales-sheet">
+      <div class="eyebrow" style="color:var(--c-aarogya)">Aarogya — Sales Sheet</div>
+      <div class="sales-wide"><h4>The problem</h4><p>Personal health information is often scattered. Readings are in devices. Reports are in files. Medicines are remembered from prescriptions. Meals and routines are tracked inconsistently. Important context is forgotten before the next doctor visit.</p></div>
+      <div class="sales-grid">
+        <div class="sales-card"><h4>Headline</h4><p>Organize everyday health information into one clearer personal record.</p></div>
+        <div class="sales-card"><h4>Differentiators</h4><p>Built for everyday health organization · Calm, non-alarmist experience · India-aware direction</p></div>
+        <div class="sales-card"><h4>Primary CTA</h4><p>Explore Aarogya</p></div>
+        <div class="sales-card"><h4>Responsible-use note</h4><p>Aarogya does not provide medical diagnosis, emergency monitoring, or treatment advice. Users should not change medication based solely on the product.</p></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ═══════════════ RESTAURANTOS ══════════════════════════════════════════ -->
+  <section id="restaurantos" class="product-section" aria-labelledby="restaurantos-heading" style="--pc:var(--c-restaurant)">
+    <div class="product-hero">
+      <div class="product-icon" style="background:var(--c-restaurant)">R</div>
+      <div>
+        <div class="case-study-tag">Case Study</div>
+        <div class="product-category" style="color:var(--c-restaurant)">Restaurant Ordering &amp; Operations Platform</div>
+        <h2 class="product-name" id="restaurantos-heading" style="color:var(--c-restaurant)">RestaurantOS</h2>
+        <p class="product-tagline">Connect every table, kitchen, service, and owner workflow.</p>
+        <div class="cta-row">
+          <a class="btn-primary" style="background:var(--c-restaurant)" href="https://nexus.example.com/restaurantos/demo" target="_blank" rel="noopener">Book a demo</a>
+          <a class="btn-outline"  href="#restaurantos-sheet">Discuss a pilot</a>
+        </div>
+        <div class="product-status"><span class="status-dot beta"></span>Pilot programme — limited restaurants</div>
+        <div class="product-screenshot">
+          <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RestaurantOS interface preview">
+            <!-- Background -->
+            <rect width="800" height="340" fill="#FAF4EE"/>
+            <!-- Header -->
+            <rect width="800" height="44" fill="#A05C1A"/>
+            <text x="16" y="17" font-family="sans-serif" font-size="10" fill="white" opacity=".7">RestaurantOS</text>
+            <text x="16" y="33" font-family="sans-serif" font-size="13" font-weight="700" fill="white">The Spice Garden · 7:42 PM · 6 tables active</text>
+            <rect x="644" y="12" width="140" height="22" rx="4" fill="white" opacity=".2"/>
+            <text x="714" y="27" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">₹ 18,240 today</text>
+
+            <!-- Floor plan -->
+            <rect x="16" y="56" width="260" height="272" rx="8" fill="white"/>
+            <text x="28" y="78" font-family="sans-serif" font-size="11" font-weight="700" fill="#A05C1A">FLOOR PLAN</text>
+            <!-- Tables -->
+            <rect x="28" y="88" width="60" height="56" rx="6" fill="#A05C1A"/>
+            <text x="58" y="111" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">T1</text>
+            <text x="58" y="127" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">4 pax</text>
+            <rect x="100" y="88" width="60" height="56" rx="6" fill="#A05C1A"/>
+            <text x="130" y="111" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">T2</text>
+            <text x="130" y="127" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">2 pax</text>
+            <rect x="172" y="88" width="60" height="56" rx="6" fill="#E5E8ED"/>
+            <text x="202" y="111" font-family="sans-serif" font-size="11" font-weight="700" fill="#6B6B6B" text-anchor="middle">T3</text>
+            <text x="202" y="127" font-family="sans-serif" font-size="9" fill="#6B6B6B" text-anchor="middle">Free</text>
+
+            <rect x="28" y="156" width="60" height="56" rx="6" fill="#A05C1A"/>
+            <text x="58" y="179" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">T4</text>
+            <text x="58" y="195" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">6 pax</text>
+            <rect x="100" y="156" width="60" height="56" rx="6" fill="#E5E8ED"/>
+            <text x="130" y="179" font-family="sans-serif" font-size="11" font-weight="700" fill="#6B6B6B" text-anchor="middle">T5</text>
+            <text x="130" y="195" font-family="sans-serif" font-size="9" fill="#6B6B6B" text-anchor="middle">Free</text>
+            <rect x="172" y="156" width="60" height="56" rx="6" fill="#A05C1A"/>
+            <text x="202" y="179" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">T6</text>
+            <text x="202" y="195" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">2 pax</text>
+
+            <rect x="28" y="224" width="60" height="56" rx="6" fill="#A05C1A"/>
+            <text x="58" y="247" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">T7</text>
+            <text x="58" y="263" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">4 pax</text>
+            <rect x="100" y="224" width="60" height="56" rx="6" fill="#D4AC0D"/>
+            <circle class="svg-pulse" cx="148" cy="232" r="3" fill="white"/>
+            <text x="130" y="247" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">T8</text>
+            <text x="130" y="263" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">Billing</text>
+            <rect x="172" y="224" width="60" height="56" rx="6" fill="#E5E8ED"/>
+            <text x="202" y="247" font-family="sans-serif" font-size="11" font-weight="700" fill="#6B6B6B" text-anchor="middle">T9</text>
+            <text x="202" y="263" font-family="sans-serif" font-size="9" fill="#6B6B6B" text-anchor="middle">Free</text>
+
+            <!-- Active order panel -->
+            <rect x="288" y="56" width="260" height="272" rx="8" fill="white"/>
+            <rect x="288" y="56" width="260" height="36" rx="8" fill="#A05C1A"/>
+            <rect x="288" y="74" width="260" height="18" fill="#A05C1A"/>
+            <text x="418" y="79" font-family="sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">Table 4 — Order #112</text>
+            <text x="418" y="96" font-family="sans-serif" font-size="10" fill="white" opacity=".8" text-anchor="middle">6 guests · opened 7:18 PM</text>
+
+            <rect x="300" y="104" width="236" height="1" fill="#E5E8ED"/>
+            <text x="300" y="120" font-family="sans-serif" font-size="10" fill="#6B6B6B">Item</text>
+            <text x="500" y="120" font-family="sans-serif" font-size="10" fill="#6B6B6B" text-anchor="end">Qty</text>
+            <text x="524" y="120" font-family="sans-serif" font-size="10" fill="#6B6B6B" text-anchor="end">Price</text>
+
+            <text x="300" y="138" font-family="sans-serif" font-size="11" fill="#1A2B4C">Paneer Butter Masala</text>
+            <text x="500" y="138" font-family="sans-serif" font-size="11" fill="#6B6B6B" text-anchor="end">×2</text>
+            <text x="524" y="138" font-family="sans-serif" font-size="11" fill="#1A2B4C" text-anchor="end">₹640</text>
+            <text x="300" y="156" font-family="sans-serif" font-size="11" fill="#1A2B4C">Dal Makhani</text>
+            <text x="500" y="156" font-family="sans-serif" font-size="11" fill="#6B6B6B" text-anchor="end">×1</text>
+            <text x="524" y="156" font-family="sans-serif" font-size="11" fill="#1A2B4C" text-anchor="end">₹280</text>
+            <text x="300" y="174" font-family="sans-serif" font-size="11" fill="#1A2B4C">Garlic Naan</text>
+            <text x="500" y="174" font-family="sans-serif" font-size="11" fill="#6B6B6B" text-anchor="end">×6</text>
+            <text x="524" y="174" font-family="sans-serif" font-size="11" fill="#1A2B4C" text-anchor="end">₹300</text>
+            <text x="300" y="192" font-family="sans-serif" font-size="11" fill="#1A2B4C">Chicken Biryani</text>
+            <text x="500" y="192" font-family="sans-serif" font-size="11" fill="#6B6B6B" text-anchor="end">×2</text>
+            <text x="524" y="192" font-family="sans-serif" font-size="11" fill="#1A2B4C" text-anchor="end">₹560</text>
+            <text x="300" y="210" font-family="sans-serif" font-size="11" fill="#1A2B4C">Mango Lassi</text>
+            <text x="500" y="210" font-family="sans-serif" font-size="11" fill="#6B6B6B" text-anchor="end">×4</text>
+            <text x="524" y="210" font-family="sans-serif" font-size="11" fill="#1A2B4C" text-anchor="end">₹360</text>
+
+            <rect x="300" y="220" width="236" height="1" fill="#E5E8ED"/>
+            <text x="300" y="238" font-family="sans-serif" font-size="11" fill="#6B6B6B">Subtotal</text>
+            <text x="524" y="238" font-family="sans-serif" font-size="11" fill="#6B6B6B" text-anchor="end">₹2,140</text>
+            <text x="300" y="254" font-family="sans-serif" font-size="11" fill="#6B6B6B">GST (5%)</text>
+            <text x="524" y="254" font-family="sans-serif" font-size="11" fill="#6B6B6B" text-anchor="end">₹107</text>
+            <text x="300" y="272" font-family="sans-serif" font-size="13" font-weight="700" fill="#1A2B4C">Total</text>
+            <text x="524" y="272" font-family="sans-serif" font-size="13" font-weight="700" fill="#1A2B4C" text-anchor="end">₹2,247</text>
+
+            <rect x="300" y="284" width="114" height="32" rx="6" fill="#A05C1A"/>
+            <text x="357" y="304" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">Print bill</text>
+            <rect x="422" y="284" width="114" height="32" rx="6" fill="#FAF4EE" stroke="#A05C1A" stroke-width="1.5"/>
+            <text x="479" y="304" font-family="sans-serif" font-size="11" font-weight="700" fill="#A05C1A" text-anchor="middle">Add items</text>
+
+            <!-- Kitchen queue panel -->
+            <rect x="560" y="56" width="224" height="272" rx="8" fill="white"/>
+            <text x="572" y="78" font-family="sans-serif" font-size="11" font-weight="700" fill="#A05C1A">KITCHEN QUEUE</text>
+            <text x="764" y="78" font-family="sans-serif" font-size="10" fill="#6B6B6B" text-anchor="end">3 tickets</text>
+
+            <rect x="572" y="86" width="200" height="66" rx="6" fill="#FFF3E0" stroke="#E07A20" stroke-width="1.5"/>
+            <text x="584" y="103" font-family="sans-serif" font-size="10" font-weight="700" fill="#E07A20">T1 · #108 · 18 min ago</text>
+            <text x="584" y="119" font-family="sans-serif" font-size="11" fill="#1A2B4C">Chicken Tikka ×1</text>
+            <text x="584" y="135" font-family="sans-serif" font-size="11" fill="#1A2B4C">Butter Chicken ×2</text>
+            <rect x="680" y="136" width="82" height="10" rx="3" fill="#E07A20" opacity=".2"/>
+            <text x="720" y="145" font-family="sans-serif" font-size="9" fill="#E07A20" text-anchor="middle">PREPARING</text>
+
+            <rect x="572" y="160" width="200" height="54" rx="6" fill="#F2F7F3" stroke="#5A7F5E" stroke-width="1.5"/>
+            <text x="584" y="177" font-family="sans-serif" font-size="10" font-weight="700" fill="#5A7F5E">T4 · #112 · 7 min ago</text>
+            <text x="584" y="193" font-family="sans-serif" font-size="11" fill="#1A2B4C">Dal Makhani ×1, Biryani ×2</text>
+            <rect x="680" y="202" width="82" height="10" rx="3" fill="#5A7F5E" opacity=".2"/>
+            <text x="720" y="210" font-family="sans-serif" font-size="9" fill="#5A7F5E" text-anchor="middle">FIRED</text>
+
+            <rect x="572" y="222" width="200" height="44" rx="6" fill="#F4F6FA"/>
+            <text x="584" y="239" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">T6 · #113 · just now</text>
+            <text x="584" y="255" font-family="sans-serif" font-size="11" fill="#1A2B4C">Garlic Naan ×4</text>
+
+            <rect x="572" y="282" width="200" height="36" rx="6" fill="#A05C1A"/>
+            <text x="672" y="304" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">Mark T4 as ready</text>
+          </svg>
+          <div class="screenshot-label">Table ordering · Kitchen queue · Owner dashboard</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="restaurantos-detail" class="doc-section" style="border-top:none">
+      <h3 class="doc-h2 first">The Problem</h3>
+      <p class="doc-p">In many restaurants, the service journey moves through too many disconnected places. An order is written down or entered into a system. The kitchen receives part of the context. Special instructions are repeated verbally. Service staff check what is ready. The owner reviews the day through a mix of POS data, staff memory, and manual notes.</p>
+      <blockquote class="doc-quote">The customer experience is one journey. The restaurant system should be one journey too.</blockquote>
+
+      <h3 class="doc-h2">The Workflow</h3>
+      <ol class="workflow-chain" aria-label="Workflow steps">
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-restaurant)">Scan</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-restaurant-dark)">Order</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-restaurant)">Prepare</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-restaurant-dark)">Serve</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-restaurant)">Bill</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-restaurant-dark)">Review</div></li>
+      </ol>
+
+      <h3 class="doc-h2">Core Capabilities</h3>
+      <div class="two-col">
+        <div class="two-col-card"><h4>Customer Ordering</h4><ul class="doc-ul"><li>QR table access and menu browsing</li><li>Multiple order rounds</li><li>Special instructions</li><li>Availability status</li><li>Order progress visibility</li></ul></div>
+        <div class="two-col-card"><h4>Kitchen &amp; Service</h4><ul class="doc-ul"><li>Live order queue with item-level status</li><li>Ready-item signaling</li><li>Service staff table view</li><li>Bill request handling</li></ul></div>
+        <div class="two-col-card"><h4>Billing &amp; Admin</h4><ul class="doc-ul"><li>Table-level billing direction</li><li>Discount and tax handling where configured</li><li>Menu management and availability control</li></ul></div>
+        <div class="two-col-card"><h4>Owner View</h4><ul class="doc-ul"><li>Live floor overview</li><li>Order volume and revenue summary</li><li>Daily and shift summaries</li><li>Menu item performance</li></ul></div>
+      </div>
+      <h3 class="doc-h2">Integrations &amp; Hardware</h3>
+      <p class="doc-p">RestaurantOS works with standard hardware found in most restaurants. QR code menus print to any standard printer. Kitchen display works on any tablet or wall-mounted screen with a browser. Billing connects to UPI, card readers, and cash. Receipt printing is supported on thermal printers via standard protocols. POS terminal compatibility and third-party accounting integrations (Tally, Zoho Books) should be confirmed per deployment.</p>
+
+      <div class="doc-disclaimer compact"><strong>Disclaimer:</strong> RestaurantOS is a restaurant ordering and operations platform. Operational outcomes depend on restaurant setup, staff adoption, configuration, and connected systems. Payment, billing, tax, inventory, and integration details should be confirmed for each deployment.</div>
+    </section>
+
+    <section id="restaurantos-sheet" class="sales-sheet">
+      <div class="eyebrow" style="color:var(--c-restaurant)">RestaurantOS — Sales Sheet</div>
+      <div class="sales-wide"><h4>The problem</h4><p>Restaurant work is often split across printed menus, verbal instructions, kitchen notes, POS systems, staff memory, payment tools, and owner spreadsheets. When these views are disconnected, the restaurant becomes harder to operate.</p></div>
+      <div class="sales-grid">
+        <div class="sales-card"><h4>Headline</h4><p>Connect the table, kitchen, floor, billing, and owner view.</p></div>
+        <div class="sales-card"><h4>Differentiators</h4><p>Not just a QR menu · Role-specific restaurant views · Built for busy operating conditions</p></div>
+        <div class="sales-card"><h4>Primary CTA</h4><p>Book a RestaurantOS demo</p></div>
+        <div class="sales-card"><h4>Responsible-use note</h4><p>Operational results depend on restaurant setup, staff adoption, configuration, service model, and connected systems.</p></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ═══════════════ SHIPWRIGHT ═════════════════════════════════════════════ -->
+  <section id="shipwright" class="product-section" aria-labelledby="shipwright-heading" style="--pc:var(--c-shipwright)">
+    <div class="product-hero">
+      <div class="product-icon" style="background:var(--c-shipwright)">Sw</div>
+      <div>
+        <div class="case-study-tag">Case Study</div>
+        <div class="product-category" style="color:var(--c-shipwright)">Async Team Execution Workspace</div>
+        <h2 class="product-name" id="shipwright-heading" style="color:var(--c-shipwright)">ShipWright</h2>
+        <p class="product-tagline">Keep projects, tasks, files, decisions, blockers, and check-ins connected.</p>
+        <div class="cta-row">
+          <a class="btn-primary" style="background:var(--c-shipwright)" href="https://nexus.example.com/shipwright/beta" target="_blank" rel="noopener">Request a walkthrough</a>
+          <a class="btn-outline"  href="#shipwright-sheet">Apply for private-beta</a>
+        </div>
+        <div class="product-status"><span class="status-dot beta"></span>Private beta — apply to join</div>
+        <div class="product-screenshot">
+          <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ShipWright interface preview">
+            <!-- Background -->
+            <rect width="800" height="340" fill="#F2F0F8"/>
+            <!-- Top bar -->
+            <rect width="800" height="44" fill="#5B4B8A"/>
+            <text x="16" y="17" font-family="sans-serif" font-size="10" fill="white" opacity=".7">ShipWright</text>
+            <text x="16" y="33" font-family="sans-serif" font-size="13" font-weight="700" fill="white">Q3 Launch — Design &amp; Engineering</text>
+            <text x="700" y="20" font-family="sans-serif" font-size="10" fill="white" opacity=".7" text-anchor="middle">Check-in due in 2h</text>
+            <rect x="640" y="26" width="144" height="14" rx="7" fill="white" opacity=".15"/>
+            <rect x="640" y="26" width="90" height="14" rx="7" fill="white" opacity=".3"/>
+            <text x="784" y="37" font-family="sans-serif" font-size="9" fill="white" opacity=".6" text-anchor="end">62%</text>
+
+            <!-- Three-column kanban -->
+            <!-- TODO column -->
+            <rect x="16" y="56" width="240" height="272" rx="8" fill="#E8E4F4"/>
+            <text x="28" y="78" font-family="sans-serif" font-size="11" font-weight="700" fill="#5B4B8A">TODO</text>
+            <rect x="196" y="66" width="22" height="18" rx="9" fill="#5B4B8A" opacity=".3"/>
+            <text x="207" y="79" font-family="sans-serif" font-size="10" font-weight="700" fill="#5B4B8A" text-anchor="middle">4</text>
+
+            <rect x="24" y="88" width="224" height="72" rx="6" fill="white"/>
+            <text x="36" y="106" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">Write onboarding email sequence</text>
+            <text x="36" y="122" font-family="sans-serif" font-size="10" fill="#6B6B6B">3 emails · welcome, day 3, day 7</text>
+            <circle cx="36" cy="144" r="10" fill="#8A2A5A"/>
+            <text x="36" y="148" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">P</text>
+            <text x="50" y="148" font-family="sans-serif" font-size="10" fill="#6B6B6B">Priya</text>
+            <rect x="164" y="136" width="74" height="18" rx="9" fill="#EEF1F7"/>
+            <text x="200" y="149" font-family="sans-serif" font-size="9" fill="#5B4B8A" text-anchor="middle" font-weight="600">Due 5 Jul</text>
+
+            <rect x="24" y="168" width="224" height="60" rx="6" fill="white"/>
+            <text x="36" y="186" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">Set up error monitoring</text>
+            <text x="36" y="202" font-family="sans-serif" font-size="10" fill="#6B6B6B">Sentry integration + alerts</text>
+            <circle cx="36" cy="216" r="10" fill="#1A2B4C"/>
+            <text x="36" y="220" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">R</text>
+            <text x="50" y="220" font-family="sans-serif" font-size="10" fill="#6B6B6B">Rahul</text>
+
+            <rect x="24" y="236" width="224" height="52" rx="6" fill="white" opacity=".7"/>
+            <text x="36" y="254" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">User research — 5 interviews</text>
+            <text x="36" y="270" font-family="sans-serif" font-size="10" fill="#6B6B6B">Recruit + schedule</text>
+
+            <!-- IN PROGRESS column -->
+            <rect x="280" y="56" width="240" height="272" rx="8" fill="#DDD8F0"/>
+            <text x="292" y="78" font-family="sans-serif" font-size="11" font-weight="700" fill="#5B4B8A">IN PROGRESS</text>
+            <rect x="458" y="66" width="22" height="18" rx="9" fill="#5B4B8A" opacity=".5"/>
+            <text x="469" y="79" font-family="sans-serif" font-size="10" font-weight="700" fill="#5B4B8A" text-anchor="middle">3</text>
+
+            <rect x="288" y="88" width="224" height="80" rx="6" fill="white"/>
+            <rect x="288" y="88" width="4" height="80" rx="2" fill="#5B4B8A"/>
+            <text x="300" y="106" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">Redesign pricing page</text>
+            <text x="300" y="122" font-family="sans-serif" font-size="10" fill="#6B6B6B">Figma → dev handoff by EOD</text>
+            <circle cx="300" cy="148" r="10" fill="#5A7F5E"/>
+            <text x="300" y="152" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">A</text>
+            <text x="314" y="152" font-family="sans-serif" font-size="10" fill="#6B6B6B">Ananya</text>
+            <rect x="388" y="142" width="114" height="16" rx="3" fill="#F2F0F8"/>
+            <rect class="svg-pulse" x="388" y="142" width="82" height="16" rx="3" fill="#5B4B8A" opacity=".4"/>
+            <text x="498" y="153" font-family="sans-serif" font-size="9" fill="#5B4B8A" text-anchor="end">72%</text>
+
+            <rect x="288" y="176" width="224" height="60" rx="6" fill="white"/>
+            <rect x="288" y="176" width="4" height="60" rx="2" fill="#5B4B8A"/>
+            <text x="300" y="194" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">API rate limiting</text>
+            <text x="300" y="210" font-family="sans-serif" font-size="10" fill="#6B6B6B">Redis + token bucket impl.</text>
+            <circle cx="300" cy="224" r="10" fill="#1A2B4C"/>
+            <text x="300" y="228" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">R</text>
+            <text x="314" y="228" font-family="sans-serif" font-size="10" fill="#6B6B6B">Rahul</text>
+
+            <rect x="288" y="244" width="224" height="52" rx="6" fill="white" opacity=".8"/>
+            <rect x="288" y="244" width="4" height="52" rx="2" fill="#D4AC0D"/>
+            <text x="300" y="262" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">Weekly check-in digest</text>
+            <text x="300" y="278" font-family="sans-serif" font-size="10" fill="#6B6B6B">Email template + send logic</text>
+
+            <!-- DONE column -->
+            <rect x="544" y="56" width="240" height="272" rx="8" fill="#E4F0E6"/>
+            <text x="556" y="78" font-family="sans-serif" font-size="11" font-weight="700" fill="#3A7A4A">DONE</text>
+            <rect x="718" y="66" width="22" height="18" rx="9" fill="#3A7A4A" opacity=".4"/>
+            <text x="729" y="79" font-family="sans-serif" font-size="10" font-weight="700" fill="#3A7A4A" text-anchor="middle">5</text>
+
+            <rect x="552" y="88" width="224" height="60" rx="6" fill="white"/>
+            <text x="564" y="106" font-family="sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-decoration="line-through">Define Q3 OKRs</text>
+            <text x="564" y="122" font-family="sans-serif" font-size="10" fill="#6B6B6B">Completed 28 Jun</text>
+            <circle cx="564" cy="136" r="10" fill="#5B4B8A" opacity=".5"/>
+            <text x="564" y="140" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">P</text>
+            <rect x="580" y="128" width="44" height="16" rx="8" fill="#E4F0E6"/>
+            <text x="602" y="140" font-family="sans-serif" font-size="9" fill="#3A7A4A" text-anchor="middle">Done</text>
+
+            <rect x="552" y="156" width="224" height="60" rx="6" fill="white"/>
+            <text x="564" y="174" font-family="sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-decoration="line-through">Onboarding flow v1</text>
+            <text x="564" y="190" font-family="sans-serif" font-size="10" fill="#6B6B6B">Completed 30 Jun</text>
+            <circle cx="564" cy="204" r="10" fill="#8A2A5A" opacity=".5"/>
+            <text x="564" y="208" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">P</text>
+            <rect x="580" y="196" width="44" height="16" rx="8" fill="#E4F0E6"/>
+            <text x="602" y="208" font-family="sans-serif" font-size="9" fill="#3A7A4A" text-anchor="middle">Done</text>
+
+            <rect x="552" y="224" width="224" height="52" rx="6" fill="white" opacity=".7"/>
+            <text x="564" y="242" font-family="sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-decoration="line-through">Fix auth token refresh bug</text>
+            <text x="564" y="258" font-family="sans-serif" font-size="10" fill="#6B6B6B">Completed 1 Jul</text>
+          </svg>
+          <div class="screenshot-label">Project view · Task board · Check-in feed</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="shipwright-detail" class="doc-section" style="border-top:none">
+      <h3 class="doc-h2 first">The Problem</h3>
+      <p class="doc-p">Teams rarely lose work because it doesn't exist. They lose it because it scatters. The task is in one tool. The discussion is in chat. The file is in a drive. The decision was made in a meeting. The blocker was mentioned once and forgotten. The status update has to be rebuilt every week.</p>
+      <blockquote class="doc-quote">Work moves faster when context stays with it.</blockquote>
+
+      <h3 class="doc-h2">The Workflow</h3>
+      <ol class="workflow-chain" aria-label="Workflow steps">
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-shipwright)">Plan</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-shipwright-dark)">Assign</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-shipwright)">Discuss</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-shipwright-dark)">Check in</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-shipwright)">Resolve blockers</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-shipwright-dark)">Ship</div></li>
+      </ol>
+
+      <h3 class="doc-h2">Core Capabilities</h3>
+      <div class="two-col">
+        <div class="two-col-card"><h4>Plan &amp; organize</h4><ul class="doc-ul"><li>Workspaces</li><li>Projects &amp; milestones</li><li>Tasks &amp; ownership</li><li>Files &amp; notes</li></ul></div>
+        <div class="two-col-card"><h4>Communicate &amp; decide</h4><ul class="doc-ul"><li>Team check-ins</li><li>Comments &amp; discussions</li><li>Decision history</li><li>Blocker visibility</li></ul></div>
+        <div class="two-col-card"><h4>Remember &amp; report</h4><ul class="doc-ul"><li>Project summaries</li><li>Operational context</li><li>Team memory</li></ul></div>
+      </div>
+      <h3 class="doc-h2">Integrations &amp; Notifications</h3>
+      <p class="doc-p">ShipWright sends daily check-in reminders and task deadline nudges via email. Slack notifications are available as an optional integration — team members can receive task updates and check-in prompts without leaving their existing tools. File attachments are supported for tasks. Calendar integrations for deadline visibility are on the roadmap.</p>
+
+      <div class="doc-disclaimer compact"><strong>Disclaimer:</strong> ShipWright is an async team execution workspace. Team outcomes depend on adoption, workflow setup, communication norms, and how consistently teams use the workspace.</div>
+    </section>
+
+    <section id="shipwright-sheet" class="sales-sheet">
+      <div class="eyebrow" style="color:var(--c-shipwright)">ShipWright — Sales Sheet</div>
+      <div class="sales-wide"><h4>The problem</h4><p>Teams rarely lose work because the work does not exist. They lose it because the work is scattered. The task is in one tool. The discussion is in chat. The file is in a drive. The decision was made in a meeting. The blocker was mentioned once and forgotten.</p></div>
+      <div class="sales-grid">
+        <div class="sales-card"><h4>Headline</h4><p>Keep projects, decisions, blockers, and files connected.</p></div>
+        <div class="sales-card"><h4>Differentiators</h4><p>Built for context continuity · Async-first execution · Operational memory</p></div>
+        <div class="sales-card"><h4>Primary CTA</h4><p>Request a ShipWright walkthrough</p></div>
+        <div class="sales-card"><h4>Responsible-use note</h4><p>Team outcomes depend on adoption, workflow setup, and communication norms.</p></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ═══════════════ SECURESCAN ═════════════════════════════════════════════ -->
+  <section id="securescan" class="product-section" aria-labelledby="securescan-heading" style="--pc:var(--c-securescan)">
+    <div class="product-hero">
+      <div class="product-icon" style="background:var(--c-securescan)">Sc</div>
+      <div>
+        <div class="case-study-tag">Case Study</div>
+        <div class="product-category" style="color:var(--c-securescan)">Developer-Focused Web-Security Scanning Platform</div>
+        <h2 class="product-name" id="securescan-heading" style="color:var(--c-securescan)">SecureScan</h2>
+        <p class="product-tagline">Bring repeatable security checks closer to development work.</p>
+        <div class="cta-row">
+          <a class="btn-primary" style="background:var(--c-securescan)" href="https://nexus.example.com/securescan/demo" target="_blank" rel="noopener">Request a technical demo</a>
+          <a class="btn-outline"  href="#securescan-sheet">Review your workflow</a>
+        </div>
+        <div class="product-status"><span class="status-dot available"></span>Available — technical demos running now</div>
+        <div class="product-screenshot">
+          <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SecureScan interface preview">
+            <!-- Background -->
+            <rect width="800" height="340" fill="#F0F4F6"/>
+            <!-- Top bar -->
+            <rect width="800" height="44" fill="#162830"/>
+            <text x="16" y="17" font-family="sans-serif" font-size="10" fill="#3A9EAA" font-weight="700">SecureScan</text>
+            <text x="16" y="33" font-family="sans-serif" font-size="12" font-weight="600" fill="white">app.example.com — Scan #47 complete</text>
+            <rect x="640" y="12" width="144" height="22" rx="4" fill="#2A7D8A"/>
+            <text x="712" y="27" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">+ New Scan</text>
+
+            <!-- Severity summary bar -->
+            <rect x="16" y="56" width="768" height="64" rx="8" fill="white"/>
+            <text x="28" y="76" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">SCAN RESULTS SUMMARY</text>
+            <rect x="28" y="84" width="36" height="26" rx="4" fill="#C0392B"/>
+            <text x="46" y="101" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">2</text>
+            <text x="70" y="97" font-family="sans-serif" font-size="11" fill="#C0392B" font-weight="700">Critical</text>
+            <rect x="150" y="84" width="36" height="26" rx="4" fill="#E07A20"/>
+            <text x="168" y="101" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">7</text>
+            <text x="192" y="97" font-family="sans-serif" font-size="11" fill="#E07A20" font-weight="700">High</text>
+            <rect x="272" y="84" width="36" height="26" rx="4" fill="#D4AC0D"/>
+            <text x="290" y="101" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">14</text>
+            <text x="314" y="97" font-family="sans-serif" font-size="11" fill="#D4AC0D" font-weight="700">Medium</text>
+            <rect x="400" y="84" width="36" height="26" rx="4" fill="#5A9E6A"/>
+            <text x="418" y="101" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">22</text>
+            <text x="442" y="97" font-family="sans-serif" font-size="11" fill="#5A9E6A" font-weight="700">Low</text>
+            <rect x="520" y="84" width="36" height="26" rx="4" fill="#6B6B6B"/>
+            <text x="538" y="101" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">31</text>
+            <text x="562" y="97" font-family="sans-serif" font-size="11" fill="#6B6B6B" font-weight="700">Info</text>
+            <text x="750" y="92" font-family="sans-serif" font-size="10" fill="#6B6B6B" text-anchor="end">Scanned: 2 Jul 2026</text>
+            <text x="750" y="106" font-family="sans-serif" font-size="10" fill="#6B6B6B" text-anchor="end">Duration: 4m 12s</text>
+
+            <!-- Findings list -->
+            <rect x="16" y="132" width="380" height="196" rx="8" fill="white"/>
+            <text x="28" y="154" font-family="sans-serif" font-size="11" font-weight="700" fill="#1A2B4C">Findings</text>
+
+            <rect x="28" y="162" width="356" height="44" rx="5" fill="#FEF0EF"/>
+            <rect x="28" y="162" width="4" height="44" rx="2" fill="#C0392B"/>
+            <rect x="42" y="170" width="54" height="16" rx="3" fill="#C0392B"/>
+            <text x="69" y="182" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">CRITICAL</text>
+            <text x="104" y="177" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">SQL Injection — /api/search</text>
+            <text x="104" y="193" font-family="sans-serif" font-size="10" fill="#6B6B6B">Unsanitised input allows arbitrary queries</text>
+            <text x="375" y="177" font-family="sans-serif" font-size="10" fill="#2A7D8A" text-anchor="end">Details →</text>
+
+            <rect x="28" y="212" width="356" height="44" rx="5" fill="#FEF0EF"/>
+            <rect x="28" y="212" width="4" height="44" rx="2" fill="#C0392B"/>
+            <rect x="42" y="220" width="54" height="16" rx="3" fill="#C0392B"/>
+            <text x="69" y="232" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">CRITICAL</text>
+            <text x="104" y="227" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">Exposed .env file — root path</text>
+            <text x="104" y="243" font-family="sans-serif" font-size="10" fill="#6B6B6B">Credentials accessible without authentication</text>
+            <text x="375" y="227" font-family="sans-serif" font-size="10" fill="#2A7D8A" text-anchor="end">Details →</text>
+
+            <rect x="28" y="262" width="356" height="36" rx="5" fill="#FFF8ED"/>
+            <rect x="28" y="262" width="4" height="36" rx="2" fill="#E07A20"/>
+            <rect x="42" y="269" width="40" height="16" rx="3" fill="#E07A20"/>
+            <text x="62" y="281" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">HIGH</text>
+            <text x="92" y="277" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A2B4C">Missing CSRF tokens — POST endpoints</text>
+            <text x="375" y="277" font-family="sans-serif" font-size="10" fill="#2A7D8A" text-anchor="end">Details →</text>
+
+            <rect x="28" y="304" width="356" height="16" rx="4" fill="#F0F4F6"/>
+            <text x="196" y="316" font-family="sans-serif" font-size="10" fill="#6B6B6B" text-anchor="middle">+ 43 more findings — view all</text>
+
+            <!-- Finding detail panel -->
+            <rect x="408" y="132" width="376" height="196" rx="8" fill="white"/>
+            <text x="420" y="154" font-family="sans-serif" font-size="11" font-weight="700" fill="#1A2B4C">Finding detail</text>
+            <rect x="420" y="162" width="54" height="16" rx="3" fill="#C0392B"/>
+            <text x="447" y="174" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">CRITICAL</text>
+
+            <text x="420" y="196" font-family="sans-serif" font-size="12" font-weight="700" fill="#1A2B4C">SQL Injection</text>
+            <text x="420" y="212" font-family="sans-serif" font-size="10" fill="#6B6B6B">Endpoint: GET /api/search?q=</text>
+            <text x="420" y="230" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">EVIDENCE</text>
+            <rect x="420" y="236" width="352" height="36" rx="4" fill="#162830"/>
+            <text x="430" y="252" font-family="monospace" font-size="10" fill="#3A9EAA">GET /api/search?q=1'+OR+'1'='1</text>
+            <text x="430" y="266" font-family="monospace" font-size="10" fill="#6FA876">→ 200 OK, 2,847 rows returned</text>
+            <rect class="svg-blink" x="606" y="258" width="6" height="11" fill="#6FA876"/>
+            <text x="420" y="290" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">REMEDIATION</text>
+            <text x="420" y="306" font-family="sans-serif" font-size="10" fill="#2C2C2C">Use parameterised queries or prepared statements.</text>
+            <text x="420" y="320" font-family="sans-serif" font-size="10" fill="#2C2C2C">Validate and sanitise all user-controlled input.</text>
+          </svg>
+          <div class="screenshot-label">Scan results · Finding detail · Severity breakdown</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="securescan-detail" class="doc-section" style="border-top:none">
+      <h3 class="doc-h2 first">The Problem</h3>
+      <p class="doc-p">Security findings often arrive too late or in a form developers cannot easily act on. Reports are disconnected from the development workflow. Findings are hard to prioritize. Issues are not re-checked consistently. Security becomes a one-off event instead of a repeatable habit.</p>
+      <blockquote class="doc-quote">A security finding is only useful when the developer who can fix it sees it at the right time.</blockquote>
+
+      <h3 class="doc-h2">The Workflow</h3>
+      <ol class="workflow-chain" aria-label="Workflow steps">
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-securescan)">Scan</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-securescan-dark)">Classify</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-securescan)">Prioritize</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-securescan-dark)">Fix</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-securescan)">Re-scan</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-securescan-dark)">Report</div></li>
+      </ol>
+
+      <h3 class="doc-h2">Finding Severity Levels</h3>
+      <div class="states-row">
+        <span class="state-chip state-chip--critical" style="font-weight:600">Critical</span>
+        <span class="state-chip state-chip--high" style="font-weight:600">High</span>
+        <span class="state-chip state-chip--medium" style="font-weight:600">Medium</span>
+        <span class="state-chip state-chip--low" style="font-weight:600">Low</span>
+        <span class="state-chip" style="font-weight:600">Informational</span>
+      </div>
+      <h3 class="doc-h2">Integrations &amp; Pipeline</h3>
+      <p class="doc-p">SecureScan integrates with GitHub Actions and GitLab CI for automated scans on every pull request or deployment. Findings export as JSON, CSV, or PDF for import into Jira, Linear, or any issue tracker. Slack notifications alert the team when new Critical or High findings are detected. API access is available for teams building custom security dashboards or integrating with existing DevSecOps tooling.</p>
+
+      <div class="doc-disclaimer compact"><strong>Disclaimer:</strong> Automated scanning can help identify common security risks, but it cannot guarantee that an application is secure and does not replace qualified security review, secure development practices, code review, threat modeling, penetration testing, or compliance assessment.</div>
+    </section>
+
+    <section id="securescan-sheet" class="sales-sheet">
+      <div class="eyebrow" style="color:var(--c-securescan)">SecureScan — Sales Sheet</div>
+      <div class="sales-wide"><h4>The problem</h4><p>Security findings often arrive too late or in a form developers struggle to act on. Reports are disconnected from the development workflow. Findings are hard to prioritize. Teams lose track of what was fixed and what still matters. Security becomes a one-off event instead of a repeatable habit.</p></div>
+      <div class="sales-grid">
+        <div class="sales-card"><h4>Headline</h4><p>Run repeatable web-security checks before issues disappear into release pressure.</p></div>
+        <div class="sales-card"><h4>Differentiators</h4><p>Developer-readable findings · Repeatable review rhythm · Built near delivery workflows</p></div>
+        <div class="sales-card"><h4>Primary CTA</h4><p>Request a technical demo</p></div>
+        <div class="sales-card"><h4>Responsible-use note</h4><p>Automated scanning cannot guarantee that an application is secure and does not replace qualified security review or penetration testing.</p></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ═══════════════ SAFEDATE ═══════════════════════════════════════════════ -->
+  <section id="safedate" class="product-section" aria-labelledby="safedate-heading" style="--pc:var(--c-safedate)">
+    <div class="product-hero">
+      <div class="product-icon" style="background:var(--c-safedate)">Sd</div>
+      <div>
+        <div class="case-study-tag">Case Study</div>
+        <div class="product-category" style="color:var(--c-safedate)">Dating-Safety Preparation &amp; Check-in Product</div>
+        <h2 class="product-name" id="safedate-heading" style="color:var(--c-safedate)">SafeDate</h2>
+        <p class="product-tagline">Plan, share, and close the loop around dating safety without fear-based design.</p>
+        <div class="cta-row">
+          <a class="btn-primary" style="background:var(--c-safedate)" href="https://nexus.example.com/safedate" target="_blank" rel="noopener">Explore SafeDate</a>
+          <a class="btn-outline"  href="#safedate-sheet">Create a safety plan</a>
+        </div>
+        <div class="product-status"><span class="status-dot available"></span>Early access — available now</div>
+        <div class="product-screenshot">
+          <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SafeDate interface preview">
+            <!-- Background -->
+            <rect width="800" height="340" fill="#F9F0F5"/>
+            <!-- Header -->
+            <rect width="800" height="44" fill="#8A2A5A"/>
+            <text x="16" y="17" font-family="sans-serif" font-size="10" fill="white" opacity=".7">SafeDate</text>
+            <text x="16" y="33" font-family="sans-serif" font-size="13" font-weight="700" fill="white">Active plan · Coffee date</text>
+            <rect x="660" y="12" width="124" height="22" rx="11" fill="white" opacity=".2"/>
+            <text x="722" y="27" font-family="sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">Check-in: 2h 14m</text>
+
+            <!-- Date plan card -->
+            <rect x="16" y="56" width="300" height="272" rx="8" fill="white"/>
+            <text x="28" y="78" font-family="sans-serif" font-size="11" font-weight="700" fill="#8A2A5A">YOUR DATE PLAN</text>
+            <text x="28" y="100" font-family="sans-serif" font-size="14" font-weight="700" fill="#1A2B4C">Coffee with Arjun</text>
+            <text x="28" y="118" font-family="sans-serif" font-size="11" fill="#6B6B6B">Wednesday, 2 July 2026</text>
+
+            <rect x="28" y="128" width="276" height="1" fill="#E5E8ED"/>
+
+            <text x="28" y="150" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">WHERE</text>
+            <text x="28" y="166" font-family="sans-serif" font-size="12" fill="#1A2B4C">Blue Tokai Coffee</text>
+            <text x="28" y="182" font-family="sans-serif" font-size="11" fill="#6B6B6B">Indiranagar, Bangalore</text>
+
+            <text x="28" y="204" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">TIME</text>
+            <text x="28" y="220" font-family="sans-serif" font-size="12" fill="#1A2B4C">4:00 PM → until done</text>
+
+            <text x="28" y="242" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">CHECK-IN TIME</text>
+            <text x="28" y="258" font-family="sans-serif" font-size="12" fill="#1A2B4C">6:30 PM</text>
+            <text x="28" y="274" font-family="sans-serif" font-size="10" fill="#6B6B6B">Grace period: 15 minutes</text>
+
+            <rect x="28" y="288" width="276" height="32" rx="6" fill="#8A2A5A"/>
+            <text x="166" y="308" font-family="sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">I'm safe — close plan</text>
+
+            <!-- Trusted contacts panel -->
+            <rect x="328" y="56" width="232" height="272" rx="8" fill="white"/>
+            <text x="340" y="78" font-family="sans-serif" font-size="11" font-weight="700" fill="#8A2A5A">TRUSTED CONTACTS</text>
+            <text x="340" y="96" font-family="sans-serif" font-size="10" fill="#6B6B6B">2 contacts can see this plan</text>
+
+            <rect x="340" y="106" width="208" height="60" rx="6" fill="#F9F0F5"/>
+            <circle cx="360" cy="136" r="18" fill="#8A2A5A"/>
+            <text x="360" y="141" font-family="sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">M</text>
+            <text x="386" y="128" font-family="sans-serif" font-size="12" font-weight="600" fill="#1A2B4C">Meera (sister)</text>
+            <text x="386" y="144" font-family="sans-serif" font-size="10" fill="#6B6B6B">Notified when plan shared</text>
+            <rect x="500" y="118" width="40" height="16" rx="8" fill="#E8F5E9"/>
+            <text x="520" y="130" font-family="sans-serif" font-size="9" font-weight="700" fill="#3A7A4A" text-anchor="middle">Active</text>
+
+            <rect x="340" y="174" width="208" height="60" rx="6" fill="#F4F6FA"/>
+            <circle cx="360" cy="204" r="18" fill="#1A2B4C"/>
+            <text x="360" y="209" font-family="sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">R</text>
+            <text x="386" y="196" font-family="sans-serif" font-size="12" font-weight="600" fill="#1A2B4C">Rohan (friend)</text>
+            <text x="386" y="212" font-family="sans-serif" font-size="10" fill="#6B6B6B">Will alert if check-in missed</text>
+            <rect x="500" y="186" width="40" height="16" rx="8" fill="#E8F5E9"/>
+            <text x="520" y="198" font-family="sans-serif" font-size="9" font-weight="700" fill="#3A7A4A" text-anchor="middle">Active</text>
+
+            <text x="444" y="260" font-family="sans-serif" font-size="10" fill="#8A2A5A" text-anchor="middle">+ Add contact</text>
+
+            <rect x="340" y="276" width="208" height="1" fill="#E5E8ED"/>
+            <text x="340" y="296" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">CONTACTS SEE</text>
+            <text x="340" y="312" font-family="sans-serif" font-size="10" fill="#6B6B6B">Location · Date plan · Alert if missed</text>
+
+            <!-- Check-in status panel -->
+            <rect x="572" y="56" width="212" height="272" rx="8" fill="white"/>
+            <text x="584" y="78" font-family="sans-serif" font-size="11" font-weight="700" fill="#8A2A5A">CHECK-IN STATUS</text>
+
+            <circle cx="678" cy="148" r="56" fill="#F9F0F5" stroke="#8A2A5A" stroke-width="3"/>
+            <circle class="svg-pulse-scale" cx="678" cy="92" r="4" fill="#8A2A5A"/>
+            <text x="678" y="140" font-family="sans-serif" font-size="22" font-weight="700" fill="#8A2A5A" text-anchor="middle">2:14</text>
+            <text x="678" y="158" font-family="sans-serif" font-size="11" fill="#8A2A5A" text-anchor="middle">hours left</text>
+            <text x="678" y="174" font-family="sans-serif" font-size="10" fill="#6B6B6B" text-anchor="middle">until 6:30 PM</text>
+
+            <text x="678" y="226" font-family="sans-serif" font-size="10" fill="#6B6B6B" text-anchor="middle">If you miss check-in:</text>
+            <text x="678" y="242" font-family="sans-serif" font-size="10" font-weight="600" fill="#1A2B4C" text-anchor="middle">Meera + Rohan are alerted</text>
+            <text x="678" y="258" font-family="sans-serif" font-size="10" fill="#6B6B6B" text-anchor="middle">with your plan details</text>
+
+            <rect x="584" y="276" width="188" height="32" rx="6" fill="#F9F0F5" stroke="#8A2A5A" stroke-width="1.5"/>
+            <text x="678" y="296" font-family="sans-serif" font-size="11" font-weight="700" fill="#8A2A5A" text-anchor="middle">Extend check-in time</text>
+          </svg>
+          <div class="screenshot-label">Date plan · Trusted contact · Check-in screen</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="safedate-detail" class="doc-section" style="border-top:none">
+      <h3 class="doc-h2 first">The Problem</h3>
+      <p class="doc-p">Modern dating often starts digitally, but the safety planning around meeting someone is still informal. A friend may know part of the plan. A location may be shared in a message. A check-in may be forgotten. The loop may never be closed.</p>
+      <blockquote class="doc-quote">Safety planning should feel like preparation, not alarm.</blockquote>
+
+      <h3 class="doc-h2">The Workflow</h3>
+      <ol class="workflow-chain" aria-label="Workflow steps">
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-safedate)">Plan</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-safedate-dark)">Share context</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-safedate)">Check in</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-safedate-dark)">Update contact</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-safedate)">Close the loop</div></li>
+      </ol>
+
+      <h3 class="doc-h2">Core Capabilities</h3>
+      <div class="cap-grid">
+        <span class="cap-tag">Date planning</span><span class="cap-tag">Trusted-contact sharing</span><span class="cap-tag">Check-in reminders</span><span class="cap-tag">Consent-aware sharing</span><span class="cap-tag">Privacy controls</span><span class="cap-tag">Safety notes</span><span class="cap-tag">Emergency-boundary guidance</span><span class="cap-tag">Post-date closeout</span>
+      </div>
+      <h3 class="doc-h2">How check-ins work</h3>
+      <p class="doc-p">When you create a date plan in SafeDate, you set a check-in time — typically the end of the date. At that time, SafeDate sends you a prompt. If you confirm you're safe, your trusted contacts see a green status and nothing else happens. If you don't respond within a configurable grace period (5–30 minutes, your choice), your trusted contacts receive an alert with your last shared plan details. Trusted contacts do not need a SafeDate account to receive alerts — they're reached by SMS or email. No location tracking occurs unless you choose to share it.</p>
+
+      <h3 class="doc-h2">Integrations &amp; Notifications</h3>
+      <p class="doc-p">SafeDate reaches trusted contacts via SMS and email — no app install required on their end. Push notifications are available for SafeDate users on mobile. The product does not integrate with phone emergency services directly; if you believe you are in danger, contact emergency services first.</p>
+
+      <div class="doc-disclaimer compact"><strong>Disclaimer:</strong> SafeDate cannot guarantee personal safety, predict another person's behavior, prevent harm, or replace emergency services. Users should contact appropriate emergency support when they believe they are in danger.</div>
+    </section>
+
+    <section id="safedate-sheet" class="sales-sheet">
+      <div class="eyebrow" style="color:var(--c-safedate)">SafeDate — Sales Sheet</div>
+      <div class="sales-wide"><h4>The problem</h4><p>Modern dating often starts digitally, but the safety planning around meeting someone is still informal. A friend may know part of the plan. A check-in may be forgotten. Important context may be scattered. The loop may never be closed.</p></div>
+      <div class="sales-grid">
+        <div class="sales-card"><h4>Headline</h4><p>Plan, share, and close the loop around dating safety.</p></div>
+        <div class="sales-card"><h4>Differentiators</h4><p>Non-fear-based safety design · Consent-aware sharing · Clear closeout</p></div>
+        <div class="sales-card"><h4>Primary CTA</h4><p>Explore SafeDate</p></div>
+        <div class="sales-card"><h4>Responsible-use note</h4><p>SafeDate cannot guarantee personal safety, predict another person's behavior, or replace emergency services.</p></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ═══════════════ BUILDPUBLIC ════════════════════════════════════════════ -->
+  <section id="buildpublic" class="product-section" aria-labelledby="buildpublic-heading" style="--pc:var(--c-buildpublic)">
+    <div class="product-hero">
+      <div class="product-icon" style="background:var(--c-buildpublic)">Bp</div>
+      <div>
+        <div class="case-study-tag">Case Study</div>
+        <div class="product-category" style="color:var(--c-buildpublic)">Founder Execution &amp; Public-Progress Workspace</div>
+        <h2 class="product-name" id="buildpublic-heading" style="color:var(--c-buildpublic)">BuildPublic</h2>
+        <p class="product-tagline">Manage the build privately. Share the journey publicly.</p>
+        <div class="cta-row">
+          <a class="btn-primary" style="background:var(--c-buildpublic)" href="https://nexus.example.com/buildpublic" target="_blank" rel="noopener">Start building in public</a>
+          <a class="btn-outline"  href="#buildpublic-sheet">Create your project page</a>
+        </div>
+        <div class="product-status"><span class="status-dot available"></span>Available — start today</div>
+        <div class="product-screenshot">
+          <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BuildPublic interface preview">
+            <!-- Background -->
+            <rect width="800" height="340" fill="#F0F4F1"/>
+            <!-- Header -->
+            <rect width="800" height="44" fill="#2A5A3A"/>
+            <text x="16" y="17" font-family="sans-serif" font-size="10" fill="white" opacity=".7">BuildPublic</text>
+            <text x="16" y="33" font-family="sans-serif" font-size="13" font-weight="700" fill="white">Meera Iyer · Fieldnotes app</text>
+            <text x="680" y="22" font-family="sans-serif" font-size="10" fill="white" opacity=".7" text-anchor="middle">Public page live</text>
+            <rect x="668" y="28" width="116" height="14" rx="7" fill="white" opacity=".15"/>
+            <text x="726" y="39" font-family="sans-serif" font-size="9" fill="white" opacity=".7" text-anchor="middle">fieldnotes.buildpublic.co</text>
+
+            <!-- Private side -->
+            <rect x="16" y="56" width="380" height="272" rx="8" fill="white"/>
+            <rect x="16" y="56" width="380" height="36" rx="8" fill="#1A2B4C" opacity=".06"/>
+            <rect x="16" y="74" width="380" height="18" fill="#1A2B4C" opacity=".06"/>
+            <text x="28" y="74" font-family="sans-serif" font-size="11" font-weight="700" fill="#1A2B4C">MY TASKS</text>
+            <rect x="310" y="62" width="78" height="20" rx="4" fill="#2A5A3A"/>
+            <text x="349" y="76" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">🔒 Private</text>
+
+            <text x="28" y="112" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">THIS WEEK</text>
+            <rect x="28" y="118" width="14" height="14" rx="3" fill="#2A5A3A"/>
+            <text x="35" y="129" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">✓</text>
+            <text x="50" y="130" font-family="sans-serif" font-size="12" fill="#6B6B6B" text-decoration="line-through">Launch beta waitlist page</text>
+
+            <rect x="28" y="140" width="14" height="14" rx="3" fill="#2A5A3A"/>
+            <text x="35" y="151" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">✓</text>
+            <text x="50" y="152" font-family="sans-serif" font-size="12" fill="#6B6B6B" text-decoration="line-through">Write first 3 blog posts</text>
+
+            <rect x="28" y="162" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5"/>
+            <text x="50" y="174" font-family="sans-serif" font-size="12" fill="#1A2B4C">Get 50 waitlist signups</text>
+            <text x="370" y="174" font-family="sans-serif" font-size="10" fill="#E07A20" text-anchor="end">↑ 31 so far</text>
+
+            <rect x="28" y="184" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5"/>
+            <text x="50" y="196" font-family="sans-serif" font-size="12" fill="#1A2B4C">Cold email 20 potential users</text>
+
+            <rect x="28" y="206" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5"/>
+            <text x="50" y="218" font-family="sans-serif" font-size="12" fill="#1A2B4C">Record product demo video</text>
+
+            <text x="28" y="242" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">NEXT WEEK</text>
+            <rect x="28" y="248" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5" opacity=".5"/>
+            <text x="50" y="260" font-family="sans-serif" font-size="12" fill="#6B6B6B">Launch on Product Hunt</text>
+            <rect x="28" y="268" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5" opacity=".5"/>
+            <text x="50" y="280" font-family="sans-serif" font-size="12" fill="#6B6B6B">Onboard first 10 beta users</text>
+            <rect x="28" y="288" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5" opacity=".5"/>
+            <text x="50" y="300" font-family="sans-serif" font-size="12" fill="#6B6B6B">Integrate Stripe payments</text>
+
+            <!-- Divider -->
+            <rect x="404" y="56" width="2" height="272" fill="#2A5A3A" opacity=".2"/>
+            <rect x="396" y="180" width="18" height="18" rx="9" fill="#2A5A3A"/>
+            <text x="405" y="192" font-family="sans-serif" font-size="10" fill="white" text-anchor="middle">→</text>
+
+            <!-- Public log side -->
+            <rect x="414" y="56" width="370" height="272" rx="8" fill="white"/>
+            <rect x="414" y="56" width="370" height="36" rx="8" fill="#2A5A3A" opacity=".08"/>
+            <rect x="414" y="74" width="370" height="18" fill="#2A5A3A" opacity=".08"/>
+            <text x="426" y="74" font-family="sans-serif" font-size="11" font-weight="700" fill="#2A5A3A">PUBLIC PROGRESS LOG</text>
+            <rect x="700" y="62" width="76" height="20" rx="4" fill="#E4F0E6"/>
+            <text x="738" y="76" font-family="sans-serif" font-size="9" font-weight="700" fill="#2A5A3A" text-anchor="middle">🌐 Public</text>
+
+            <rect x="426" y="100" width="4" height="200" rx="2" fill="#E4F0E6"/>
+
+            <circle class="svg-pulse-scale" cx="428" cy="112" r="5" fill="#2A5A3A"/>
+            <text x="444" y="107" font-family="sans-serif" font-size="10" fill="#6B6B6B">Today, 11:42 AM</text>
+            <text x="444" y="122" font-family="sans-serif" font-size="12" font-weight="600" fill="#1A2B4C">Waitlist hit 31 signups 🎉</text>
+            <text x="444" y="138" font-family="sans-serif" font-size="11" fill="#6B6B6B">Running cold DMs to researchers</text>
+            <text x="444" y="154" font-family="sans-serif" font-size="11" fill="#6B6B6B">and journalists. Target: 50 by Friday.</text>
+
+            <circle cx="428" cy="176" r="5" fill="#2A5A3A" opacity=".6"/>
+            <text x="444" y="171" font-family="sans-serif" font-size="10" fill="#6B6B6B">Yesterday</text>
+            <text x="444" y="186" font-family="sans-serif" font-size="12" font-weight="600" fill="#1A2B4C">Published post #3: "Why I'm building</text>
+            <text x="444" y="202" font-family="sans-serif" font-size="12" font-weight="600" fill="#1A2B4C">a notes app in 2026"</text>
+            <text x="444" y="218" font-family="sans-serif" font-size="11" fill="#6B6B6B">280 readers. Best post so far.</text>
+
+            <circle cx="428" cy="240" r="5" fill="#2A5A3A" opacity=".4"/>
+            <text x="444" y="235" font-family="sans-serif" font-size="10" fill="#6B6B6B">30 Jun</text>
+            <text x="444" y="250" font-family="sans-serif" font-size="12" font-weight="600" fill="#1A2B4C">Beta waitlist page went live</text>
+            <text x="444" y="266" font-family="sans-serif" font-size="11" fill="#6B6B6B">Built in 2 days. Using BuildPublic</text>
+            <text x="444" y="282" font-family="sans-serif" font-size="11" fill="#6B6B6B">to track progress publicly.</text>
+
+            <rect x="426" y="308" width="340" height="12" rx="3" fill="#2A5A3A" opacity=".1"/>
+            <text x="596" y="319" font-family="sans-serif" font-size="9" fill="#2A5A3A" text-anchor="middle">+ Share a new update</text>
+          </svg>
+          <div class="screenshot-label">Private tasks · Progress log · Public project page</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="buildpublic-detail" class="doc-section" style="border-top:none">
+      <h3 class="doc-h2 first">The Problem</h3>
+      <p class="doc-p">Building in public sounds simple, but execution and storytelling live in different places. Tasks are private. Notes are scattered. Progress is hard to summarize. Public updates are inconsistent. Launch history disappears across social posts.</p>
+      <blockquote class="doc-quote">Private execution. Public momentum.</blockquote>
+
+      <h3 class="doc-h2">The Workflow</h3>
+      <ol class="workflow-chain" aria-label="Workflow steps">
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-buildpublic)">Plan</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-buildpublic-dark)">Build</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-buildpublic)">Log progress</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-buildpublic-dark)">Select updates</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-buildpublic)">Publish</div><span class="wf-arrow">›</span></li>
+        <li class="wf-step"><div class="wf-label" style="background:var(--c-buildpublic-dark)">Learn</div></li>
+      </ol>
+
+      <h3 class="doc-h2">Core Capabilities</h3>
+      <div class="cap-grid">
+        <span class="cap-tag">Private tasks</span><span class="cap-tag">Milestones</span><span class="cap-tag">Notes &amp; build logs</span><span class="cap-tag">Progress updates</span><span class="cap-tag">Public project pages</span><span class="cap-tag">Launch timelines</span><span class="cap-tag">Founder accountability</span><span class="cap-tag">Audience-facing updates</span><span class="cap-tag">Learning loops</span><span class="cap-tag">Private / public tagging</span>
+      </div>
+
+      <h3 class="doc-h2">Product Principles</h3>
+      <ul class="doc-ul">
+        <li>Private execution first — work privately, share selectively.</li>
+        <li>Selective public updates — the founder controls what becomes public.</li>
+        <li>Milestone storytelling — progress organized around what was built.</li>
+        <li>Consistent publishing rhythm — without requiring oversharing.</li>
+        <li>No forced transparency — the private/public boundary stays in the founder's control.</li>
+      </ul>
+      <h3 class="doc-h2">What makes it different from posting on X</h3>
+      <p class="doc-p">X (Twitter) threads are ephemeral and algorithm-dependent. A BuildPublic project page is permanent, structured, and owned by you — it lives at your URL, not inside a platform that can change its algorithm or suspend your account. Your private task list stays private no matter what you choose to share publicly. You can share one milestone without exposing the ten tasks that led to it. The public log is also readable without an account, so anyone you send it to can follow your progress without signing up.</p>
+
+      <h3 class="doc-h2">Integrations</h3>
+      <p class="doc-p">BuildPublic public project pages generate an RSS feed — anyone can subscribe to your progress updates in any feed reader. Optional cross-posting to X and LinkedIn lets you push a public update to your existing audience with one click. GitHub integration is on the roadmap, allowing commits to automatically generate progress log entries.</p>
+
+      <div class="doc-disclaimer compact"><strong>Disclaimer:</strong> BuildPublic does not guarantee audience growth, customer acquisition, revenue, funding, product success, launch performance, or social-platform reach. Users should avoid publishing confidential information, personal data, customer data, credentials, or unapproved claims. Public sharing should remain intentional and controlled.</div>
+    </section>
+
+    <section id="buildpublic-sheet" class="sales-sheet">
+      <div class="eyebrow" style="color:var(--c-buildpublic)">BuildPublic — Sales Sheet</div>
+      <div class="sales-wide"><h4>The problem</h4><p>Building in public sounds simple, but execution and storytelling live in different places. Tasks are private. Notes are scattered. Progress is hard to summarize. Public updates are inconsistent. Launch history disappears across social posts.</p></div>
+      <div class="sales-grid">
+        <div class="sales-card"><h4>Headline</h4><p>Build privately. Share selected progress publicly.</p></div>
+        <div class="sales-card"><h4>Differentiators</h4><p>Private execution first · Selective public storytelling · Founder accountability</p></div>
+        <div class="sales-card"><h4>Primary CTA</h4><p>Start building in public</p></div>
+        <div class="sales-card"><h4>Responsible-use note</h4><p>BuildPublic does not guarantee audience growth, funding, or launch performance. Public sharing should remain intentional and controlled.</p></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ═══════════════ DISCLAIMERS ════════════════════════════════════════════ -->
+  <section id="disclaimers" class="doc-section last">
+    <div class="eyebrow">Reference</div>
+    <h2 class="section-title">Master Disclaimer Reference</h2>
+    <p class="section-sub">Required language for all product communications. Review before any public-facing use.</p>
+
+    <h3 class="doc-h2 first">Company-Level Disclaimer</h3>
+    <div class="doc-disclaimer">Product capabilities, integrations, and deployment details may vary by configuration. Health-related products do not provide medical diagnosis, emergency monitoring, or treatment advice. Clinic and pharmacy workflows remain subject to qualified professional judgment and applicable requirements. Safety products cannot guarantee personal safety or predict another person's behavior. Automated security scanning cannot guarantee that an application is secure and does not replace qualified security review or penetration testing. Any legal, regulatory, compliance, or certification claims require separate approval before publication.</div>
+
+    <h3 class="doc-h2">Product Disclaimers</h3>
+    <div class="disclaimer-accordion">
+      <div class="disclaimer-item">
+        <button class="disclaimer-toggle" aria-expanded="false" aria-controls="disc-clinicos-body" id="disc-clinicos-toggle">
+          <span>ClinicOS</span>
+          <svg class="disclaimer-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="disclaimer-body-wrap" id="disc-clinicos-body" role="region" aria-labelledby="disc-clinicos-toggle">
+          <div class="disclaimer-body-inner"><p>Queue and arrival times are estimates, not promises. ClinicOS does not provide medical advice to patients. Clinical decisions remain with qualified professionals. Prescription, pharmacy, diagnostics, billing, and data workflows remain subject to authorized professional review and applicable requirements.</p></div>
+        </div>
+      </div>
+      <div class="disclaimer-item">
+        <button class="disclaimer-toggle" aria-expanded="false" aria-controls="disc-aarogya-body" id="disc-aarogya-toggle">
+          <span>Aarogya</span>
+          <svg class="disclaimer-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="disclaimer-body-wrap" id="disc-aarogya-body" role="region" aria-labelledby="disc-aarogya-toggle">
+          <div class="disclaimer-body-inner"><p>Aarogya does not provide medical diagnosis, emergency monitoring, or treatment advice. It does not replace qualified medical care. Users should not change medication or treatment based solely on the product.</p></div>
+        </div>
+      </div>
+      <div class="disclaimer-item">
+        <button class="disclaimer-toggle" aria-expanded="false" aria-controls="disc-restaurantos-body" id="disc-restaurantos-toggle">
+          <span>RestaurantOS</span>
+          <svg class="disclaimer-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="disclaimer-body-wrap" id="disc-restaurantos-body" role="region" aria-labelledby="disc-restaurantos-toggle">
+          <div class="disclaimer-body-inner"><p>Operational results depend on restaurant setup, staff adoption, configuration, service model, and connected systems. Payment, billing, tax, inventory, and integration details should be confirmed for each deployment.</p></div>
+        </div>
+      </div>
+      <div class="disclaimer-item">
+        <button class="disclaimer-toggle" aria-expanded="false" aria-controls="disc-shipwright-body" id="disc-shipwright-toggle">
+          <span>ShipWright</span>
+          <svg class="disclaimer-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="disclaimer-body-wrap" id="disc-shipwright-body" role="region" aria-labelledby="disc-shipwright-toggle">
+          <div class="disclaimer-body-inner"><p>Team outcomes depend on adoption, workflow setup, communication norms, and how consistently teams use the workspace.</p></div>
+        </div>
+      </div>
+      <div class="disclaimer-item">
+        <button class="disclaimer-toggle" aria-expanded="false" aria-controls="disc-securescan-body" id="disc-securescan-toggle">
+          <span>SecureScan</span>
+          <svg class="disclaimer-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="disclaimer-body-wrap" id="disc-securescan-body" role="region" aria-labelledby="disc-securescan-toggle">
+          <div class="disclaimer-body-inner"><p>Automated scanning can help identify common security risks, but it cannot guarantee that an application is secure and does not replace qualified security review or penetration testing.</p></div>
+        </div>
+      </div>
+      <div class="disclaimer-item">
+        <button class="disclaimer-toggle" aria-expanded="false" aria-controls="disc-safedate-body" id="disc-safedate-toggle">
+          <span>SafeDate</span>
+          <svg class="disclaimer-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="disclaimer-body-wrap" id="disc-safedate-body" role="region" aria-labelledby="disc-safedate-toggle">
+          <div class="disclaimer-body-inner"><p>SafeDate cannot guarantee personal safety, predict another person's behavior, or replace emergency services. Users should contact appropriate emergency support when they believe they are in danger.</p></div>
+        </div>
+      </div>
+      <div class="disclaimer-item">
+        <button class="disclaimer-toggle" aria-expanded="false" aria-controls="disc-buildpublic-body" id="disc-buildpublic-toggle">
+          <span>BuildPublic</span>
+          <svg class="disclaimer-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="disclaimer-body-wrap" id="disc-buildpublic-body" role="region" aria-labelledby="disc-buildpublic-toggle">
+          <div class="disclaimer-body-inner"><p>BuildPublic does not guarantee audience growth, customer acquisition, revenue, funding, product success, or launch performance. Public sharing should remain intentional and controlled.</p></div>
+        </div>
+      </div>
+      <div class="disclaimer-item">
+        <button class="disclaimer-toggle" aria-expanded="false" aria-controls="disc-services-body" id="disc-services-toggle">
+          <span>Services</span>
+          <svg class="disclaimer-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="disclaimer-body-wrap" id="disc-services-body" role="region" aria-labelledby="disc-services-toggle">
+          <div class="disclaimer-body-inner"><p>Service scope, deliverables, timelines, integrations, and implementation responsibilities depend on the agreed engagement. Security-conscious engineering does not replace qualified security review. AI-assisted features should be designed with appropriate human oversight.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="closing-card">
+      <h3>Ready to see how it fits your workflow?</h3>
+      <p>Pick a product to explore in depth, or talk to us about what you're trying to solve.</p>
+      <div class="closing-cta-row">
+        <a class="btn-primary" href="https://nexus.example.com/contact" target="_blank" rel="noopener">Book a demo</a>
+        <a class="btn-outline" href="#cover">Browse all products</a>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <div style="font-family:'DM Serif Display',serif;font-size:28px;color:#fff;letter-spacing:-.5px;margin-bottom:8px">Nexus</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.5)">Practical software for complex workflows.</div>
+      <!-- Social links — replace href placeholders with real profile URLs before publishing -->
+      <div style="display:flex;gap:16px;justify-content:center;margin-top:16px">
+        <a href="https://twitter.com/nexus" aria-label="Nexus on X / Twitter" style="color:rgba(255,255,255,.55);font-size:12px;font-weight:600;letter-spacing:.3px;text-decoration:none">X&nbsp;(Twitter)</a>
+        <a href="https://linkedin.com/company/nexus" aria-label="Nexus on LinkedIn" style="color:rgba(255,255,255,.55);font-size:12px;font-weight:600;letter-spacing:.3px;text-decoration:none">LinkedIn</a>
+        <a href="https://github.com/nexus" aria-label="Nexus on GitHub" style="color:rgba(255,255,255,.55);font-size:12px;font-weight:600;letter-spacing:.3px;text-decoration:none">GitHub</a>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:14px">
+        &copy; 2026 Nexus &middot;
+        Version: <span class="version-date">22 June 2026</span> &middot;
+        <a href="privacy-policy.html" style="color:#fff">Privacy Policy</a> &middot;
+        <a href="terms-of-service.html" style="color:#fff">Terms of Service</a> &middot;
+        <a href="sitemap.xml" style="color:#fff">Sitemap</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ── Active nav + breadcrumb via IntersectionObserver ─────────────────────────
+// FIX #5: observer marks BOTH the product trigger AND its sub-links correctly
+const crumbLabel = document.getElementById('crumb-label');
+
+// Map every observed ID → { crumb text, parent product id (or null) }
+const productColorVar = {
+  clinicos:'--c-clinicos', aarogya:'--c-aarogya', restaurantos:'--c-restaurant',
+  shipwright:'--c-shipwright', securescan:'--c-securescan', safedate:'--c-safedate',
+  buildpublic:'--c-buildpublic',
+};
+
+const idMeta = {
+  cover:              { label:'Overview',              parent:null },
+  'company-brochure': { label:'Company Brochure',      parent:null },
+  'services-brochure':{ label:'Services',              parent:null },
+  'case-studies':      { label:"What We've Built",      parent:null },
+  clinicos:           { label:'ClinicOS',               parent:'clinicos' },
+  'clinicos-detail':  { label:'ClinicOS — Brochure',   parent:'clinicos' },
+  'clinicos-sheet':   { label:'ClinicOS — Sales Sheet',parent:'clinicos' },
+  aarogya:            { label:'Aarogya',                parent:'aarogya' },
+  'aarogya-detail':   { label:'Aarogya — Brochure',    parent:'aarogya' },
+  'aarogya-sheet':    { label:'Aarogya — Sales Sheet', parent:'aarogya' },
+  restaurantos:           { label:'RestaurantOS',               parent:'restaurantos' },
+  'restaurantos-detail':  { label:'RestaurantOS — Brochure',    parent:'restaurantos' },
+  'restaurantos-sheet':   { label:'RestaurantOS — Sales Sheet', parent:'restaurantos' },
+  shipwright:           { label:'ShipWright',               parent:'shipwright' },
+  'shipwright-detail':  { label:'ShipWright — Brochure',    parent:'shipwright' },
+  'shipwright-sheet':   { label:'ShipWright — Sales Sheet', parent:'shipwright' },
+  securescan:           { label:'SecureScan',               parent:'securescan' },
+  'securescan-detail':  { label:'SecureScan — Brochure',    parent:'securescan' },
+  'securescan-sheet':   { label:'SecureScan — Sales Sheet', parent:'securescan' },
+  safedate:           { label:'SafeDate',               parent:'safedate' },
+  'safedate-detail':  { label:'SafeDate — Brochure',    parent:'safedate' },
+  'safedate-sheet':   { label:'SafeDate — Sales Sheet', parent:'safedate' },
+  buildpublic:           { label:'BuildPublic',               parent:'buildpublic' },
+  'buildpublic-detail':  { label:'BuildPublic — Brochure',    parent:'buildpublic' },
+  'buildpublic-sheet':   { label:'BuildPublic — Sales Sheet', parent:'buildpublic' },
+  disclaimers:        { label:'Disclaimers',            parent:null },
+};
+
+const allNavLinks  = document.querySelectorAll('#sidebar a[href^="#"]');
+
+function activate(id) {
+  const meta = idMeta[id];
+  if (!meta) return;
+
+  // breadcrumb
+  crumbLabel.textContent = meta.label;
+
+  // clear all active states
+  allNavLinks.forEach(l => l.classList.remove('active'));
+
+  // mark the matching link active
+  const matchingLink = document.querySelector(`#sidebar a[href="#${id}"]`);
+  if (matchingLink) matchingLink.classList.add('active');
+
+  // mark the parent product link active too (so e.g. clinicos-detail also highlights ClinicOS)
+  if (meta.parent) {
+    const parentLink = document.querySelector(`#sidebar a[href="#${meta.parent}"]`);
+    if (parentLink) parentLink.classList.add('active');
+  }
+
+  // update the shared "current product color" used by the progress bar + nav indicator
+  const productId = meta.parent || id;
+  const colorVar = productColorVar[productId];
+  document.documentElement.style.setProperty('--current-pc', colorVar ? `var(${colorVar})` : 'var(--navy)');
+
+  // slide the sidebar indicator to the active link
+  const activeLink = document.querySelector('#sidebar a.active');
+  const indicator = document.getElementById('nav-indicator');
+  if (activeLink && indicator) {
+    indicator.style.transform = `translateY(${activeLink.offsetTop}px)`;
+    indicator.style.height = `${activeLink.offsetHeight}px`;
+    indicator.style.opacity = '1';
+  }
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) activate(entry.target.id);
+  });
+}, { rootMargin:'-52px 0px -40% 0px', threshold:0 });
+
+Object.keys(idMeta).forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+
+// ── Floating nav active state ─────────────────────────────────────────────────
+(function(){
+  const fnBtns = document.querySelectorAll('.fn-btn');
+  const productIds = ['clinicos', 'aarogya', 'restaurantos', 'shipwright', 'securescan', 'safedate', 'buildpublic'];
+  // Observe each product section and mark its button active
+  const fnObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const btn = document.querySelector(`.fn-btn[data-id="${e.target.id}"]`);
+      if (btn) btn.classList.toggle('active', e.isIntersecting);
+    });
+  }, { rootMargin:'-52px 0px -30% 0px', threshold:0 });
+  productIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) fnObs.observe(el);
+  });
+})();
+
+// ── Scroll progress bar ─────────────────────────────────────────────────────────
+(function(){
+  const fill = document.getElementById('scroll-progress-fill');
+  if (!fill) return;
+  let ticking = false;
+  function updateProgress(){
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+    fill.style.width = pct + '%';
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+  }, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+})();
+
+// ── Page-wide cursor spotlight ──────────────────────────────────────────────────
+(function(){
+  const spotlight = document.getElementById('cursor-spotlight');
+  if (!spotlight) return;
+  if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+
+  let targetX = window.innerWidth / 2, targetY = window.innerHeight * 0.3;
+  let curX = targetX, curY = targetY;
+
+  window.addEventListener('mousemove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+  }, { passive: true });
+
+  function loop(){
+    curX += (targetX - curX) * 0.12;
+    curY += (targetY - curY) * 0.12;
+    spotlight.style.setProperty('--mx', (curX / window.innerWidth) * 100 + '%');
+    spotlight.style.setProperty('--my', (curY / window.innerHeight) * 100 + '%');
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+
+<!-- Floating product nav -->
+<nav id="float-nav" aria-label="Jump to product">
+  <span class="fn-label">Products</span>
+  <a class="fn-btn" href="#clinicos" style="background:#1A2B4C" data-id="clinicos" data-tip="ClinicOS" aria-label="ClinicOS">C</a>
+    <a class="fn-btn" href="#aarogya" style="background:#5A7F5E" data-id="aarogya" data-tip="Aarogya" aria-label="Aarogya">A</a>
+    <a class="fn-btn" href="#restaurantos" style="background:#A05C1A" data-id="restaurantos" data-tip="RestaurantOS" aria-label="RestaurantOS">R</a>
+    <a class="fn-btn" href="#shipwright" style="background:#5B4B8A" data-id="shipwright" data-tip="ShipWright" aria-label="ShipWright">Sh</a>
+    <a class="fn-btn" href="#securescan" style="background:#2A7D8A" data-id="securescan" data-tip="SecureScan" aria-label="SecureScan">Sc</a>
+    <a class="fn-btn" href="#safedate" style="background:#8A2A5A" data-id="safedate" data-tip="SafeDate" aria-label="SafeDate">Sd</a>
+    <a class="fn-btn" href="#buildpublic" style="background:#2A5A3A" data-id="buildpublic" data-tip="BuildPublic" aria-label="BuildPublic">B</a>
+</nav>
+
+<script>
+// ── Mobile sidebar ────────────────────────────────────────────────────────────
+(function(){
+  const toggle = document.getElementById('menu-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sb-overlay');
+  if(!toggle || !sidebar || !overlay) return;
+  function openSidebar(){
+    sidebar.classList.add('open');
+    overlay.classList.add('active');
+    toggle.classList.add('open');
+    document.body.style.overflow='hidden';
+    toggle.setAttribute('aria-expanded','true');
+  }
+  function closeSidebar(){
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    toggle.classList.remove('open');
+    document.body.style.overflow='';
+    toggle.setAttribute('aria-expanded','false');
+  }
+  toggle.addEventListener('click',()=>{
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+  overlay.addEventListener('click', closeSidebar);
+  // Close on nav link tap on mobile
+  sidebar.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click',()=>{ if(window.innerWidth<=900) closeSidebar(); });
+  });
+  // Close on Escape
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSidebar(); });
+})();
+</script>
+<script>
+// ── Version date ──────────────────────────────────────────────────────────────
+(function(){
+  const d = document.body.dataset.version;
+  if(d) document.querySelectorAll('.version-date').forEach(el=>el.textContent=d);
+})();
+</script>
+<script>
+// ── Entrance animations ───────────────────────────────────────────────────────
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const animEls = document.querySelectorAll('.product-section, .doc-section');
+  const animObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); animObs.unobserve(e.target); } });
+  },{rootMargin:'-40px 0px -5% 0px',threshold:0.04});
+  animEls.forEach(el=>animObs.observe(el));
+})();
+
+// ── Staggered card / row / step reveals ───────────────────────────────────────
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const groups = document.querySelectorAll('.two-col, .workflow-chain, .sales-grid, .contact-table, table.doc-table');
+  const staggerObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('stagger-in'); staggerObs.unobserve(e.target); } });
+  },{rootMargin:'-10% 0px -10% 0px',threshold:0.01});
+  groups.forEach(el=>staggerObs.observe(el));
+})();
+</script>
+<script>
+// ── Disclaimer accordion ─────────────────────────────────────────────────────────
+(function(){
+  document.querySelectorAll('.disclaimer-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const body = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (body) body.classList.toggle('open', !expanded);
+    });
+  });
+})();
+</script>
+<script>
+// ── Copy section link ─────────────────────────────────────────────────────────
+(function(){
+  const toast = document.createElement('div');
+  toast.className = 'copy-toast';
+  toast.textContent = 'Link copied';
+  document.body.appendChild(toast);
+  let toastTimer;
+
+  document.querySelectorAll('[id]').forEach(el=>{
+    const heading = el.querySelector('h2.section-title, h2.product-name');
+    if(!heading || !el.id) return;
+    const btn = document.createElement('a');
+    btn.className = 'copy-link-btn';
+    btn.innerHTML = '&#182;';
+    btn.setAttribute('aria-label','Copy link to section');
+    btn.setAttribute('href','#'+el.id);
+    btn.addEventListener('click',e=>{
+      e.preventDefault();
+      navigator.clipboard.writeText(location.origin+location.pathname+'#'+el.id).then(()=>{
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(()=>toast.classList.remove('show'),2000);
+      });
+    });
+    heading.appendChild(btn);
+  });
+})();
+</script>
+<script>
+// ── Clear mobile sidebar state on desktop resize ─────────────────────────────
+(function(){
+  function onResize(){
+    if(window.innerWidth > 900){
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.querySelector('.sb-overlay');
+      const toggle  = document.getElementById('menu-toggle');
+      if(sidebar)  sidebar.classList.remove('open');
+      if(overlay)  overlay.classList.remove('active');
+      if(toggle)   toggle.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
+    }
+  }
+  window.addEventListener('resize', onResize);
+  onResize(); // run on load too
+})();
+</script>
+<!-- ═══════════════ ANALYTICS (stub — replace with real tracking ID) ══════ -->
+<!--
+  To enable analytics, replace YOUR_MEASUREMENT_ID below with your real ID
+  (e.g. G-XXXXXXXXXX for GA4, or swap the block for Plausible/Fathom/etc.)
+  Analytics only loads AFTER the user accepts cookies via the banner below.
+-->
+<script id="analytics-loader" type="text/plain" data-cookiecategory="analytics">
+  // GA4 example — swap src and config values for your real ID
+  // var s = document.createElement('script');
+  // s.src = 'https://www.googletagmanager.com/gtag/js?id=YOUR_MEASUREMENT_ID';
+  // s.async = true;
+  // document.head.appendChild(s);
+  // window.dataLayer = window.dataLayer || [];
+  // function gtag(){dataLayer.push(arguments);}
+  // gtag('js', new Date());
+  // gtag('config', 'YOUR_MEASUREMENT_ID');
+</script>
+
+<!-- ═══════════════ COOKIE CONSENT LOGIC ══════════════════════════════════ -->
+<script>
+(function(){
+  var PREF_KEY = 'nexus_cookie_pref';
+  var banner   = document.getElementById('cookie-banner');
+
+  function loadAnalytics(){
+    var stub = document.getElementById('analytics-loader');
+    if(!stub) return;
+    var s = document.createElement('script');
+    s.textContent = stub.textContent;
+    document.head.appendChild(s);
+  }
+
+  function applyChoice(choice){
+    try{ localStorage.setItem(PREF_KEY, choice); }catch(e){}
+    banner.classList.remove('visible');
+    if(choice === 'accepted') loadAnalytics();
+  }
+
+  function showBanner(){
+    // small delay so banner entrance animation is visible after paint
+    setTimeout(function(){ banner.classList.add('visible'); }, 600);
+  }
+
+  var saved;
+  try{ saved = localStorage.getItem(PREF_KEY); }catch(e){}
+
+  if(saved === 'accepted'){ loadAnalytics(); }
+  else if(!saved){ showBanner(); }
+
+  document.getElementById('cookie-accept').addEventListener('click', function(){ applyChoice('accepted'); });
+  document.getElementById('cookie-decline').addEventListener('click', function(){ applyChoice('declined'); });
+})();
+</script>
+
+</body>
+</html>
