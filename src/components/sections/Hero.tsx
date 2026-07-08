@@ -78,17 +78,10 @@ export function Hero() {
 
             <motion.p 
               variants={itemVariants}
-              className="text-base md:text-lg font-light text-white/70 leading-relaxed max-w-[540px] mb-6"
+              className="text-base md:text-lg font-light text-white/70 leading-relaxed max-w-[540px] mb-8"
             >
               {HERO.tagline}
             </motion.p>
-
-            <motion.div 
-              variants={itemVariants}
-              className="text-sm font-semibold tracking-wide text-white/90 border-l-2 border-white/20 pl-4 py-1 mb-8"
-            >
-              {HERO.proofTagline}
-            </motion.div>
 
             {/* CTAs */}
             <motion.div 
@@ -121,7 +114,7 @@ export function Hero() {
             {/* Version Metadata */}
             <motion.div 
               variants={itemVariants}
-              className="mt-12 pt-6 border-t border-white/10 w-full max-w-sm flex items-center justify-between text-[10px] md:text-xs text-white/40 font-medium tracking-wide uppercase"
+              className="mt-12 pt-6 border-t border-white/10 w-full max-w-sm flex items-center justify-between text-[10px] md:text-xs text-white/60 font-medium tracking-wide uppercase"
             >
               <span>{HERO.version}</span>
               <span>&middot;</span>

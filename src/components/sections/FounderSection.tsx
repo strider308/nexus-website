@@ -13,9 +13,6 @@ export function FounderSection() {
             
             {/* Bio */}
             <div>
-              <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
-                Company Brochure
-              </span>
               <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-primary leading-tight mb-6">
                 {FOUNDER.title}
               </h2>
@@ -101,7 +98,7 @@ export function FounderSection() {
                     href={`${METADATA.canonicalUrl}/contact`} 
                     className="text-[#2E6FAD] hover:underline font-semibold block mt-1 focus-visible:ring-1 focus-visible:ring-[#2E6FAD]/50 outline-none rounded-[2px]"
                   >
-                    Request a quote &rarr;
+                    Start a conversation &rarr;
                   </a>
                 </div>
               </div>

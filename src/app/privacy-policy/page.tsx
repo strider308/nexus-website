@@ -5,6 +5,9 @@ import { METADATA } from "@/lib/content/nexus";
 export const metadata = {
   title: "Privacy Policy — Nexus",
   description: "Nexus privacy policies and compliance parameters.",
+  alternates: {
+    canonical: `${METADATA.canonicalUrl}/privacy-policy`,
+  },
 };
 
 export default function PrivacyPolicyPage() {

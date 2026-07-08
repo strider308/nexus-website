@@ -39,7 +39,7 @@ export function FinalCTA() {
                 )}
               >
                 <MessageSquare className="h-4 w-4" />
-                Book a demo
+                Start a conversation
               </a>
               <Button 
                 variant="outline"

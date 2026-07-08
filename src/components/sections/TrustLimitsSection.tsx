@@ -12,9 +12,6 @@ export function TrustLimitsSection() {
         
         {/* Header */}
         <div className="mb-12">
-          <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
-            Reference
-          </span>
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-primary leading-tight mb-4">
             Master Disclaimer Reference
           </h2>

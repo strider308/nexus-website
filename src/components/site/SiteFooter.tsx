@@ -49,7 +49,7 @@ export function SiteFooter() {
         <div className="w-full max-w-xl h-px bg-white/10 mb-8" />
 
         {/* Metadata and Legal */}
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full max-w-4xl text-[11px] text-white/50">
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full max-w-4xl text-[11px] text-white/60">
           <div>
             &copy; {new Date().getFullYear()} Nexus &middot; Version: {HERO.version}
           </div>

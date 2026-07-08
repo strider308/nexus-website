@@ -81,7 +81,7 @@ export const METADATA: SiteMetadata = {
 export const HERO = {
   eyebrow: "Capability Reference",
   title: "Nexus",
-  tagline: "We build custom software and automation for complex workflows. The seven systems below are proof of what we can build — not a product menu to choose from. Bring us your workflow.",
+  tagline: "We build custom software and automation for complex workflows. The seven systems below are proof of range.",
   proofTagline: "Seven systems shipped. Five industries. Built by one founder.",
   ctaText: "Start a conversation",
   ctaUrl: contactUrl, // TODO: Replace with production contact URL

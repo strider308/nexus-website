@@ -5,6 +5,9 @@ import { METADATA } from "@/lib/content/nexus";
 export const metadata = {
   title: "Terms of Service — Nexus",
   description: "Nexus terms of service and compliance guidelines.",
+  alternates: {
+    canonical: `${METADATA.canonicalUrl}/terms-of-service`,
+  },
 };
 
 export default function TermsOfServicePage() {

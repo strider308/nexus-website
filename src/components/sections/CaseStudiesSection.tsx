@@ -47,15 +47,39 @@ export function CaseStudiesSection() {
     setActiveTab(id);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const activeIdx = CASE_STUDIES.findIndex((study) => study.id === activeTab);
+    let nextIdx = activeIdx;
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      e.preventDefault();
+      nextIdx = (activeIdx + 1) % CASE_STUDIES.length;
+    } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      nextIdx = (activeIdx - 1 + CASE_STUDIES.length) % CASE_STUDIES.length;
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      nextIdx = 0;
+    } else if (e.key === "End") {
+      e.preventDefault();
+      nextIdx = CASE_STUDIES.length - 1;
+    }
+
+    if (nextIdx !== activeIdx) {
+      const nextStudy = CASE_STUDIES[nextIdx];
+      setActiveTab(nextStudy.id);
+      setTimeout(() => {
+        const btn = document.getElementById(`tab-${nextStudy.id}`);
+        if (btn) btn.focus();
+      }, 0);
+    }
+  };
+
   return (
     <AnimatedSection id="case-studies" className="w-full py-16 md:py-24 border-b border-border bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
-            What We&apos;ve Shipped
-          </span>
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-primary leading-tight mb-6">
             Seven systems. Five industries. One founder.
           </h2>
@@ -71,6 +95,7 @@ export function CaseStudiesSection() {
           <div 
             role="tablist" 
             aria-label="Systems shipped case studies"
+            onKeyDown={handleKeyDown}
             className="lg:col-span-3 flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 gap-2 border-b lg:border-b-0 border-border lg:border-l lg:border-border pl-0 lg:pl-4 scrollbar-none scroll-smooth"
           >
             {CASE_STUDIES.map((study) => {
@@ -239,8 +264,20 @@ export function CaseStudiesSection() {
                     System Capabilities
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {activeStudy.capabilities.map((cap) => (
-                      <div key={cap.title} className="border border-border rounded-[6px] p-6 bg-background">
+                    {activeStudy.capabilities.map((cap, idx) => (
+                      <div 
+                        key={cap.title} 
+                        className={cn(
+                          "border rounded-[6px] p-6 transition-all duration-300",
+                          idx === 0 
+                            ? "md:col-span-2 hover:shadow-md" 
+                            : "bg-background border-border hover:border-muted-foreground/30 hover:shadow-sm"
+                        )}
+                        style={idx === 0 ? {
+                          backgroundColor: `${activeTheme.primary}0D`,
+                          borderColor: `${activeTheme.primary}30`
+                        } : undefined}
+                      >
                         <h5 className="font-display text-base font-bold text-primary mb-4">
                           {cap.title}
                         </h5>

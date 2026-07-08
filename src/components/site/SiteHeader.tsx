@@ -140,7 +140,7 @@ export function SiteHeader() {
             rel="noopener noreferrer"
             className={cn(buttonVariants({ size: "sm" }), "bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] flex items-center justify-center focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none")}
           >
-            Talk to us
+            Start a conversation
           </a>
         </nav>
 

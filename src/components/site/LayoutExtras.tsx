@@ -2,30 +2,27 @@
 
 import { useEffect, useState } from "react";
 import { PRODUCT_THEMES } from "@/lib/design-tokens";
+import { motion, useScroll, useSpring } from "motion/react";
 
 export function LayoutExtras() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [spotlightPos, setSpotlightPos] = useState({ x: 0, y: 0 });
   const [showCookieBanner, setShowCookieBanner] = useState(false);
   const [activeProductColor, setActiveProductColor] = useState("#1A2B4C");
 
+  // Framer Motion scroll progress (compositor thread tracking, 0 re-renders)
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   useEffect(() => {
-    // 1. Scroll Progress Handler
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    // 2. Spotlight Cursor Tracker (only for desktops with mouse pointer)
+    // 1. Mouse Spotlight Tracker (CSS-driven, 0 re-renders)
     const hasPointer = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
     const handleMouseMove = (e: MouseEvent) => {
       if (hasPointer) {
-        setSpotlightPos({ x: e.clientX, y: e.clientY });
+        document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+        document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
       }
     };
 
@@ -33,11 +30,10 @@ export function LayoutExtras() {
       window.addEventListener("mousemove", handleMouseMove, { passive: true });
     }
 
-    // 3. Cookie Consent Banner check
+    // 2. Cookie Consent Banner check
     try {
       const consent = localStorage.getItem("nexus_cookie_pref");
       if (!consent) {
-        // Small delay to make entrance animation smooth
         const timer = setTimeout(() => setShowCookieBanner(true), 1000);
         return () => clearTimeout(timer);
       }
@@ -46,12 +42,11 @@ export function LayoutExtras() {
     }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
-  // 4. Track Active Color based on viewport scroll sections
+  // 3. Track Active Color based on viewport scroll sections
   useEffect(() => {
     const handleColorIntersection = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
@@ -92,25 +87,21 @@ export function LayoutExtras() {
   return (
     <>
       {/* Scroll Progress Bar */}
-      <div 
-        className="fixed top-0 left-0 right-0 h-[3px] z-[100] bg-transparent pointer-events-none"
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-[3px] z-[100] origin-left pointer-events-none"
+        style={{ 
+          scaleX,
+          backgroundColor: activeProductColor 
+        }}
         aria-hidden="true"
-      >
-        <div 
-          className="h-full transition-all duration-150 ease-out"
-          style={{ 
-            width: `${scrollProgress}%`,
-            backgroundColor: activeProductColor 
-          }}
-        />
-      </div>
+      />
 
       {/* Mouse Spotlight overlay */}
       <div
         id="cursor-spotlight"
         className="fixed inset-0 pointer-events-none z-30 opacity-[0.06] hidden md:block"
         style={{
-          background: `radial-gradient(circle 480px at ${spotlightPos.x}px ${spotlightPos.y}px, var(--accent), transparent 70%)`
+          background: `radial-gradient(circle 480px at var(--mouse-x, 0px) var(--mouse-y, 0px), var(--accent), transparent 70%)`
         }}
         aria-hidden="true"
       />
@@ -125,7 +116,7 @@ export function LayoutExtras() {
         >
           <p className="text-xs md:text-sm text-white/80 max-w-3xl leading-relaxed">
             We use analytics cookies to understand how this site is used and improve it. See our{" "}
-            <a href="/privacy-policy.html" className="underline hover:text-white">
+            <a href="/privacy-policy" className="underline hover:text-white">
               Privacy Policy
             </a>{" "}
             for details.
