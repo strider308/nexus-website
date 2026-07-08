@@ -3,6 +3,7 @@
 import { PROBLEM } from "@/lib/content/nexus";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
 import { AlertCircle, CheckCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const TRANSFORMATIONS = [
   {
@@ -57,6 +58,11 @@ export function ProblemSection() {
             <blockquote className="border-l-4 border-[#2E6FAD] pl-6 py-2 my-6 font-display text-xl md:text-2xl text-primary italic leading-relaxed max-w-lg">
               &ldquo;{PROBLEM.quote}&rdquo;
             </blockquote>
+
+            {/* Mobile Workflow Resolution Panel */}
+            <div className="block lg:hidden mt-6 mb-8">
+              <WorkflowResolutionPanel />
+            </div>
 
             {/* Before / After Nexus Transformation Comparison (Side-by-side Table) */}
             <div className="mt-8 pt-8 border-t border-border/80">
@@ -135,10 +141,91 @@ export function ProblemSection() {
             <div className="text-lg md:text-xl font-light leading-relaxed text-foreground/90 pl-2 border-l-2 border-border/80">
               {PROBLEM.conclusion}
             </div>
+
+            {/* Desktop Workflow Resolution Panel */}
+            <div className="hidden lg:block mt-8">
+              <WorkflowResolutionPanel />
+            </div>
           </div>
 
         </div>
       </div>
     </AnimatedSection>
+  );
+}
+
+function WorkflowResolutionPanel() {
+  return (
+    <div 
+      className="border border-border/80 bg-muted/15 rounded-[12px] p-6 shadow-sm overflow-hidden relative"
+      aria-label="Workflow resolution flow: scattered inputs are mapped by Nexus into a connected operational system."
+    >
+      {/* Subtle grid pattern background */}
+      <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+
+      <h3 className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase mb-6 flex items-center gap-2 select-none">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#2E6FAD] animate-pulse" />
+        Operational Transformation Model
+      </h3>
+
+      <div className="flex flex-col gap-6 relative z-10">
+        {/* Step 1: Scattered Inputs */}
+        <div className="border border-border bg-background/50 backdrop-blur-sm rounded-[8px] p-4">
+          <span className="text-[9px] font-mono font-bold text-muted-foreground uppercase block mb-2 select-none">
+            1. Scattered Inputs (Fragmented State)
+          </span>
+          <div className="flex flex-wrap gap-2">
+            {["Chats", "Sheets", "Tasks", "Calls", "Billing Notes"].map((item, idx) => (
+              <span 
+                key={idx} 
+                className="text-[10px] px-2 py-1 bg-red-500/5 text-[#C0392B] border border-red-500/10 rounded-[4px] font-medium"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Step 2: Middle Connector */}
+        <div className="flex flex-col items-center py-2 relative">
+          <div className="h-8 w-px bg-[linear-gradient(to_bottom,var(--border)_50%,transparent_50%)] bg-[size:1px_8px] relative">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#2E6FAD]/10 text-[#2E6FAD] text-[9px] font-mono px-2 py-0.5 rounded-full border border-[#2E6FAD]/25 whitespace-nowrap">
+              Nexus maps the workflow
+            </div>
+          </div>
+        </div>
+
+        {/* Step 3: Connected System */}
+        <div className="border border-[#2A7D8A]/20 bg-[#2A7D8A]/5 rounded-[8px] p-4">
+          <span className="text-[9px] font-mono font-bold text-[#2A7D8A] uppercase block mb-2 select-none">
+            2. Connected System (Unified Operations)
+          </span>
+          <div className="grid grid-cols-2 gap-2">
+            {["Defined Roles", "State Statuses", "Enforced Handoffs", "Live Dashboards"].map((item, idx) => (
+              <span 
+                key={idx} 
+                className="text-[10px] px-2.5 py-1.5 bg-[#2A7D8A]/10 text-[#2A7D8A] rounded-[4px] font-semibold text-center border border-[#2A7D8A]/20"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Step 4: Status Indicator Rows */}
+        <div className="border-t border-border/60 pt-4 mt-2 flex flex-col gap-2">
+          {[
+            { label: "Owner Visibility", state: "Live", color: "text-[#2A7D8A]" },
+            { label: "Manual Handoff", state: "Automated", color: "text-[#2E6FAD]" },
+            { label: "Customer Follow-up", state: "Status-aware", color: "text-[#2A7D8A]" }
+          ].map((row, idx) => (
+            <div key={idx} className="flex justify-between items-center text-xs border-b border-border/30 last:border-b-0 pb-1.5 last:pb-0">
+              <span className="text-muted-foreground font-light">{row.label}</span>
+              <span className={cn("font-semibold font-mono", row.color)}>{row.state}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
