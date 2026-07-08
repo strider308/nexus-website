@@ -24,17 +24,55 @@ export function FounderSection() {
               </p>
             </div>
 
-            {/* Limits Callout */}
-            <div className="border border-border/80 rounded-[8px] p-6 bg-background">
-              <h3 className="font-display text-lg font-bold text-primary mb-3 flex items-center gap-2">
-                <ShieldCheck className="h-5 w-5 text-[#2E6FAD]" />
-                {FOUNDER.limitsTitle}
+            {/* Founder Operating Model */}
+            <div className="border border-border rounded-[8px] p-6 bg-background">
+              <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-3 block">
+                Operating Model
+              </span>
+              <h3 className="font-display text-lg font-bold text-primary mb-3">
+                Founder-Led Where It Matters
               </h3>
-              <p className="text-sm text-foreground/75 leading-relaxed font-light mb-3">
-                {FOUNDER.limitsText1}
+              <p className="text-xs text-foreground/80 leading-relaxed font-light mb-4">
+                Nexus is not a loose agency. It is a founder-led studio with repeatable systems. We handle scoping, architecture, workflow modeling, UX design, and QA standards directly.
               </p>
-              <p className="text-sm text-foreground/75 leading-relaxed font-light">
-                {FOUNDER.limitsText2}
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-border/60">
+                <div>
+                  <h4 className="text-xs font-bold text-primary mb-2">Founder-Led</h4>
+                  <ul className="flex flex-col gap-1.5 text-[11px] font-light text-muted-foreground">
+                    <li>· Discovery & Scoping</li>
+                    <li>· System Architecture</li>
+                    <li>· Workflow Modeling</li>
+                    <li>· UX Systems Design</li>
+                    <li>· Implementation Standards</li>
+                    <li>· Final QA & Verification</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-primary mb-2">Supported Capacity</h4>
+                  <ul className="flex flex-col gap-1.5 text-[11px] font-light text-muted-foreground">
+                    <li>· Specialist Contractors</li>
+                    <li>· Custom API Integrations</li>
+                    <li>· UI Asset Production</li>
+                    <li>· Continuous QA Testing</li>
+                    <li>· Deployment Assistance</li>
+                    <li>· Documentation Support</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust & Limits */}
+            <div className="border border-[#C0392B]/20 rounded-[8px] p-6 bg-[#C0392B]/5">
+              <h3 className="font-display text-lg font-bold text-[#C0392B] mb-3 flex items-center gap-2">
+                <ShieldCheck className="h-5 w-5" />
+                Trust &amp; Limits
+              </h3>
+              <p className="text-xs text-foreground/75 leading-relaxed font-light mb-3">
+                Nexus is committed to building useful, reliable software. That starts with honest constraints: health tools do not provide medical diagnosis, safety check-ins cannot guarantee personal safety, and security tools do not replace manual threat penetration testing.
+              </p>
+              <p className="text-xs text-foreground/75 leading-relaxed font-light">
+                All proof systems and demo walkthroughs are mock models built to demonstrate range, not active commercial entities. AI integrations are scoped for drafting and summary support, requiring human-in-the-loop review before actions are executed.
               </p>
             </div>
 

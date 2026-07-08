@@ -27,6 +27,58 @@ const mockupMap: Record<string, React.ComponentType> = {
   buildpublic: BuildPublicMockup
 };
 
+const WHAT_THIS_PROVES: Record<string, string[]> = {
+  clinicos: [
+    "Multi-role outpatient operations",
+    "Queue and appointment state logic",
+    "Billing and pharmacy handoffs",
+    "Owner visibility",
+    "Audit-aware workflows"
+  ],
+  aarogya: [
+    "Personal data tracking",
+    "Trend summaries",
+    "User-controlled health records",
+    "Export/delete flows",
+    "Safety-conscious health UX"
+  ],
+  restaurantos: [
+    "Table-to-kitchen flow",
+    "Live order state",
+    "Billing reconciliation",
+    "Service coordination",
+    "Owner dashboarding"
+  ],
+  shipwright: [
+    "Async execution",
+    "Task ownership",
+    "Accountability loops",
+    "Team progress visibility",
+    "Founder/operator workflows"
+  ],
+  securescan: [
+    "Authorized risk scanning",
+    "Severity classification",
+    "Sample reports",
+    "Developer workflow",
+    "Security-conscious product UX"
+  ],
+  safedate: [
+    "Consent-aware sharing",
+    "Timed check-ins",
+    "Trusted-contact flows",
+    "Safety-state logic",
+    "Sensitive UX design"
+  ],
+  buildpublic: [
+    "Founder accountability",
+    "Public/private progress layers",
+    "Milestone sharing",
+    "Execution dashboards",
+    "Audience-facing workflow"
+  ]
+};
+
 const CAPABILITIES = [
   { id: "workflow", label: "Multi-role workflow" },
   { id: "automation", label: "Automation layers" },
@@ -211,6 +263,21 @@ export function CaseStudiesSection() {
                   <p className="text-lg md:text-xl font-light text-muted-foreground leading-relaxed max-w-2xl">
                     {activeStudy.tagline}
                   </p>
+
+                  {/* What This Proves Summary Block */}
+                  <div className="mt-4 p-4 border border-border bg-muted/40 rounded-[8px] max-w-2xl">
+                    <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-2 block">
+                      What This Proves
+                    </span>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {WHAT_THIS_PROVES[activeStudy.id]?.map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-2 text-xs font-semibold text-primary">
+                          <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: activeTheme.primary }} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
                   <div className="flex flex-wrap items-center gap-3 mt-4 text-[10px] md:text-xs font-bold tracking-wider text-muted-foreground uppercase">
                     <span className="flex items-center gap-1.5">

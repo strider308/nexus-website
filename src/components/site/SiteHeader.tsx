@@ -6,6 +6,8 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { HERO } from "@/lib/content/nexus";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 interface NavItem {
   label: string;
@@ -13,11 +15,10 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Cover", href: "#cover" },
-  { label: "Services", href: "#services-brochure" },
-  { label: "Company", href: "#company-brochure" },
-  { label: "What We've Built", href: "#case-studies" },
-  { label: "Legal & Disclaimers", href: "#disclaimers" },
+  { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Demo Library", href: "/demo" },
+  { label: "Resources", href: "/resources" },
 ];
 
 const sectionLabels: Record<string, string> = {
@@ -39,8 +40,11 @@ const sectionLabels: Record<string, string> = {
 export function SiteHeader() {
   const [activeSection, setActiveSection] = useState("cover");
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    if (pathname !== "/") return;
+
     const observerOptions = {
       root: null,
       rootMargin: "-80px 0px -60% 0px",
@@ -60,7 +64,6 @@ export function SiteHeader() {
 
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
 
-    // Observe all main sections
     const sections = [
       "cover",
       "services-brochure",
@@ -83,19 +86,14 @@ export function SiteHeader() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   const getCrumbLabel = () => {
+    if (pathname === "/services") return "Services";
+    if (pathname === "/case-studies") return "Case Studies";
+    if (pathname === "/demo") return "Demo Library";
+    if (pathname === "/resources") return "Resources";
     return sectionLabels[activeSection] || "Overview";
-  };
-
-  const handleLinkClick = (href: string) => {
-    setIsOpen(false);
-    const targetId = href.replace("#", "");
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
-    }
   };
 
   return (
@@ -104,12 +102,12 @@ export function SiteHeader() {
         
         {/* Logo and Breadcrumbs */}
         <div className="flex items-center gap-4">
-          <a 
-            href="#cover" 
+          <Link 
+            href="/" 
             className="font-display text-xl md:text-2xl font-bold tracking-tight text-primary focus-visible:ring-2 focus-visible:ring-primary/50 outline-none rounded-[4px]"
           >
             Nexus
-          </a>
+          </Link>
           <span className="text-muted-foreground/40 font-light select-none">|</span>
           <div className="text-xs md:text-sm text-muted-foreground font-medium truncate max-w-[150px] sm:max-w-none">
             <span className="hidden sm:inline">Nexus <span aria-hidden="true">&rsaquo;</span> </span><span className="text-foreground transition-colors">{getCrumbLabel()}</span>
@@ -119,21 +117,18 @@ export function SiteHeader() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navItems.map((item) => {
-            const isActive = activeSection === item.href.replace("#", "");
+            const isActive = pathname === item.href;
             return (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(item.href);
-                }}
-                className={`transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-primary/50 outline-none rounded-[4px] px-1 py-0.5 interactive-action ${
+                className={cn(
+                  "transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-primary/50 outline-none rounded-[4px] px-1 py-0.5 interactive-action",
                   isActive ? "text-primary font-semibold" : "text-muted-foreground"
-                }`}
+                )}
               >
                 {item.label}
-              </a>
+              </Link>
             );
           })}
           <a 
@@ -159,21 +154,19 @@ export function SiteHeader() {
                 <div className="font-display text-2xl font-bold text-primary mb-4">Nexus</div>
                 <nav className="flex flex-col gap-4 text-base font-medium">
                   {navItems.map((item) => {
-                    const isActive = activeSection === item.href.replace("#", "");
+                    const isActive = pathname === item.href;
                     return (
-                      <a
+                      <Link
                         key={item.href}
                         href={item.href}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleLinkClick(item.href);
-                        }}
-                        className={`py-2 border-b border-border/50 transition-colors focus-visible:ring-2 focus-visible:ring-primary/50 outline-none rounded-[4px] interactive-action ${
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          "py-2 border-b border-border/50 transition-colors focus-visible:ring-2 focus-visible:ring-primary/50 outline-none rounded-[4px] interactive-action",
                           isActive ? "text-primary font-bold" : "text-muted-foreground"
-                        }`}
+                        )}
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     );
                   })}
                 </nav>

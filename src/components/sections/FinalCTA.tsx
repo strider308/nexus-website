@@ -1,17 +1,12 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { MessageSquare, ArrowUp } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { HERO } from "@/lib/content/nexus";
 
 export function FinalCTA() {
-  const handleScrollToTop = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const el = document.getElementById("cover");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <AnimatedSection id="contact" className="w-full py-16 md:py-24 bg-background">
@@ -26,7 +21,7 @@ export function FinalCTA() {
               Ready to see how it fits your workflow?
             </h3>
             <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed mb-8">
-              Pick a product to explore in depth, or talk to us about what you&apos;re trying to solve.
+              Bring us your messy workflow. We&apos;ll help you map the first buildable version.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <a 
@@ -35,23 +30,27 @@ export function FinalCTA() {
                 rel="noopener noreferrer" 
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold px-8 py-6 rounded-[6px] transition-all duration-300 hover:translate-y-[-2px] active:translate-y-0 shadow-sm flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none"
+                  "bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold px-8 py-6 rounded-[6px] transition-all duration-300 hover:translate-y-[-2px] active:translate-y-0 shadow-sm flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none interactive-action"
                 )}
               >
                 <MessageSquare className="h-4 w-4" />
                 Start a conversation
               </a>
-              <Button 
-                variant="outline"
-                onClick={handleScrollToTop}
-                className="bg-transparent hover:bg-muted text-primary border-border font-semibold px-8 py-6 rounded-[6px] transition-all duration-300 hover:translate-y-[-2px] active:translate-y-0 shadow-sm focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 outline-none"
+              <a 
+                href="/case-studies"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "bg-transparent hover:bg-muted text-primary border-border font-semibold px-8 py-6 rounded-[6px] transition-all duration-300 hover:translate-y-[-2px] active:translate-y-0 shadow-sm focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 outline-none"
+                )}
               >
                 <span className="flex items-center gap-2">
-                  <ArrowUp className="h-4 w-4" />
-                  Browse all products
+                  Browse proof systems
                 </span>
-              </Button>
+              </a>
             </div>
+            <p className="text-[10px] text-muted-foreground font-mono mt-4">
+              You&apos;ll get a founder-led scoping reply, not a generic sales script.
+            </p>
           </div>
         </div>
 

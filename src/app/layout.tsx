@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nexus — Complete Product Reference",
-    description: "Practical software for complex workflows. Seven products, one reference.",
+    title: METADATA.title,
+    description: METADATA.description,
     images: [`${METADATA.canonicalUrl}/og-cover.png`],
   },
 };

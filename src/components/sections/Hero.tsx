@@ -7,6 +7,39 @@ import { NexusNetworkVisual } from "../visuals/NexusNetworkVisual";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowDown, MessageSquare } from "lucide-react";
 
+const STARTING_POINTS = [
+  {
+    title: "I run an operation manually",
+    desc: "Replacing paper logs, shared sheets, or fragmented messaging threads with custom software.",
+    model: "Operational System Build",
+    link: "#services-brochure"
+  },
+  {
+    title: "I have an app idea but need scope",
+    desc: "Structuring user roles, transition stages, approval pathways, and core scope parameters.",
+    model: "Workflow Mapping Sprint",
+    link: "#services-brochure"
+  },
+  {
+    title: "I need automation between tools",
+    desc: "Injecting status-aware integrations and automated webhook notifications behind existing data.",
+    model: "Automation Layer Build",
+    link: "#services-brochure"
+  },
+  {
+    title: "I need better owner visibility",
+    desc: "Consolidating scattered database stages or record sheets into a live, clean analytics dashboard.",
+    model: "Consolidated Dashboard",
+    link: "#services-brochure"
+  },
+  {
+    title: "I need a private beta built",
+    desc: "Releasing a scoped, functional product iteration to first friendly users or pilot groups.",
+    model: "Private Beta Build",
+    link: "#services-brochure"
+  }
+];
+
 export function Hero() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -133,6 +166,40 @@ export function Hero() {
           </motion.div>
 
         </div>
+
+        {/* Find Your Starting Point Navigation Aid */}
+        <div className="mt-16 pt-12 border-t border-white/10 relative z-20">
+          <h2 className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-white/50 mb-6">
+            Find Your Starting Point
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {STARTING_POINTS.map((pt, idx) => (
+              <a
+                key={idx}
+                href={pt.link}
+                className="group border border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10 p-5 rounded-[8px] flex flex-col justify-between transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <div>
+                  <h3 className="text-xs font-bold text-white mb-2 group-hover:text-[#2E6FAD] transition-colors">
+                    {pt.title}
+                  </h3>
+                  <p className="text-[11px] text-white/70 leading-relaxed font-light mb-4">
+                    {pt.desc}
+                  </p>
+                </div>
+                <div className="border-t border-white/10 pt-3 mt-2 flex flex-col gap-1">
+                  <span className="text-[8px] font-mono text-white/40 uppercase block">
+                    Recommended Model
+                  </span>
+                  <span className="text-[10px] font-semibold text-white/90 group-hover:text-white transition-colors">
+                    {pt.model}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
       </div>
 
       {/* Scroll indicator */}

@@ -66,27 +66,27 @@ const githubUrl = typeof process !== 'undefined' ? (process.env.NEXT_PUBLIC_GITH
 
 // TODO: Replace placeholders with your actual production domain and email settings before deployment.
 export const METADATA: SiteMetadata = {
-  title: "Nexus — Custom Software & Automation",
-  description: "Nexus builds custom software and automation for complex workflows. See seven systems we've built end-to-end — clinics, restaurants, security, teams, and more — then bring us yours.",
-  canonicalUrl: siteUrl, // TODO: Replace with production URL
-  email: contactEmail, // TODO: Replace with production email
-  domain: siteUrl.replace(/^https?:\/\//, ""), // TODO: Replace with production domain
+  title: "Nexus — Custom Workflow Systems & Automation",
+  description: "Nexus builds custom software and automation for complex workflows. See seven shipped proof systems built end-to-end — clinics, restaurants, security, teams, and more — then bring us yours.",
+  canonicalUrl: siteUrl,
+  email: contactEmail,
+  domain: siteUrl.replace(/^https?:\/\//, ""),
   socials: {
-    x: xUrl, // TODO: Replace with company socials
+    x: xUrl,
     linkedin: linkedinUrl,
     github: githubUrl
   }
 };
 
 export const HERO = {
-  eyebrow: "Capability Reference",
+  eyebrow: "Custom Workflow Systems",
   title: "Nexus",
-  tagline: "We build custom software and automation for complex workflows. The seven systems below are proof of range.",
+  tagline: "We build custom software and automation for complex workflows. The seven systems below are shipped proof of range.",
   proofTagline: "Seven systems shipped. Five industries. Built by one founder.",
   ctaText: "Start a conversation",
-  ctaUrl: contactUrl, // TODO: Replace with production contact URL
+  ctaUrl: contactUrl,
   version: "22 June 2026",
-  metaCount: "7 Products · 10 Documents"
+  metaCount: "7 shipped proof systems · 5 industries"
 };
 
 export const PROOF_STRIP = [
@@ -199,7 +199,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     status: "Early access — demos available now",
     statusType: "available",
     ctaPrimaryText: "Book a demo",
-    ctaPrimaryUrl: `${siteUrl}/clinicos/demo`,
+    ctaPrimaryUrl: "/demo#clinicos",
     ctaSecondaryText: "Map your clinic journey",
     ctaSecondaryUrl: "#clinicos-sheet",
     problem: "In many outpatient clinics, the patient journey is divided across too many places. A phone enquiry becomes a receptionist note. A same-day booking becomes a token slip. A doctor delay becomes repeated patient questions. A consultation becomes a handwritten prescription. A billing counter recreates the same information. The owner understands the day only after asking multiple people.",
@@ -269,7 +269,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     status: "Joining the waitlist now",
     statusType: "waitlist",
     ctaPrimaryText: "Explore Aarogya",
-    ctaPrimaryUrl: `${siteUrl}/aarogya`,
+    ctaPrimaryUrl: "/demo#aarogya",
     ctaSecondaryText: "Join the waitlist",
     ctaSecondaryUrl: "#aarogya-sheet",
     problem: "Everyday health information often lives in too many places. A blood-pressure reading is written in a notebook. A glucose value is stored in a device. A prescription is saved as a photo. A lab report is buried in a file. A medicine routine is remembered from habit. A doctor visit happens before the user can summarize what changed.",
@@ -335,7 +335,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     status: "Pilot programme — limited restaurants",
     statusType: "beta",
     ctaPrimaryText: "Book a demo",
-    ctaPrimaryUrl: `${siteUrl}/restaurantos/demo`,
+    ctaPrimaryUrl: "/demo#restaurantos",
     ctaSecondaryText: "Discuss a pilot",
     ctaSecondaryUrl: "#restaurantos-sheet",
     problem: "In many restaurants, the service journey moves through too many disconnected places. An order is written down or entered into a system. The kitchen receives part of the context. Special instructions are repeated verbally. Service staff check what is ready. The owner reviews the day through a mix of POS data, staff memory, and manual notes.",
@@ -398,7 +398,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     status: "Private beta — apply to join",
     statusType: "beta",
     ctaPrimaryText: "Request a walkthrough",
-    ctaPrimaryUrl: `${siteUrl}/shipwright/beta`,
+    ctaPrimaryUrl: "/demo#shipwright",
     ctaSecondaryText: "Apply for private-beta",
     ctaSecondaryUrl: "#shipwright-sheet",
     problem: "Teams rarely lose work because it doesn't exist. They lose it because it scatters. The task is in one tool. The discussion is in chat. The file is in a drive. The decision was made in a meeting. The blocker was mentioned once and forgotten. The status update has to be rebuilt every week.",
@@ -451,7 +451,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     status: "Available — technical demos running now",
     statusType: "available",
     ctaPrimaryText: "Request a demo",
-    ctaPrimaryUrl: `${siteUrl}/securescan/demo`,
+    ctaPrimaryUrl: "/demo#securescan",
     ctaSecondaryText: "Review your workflow",
     ctaSecondaryUrl: "#securescan-sheet",
     problem: "Security findings often arrive too late or in a form developers cannot easily act on. Reports are disconnected from the development workflow. Findings are hard to prioritize. Issues are not re-checked consistently. Security becomes a one-off event instead of a repeatable habit.",
@@ -496,7 +496,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     status: "Early access — available now",
     statusType: "available",
     ctaPrimaryText: "Explore SafeDate",
-    ctaPrimaryUrl: `${siteUrl}/safedate`,
+    ctaPrimaryUrl: "/demo#safedate",
     ctaSecondaryText: "Create a safety plan",
     ctaSecondaryUrl: "#safedate-sheet",
     problem: "Modern dating often starts digitally, but the safety planning around meeting someone is still informal. A friend may know part of the plan. A location may be shared in a message. A check-in may be forgotten. The loop may never be closed.",
@@ -537,7 +537,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     status: "Available — start today",
     statusType: "available",
     ctaPrimaryText: "Start building",
-    ctaPrimaryUrl: `${siteUrl}/buildpublic`,
+    ctaPrimaryUrl: "/demo#buildpublic",
     ctaSecondaryText: "Create project page",
     ctaSecondaryUrl: "#buildpublic-sheet",
     problem: "Building in public sounds simple, but execution and storytelling live in different places. Tasks are private. Notes are scattered. Progress is hard to summarize. Public updates are inconsistent. Launch history disappears across social posts.",

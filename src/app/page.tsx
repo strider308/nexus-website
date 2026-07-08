@@ -7,7 +7,9 @@ import { ProofStrip } from "@/components/sections/ProofStrip";
 import { ProblemSection } from "@/components/sections/ProblemSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
-import { WorkflowConfigurator } from "@/components/sections/WorkflowConfigurator";
+import { ProofLedger } from "@/components/sections/ProofLedger";
+import { WhyNexusCompounds } from "@/components/sections/WhyNexusCompounds";
+import { EngagementModels } from "@/components/sections/EngagementModels";
 import { FounderSection } from "@/components/sections/FounderSection";
 import { TrustLimitsSection } from "@/components/sections/TrustLimitsSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -27,8 +29,10 @@ export default function Home() {
         <ProofStrip />
         <ProblemSection />
         <ServicesSection />
+        <ProofLedger />
+        <WhyNexusCompounds />
         <CaseStudiesSection />
-        <WorkflowConfigurator />
+        <EngagementModels />
         <FounderSection />
         <TrustLimitsSection />
         <FinalCTA />

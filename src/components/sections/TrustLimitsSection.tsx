@@ -13,17 +13,17 @@ export function TrustLimitsSection() {
         {/* Header */}
         <div className="mb-12">
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-primary leading-tight mb-4">
-            Master Disclaimer Reference
+            Trust &amp; Limits
           </h2>
           <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed">
-            Required language for all product communications. Review before any public-facing use.
+            Transparent limits and disclaimers for each of our custom workflows.
           </p>
         </div>
 
         {/* Global Company Disclaimer */}
         <div className="border border-border bg-muted/20 rounded-[8px] p-6 text-xs md:text-sm text-foreground/80 leading-relaxed font-light mb-10">
           <strong className="text-primary font-bold uppercase tracking-wider block mb-2">
-            Company-Level Disclaimer
+            Core Constraints &amp; Responsibility
           </strong>
           {MASTER_DISCLAIMER}
         </div>

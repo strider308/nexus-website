@@ -11,8 +11,16 @@ export function SiteFooter() {
         </div>
         
         <p className="text-sm text-white/60 font-light mb-8 max-w-sm leading-relaxed">
-          Practical software for complex workflows.
+          Custom software and automation for complex workflows.
         </p>
+
+        {/* Page Links */}
+        <div className="flex flex-wrap gap-6 justify-center mb-8 text-xs font-semibold uppercase tracking-wider">
+          <a href="/services" className="text-white/80 hover:text-white transition-colors">Services</a>
+          <a href="/case-studies" className="text-white/80 hover:text-white transition-colors">Case Studies</a>
+          <a href="/demo" className="text-white/80 hover:text-white transition-colors">Demo Library</a>
+          <a href="/resources" className="text-white/80 hover:text-white transition-colors">Resources</a>
+        </div>
 
         {/* Social Links */}
         <div className="flex gap-6 justify-center mb-8">
