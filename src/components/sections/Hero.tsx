@@ -136,8 +136,8 @@ export function Hero() {
               <a 
                 href="#case-studies" 
                 className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "w-full sm:w-auto text-white border-white/20 hover:bg-white/5 font-semibold rounded-[6px] flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 outline-none interactive-action"
+                  buttonVariants({ variant: "ghost", size: "lg" }),
+                  "w-full sm:w-auto bg-transparent text-white border border-white/25 hover:bg-white/10 hover:text-white font-semibold rounded-[6px] flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 outline-none interactive-action"
                 )}
               >
                 See proof of work
