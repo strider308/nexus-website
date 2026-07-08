@@ -1,227 +1,315 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { useState } from "react";
-import { PRODUCT_THEMES } from "@/lib/design-tokens";
-
-interface NodeData {
-  id: string;
-  label: string;
-  color: string;
-  x: number;
-  y: number;
-  delay: number;
-}
-
-const nodes: NodeData[] = [
-  { id: "clinicos", label: "ClinicOS", color: "#1A2B4C", x: 50, y: 15, delay: 0 },
-  { id: "aarogya", label: "Aarogya", color: "#5A7F5E", x: 78, y: 28, delay: 0.3 },
-  { id: "restaurantos", label: "RestaurantOS", color: "#A05C1A", x: 85, y: 58, delay: 0.6 },
-  { id: "shipwright", label: "ShipWright", color: "#5B4B8A", x: 65, y: 82, delay: 0.9 },
-  { id: "securescan", label: "SecureScan", color: "#2A7D8A", x: 35, y: 82, delay: 1.2 },
-  { id: "safedate", label: "SafeDate", color: "#8A2A5A", x: 15, y: 58, delay: 1.5 },
-  { id: "buildpublic", label: "BuildPublic", color: "#2A5A3A", x: 22, y: 28, delay: 1.8 }
-];
 
 export function NexusNetworkVisual() {
   const shouldReduceMotion = useReducedMotion();
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
-  // Return simple, elegant static network if reduced motion is requested
-  if (shouldReduceMotion) {
-    return (
-      <div className="relative w-full max-w-[400px] aspect-square mx-auto flex items-center justify-center">
-        <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
-          {/* Node connecting lines */}
-          {nodes.map((node) => (
-            <line
-              key={`line-${node.id}`}
-              x1="50"
-              y1="50"
-              x2={node.x}
-              y2={node.y}
-              stroke="currentColor"
-              className="text-muted/30 dark:text-muted-foreground/15"
-              strokeWidth="0.8"
-            />
-          ))}
+  // If reduced motion is preferred, render static paths directly
+  const messyInit = shouldReduceMotion ? { pathLength: 1, opacity: 0.4 } : { pathLength: 0, opacity: 0.2 };
+  const messyAnim = shouldReduceMotion ? undefined : { pathLength: 1, opacity: 0.55 };
 
-          {/* Central Nexus core */}
-          <circle cx="50" cy="50" r="5" className="fill-foreground" />
+  const cleanInit = shouldReduceMotion ? { pathLength: 1, opacity: 0.75 } : { pathLength: 0, opacity: 0.1 };
+  const cleanAnim = shouldReduceMotion ? undefined : { pathLength: 1, opacity: 0.85 };
 
-          {/* Orbit Nodes */}
-          {nodes.map((node) => (
-            <g key={node.id}>
-              <circle
-                cx={node.x}
-                cy={node.y}
-                r="3"
-                fill={node.color}
-                stroke="white"
-                strokeWidth="0.5"
-              />
-            </g>
-          ))}
-        </svg>
-      </div>
-    );
-  }
+  const nodeInit = shouldReduceMotion ? { scale: 1, opacity: 1 } : { scale: 0.8, opacity: 0 };
+  const nodeAnim = shouldReduceMotion ? undefined : { scale: 1, opacity: 1 };
 
   return (
-    <div className="relative w-full max-w-[440px] aspect-square mx-auto flex items-center justify-center">
-      
-      {/* Background radial highlight glowing color on hover */}
-      <div 
-        className="absolute inset-0 bg-radial transition-all duration-700 blur-[80px] opacity-15"
-        style={{
-          background: hoveredNode 
-            ? `radial-gradient(circle, ${PRODUCT_THEMES[hoveredNode]?.primary} 0%, transparent 70%)` 
-            : 'radial-gradient(circle, var(--accent) 0%, transparent 70%)'
-        }}
-      />
-
-      <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible relative z-10">
-        
-        {/* Node connecting lines with gradient highlight on hover */}
-        {nodes.map((node) => {
-          const isHighlighted = hoveredNode === node.id || hoveredNode === null;
-          return (
-            <motion.line
-              key={`line-${node.id}`}
-              x1="50"
-              y1="50"
-              x2={node.x}
-              y2={node.y}
-              stroke={hoveredNode === node.id ? node.color : "currentColor"}
-              className="text-border dark:text-zinc-800"
-              animate={{
-                strokeWidth: hoveredNode === node.id ? 1.5 : 0.6,
-                opacity: isHighlighted ? 0.7 : 0.15
-              }}
-              transition={{ duration: 0.3 }}
-            />
-          );
-        })}
-
-        {/* Central Nexus core */}
-        <motion.circle
-          cx="50"
-          cy="50"
-          r="4.5"
-          className="fill-foreground dark:fill-white"
+    <div className="relative w-full max-w-[420px] aspect-[420/200] md:aspect-[420/200] mx-auto flex items-center justify-center">
+      {/* Glow highlight behind central core */}
+      {!shouldReduceMotion && (
+        <motion.div 
+          className="absolute w-36 h-36 rounded-full blur-[48px] bg-[#2E6FAD] opacity-10 pointer-events-none"
           animate={{
-            scale: hoveredNode ? 1.15 : 1,
-            fill: hoveredNode ? PRODUCT_THEMES[hoveredNode].primary : "#ffffff"
-          }}
-          transition={{ duration: 0.3 }}
-        />
-        
-        {/* Central Glow Ring */}
-        <motion.circle
-          cx="50"
-          cy="50"
-          r="8"
-          stroke="currentColor"
-          className="text-[#1A2B4C]/10 dark:text-white/10"
-          strokeWidth="0.5"
-          fill="none"
-          animate={{
-            scale: [1, 1.25, 1],
-            opacity: [0.3, 0.6, 0.3]
+            scale: [1, 1.12, 1],
+            opacity: [0.1, 0.16, 0.1]
           }}
           transition={{
-            duration: 4,
+            duration: 6,
             repeat: Infinity,
             ease: "easeInOut"
           }}
         />
+      )}
 
-        {/* Orbit Nodes */}
-        {nodes.map((node) => {
-          const isHovered = hoveredNode === node.id;
-          const isAnyHovered = hoveredNode !== null;
-          
-          return (
-            <g
-              key={node.id}
-              className="cursor-pointer"
-              onMouseEnter={() => setHoveredNode(node.id)}
-              onMouseLeave={() => setHoveredNode(null)}
-              onClick={() => {
-                const el = document.getElementById(node.id);
-                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      {/* Desktop SVG */}
+      <svg viewBox="0 0 420 200" className="hidden md:block w-full h-full overflow-visible relative z-10">
+        {/* Messy converging paths (left side) */}
+        <motion.path
+          d="M 40 50 C 120 50, 120 100, 200 100"
+          stroke="#5B4B8A"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          fill="none"
+          initial={messyInit}
+          animate={messyAnim}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+        />
+        <motion.path
+          d="M 40 100 Q 120 100, 200 100"
+          stroke="#2A7D8A"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          fill="none"
+          initial={messyInit}
+          animate={messyAnim}
+          transition={{ duration: 0.4, ease: "easeOut", delay: 0.05 }}
+        />
+        <motion.path
+          d="M 40 150 C 120 150, 120 100, 200 100"
+          stroke="#8A2A5A"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          fill="none"
+          initial={messyInit}
+          animate={messyAnim}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.02 }}
+        />
+
+        {/* Clean straight paths (right side) */}
+        <motion.line
+          x1="200"
+          y1="100"
+          x2="360"
+          y2="50"
+          stroke="#2E6FAD"
+          strokeWidth="2"
+          initial={cleanInit}
+          animate={cleanAnim}
+          transition={{ duration: 0.4, ease: "easeInOut", delay: 0.45 }}
+        />
+        <motion.line
+          x1="200"
+          y1="100"
+          x2="360"
+          y2="100"
+          stroke="#5A7F5E"
+          strokeWidth="2"
+          initial={cleanInit}
+          animate={cleanAnim}
+          transition={{ duration: 0.35, ease: "easeInOut", delay: 0.48 }}
+        />
+        <motion.line
+          x1="200"
+          y1="100"
+          x2="360"
+          y2="150"
+          stroke="#A05C1A"
+          strokeWidth="2"
+          initial={cleanInit}
+          animate={cleanAnim}
+          transition={{ duration: 0.4, ease: "easeInOut", delay: 0.45 }}
+        />
+
+        {/* Left Input Nodes */}
+        <g>
+          <circle cx="40" cy="50" r="3.5" fill="#5B4B8A" />
+          <text x="32" y="38" fontFamily="var(--font-sans)" fontSize="8" fill="white" opacity="0.45" textAnchor="start">Chats</text>
+        </g>
+        <g>
+          <circle cx="40" cy="100" r="3.5" fill="#2A7D8A" />
+          <text x="32" y="88" fontFamily="var(--font-sans)" fontSize="8" fill="white" opacity="0.45" textAnchor="start">Sheets</text>
+        </g>
+        <g>
+          <circle cx="40" cy="150" r="3.5" fill="#8A2A5A" />
+          <text x="32" y="138" fontFamily="var(--font-sans)" fontSize="8" fill="white" opacity="0.45" textAnchor="start">Tasks</text>
+        </g>
+
+        {/* Central Nexus core node */}
+        <g>
+          <motion.circle
+            cx="200"
+            cy="100"
+            r="10"
+            fill="#0C1828"
+            stroke="white"
+            strokeWidth="0.8"
+            initial={shouldReduceMotion ? { scale: 1, opacity: 1 } : { scale: 0.7, opacity: 0 }}
+            animate={shouldReduceMotion ? undefined : { scale: [0.7, 1.15, 1], opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.38, type: "spring", stiffness: 200, damping: 12 }}
+          />
+          <motion.circle
+            cx="200"
+            cy="100"
+            r="5"
+            fill="#ffffff"
+            initial={{ scale: 1 }}
+            animate={shouldReduceMotion ? undefined : { 
+              scale: [1, 1.2, 1],
+              fill: ["#ffffff", "#2E6FAD", "#ffffff"]
+            }}
+            transition={{ duration: 0.5, delay: 0.38 }}
+          />
+          {/* Ambient slow breathing core overlay */}
+          {!shouldReduceMotion && (
+            <motion.circle
+              cx="200"
+              cy="100"
+              r="5"
+              fill="#2E6FAD"
+              animate={{
+                opacity: [0.2, 0.6, 0.2]
               }}
-            >
-              {/* Outer pulsing ring */}
-              <motion.circle
-                cx={node.x}
-                cy={node.y}
-                r="4.5"
-                fill="none"
-                stroke={node.color}
-                strokeWidth="0.4"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{
-                  scale: isHovered ? [1, 1.4, 1] : 1,
-                  opacity: isHovered ? 0.8 : [0.15, 0.45, 0.15]
-                }}
-                transition={{
-                  duration: isHovered ? 1.5 : 3,
-                  repeat: Infinity,
-                  delay: node.delay
-                }}
-              />
+              transition={{
+                duration: 3.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          )}
+          <text x="200" y="84" fontFamily="var(--font-mono)" fontSize="9" fontWeight="700" fill="white" opacity="0.6" textAnchor="middle">NEXUS</text>
+        </g>
 
-              {/* Core Node Circle */}
-              <motion.circle
-                cx={node.x}
-                cy={node.y}
-                r="2.5"
-                fill={node.color}
-                stroke="white"
-                strokeWidth="0.5"
-                animate={{
-                  scale: isHovered ? 1.35 : (isAnyHovered && !isHovered ? 0.85 : 1),
-                  opacity: isAnyHovered && !isHovered ? 0.4 : 1
-                }}
-                transition={{ duration: 0.3, type: "spring", stiffness: 200, damping: 15 }}
-              />
+        {/* Right Clean Output Nodes */}
+        <motion.g
+          initial={nodeInit}
+          animate={nodeAnim}
+          transition={{ duration: 0.4, delay: 0.8, type: "spring" }}
+        >
+          <circle cx="360" cy="50" r="4.5" fill="#2E6FAD" />
+          <text x="372" y="53" fontFamily="var(--font-sans)" fontSize="8.5" fontWeight="600" fill="white" textAnchor="start">Custom Software</text>
+        </motion.g>
+        <motion.g
+          initial={nodeInit}
+          animate={nodeAnim}
+          transition={{ duration: 0.4, delay: 0.82, type: "spring" }}
+        >
+          <circle cx="360" cy="100" r="4.5" fill="#5A7F5E" />
+          <text x="372" y="103" fontFamily="var(--font-sans)" fontSize="8.5" fontWeight="600" fill="white" textAnchor="start">Automation</text>
+        </motion.g>
+        <motion.g
+          initial={nodeInit}
+          animate={nodeAnim}
+          transition={{ duration: 0.4, delay: 0.8, type: "spring" }}
+        >
+          <circle cx="360" cy="150" r="4.5" fill="#A05C1A" />
+          <text x="372" y="153" fontFamily="var(--font-sans)" fontSize="8.5" fontWeight="600" fill="white" textAnchor="start">Owner Visibility</text>
+        </motion.g>
+      </svg>
 
-              {/* Text tooltip floating above nodes */}
-              {isHovered && (
-                <motion.g
-                  initial={{ opacity: 0, y: -2 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {/* Tooltip Background */}
-                  <rect
-                    x={node.x - 18}
-                    y={node.y - 9}
-                    width="36"
-                    height="6"
-                    rx="1.5"
-                    fill="var(--background)"
-                    stroke="var(--border)"
-                    strokeWidth="0.3"
-                  />
-                  {/* Tooltip Text */}
-                  <text
-                    x={node.x}
-                    y={node.y - 5.2}
-                    fontFamily="var(--font-sans)"
-                    fontSize="2.2"
-                    fontWeight="700"
-                    fill={node.color}
-                    textAnchor="middle"
-                  >
-                    {node.label}
-                  </text>
-                </motion.g>
-              )}
-            </g>
-          );
-        })}
+      {/* Mobile SVG */}
+      <svg viewBox="0 0 200 360" className="block md:hidden w-full h-full overflow-visible relative z-10">
+        {/* Converging Paths */}
+        <motion.path
+          d="M 40 40 C 40 100, 100 100, 100 160"
+          stroke="#5B4B8A"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          fill="none"
+          initial={messyInit}
+          animate={messyAnim}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+        />
+        <motion.path
+          d="M 100 40 Q 100 100, 100 160"
+          stroke="#2A7D8A"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          fill="none"
+          initial={messyInit}
+          animate={messyAnim}
+          transition={{ duration: 0.4, ease: "easeOut", delay: 0.05 }}
+        />
+        <motion.path
+          d="M 160 40 C 160 100, 100 100, 100 160"
+          stroke="#8A2A5A"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          fill="none"
+          initial={messyInit}
+          animate={messyAnim}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.02 }}
+        />
+
+        {/* Straight paths */}
+        <motion.line
+          x1="100"
+          y1="160"
+          x2="40"
+          y2="280"
+          stroke="#2E6FAD"
+          strokeWidth="2"
+          initial={cleanInit}
+          animate={cleanAnim}
+          transition={{ duration: 0.4, ease: "easeInOut", delay: 0.45 }}
+        />
+        <motion.line
+          x1="100"
+          y1="160"
+          x2="100"
+          y2="280"
+          stroke="#5A7F5E"
+          strokeWidth="2"
+          initial={cleanInit}
+          animate={cleanAnim}
+          transition={{ duration: 0.35, ease: "easeInOut", delay: 0.48 }}
+        />
+        <motion.line
+          x1="100"
+          y1="160"
+          x2="160"
+          y2="280"
+          stroke="#A05C1A"
+          strokeWidth="2"
+          initial={cleanInit}
+          animate={cleanAnim}
+          transition={{ duration: 0.4, ease: "easeInOut", delay: 0.45 }}
+        />
+
+        {/* Top Input circles */}
+        <circle cx="40" cy="40" r="3.5" fill="#5B4B8A" />
+        <circle cx="100" cy="40" r="3.5" fill="#2A7D8A" />
+        <circle cx="160" cy="40" r="3.5" fill="#8A2A5A" />
+
+        {/* Central Core */}
+        <g>
+          <motion.circle
+            cx="100"
+            cy="160"
+            r="9"
+            fill="#0C1828"
+            stroke="white"
+            strokeWidth="0.8"
+            initial={shouldReduceMotion ? { scale: 1, opacity: 1 } : { scale: 0.7, opacity: 0 }}
+            animate={shouldReduceMotion ? undefined : { scale: [0.7, 1.15, 1], opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.38, type: "spring", stiffness: 200 }}
+          />
+          <motion.circle
+            cx="100"
+            cy="160"
+            r="4.5"
+            fill="#ffffff"
+            animate={shouldReduceMotion ? undefined : { scale: [1, 1.05, 1] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </g>
+
+        {/* Bottom clean output labels */}
+        <motion.g
+          initial={nodeInit}
+          animate={nodeAnim}
+          transition={{ duration: 0.4, delay: 0.8 }}
+        >
+          <circle cx="40" cy="280" r="4.5" fill="#2E6FAD" />
+          <text x="40" y="300" fontFamily="var(--font-sans)" fontSize="8.5" fontWeight="600" fill="white" textAnchor="middle">Software</text>
+        </motion.g>
+        <motion.g
+          initial={nodeInit}
+          animate={nodeAnim}
+          transition={{ duration: 0.4, delay: 0.82 }}
+        >
+          <circle cx="100" cy="280" r="4.5" fill="#5A7F5E" />
+          <text x="100" y="300" fontFamily="var(--font-sans)" fontSize="8.5" fontWeight="600" fill="white" textAnchor="middle">Automation</text>
+        </motion.g>
+        <motion.g
+          initial={nodeInit}
+          animate={nodeAnim}
+          transition={{ duration: 0.4, delay: 0.8 }}
+        >
+          <circle cx="160" cy="280" r="4.5" fill="#A05C1A" />
+          <text x="160" y="300" fontFamily="var(--font-sans)" fontSize="8.5" fontWeight="600" fill="white" text-anchor="middle">Visibility</text>
+        </motion.g>
       </svg>
     </div>
   );

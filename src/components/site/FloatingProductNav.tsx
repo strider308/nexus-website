@@ -89,7 +89,7 @@ export function FloatingProductNav() {
               className="relative group w-8 h-8 rounded-full flex items-center justify-center font-display font-bold text-xs text-white transition-all duration-300 hover:scale-115 active:scale-95 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 outline-none cursor-pointer"
               style={{
                 backgroundColor: theme.primary,
-                border: isActive ? "2px stroke white" : "none",
+                border: isActive ? "2px solid white" : "none",
                 boxShadow: isActive ? `0 0 12px ${theme.primary}` : "none"
               }}
             >

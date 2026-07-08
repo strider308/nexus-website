@@ -128,7 +128,7 @@ export function SiteHeader() {
                   e.preventDefault();
                   handleLinkClick(item.href);
                 }}
-                className={`transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-primary/50 outline-none rounded-[4px] px-1 py-0.5 ${
+                className={`transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-primary/50 outline-none rounded-[4px] px-1 py-0.5 interactive-action ${
                   isActive ? "text-primary font-semibold" : "text-muted-foreground"
                 }`}
               >
@@ -140,7 +140,7 @@ export function SiteHeader() {
             href={HERO.ctaUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className={cn(buttonVariants({ size: "sm" }), "bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] flex items-center justify-center focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none")}
+            className={cn(buttonVariants({ size: "sm" }), "bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] flex items-center justify-center focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none interactive-action")}
           >
             Start a conversation
           </a>
@@ -168,7 +168,7 @@ export function SiteHeader() {
                           e.preventDefault();
                           handleLinkClick(item.href);
                         }}
-                        className={`py-2 border-b border-border/50 transition-colors focus-visible:ring-2 focus-visible:ring-primary/50 outline-none rounded-[4px] ${
+                        className={`py-2 border-b border-border/50 transition-colors focus-visible:ring-2 focus-visible:ring-primary/50 outline-none rounded-[4px] interactive-action ${
                           isActive ? "text-primary font-bold" : "text-muted-foreground"
                         }`}
                       >
@@ -181,7 +181,7 @@ export function SiteHeader() {
                   href={HERO.ctaUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className={cn(buttonVariants({ size: "default" }), "w-full bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] mt-6 flex items-center justify-center focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none")}
+                  className={cn(buttonVariants({ size: "default" }), "w-full bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] mt-6 flex items-center justify-center focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none interactive-action")}
                 >
                   Start a conversation
                 </a>

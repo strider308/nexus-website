@@ -94,7 +94,7 @@ export function Hero() {
                 rel="noopener noreferrer" 
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "w-full sm:w-auto bg-white hover:bg-white/90 text-[#0C1828] font-bold rounded-[6px] transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_6px_20px_rgba(255,255,255,0.15)] active:translate-y-0 flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 outline-none"
+                  "w-full sm:w-auto bg-white hover:bg-white/90 text-[#0C1828] font-bold rounded-[6px] flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 outline-none interactive-action"
                 )}
               >
                 <MessageSquare className="h-4 w-4" />
@@ -104,7 +104,7 @@ export function Hero() {
                 href="#case-studies" 
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "w-full sm:w-auto text-white border-white/20 hover:bg-white/5 font-semibold rounded-[6px] transition-all duration-300 hover:translate-y-[-2px] active:translate-y-0 flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 outline-none"
+                  "w-full sm:w-auto text-white border-white/20 hover:bg-white/5 font-semibold rounded-[6px] flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 outline-none interactive-action"
                 )}
               >
                 See proof of work

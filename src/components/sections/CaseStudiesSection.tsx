@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CASE_STUDIES } from "@/lib/content/nexus";
 import { PRODUCT_THEMES } from "@/lib/design-tokens";
 import { ClinicOSMockup } from "../visuals/ClinicOSMockup";
@@ -31,6 +31,12 @@ export function CaseStudiesSection() {
   const [activeTab, setActiveTab] = useState<string>("clinicos");
   const [salesSheetExpanded, setSalesSheetExpanded] = useState<Record<string, boolean>>({});
   const shouldReduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const activeStudy = CASE_STUDIES.find((study) => study.id === activeTab) || CASE_STUDIES[0];
   const MockupComponent = mockupMap[activeStudy.id];
@@ -110,15 +116,27 @@ export function CaseStudiesSection() {
                   aria-controls={`panel-${study.id}`}
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => handleTabChange(study.id)}
-                  className={`flex items-center gap-3 shrink-0 px-4 py-3 rounded-[6px] text-xs md:text-sm font-semibold tracking-tight transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 outline-none cursor-pointer ${
+                  className={`relative flex items-center gap-3 shrink-0 px-4 py-3 rounded-[6px] text-xs md:text-sm font-semibold tracking-tight transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 outline-none cursor-pointer z-10 ${
                     isActive
-                      ? "bg-muted text-primary"
-                      : "text-muted-foreground hover:text-primary hover:bg-muted/50"
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-primary hover:bg-muted/30"
                   }`}
                   style={{
                     borderLeft: isActive ? `3px solid ${theme.primary}` : "3px solid transparent"
                   }}
                 >
+                  {/* Gliding active tab background indicator */}
+                  {isActive && !shouldReduceMotion && (
+                    <motion.span
+                      layoutId="activeTabIndicator"
+                      className="absolute inset-0 bg-muted rounded-[6px] z-[-1]"
+                      transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                    />
+                  )}
+                  {isActive && (shouldReduceMotion || !mounted) && (
+                    <span className="absolute inset-0 bg-muted rounded-[6px] z-[-1]" />
+                  )}
+
                   {/* Status dot coloring matching reference */}
                   <span
                     className="w-2 h-2 rounded-full shrink-0"
@@ -138,9 +156,9 @@ export function CaseStudiesSection() {
                 id={`panel-${activeStudy.id}`}
                 role="tabpanel"
                 aria-labelledby={`tab-${activeStudy.id}`}
-                initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: -10 }}
+                initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="flex flex-col gap-10 focus:outline-none"
               >
@@ -265,8 +283,12 @@ export function CaseStudiesSection() {
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {activeStudy.capabilities.map((cap, idx) => (
-                      <div 
+                      <motion.div 
                         key={cap.title} 
+                        initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+                        whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.1 }}
+                        transition={{ duration: 0.45, delay: idx * 0.04, ease: "easeOut" }}
                         className={cn(
                           "border rounded-[6px] p-6 transition-all duration-300",
                           idx === 0 
@@ -289,7 +311,7 @@ export function CaseStudiesSection() {
                             </li>
                           ))}
                         </ul>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </div>

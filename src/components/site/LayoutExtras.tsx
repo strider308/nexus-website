@@ -116,7 +116,7 @@ export function LayoutExtras() {
         >
           <p className="text-xs md:text-sm text-white/80 max-w-3xl leading-relaxed">
             We use analytics cookies to understand how this site is used and improve it. See our{" "}
-            <a href="/privacy-policy" className="underline hover:text-white">
+            <a href="/privacy-policy" className="underline hover:text-white interactive-action">
               Privacy Policy
             </a>{" "}
             for details.
@@ -124,13 +124,13 @@ export function LayoutExtras() {
           <div className="flex gap-3 shrink-0">
             <button
               onClick={() => handleCookieChoice("declined")}
-              className="text-xs font-semibold px-4 py-2 border border-white/20 rounded-[6px] hover:bg-white/5 transition-colors cursor-pointer"
+              className="text-xs font-semibold px-4 py-2 border border-white/20 rounded-[6px] hover:bg-white/5 transition-colors cursor-pointer interactive-action"
             >
               Decline
             </button>
             <button
               onClick={() => handleCookieChoice("accepted")}
-              className="text-xs font-bold px-4 py-2 bg-white text-[#0C1828] rounded-[6px] hover:bg-white/90 transition-colors cursor-pointer"
+              className="text-xs font-bold px-4 py-2 bg-white text-[#0C1828] rounded-[6px] hover:bg-white/90 transition-colors cursor-pointer interactive-action"
             >
               Accept
             </button>
