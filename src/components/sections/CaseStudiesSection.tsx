@@ -13,6 +13,17 @@ import { BuildPublicMockup } from "../visuals/BuildPublicMockup";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
+import { OrbitFallback } from "../three/ThreeFallback";
+
+const ThreeCanvasShell = dynamic(
+  () => import("../three/ThreeCanvasShell").then((mod) => mod.ThreeCanvasShell),
+  { ssr: false, loading: () => <OrbitFallback /> }
+);
+const ProofOrbitScene = dynamic(
+  () => import("../three/ProofOrbitScene"),
+  { ssr: false }
+);
 import { ChevronDown, ChevronUp, Layers, Link as LinkIcon, Cpu } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 
@@ -287,25 +298,42 @@ export function CaseStudiesSection() {
                   </div>
                 </div>
 
-                {/* Simulated Device Frame with high fidelity SVG */}
-                <div className="border border-border rounded-[10px] overflow-hidden shadow-md bg-muted/30">
-                  {/* Browser Bar */}
-                  <div className="bg-muted border-b border-border/80 px-4 py-3 flex items-center justify-between">
-                    <div className="flex gap-1.5">
-                      <span className="w-3 h-3 rounded-full bg-red-400/80" />
-                      <span className="w-3 h-3 rounded-full bg-yellow-400/80" />
-                      <span className="w-3 h-3 rounded-full bg-green-400/80" />
+                {/* Simulated Device Frame & 3D Orbit Constellation Visualizer */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                  {/* Mockup Frame (7 Cols) */}
+                  <div className="lg:col-span-7 border border-border rounded-[10px] overflow-hidden shadow-md bg-muted/30 flex flex-col justify-between">
+                    {/* Browser Bar */}
+                    <div className="bg-muted border-b border-border/80 px-4 py-3 flex items-center justify-between">
+                      <div className="flex gap-1.5">
+                        <span className="w-3 h-3 rounded-full bg-red-400/80" />
+                        <span className="w-3 h-3 rounded-full bg-yellow-400/80" />
+                        <span className="w-3 h-3 rounded-full bg-green-400/80" />
+                      </div>
+                      <div className="text-[10px] md:text-xs font-mono text-muted-foreground tracking-wide font-medium">
+                        nexus.co/{activeStudy.id}
+                      </div>
+                      <div className="w-12 h-2" />
                     </div>
-                    <div className="text-[10px] md:text-xs font-mono text-muted-foreground tracking-wide font-medium">
-                      nexus.co/{activeStudy.id}
+                    {/* Render Visual Mockup */}
+                    <div className="bg-background overflow-x-auto relative flex-grow flex items-center">
+                      <div className="w-full min-w-[640px] md:min-w-0">
+                        {MockupComponent && <MockupComponent />}
+                      </div>
                     </div>
-                    <div className="w-12 h-2" />
                   </div>
-                  
-                  {/* Render Visual Mockup */}
-                  <div className="bg-background overflow-x-auto relative">
-                    <div className="min-w-[640px] md:min-w-0">
-                      {MockupComponent && <MockupComponent />}
+
+                  {/* 3D Orbit Constellation Visualizer (5 Cols, Desktop Only) */}
+                  <div className="hidden lg:flex lg:col-span-5 border border-border rounded-[10px] overflow-hidden shadow-md bg-muted/20 items-center justify-center p-4 relative min-h-[280px]">
+                    <div className="absolute top-3 left-4 text-[9px] font-mono text-muted-foreground/60 uppercase select-none">
+                      Active Orbit Node
+                    </div>
+                    <div className="w-full h-full">
+                      <ThreeCanvasShell 
+                        ariaLabel="A 3D system orbit constellation mapping out ClinicOS, Aarogya, and other proof modules."
+                        fallback={<OrbitFallback />}
+                      >
+                        <ProofOrbitScene activeId={activeStudy.id} />
+                      </ThreeCanvasShell>
                     </div>
                   </div>
                 </div>

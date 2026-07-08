@@ -3,7 +3,17 @@
 import { HERO } from "@/lib/content/nexus";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { NexusNetworkVisual } from "../visuals/NexusNetworkVisual";
+import dynamic from "next/dynamic";
+import { HeroFallback } from "../three/ThreeFallback";
+
+const ThreeCanvasShell = dynamic(
+  () => import("../three/ThreeCanvasShell").then((mod) => mod.ThreeCanvasShell),
+  { ssr: false, loading: () => <HeroFallback /> }
+);
+const NexusSystemScene = dynamic(
+  () => import("../three/NexusSystemScene"),
+  { ssr: false }
+);
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowDown, MessageSquare } from "lucide-react";
 
@@ -157,12 +167,17 @@ export function Hero() {
 
           {/* Hero Visual Asset (Right Column) */}
           <motion.div 
-            className="lg:col-span-5 flex justify-center items-center"
+            className="lg:col-span-5 flex justify-center items-center h-[350px] w-full"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <NexusNetworkVisual />
+            <ThreeCanvasShell 
+              ariaLabel="Workflow integration visualization mapping scattered chats, sheets, and tasks into a central Nexus network outputting custom software and automations."
+              fallback={<HeroFallback />}
+            >
+              <NexusSystemScene />
+            </ThreeCanvasShell>
           </motion.div>
 
         </div>

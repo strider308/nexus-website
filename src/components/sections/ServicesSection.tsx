@@ -7,6 +7,17 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { ArrowRight, CheckCircle2, AlertCircle, Cpu, Layers } from "lucide-react";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { DepthFallback } from "../three/ThreeFallback";
+
+const ThreeCanvasShell = dynamic(
+  () => import("../three/ThreeCanvasShell").then((mod) => mod.ThreeCanvasShell),
+  { ssr: false, loading: () => <DepthFallback /> }
+);
+const ServiceDepthScene = dynamic(
+  () => import("../three/ServiceDepthScene"),
+  { ssr: false }
+);
 
 const EXPLORER_SERVICES = [
   {
@@ -200,18 +211,19 @@ export function ServicesSection() {
 
             {/* Right Side: Detail Panel */}
             <div className="lg:col-span-7 border-t lg:border-t-0 lg:border-l border-border/60 pt-5 lg:pt-0 lg:pl-6 flex flex-col justify-between min-h-[300px]">
-              <div className="animate-fade-in flex flex-col gap-4" key={selectedService}>
-                <div>
-                  <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-0.5 block">
-                    WHEN THIS MATTERS
-                  </span>
-                  <p className="text-xs md:text-sm text-foreground/80 leading-relaxed font-light">
-                    {activeServiceData.when}
-                  </p>
-                </div>
+              <div className="animate-fade-in grid grid-cols-1 md:grid-cols-12 gap-6" key={selectedService}>
+                {/* Text details (7 Cols) */}
+                <div className="md:col-span-7 flex flex-col gap-4">
+                  <div>
+                    <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-0.5 block animate-pulse">
+                      WHEN THIS MATTERS
+                    </span>
+                    <p className="text-xs text-foreground/80 leading-relaxed font-light">
+                      {activeServiceData.when}
+                    </p>
+                  </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-3 border-t border-border/40">
-                  <div className="md:col-span-7">
+                  <div className="pt-3 border-t border-border/40">
                     <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-0.5 block">
                       WHAT NEXUS BUILDS
                     </span>
@@ -219,7 +231,8 @@ export function ServicesSection() {
                       {activeServiceData.builds}
                     </p>
                   </div>
-                  <div className="md:col-span-5">
+                  
+                  <div className="pt-3 border-t border-border/40">
                     <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-0.5 block">
                       ROLES INVOLVED
                     </span>
@@ -227,24 +240,39 @@ export function ServicesSection() {
                       {activeServiceData.roles}
                     </p>
                   </div>
+
+                  <div className="pt-3 border-t border-border/40 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-muted/20 p-3.5 rounded-[6px] w-full">
+                    <div>
+                      <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-0.5 block">
+                        RELATED PROOF SYSTEM
+                      </span>
+                      <span className="text-xs text-primary font-bold">
+                        {activeServiceData.proof}
+                      </span>
+                    </div>
+                    <div className="text-left md:text-right md:max-w-xs">
+                      <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-0.5 block md:text-right">
+                        CONVERSATION STARTER
+                      </span>
+                      <span className="text-xs text-[#2E6FAD] italic font-medium">
+                        &ldquo;{activeServiceData.starter}&rdquo;
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="pt-3 border-t border-border/40 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-muted/20 p-3.5 rounded-[6px]">
-                  <div>
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-0.5 block">
-                      RELATED PROOF SYSTEM
-                    </span>
-                    <span className="text-xs text-primary font-bold">
-                      {activeServiceData.proof}
-                    </span>
+                {/* 3D Stack Visual (5 Cols, Desktop Only) */}
+                <div className="hidden md:flex md:col-span-5 border border-border/60 bg-muted/15 rounded-[8px] overflow-hidden items-center justify-center p-2 relative h-[240px]">
+                  <div className="absolute top-2 left-3 text-[8px] font-mono text-muted-foreground/60 uppercase select-none">
+                    Architecture Stack
                   </div>
-                  <div className="text-right md:max-w-xs">
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-0.5 block md:text-right">
-                      CONVERSATION STARTER
-                    </span>
-                    <span className="text-xs text-[#2E6FAD] italic font-medium">
-                      &ldquo;{activeServiceData.starter}&rdquo;
-                    </span>
+                  <div className="w-full h-full">
+                    <ThreeCanvasShell 
+                      ariaLabel="3D spatial architecture stack representing data layers, process logic, and live dashboards."
+                      fallback={<DepthFallback />}
+                    >
+                      <ServiceDepthScene selectedService={selectedService} />
+                    </ThreeCanvasShell>
                   </div>
                 </div>
               </div>

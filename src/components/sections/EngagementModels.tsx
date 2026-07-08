@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { HERO } from "@/lib/content/nexus";
 import { ArrowRight, Calendar, CheckSquare, Zap } from "lucide-react";
 
+import { SystemCard3D } from "@/components/three/SystemCard3D";
+
 const MODELS = [
   {
     letter: "A",
@@ -74,9 +76,9 @@ export function EngagementModels() {
           {MODELS.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div 
+              <SystemCard3D 
                 key={idx} 
-                className="border border-border bg-background hover:shadow-md transition-shadow rounded-[12px] p-6 flex flex-col justify-between"
+                className="border border-border bg-background hover:shadow-md rounded-[12px] p-6 flex flex-col justify-between h-full"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4 pb-4 border-b border-border/60">
@@ -128,7 +130,7 @@ export function EngagementModels() {
                   <span>Start a conversation</span>
                   <ArrowRight className="h-4 w-4" />
                 </a>
-              </div>
+              </SystemCard3D>
             );
           })}
         </div>
