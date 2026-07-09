@@ -5,6 +5,7 @@ import { METADATA, HERO } from "@/lib/content/nexus";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Link as LinkIcon } from "lucide-react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Case Studies & Shipped Proof — Nexus",
@@ -211,8 +212,9 @@ export default function CaseStudiesPage() {
                   </div>
 
                   <div className="flex flex-col gap-3">
-                    <a
+                    <Link
                       href={study.link}
+                      aria-label={`Explore ${study.name} demo`}
                       className={cn(
                         buttonVariants({ size: "default" }),
                         "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-bold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300"
@@ -220,7 +222,7 @@ export default function CaseStudiesPage() {
                     >
                       <LinkIcon className="h-3.5 w-3.5" />
                       <span>Explore Demo</span>
-                    </a>
+                    </Link>
                     <a
                       href={HERO.ctaUrl}
                       target="_blank"

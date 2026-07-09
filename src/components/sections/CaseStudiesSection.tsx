@@ -526,8 +526,6 @@ export function CaseStudiesSection() {
                         </div>
                         <a 
                           href={activeStudy.ctaPrimaryUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
                           className={cn(buttonVariants({ size: "default" }), "shrink-0 font-semibold rounded-[6px] text-white hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-offset-2 outline-none")}
                           style={{ backgroundColor: activeTheme.primary }}
                         >

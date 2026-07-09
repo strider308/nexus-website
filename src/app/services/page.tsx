@@ -102,8 +102,9 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
             {SERVICES_LIST.map((srv) => (
               <div 
-                key={srv.id} 
-                className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group"
+                key={srv.id}
+                id={srv.id}
+                className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group scroll-mt-28"
               >
                 <div>
                   <h2 className="font-display text-xl md:text-2xl font-bold text-[#E1E0CC] mb-6 pb-3 border-b border-[#DEDBC8]/5">
