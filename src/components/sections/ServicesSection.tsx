@@ -1,9 +1,7 @@
 "use client";
 
-import { SERVICES, HERO } from "@/lib/content/nexus";
-import { cn } from "@/lib/utils";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { Check, ArrowUpRight, Workflow, Cpu, Layers, BarChart3, HelpCircle } from "lucide-react";
+import { Check, ArrowUpRight, Workflow, Cpu, Layers, BarChart3 } from "lucide-react";
 import { WordsPullUpMultiStyle } from "../ui/words-pull-up";
 
 const PREMIUM_CARDS = [
@@ -66,7 +64,7 @@ export function ServicesSection() {
         
         {/* Section Header */}
         <div className="max-w-4xl mb-16 text-center mx-auto">
-          <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-gray-500 mb-4 block">
+          <span className="text-xs md:text-sm font-mono font-bold tracking-[0.2em] uppercase text-gray-400 mb-4 block">
             Capabilities Ledger
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight max-w-2xl mx-auto">
@@ -100,10 +98,10 @@ export function ServicesSection() {
             </div>
 
             <div>
-              <span className="text-[9px] font-mono tracking-widest text-gray-500 uppercase block mb-1">
+              <span className="text-xs font-mono tracking-wide text-gray-400 uppercase block mb-1">
                 Blueprint Layout
               </span>
-              <h3 className="text-[#E1E0CC] font-bold text-sm">
+              <h3 className="text-[#E1E0CC] font-bold text-base">
                 Your workflow, mapped.
               </h3>
             </div>
@@ -120,25 +118,25 @@ export function ServicesSection() {
                 <div>
                   {/* Card Number & Icon */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-[10px] font-mono text-gray-500 font-bold">
+                    <span className="text-xs font-mono text-gray-400 font-bold">
                       {card.num}
                     </span>
                     <Icon className="h-4 w-4 text-[#DEDBC8]/80 group-hover:text-[#DEDBC8] transition-colors" />
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-[#E1E0CC] font-bold text-sm mb-3">
+                  <h3 className="text-[#E1E0CC] font-bold text-base mb-3">
                     {card.title}
                   </h3>
-                  <p className="text-[11px] text-gray-400 leading-relaxed font-light mb-6">
+                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light mb-6">
                     {card.desc}
                   </p>
 
                   {/* Checklists */}
                   <ul className="flex flex-col gap-2">
                     {card.checklist.map((item, cIdx) => (
-                      <li key={cIdx} className="flex items-start gap-2 text-[10px] text-gray-400 font-light">
-                        <Check className="h-3 w-3 text-[#DEDBC8] shrink-0 mt-0.5" />
+                      <li key={cIdx} className="flex items-start gap-2 text-xs text-gray-300 font-light">
+                        <Check className="h-3.5 w-3.5 text-[#DEDBC8] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -147,7 +145,7 @@ export function ServicesSection() {
 
                 {/* Explore Action button */}
                 <div className="pt-6 border-t border-[#DEDBC8]/5 mt-6 flex justify-between items-center">
-                  <span className="text-[9px] font-mono font-bold text-[#DEDBC8]/60 uppercase">
+                  <span className="text-xs font-mono font-bold text-[#DEDBC8]/60 uppercase">
                     Explore Service
                   </span>
                   <div className="w-6 h-6 rounded-full bg-black/40 border border-[#DEDBC8]/10 flex items-center justify-center transition-all duration-300 group-hover:bg-[#DEDBC8] group-hover:border-[#DEDBC8] shrink-0">

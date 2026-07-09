@@ -164,3 +164,45 @@
     transform: none !important;
   }
 }
+
+/* Custom Typography Utilities */
+.text-body {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5rem;
+}
+@media (min-width: 768px) {
+  .text-body {
+    font-size: 1rem; /* 16px */
+    line-height: 1.75rem;
+  }
+}
+
+.text-body-muted {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: rgba(225, 224, 204, 0.75);
+}
+@media (min-width: 768px) {
+  .text-body-muted {
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+}
+
+.text-card-copy {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: rgba(225, 224, 204, 0.8);
+}
+
+.text-meta {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(225, 224, 204, 0.6);
+}
+
+.text-diagram-label {
+  font-size: 0.75rem;
+  color: rgba(225, 224, 204, 0.8);
+}

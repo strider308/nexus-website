@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "motion/react";
+import React, { useRef, useMemo } from "react";
+import { motion, useInView, useScroll, useTransform, MotionValue } from "motion/react";
 import { cn } from "@/lib/utils";
 
 interface WordsPullUpProps {
@@ -163,12 +163,46 @@ export function WordsPullUpMultiStyle({
   );
 }
 
-// React useMemo helper
-import { useMemo } from "react";
-
 interface ScrollRevealParagraphProps {
   text: string;
   className?: string;
+}
+
+interface ScrollRevealCharProps {
+  char: string;
+  index: number;
+  totalChars: number;
+  scrollYProgress: MotionValue<number>;
+}
+
+function ScrollRevealChar({ char, index, totalChars, scrollYProgress }: ScrollRevealCharProps) {
+  const charProgressStart = (index / totalChars) * 0.85;
+  const charProgressEnd = Math.min(1, charProgressStart + 0.15);
+  
+  // Character reveal opacity linking
+  const opacity = useTransform(
+    scrollYProgress,
+    [charProgressStart, charProgressEnd],
+    [0.2, 1]
+  );
+
+  // Render spaces seamlessly
+  if (char === " ") {
+    return (
+      <span className="inline-block">
+        &nbsp;
+      </span>
+    );
+  }
+
+  return (
+    <motion.span
+      style={{ opacity }}
+      className="inline-block transition-opacity duration-75"
+    >
+      {char}
+    </motion.span>
+  );
 }
 
 export function ScrollRevealParagraph({ text, className }: ScrollRevealParagraphProps) {
@@ -193,36 +227,15 @@ export function ScrollRevealParagraph({ text, className }: ScrollRevealParagraph
       
       {/* Accessible character map with opacity transforms */}
       <span aria-hidden="true" className="flex flex-wrap justify-center gap-x-[0.05em] gap-y-[0.1em]">
-        {chars.map((char, index) => {
-          const charProgressStart = (index / totalChars) * 0.85;
-          const charProgressEnd = Math.min(1, charProgressStart + 0.15);
-          
-          // Character reveal opacity linking
-          const opacity = useTransform(
-            scrollYProgress,
-            [charProgressStart, charProgressEnd],
-            [0.2, 1]
-          );
-
-          // Render spaces seamlessly
-          if (char === " ") {
-            return (
-              <span key={index} className="inline-block">
-                &nbsp;
-              </span>
-            );
-          }
-
-          return (
-            <motion.span
-              key={index}
-              style={{ opacity }}
-              className="inline-block transition-opacity duration-75"
-            >
-              {char}
-            </motion.span>
-          );
-        })}
+        {chars.map((char, index) => (
+          <ScrollRevealChar
+            key={index}
+            char={char}
+            index={index}
+            totalChars={totalChars}
+            scrollYProgress={scrollYProgress}
+          />
+        ))}
       </span>
     </p>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import { HERO } from "@/lib/content/nexus";
-import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { HeroFallback } from "../three/ThreeFallback";
 import { motion, useReducedMotion } from "motion/react";
@@ -72,7 +71,7 @@ export function Hero() {
             
             {/* Giant Typography heading (Left Column - 8 Cols) */}
             <div className="lg:col-span-8 flex flex-col items-start select-none">
-              <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#DEDBC8]/70 mb-2">
+              <span className="text-xs md:text-sm font-mono font-bold tracking-[0.25em] uppercase text-[#DEDBC8]/85 mb-2">
                 Custom Workflow Systems
               </span>
               <div className="relative">
@@ -93,7 +92,7 @@ export function Hero() {
             >
               <motion.p 
                 variants={itemVariants}
-                className="text-[#DEDBC8]/75 text-xs sm:text-sm leading-relaxed font-light"
+                className="text-body-muted font-light"
               >
                 Nexus builds custom software and automation for complex workflows — turning fragmented operations into mapped, role-aware systems.
               </motion.p>
@@ -108,7 +107,7 @@ export function Hero() {
                   href={HERO.ctaUrl}
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between gap-4 bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black rounded-full pl-5 pr-1.5 py-1.5 w-full sm:max-w-xs lg:max-w-none text-xs font-semibold tracking-wider uppercase transition-all duration-300 outline-none"
+                  className="group flex items-center justify-between gap-4 bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black rounded-full pl-5 pr-1.5 py-1.5 w-full sm:max-w-xs lg:max-w-none text-sm font-bold tracking-wider uppercase transition-all duration-300 outline-none"
                 >
                   <span>Start a conversation</span>
                   <div className="bg-black rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 group-hover:scale-105 shrink-0">
@@ -119,7 +118,7 @@ export function Hero() {
                 {/* Secondary CTA: Scroll target */}
                 <a 
                   href="#case-studies"
-                  className="flex items-center justify-center border border-[#DEDBC8]/25 text-[#DEDBC8] hover:bg-[#DEDBC8]/10 hover:border-[#DEDBC8]/40 rounded-full px-5 py-3 w-full sm:max-w-xs lg:max-w-none text-xs font-semibold tracking-wider uppercase transition-all duration-300 outline-none text-center"
+                  className="flex items-center justify-center border border-[#DEDBC8]/25 text-[#DEDBC8] hover:bg-[#DEDBC8]/10 hover:border-[#DEDBC8]/40 rounded-full px-5 py-3 w-full sm:max-w-xs lg:max-w-none text-sm font-bold tracking-wider uppercase transition-all duration-300 outline-none text-center"
                 >
                   See proof of work
                 </a>
@@ -128,7 +127,7 @@ export function Hero() {
               {/* Inset metadata tag */}
               <motion.div 
                 variants={itemVariants}
-                className="text-[9px] font-mono text-[#DEDBC8]/40 uppercase tracking-widest pt-2 border-t border-[#DEDBC8]/10 w-full"
+                className="text-xs font-mono text-[#DEDBC8]/70 uppercase tracking-wider pt-2 border-t border-[#DEDBC8]/10 w-full"
               >
                 7 shipped systems &middot; 5 industries &middot; built end-to-end
               </motion.div>

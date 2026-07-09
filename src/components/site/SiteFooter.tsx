@@ -11,12 +11,12 @@ export function SiteFooter() {
           Nexus<span className="text-[#DEDBC8] font-light">*</span>
         </div>
         
-        <p className="text-xs text-gray-500 font-light mb-8 max-w-sm leading-relaxed">
+        <p className="text-sm text-gray-400 font-light mb-8 max-w-sm leading-relaxed">
           Custom software and automation for complex workflows.
         </p>
 
         {/* Page Links */}
-        <div className="flex flex-wrap gap-6 justify-center mb-8 text-[10px] font-mono font-bold uppercase tracking-wider">
+        <div className="flex flex-wrap gap-6 justify-center mb-8 text-xs font-mono font-bold uppercase tracking-wider">
           <a href="/services" className="text-[#DEDBC8]/80 hover:text-white transition-colors">Services</a>
           <a href="/case-studies" className="text-[#DEDBC8]/80 hover:text-white transition-colors">Case Studies</a>
           <a href="/demo" className="text-[#DEDBC8]/80 hover:text-white transition-colors">Demo Library</a>
@@ -24,13 +24,13 @@ export function SiteFooter() {
         </div>
 
         {/* Social Links */}
-        <div className="flex gap-6 justify-center mb-8 text-[10px] font-mono font-bold uppercase tracking-wider">
+        <div className="flex gap-6 justify-center mb-8 text-xs font-mono font-bold uppercase tracking-wider">
           <a
             href={METADATA.socials.x}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Nexus on X"
-            className="text-gray-500 hover:text-white transition-colors"
+            className="text-gray-400 hover:text-white transition-colors"
           >
             X (Twitter)
           </a>
@@ -39,7 +39,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Nexus on LinkedIn"
-            className="text-gray-500 hover:text-white transition-colors"
+            className="text-gray-400 hover:text-white transition-colors"
           >
             LinkedIn
           </a>
@@ -48,7 +48,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Nexus on GitHub"
-            className="text-gray-500 hover:text-white transition-colors"
+            className="text-gray-400 hover:text-white transition-colors"
           >
             GitHub
           </a>
@@ -58,7 +58,7 @@ export function SiteFooter() {
         <div className="w-full max-w-xl h-px bg-[#DEDBC8]/10 mb-8" />
 
         {/* Metadata and Legal */}
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full max-w-4xl text-[10px] text-gray-500 font-mono font-bold">
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full max-w-4xl text-xs text-gray-500 font-mono font-bold">
           <div>
             &copy; {new Date().getFullYear()} Nexus &middot; Version: {HERO.version}
           </div>

@@ -87,13 +87,13 @@ export default function ServicesPage() {
           
           {/* Header */}
           <div className="max-w-3xl mb-20 text-center md:text-left">
-            <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] uppercase text-gray-500 mb-3 block">
+            <span className="text-xs md:text-sm font-mono font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">
               Capabilities Brochure
             </span>
             <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
               Core Engagement Services
             </h1>
-            <p className="text-sm md:text-base font-light text-gray-400 leading-relaxed">
+            <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed">
               We design and build custom software that solves operational complexity. Explore our service scopes below, modeled on shipped proof systems.
             </p>
           </div>
@@ -112,20 +112,20 @@ export default function ServicesPage() {
                   
                   {/* When this matters */}
                   <div className="mb-5">
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-gray-500 uppercase flex items-center gap-1.5 mb-1.5">
+                    <span className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase flex items-center gap-1.5 mb-1.5">
                       <HelpCircle className="h-3.5 w-3.5 text-[#DEDBC8]/60" /> When This Matters
                     </span>
-                    <p className="text-xs text-gray-300 leading-relaxed font-light">
+                    <p className="text-sm text-gray-300 leading-relaxed font-light">
                       {srv.when}
                     </p>
                   </div>
 
                   {/* What we build */}
                   <div className="mb-5">
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-gray-500 uppercase flex items-center gap-1.5 mb-1.5">
+                    <span className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase flex items-center gap-1.5 mb-1.5">
                       <Cpu className="h-3.5 w-3.5 text-[#DEDBC8]/60" /> What We Build
                     </span>
-                    <p className="text-xs text-[#E1E0CC] font-semibold leading-relaxed">
+                    <p className="text-sm text-[#E1E0CC] font-semibold leading-relaxed">
                       {srv.builds}
                     </p>
                   </div>
@@ -133,18 +133,18 @@ export default function ServicesPage() {
                   {/* Expected Inputs & Deliverables */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-[#DEDBC8]/5 mb-6">
                     <div>
-                      <span className="text-[8px] font-mono font-bold tracking-wider text-gray-500 uppercase block mb-1">
+                      <span className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase block mb-1">
                         Expected Inputs
                       </span>
-                      <p className="text-[11px] text-gray-400 leading-relaxed font-light">
+                      <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
                         {srv.inputs}
                       </p>
                     </div>
                     <div>
-                      <span className="text-[8px] font-mono font-bold tracking-wider text-gray-500 uppercase block mb-1">
+                      <span className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase block mb-1">
                         Typical Deliverables
                       </span>
-                      <p className="text-[11px] text-gray-400 leading-relaxed font-light">
+                      <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">
                         {srv.deliverables}
                       </p>
                     </div>
@@ -152,8 +152,8 @@ export default function ServicesPage() {
 
                   {/* Related Proof */}
                   <div className="bg-black/40 p-3.5 rounded-[12px] border border-[#DEDBC8]/5 mb-6 flex justify-between items-center text-xs">
-                    <span className="font-mono text-[9px] text-gray-500 uppercase font-bold">Related Proof:</span>
-                    <span className="font-mono text-[10px] font-semibold text-[#DEDBC8]">{srv.proof}</span>
+                    <span className="font-mono text-xs text-gray-400 uppercase font-bold">Related Proof:</span>
+                    <span className="font-mono text-xs font-semibold text-[#DEDBC8]">{srv.proof}</span>
                   </div>
                 </div>
 
@@ -163,7 +163,7 @@ export default function ServicesPage() {
                   rel="noopener noreferrer"
                   className={cn(
                     buttonVariants({ size: "default" }),
-                    "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-semibold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300 mt-2"
+                    "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-bold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300 mt-2"
                   )}
                 >
                   <span>Start a conversation</span>
@@ -178,14 +178,14 @@ export default function ServicesPage() {
             <h3 className="font-display text-xl md:text-3xl font-bold text-[#E1E0CC] mb-4">
               Not sure which service fits?
             </h3>
-            <p className="text-xs md:text-sm text-gray-400 font-light leading-relaxed mb-8 max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-gray-300 font-light leading-relaxed mb-8 max-w-2xl mx-auto">
               Bring us your messy spreadsheet, paper checklists, or fragmented processes. We will map them out together during our kickoff scoping call and recommend the narrowest initial build.
             </p>
             <a
               href={HERO.ctaUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between gap-4 bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black rounded-full pl-5 pr-1.5 py-1.5 w-full max-w-xs mx-auto text-xs font-semibold tracking-wider uppercase transition-all duration-300 outline-none"
+              className="group flex items-center justify-between gap-4 bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black rounded-full pl-5 pr-1.5 py-1.5 w-full max-w-xs mx-auto text-sm font-bold tracking-wider uppercase transition-all duration-300 outline-none"
             >
               <span>Map your workflow</span>
               <div className="bg-black rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 group-hover:scale-105 shrink-0">

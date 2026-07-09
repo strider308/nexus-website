@@ -86,13 +86,13 @@ export function ProofLedger() {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] uppercase text-gray-500 mb-3 block">
+          <span className="text-xs md:text-sm font-mono font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">
             Evidence Matrix
           </span>
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
             Seven proof systems. One operating logic.
           </h2>
-          <p className="text-sm md:text-base font-light text-gray-400 leading-relaxed max-w-2xl">
+          <p className="text-sm md:text-base font-light text-gray-300 leading-relaxed max-w-2xl">
             These are not menu items. They are shipped proof systems showing how Nexus handles roles, handoffs, dashboards, risk logic, and launch discipline.
           </p>
         </div>
@@ -102,12 +102,13 @@ export function ProofLedger() {
           {LEDGER_CARDS.map((card, idx) => (
             <div 
               key={idx}
-              className="bg-[#212121] rounded-2xl border border-[#DEDBC8]/10 p-5 flex flex-col justify-between overflow-hidden min-h-[300px] hover:border-[#DEDBC8]/30 transition-all duration-300 group"
+              id={card.id}
+              className="bg-[#212121] rounded-2xl border border-[#DEDBC8]/10 p-5 flex flex-col justify-between overflow-hidden min-h-[300px] hover:border-[#DEDBC8]/30 transition-all duration-300 group scroll-mt-28"
             >
               <div>
                 {/* Header info */}
                 <div className="flex items-center justify-between mb-4 pb-2 border-b border-[#DEDBC8]/5">
-                  <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest">
+                  <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">
                     {card.domain}
                   </span>
                   
@@ -119,21 +120,21 @@ export function ProofLedger() {
                 </div>
 
                 {/* Name */}
-                <h3 className="text-[#E1E0CC] font-bold text-base mb-2">
+                <h3 className="text-[#E1E0CC] font-bold text-lg mb-2">
                   {card.name}
                 </h3>
 
                 {/* What it proves */}
-                <p className="text-[11px] text-gray-400 leading-relaxed font-light mb-4">
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light mb-4">
                   {card.proves}
                 </p>
 
                 {/* Capabilities */}
                 <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5">
-                  <span className="text-[8px] font-mono uppercase text-gray-500 block mb-0.5">
+                  <span className="text-xs font-mono uppercase text-gray-400 block mb-0.5">
                     Capabilities
                   </span>
-                  <span className="text-[10px] text-[#DEDBC8] font-mono font-medium block leading-normal">
+                  <span className="text-xs sm:text-sm text-[#DEDBC8] font-mono font-medium block leading-normal">
                     {card.capabilities}
                   </span>
                 </div>
@@ -142,10 +143,10 @@ export function ProofLedger() {
               {/* Action Trigger */}
               <div className="mt-6 pt-3 border-t border-[#DEDBC8]/5 flex justify-between items-center">
                 <div className="flex flex-col">
-                  <span className="text-[8px] font-mono uppercase text-gray-500">
+                  <span className="text-xs font-mono uppercase text-gray-400">
                     Evidence
                   </span>
-                  <span className="text-[10px] text-gray-300 italic font-light truncate max-w-[150px]">
+                  <span className="text-xs sm:text-sm text-gray-200 italic font-light truncate max-w-[150px]">
                     {card.evidence}
                   </span>
                 </div>

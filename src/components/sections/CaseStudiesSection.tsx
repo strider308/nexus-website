@@ -260,7 +260,7 @@ export function CaseStudiesSection() {
                 <div>
                   <div className="flex flex-wrap items-center gap-3 mb-4">
                     <span 
-                      className="inline-flex items-center text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full border"
+                      className="inline-flex items-center text-xs font-bold tracking-wider uppercase px-2.5 py-1 rounded-full border"
                       style={{ 
                         color: activeTheme.primary, 
                         borderColor: activeTheme.primary + '30',
@@ -269,7 +269,7 @@ export function CaseStudiesSection() {
                     >
                       Case Study
                     </span>
-                    <span className="text-[10px] md:text-xs font-mono font-bold text-muted-foreground tracking-wider uppercase">
+                    <span className="text-xs md:text-sm font-mono font-bold text-gray-400 tracking-wider uppercase">
                       {activeStudy.category}
                     </span>
                   </div>
@@ -281,18 +281,18 @@ export function CaseStudiesSection() {
                     {activeStudy.label}
                   </h3>
                   
-                  <p className="text-lg md:text-xl font-light text-muted-foreground leading-relaxed max-w-2xl">
+                  <p className="text-base md:text-lg lg:text-xl font-light text-gray-300 leading-relaxed max-w-2xl">
                     {activeStudy.tagline}
                   </p>
 
                   {/* What This Proves Summary Block */}
-                  <div className="mt-4 p-4 border border-border bg-muted/40 rounded-[8px] max-w-2xl">
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-2 block">
+                  <div className="mt-4 p-4 border border-[#DEDBC8]/10 bg-black/45 rounded-[12px] max-w-2xl">
+                    <span className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase mb-2 block">
                       What This Proves
                     </span>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {WHAT_THIS_PROVES[activeStudy.id]?.map((item, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-xs font-semibold text-primary">
+                        <li key={idx} className="flex items-center gap-2 text-sm font-semibold text-[#E1E0CC]">
                           <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: activeTheme.primary }} />
                           <span>{item}</span>
                         </li>
@@ -300,7 +300,7 @@ export function CaseStudiesSection() {
                     </ul>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-3 mt-4 text-[10px] md:text-xs font-bold tracking-wider text-muted-foreground uppercase">
+                  <div className="flex flex-wrap items-center gap-3 mt-4 text-xs md:text-sm font-bold tracking-wider text-gray-400 uppercase">
                     <span className="flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                       {activeStudy.status}
@@ -311,21 +311,21 @@ export function CaseStudiesSection() {
                 {/* Simulated Device Frame & 3D Orbit Constellation Visualizer */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                   {/* Mockup Frame (7 Cols) */}
-                  <div className="lg:col-span-7 border border-border rounded-[10px] overflow-hidden shadow-md bg-muted/30 flex flex-col justify-between">
+                  <div className="lg:col-span-7 border border-[#DEDBC8]/10 rounded-[12px] overflow-hidden shadow-md bg-black/40 flex flex-col justify-between">
                     {/* Browser Bar */}
-                    <div className="bg-muted border-b border-border/80 px-4 py-3 flex items-center justify-between">
+                    <div className="bg-[#101010] border-b border-[#DEDBC8]/10 px-4 py-3 flex items-center justify-between">
                       <div className="flex gap-1.5">
                         <span className="w-3 h-3 rounded-full bg-red-400/80" />
                         <span className="w-3 h-3 rounded-full bg-yellow-400/80" />
                         <span className="w-3 h-3 rounded-full bg-green-400/80" />
                       </div>
-                      <div className="text-[10px] md:text-xs font-mono text-muted-foreground tracking-wide font-medium">
+                      <div className="text-xs md:text-sm font-mono text-gray-400 tracking-wide font-medium">
                         nexus.co/{activeStudy.id}
                       </div>
                       <div className="w-12 h-2" />
                     </div>
                     {/* Render Visual Mockup */}
-                    <div className="bg-background overflow-x-auto relative flex-grow flex items-center">
+                    <div className="bg-black overflow-x-auto relative flex-grow flex items-center">
                       <div className="w-full min-w-[640px] md:min-w-0">
                         {MockupComponent && <MockupComponent />}
                       </div>
@@ -333,8 +333,8 @@ export function CaseStudiesSection() {
                   </div>
 
                   {/* 3D Orbit Constellation Visualizer (5 Cols, Desktop Only) */}
-                  <div className="hidden lg:flex lg:col-span-5 border border-border rounded-[10px] overflow-hidden shadow-md bg-muted/20 items-center justify-center p-4 relative min-h-[280px]">
-                    <div className="absolute top-3 left-4 text-[9px] font-mono text-muted-foreground/60 uppercase select-none">
+                  <div className="hidden lg:flex lg:col-span-5 border border-[#DEDBC8]/10 rounded-[12px] overflow-hidden shadow-md bg-[#101010]/40 items-center justify-center p-4 relative min-h-[280px]">
+                    <div className="absolute top-4.5 left-5 text-xs font-mono text-gray-500 uppercase select-none font-bold">
                       Active Orbit Node
                     </div>
                     <div className="w-full h-full">
@@ -351,10 +351,10 @@ export function CaseStudiesSection() {
                 {/* Narrative Problem Statement */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                   <div className="md:col-span-7">
-                    <h4 className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase mb-4">
+                    <h4 className="text-sm font-mono font-bold tracking-wider text-gray-400 uppercase mb-4">
                       The Problem Context
                     </h4>
-                    <p className="text-base text-foreground/80 leading-relaxed font-light mb-6">
+                    <p className="text-base text-gray-300 leading-relaxed font-light mb-6">
                       {activeStudy.problem}
                     </p>
                     <blockquote className="border-l-2 border-accent pl-4 font-display text-lg text-primary italic leading-relaxed">
@@ -362,14 +362,14 @@ export function CaseStudiesSection() {
                     </blockquote>
                   </div>
 
-                  <div className="md:col-span-5 flex flex-col gap-6 bg-muted/10 p-6 border border-border/80 rounded-[8px]">
+                  <div className="md:col-span-5 flex flex-col gap-6 bg-[#101010]/30 p-6 border border-[#DEDBC8]/10 rounded-[12px]">
                     <div>
-                      <h4 className="text-[10px] font-mono font-bold tracking-wider text-muted-foreground uppercase mb-3">
+                      <h4 className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase mb-3">
                         DESIGNED FOR
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {activeStudy.designedFor?.map((tag) => (
-                          <span key={tag} className="text-xs bg-background border border-border px-2.5 py-1 rounded-[4px] font-medium text-foreground/80">
+                          <span key={tag} className="text-sm bg-black border border-[#DEDBC8]/15 px-2.5 py-1 rounded-[4px] font-medium text-gray-300">
                             {tag}
                           </span>
                         ))}
@@ -379,8 +379,8 @@ export function CaseStudiesSection() {
                 </div>
 
                 {/* Workflow chain block */}
-                <div className="border border-border/80 rounded-[8px] p-6 bg-muted/5">
-                  <h4 className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase mb-6 flex items-center gap-2">
+                <div className="border border-[#DEDBC8]/10 rounded-[12px] p-6 bg-black/30">
+                  <h4 className="text-sm font-mono font-bold tracking-wider text-gray-400 uppercase mb-6 flex items-center gap-2">
                     <Layers className="h-4 w-4" />
                     Operational Handoff Workflow
                   </h4>
@@ -388,13 +388,13 @@ export function CaseStudiesSection() {
                     {activeStudy.workflow.map((step, stepIdx) => (
                       <div key={step} className="flex items-center">
                         <span 
-                          className="text-xs font-semibold px-3 py-2 rounded-[4px] text-white"
+                          className="text-sm font-semibold px-3 py-2 rounded-[6px] text-white"
                           style={{ backgroundColor: stepIdx % 2 === 0 ? activeTheme.primary : "var(--accent)" }}
                         >
                           {step}
                         </span>
                         {stepIdx < activeStudy.workflow.length - 1 && (
-                          <span className="mx-2 text-muted-foreground/60 select-none">&rsaquo;</span>
+                          <span className="mx-2 text-gray-400 select-none">&rsaquo;</span>
                         )}
                       </div>
                     ))}
@@ -403,7 +403,7 @@ export function CaseStudiesSection() {
 
                 {/* Capabilities grid details */}
                 <div>
-                  <h4 className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase mb-6">
+                  <h4 className="text-sm font-mono font-bold tracking-wider text-gray-400 uppercase mb-6">
                     System Capabilities
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -411,22 +411,22 @@ export function CaseStudiesSection() {
                       <div 
                         key={cap.title} 
                         className={cn(
-                          "border rounded-[6px] p-6 transition-all duration-300",
+                          "border rounded-[12px] p-6 transition-all duration-300",
                           idx === 0 
                             ? "md:col-span-2 hover:shadow-md" 
-                            : "bg-background border-border hover:border-muted-foreground/30 hover:shadow-sm"
+                            : "bg-background border-[#DEDBC8]/10 hover:border-[#DEDBC8]/25 hover:shadow-sm"
                         )}
                         style={idx === 0 ? {
                           backgroundColor: `${activeTheme.primary}0D`,
                           borderColor: `${activeTheme.primary}30`
                         } : undefined}
                       >
-                        <h5 className="font-display text-base font-bold text-primary mb-4">
+                        <h5 className="font-display text-lg font-bold text-primary mb-4">
                           {cap.title}
                         </h5>
                         <ul className="flex flex-col gap-3">
                           {cap.bullets.map((bullet, bulletIdx) => (
-                            <li key={bulletIdx} className="flex items-start gap-2.5 text-xs md:text-sm text-foreground/80 font-light leading-relaxed">
+                            <li key={bulletIdx} className="flex items-start gap-2.5 text-sm md:text-base text-gray-300 font-light leading-relaxed">
                               <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-2" style={{ backgroundColor: activeTheme.primary }} />
                               <span>{bullet}</span>
                             </li>
@@ -438,30 +438,30 @@ export function CaseStudiesSection() {
                 </div>
 
                 {/* Integrations detail & specific Disclaimer */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start pt-6 border-t border-border/60">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start pt-6 border-t border-[#DEDBC8]/10">
                   
                   {/* Left Column: Integrations */}
                   <div className="md:col-span-7 flex flex-col gap-3">
-                    <h5 className="text-[10px] font-mono font-bold tracking-wider text-muted-foreground uppercase flex items-center gap-1.5">
+                    <h5 className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase flex items-center gap-1.5">
                       <Cpu className="h-3.5 w-3.5" />
                       Hardware &amp; System Integrations
                     </h5>
-                    <p className="text-xs text-foreground/80 font-light leading-relaxed">
+                    <p className="text-sm text-gray-300 font-light leading-relaxed">
                       {activeStudy.integrations}
                     </p>
                   </div>
 
                   {/* Right Column: Mini disclaimer */}
-                  <div className="md:col-span-5 border-l-2 border-border/80 pl-4 py-0.5 text-[11px] text-muted-foreground leading-relaxed font-light">
+                  <div className="md:col-span-5 border-l-2 border-[#DEDBC8]/10 pl-4 py-0.5 text-xs sm:text-sm text-gray-400 leading-relaxed font-light">
                     {activeStudy.disclaimer}
                   </div>
                 </div>
 
                 {/* Interactive Sales Sheet (Replaces separate sections to keep layout clean and agency-like) */}
-                <div className="border border-border rounded-[8px] bg-background shadow-sm overflow-hidden">
+                <div className="border border-[#DEDBC8]/10 rounded-[12px] bg-black shadow-sm overflow-hidden">
                   <button
                     onClick={() => toggleSalesSheet(activeStudy.id)}
-                    className="w-full flex items-center justify-between p-5 bg-muted/20 font-semibold text-xs md:text-sm text-primary hover:bg-muted/30 transition-colors"
+                    className="w-full flex items-center justify-between p-5 bg-[#101010]/80 font-bold text-xs md:text-sm text-primary hover:bg-[#101010] transition-colors"
                   >
                     <span className="flex items-center gap-2">
                       <LinkIcon className="h-4 w-4" style={{ color: activeTheme.primary }} />

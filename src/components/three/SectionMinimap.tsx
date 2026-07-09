@@ -53,8 +53,8 @@ export function SectionMinimap() {
   };
 
   return (
-    <div className="hidden lg:flex flex-col gap-4 fixed right-6 top-1/2 -translate-y-1/2 z-50 select-none bg-background/40 backdrop-blur-md p-3.5 border border-border/40 rounded-[12px] shadow-sm">
-      <div className="text-[7px] font-mono text-muted-foreground/60 tracking-widest uppercase mb-1 text-center">
+    <div className="hidden lg:flex flex-col gap-4 fixed right-6 top-1/2 -translate-y-1/2 z-50 select-none bg-[#101010]/85 backdrop-blur-md p-3.5 border border-[#DEDBC8]/15 rounded-[16px] shadow-lg shadow-black/40">
+      <div className="text-[9px] font-mono text-gray-500 tracking-widest uppercase mb-1 text-center font-bold">
         Navigator
       </div>
       <div className="flex flex-col gap-3">
@@ -64,18 +64,21 @@ export function SectionMinimap() {
             <button
               key={sec.id}
               onClick={() => scrollToSection(sec.id)}
-              className="group flex items-center justify-end gap-2 text-right outline-none"
+              className="group flex items-center justify-end gap-2 text-right outline-none focus-visible:ring-1 focus-visible:ring-[#DEDBC8] focus-visible:ring-offset-1 focus-visible:ring-offset-black rounded-[4px] px-1"
               aria-label={`Scroll to ${sec.label}`}
+              aria-current={isActive ? "true" : undefined}
             >
               <span className={cn(
-                "text-[9px] font-mono font-bold tracking-wider uppercase opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200",
-                isActive ? "text-[#E1E0CC] opacity-100 translate-x-0" : "text-[#cbd5e1] group-hover:text-white"
+                "text-[10px] font-mono font-bold tracking-wider uppercase opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200",
+                isActive ? "text-[#E1E0CC] opacity-100 translate-x-0" : "text-gray-400 group-hover:text-white"
               )}>
                 {sec.label}
               </span>
               <span className={cn(
-                "w-1.5 h-1.5 rounded-full border border-border transition-all duration-200",
-                isActive ? "bg-primary scale-125 border-primary" : "bg-transparent group-hover:bg-muted-foreground/30"
+                "w-1.5 h-1.5 rounded-full border transition-all duration-200",
+                isActive 
+                  ? "bg-[#DEDBC8] scale-125 border-[#DEDBC8] shadow-[0_0_8px_#DEDBC8]" 
+                  : "bg-transparent border-[#DEDBC8]/30 group-hover:bg-[#DEDBC8]/20 group-hover:border-[#DEDBC8]/50"
               )} />
             </button>
           );

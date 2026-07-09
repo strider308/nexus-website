@@ -3,7 +3,7 @@
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { FileText, ArrowRight, ClipboardCheck, LayoutGrid, ShieldAlert, BadgeAlert } from "lucide-react";
+import { ArrowRight, ClipboardCheck, LayoutGrid, ShieldAlert, BadgeAlert } from "lucide-react";
 import Link from "next/link";
 
 const RESOURCE_CARDS = [

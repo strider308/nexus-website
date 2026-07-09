@@ -145,13 +145,13 @@ export default function CaseStudiesPage() {
           
           {/* Header */}
           <div className="max-w-3xl mb-20 text-center md:text-left">
-            <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] uppercase text-gray-500 mb-3 block">
+            <span className="text-xs md:text-sm font-mono font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">
               Shipped Evidence
             </span>
             <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
               Case Studies &amp; Shipped Proof
             </h1>
-            <p className="text-sm md:text-base font-light text-gray-400 leading-relaxed">
+            <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed">
               Every system below was designed and built end-to-end by Nexus. They are proof of technical range and execution, not a fixed catalog. We build custom solutions to fit your specific workflow.
             </p>
           </div>
@@ -165,24 +165,24 @@ export default function CaseStudiesPage() {
               >
                 {/* Left block: details */}
                 <div className="flex-grow max-w-3xl">
-                  <span className="text-[9px] font-mono font-bold text-gray-500 uppercase tracking-wider block mb-1">
+                  <span className="text-xs font-mono font-bold text-gray-400 uppercase tracking-wider block mb-1">
                     {study.category}
                   </span>
                   <h2 className="font-display text-2xl md:text-3xl font-bold text-[#E1E0CC] mb-3">
                     {study.name}
                   </h2>
-                  <p className="text-sm md:text-base text-gray-400 leading-relaxed font-light mb-6">
+                  <p className="text-base text-gray-300 leading-relaxed font-light mb-6">
                     {study.tagline}
                   </p>
 
                   {/* What it proves */}
                   <div className="mt-4 p-5 bg-black/40 border border-[#DEDBC8]/10 rounded-[12px] mb-6">
-                    <span className="text-[9px] font-mono font-bold text-gray-500 tracking-wider uppercase mb-3 block">
+                    <span className="text-xs font-mono font-bold text-gray-400 tracking-wider uppercase mb-3 block">
                       What This Proves
                     </span>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {study.proves.map((prov, pIdx) => (
-                        <li key={pIdx} className="flex items-center gap-2 text-xs font-semibold text-[#E1E0CC]">
+                        <li key={pIdx} className="flex items-center gap-2 text-sm font-semibold text-[#E1E0CC]">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#DEDBC8] shrink-0" />
                           <span>{prov}</span>
                         </li>
@@ -190,9 +190,9 @@ export default function CaseStudiesPage() {
                     </ul>
                   </div>
 
-                  <div className="flex flex-col gap-1 pt-4 border-t border-[#DEDBC8]/5 text-xs font-light text-gray-400 leading-relaxed">
+                  <div className="flex flex-col gap-1 pt-4 border-t border-[#DEDBC8]/5 text-sm font-light text-gray-400 leading-relaxed">
                     <div>
-                      <strong className="font-mono text-[9px] uppercase tracking-wider text-gray-500 block mb-0.5">Capabilities Implemented:</strong>
+                      <strong className="font-mono text-xs uppercase tracking-wider text-gray-400 block mb-0.5">Capabilities Implemented:</strong>
                       {study.capabilities}
                     </div>
                   </div>
@@ -201,10 +201,10 @@ export default function CaseStudiesPage() {
                 {/* Right block: CTA & Models */}
                 <div className="lg:w-[260px] shrink-0 border-t lg:border-t-0 lg:border-l border-[#DEDBC8]/10 pt-6 lg:pt-0 lg:pl-8 flex flex-col justify-between">
                   <div>
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-gray-500 uppercase block mb-1">
+                    <span className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase block mb-1">
                       Service Model
                     </span>
-                    <span className="text-xs font-bold text-[#E1E0CC] block mb-6">
+                    <span className="text-sm font-bold text-[#E1E0CC] block mb-6">
                       {study.model}
                     </span>
                   </div>
@@ -214,7 +214,7 @@ export default function CaseStudiesPage() {
                       href={study.link}
                       className={cn(
                         buttonVariants({ size: "default" }),
-                        "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-semibold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300"
+                        "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-bold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300"
                       )}
                     >
                       <LinkIcon className="h-3.5 w-3.5" />
@@ -224,7 +224,7 @@ export default function CaseStudiesPage() {
                       href={HERO.ctaUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center border border-[#DEDBC8]/25 text-[#DEDBC8] hover:bg-[#DEDBC8]/10 hover:border-[#DEDBC8]/40 rounded-full px-5 py-2.5 w-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 outline-none text-center"
+                      className="flex items-center justify-center border border-[#DEDBC8]/25 text-[#DEDBC8] hover:bg-[#DEDBC8]/10 hover:border-[#DEDBC8]/40 rounded-full px-5 py-2.5 w-full text-sm font-bold tracking-wider uppercase transition-all duration-300 outline-none text-center"
                     >
                       <span>Discuss workflow</span>
                     </a>

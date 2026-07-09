@@ -98,13 +98,13 @@ export default function ResourcesPage() {
           
           {/* Header */}
           <div className="max-w-3xl mb-20 text-center md:text-left">
-            <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] uppercase text-gray-500 mb-3 block">
+            <span className="text-xs md:text-sm font-mono font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">
               Operational Utilities
             </span>
             <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
               Workflow Resources
             </h1>
-            <p className="text-sm md:text-base font-light text-gray-400 leading-relaxed">
+            <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed">
               Useful tools and checklists you can use with your team or bring to our scoping call. No email walls, no forms.
             </p>
           </div>
@@ -128,18 +128,18 @@ export default function ResourcesPage() {
                       <h2 className="font-display text-xl md:text-2xl font-bold text-[#E1E0CC] mb-3">
                         {res.title}
                       </h2>
-                      <p className="text-xs leading-relaxed font-light text-gray-400 mb-6">
+                      <p className="text-sm leading-relaxed font-light text-gray-300 mb-6">
                         {res.helpsWith}
                       </p>
 
-                      <div className="border-t border-[#DEDBC8]/5 pt-4 mb-4 flex flex-col gap-2.5 text-xs font-light text-gray-400">
+                      <div className="border-t border-[#DEDBC8]/5 pt-4 mb-4 flex flex-col gap-2.5 text-sm font-light text-gray-300">
                         <div>
-                          <strong className="font-mono text-[9px] uppercase tracking-wider text-gray-500 block mb-0.5">Who it is for:</strong>
+                          <strong className="font-mono text-xs uppercase tracking-wider text-gray-500 block mb-0.5">Who it is for:</strong>
                           {res.target}
                         </div>
                         <div>
-                          <strong className="font-mono text-[9px] uppercase tracking-wider text-gray-500 block mb-0.5">Key Questions Answered:</strong>
-                          <span className="italic text-gray-300">{res.questions}</span>
+                          <strong className="font-mono text-xs uppercase tracking-wider text-gray-500 block mb-0.5">Key Questions Answered:</strong>
+                          <span className="italic text-gray-200">{res.questions}</span>
                         </div>
                       </div>
                     </div>
@@ -150,7 +150,7 @@ export default function ResourcesPage() {
                       rel="noopener noreferrer"
                       className={cn(
                         buttonVariants({ size: "default" }),
-                        "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-semibold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300 mt-6"
+                        "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-bold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300 mt-6"
                       )}
                     >
                       <span>Use in kickoff call</span>
@@ -160,12 +160,12 @@ export default function ResourcesPage() {
 
                   {/* Right: On-page checklist (7 Cols) */}
                   <div className="flex-grow bg-black/35 border border-[#DEDBC8]/10 rounded-[16px] p-6 shadow-sm">
-                    <span className="text-[9px] font-mono font-bold text-gray-500 tracking-wider uppercase mb-4 block select-none">
+                    <span className="text-xs font-mono font-bold text-gray-500 tracking-wider uppercase mb-4 block select-none">
                       ON-PAGE CHECKLIST
                     </span>
                     <ul className="flex flex-col gap-3">
                       {res.checklist.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-xs md:text-sm text-gray-300 font-light leading-relaxed">
+                        <li key={idx} className="flex items-start gap-3 text-sm md:text-base text-gray-300 font-light leading-relaxed">
                           <input 
                             type="checkbox" 
                             id={`${res.id}-${idx}`}

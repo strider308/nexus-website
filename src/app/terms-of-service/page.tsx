@@ -18,16 +18,16 @@ export default function TermsOfServicePage() {
       <main id="main-content" className="flex-grow py-16 md:py-24 bg-background">
         <div className="max-w-3xl mx-auto px-4 md:px-8">
           
-          <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
+          <span className="text-xs md:text-sm font-mono font-bold tracking-[0.2em] uppercase text-gray-400 mb-3 block">
             Legal Statement
           </span>
-          <h1 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-primary leading-tight mb-8">
+          <h1 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-8">
             Terms of Service
           </h1>
 
-          <div className="prose prose-zinc dark:prose-invert font-light text-foreground/80 leading-relaxed text-sm md:text-base flex flex-col gap-6">
+          <div className="prose prose-zinc dark:prose-invert font-light text-[#E1E0CC]/80 leading-relaxed text-base flex flex-col gap-6">
             
-            <div className="bg-amber-500/10 border border-amber-500/20 rounded-[6px] p-4 text-xs text-amber-800 dark:text-amber-200 mb-6 font-medium">
+            <div className="bg-amber-500/10 border border-amber-500/20 rounded-[8px] p-4 text-sm text-amber-800 dark:text-amber-200 mb-6 font-medium">
               <strong>TODO for Operators:</strong> This page is a launch placeholder. It requires legal review and validation of actual terms of service parameters before deployed publicly.
             </div>
 
@@ -35,21 +35,21 @@ export default function TermsOfServicePage() {
               Last Updated: 22 June 2026
             </p>
 
-            <h2 className="font-display text-xl font-bold text-primary mt-6 mb-2">
+            <h2 className="font-display text-xl font-bold text-[#E1E0CC] mt-6 mb-2">
               1. Acceptable Use of Demos &amp; Materials
             </h2>
             <p>
               By accessing this website, you agree to comply with these Terms of Service. All software applications shown (e.g. ClinicOS, Aarogya, RestaurantOS, ShipWright, SecureScan, SafeDate, BuildPublic) are proof-of-work representations of custom software capabilities. They are provided as-is for assessment purposes and do not represent a fixed subscription software offering.
             </p>
 
-            <h2 className="font-display text-xl font-bold text-primary mt-6 mb-2">
+            <h2 className="font-display text-xl font-bold text-[#E1E0CC] mt-6 mb-2">
               2. Intellectual Property
             </h2>
             <p>
               All designs, components, source code, copy, layout frameworks, and graphical assets are the intellectual property of Nexus and its founder. You may not duplicate, redistribute, or reverse-engineer these materials without express written authorization.
             </p>
 
-            <h2 className="font-display text-xl font-bold text-primary mt-6 mb-2">
+            <h2 className="font-display text-xl font-bold text-[#E1E0CC] mt-6 mb-2">
               3. Scope &amp; Disclaimer of Liability
             </h2>
             <p>
@@ -62,19 +62,19 @@ export default function TermsOfServicePage() {
               <li>AI-assisted features are tools to support workflows and always require active operator review.</li>
             </ul>
 
-            <h2 className="font-display text-xl font-bold text-primary mt-6 mb-2">
+            <h2 className="font-display text-xl font-bold text-[#E1E0CC] mt-6 mb-2">
               4. Governing Law
             </h2>
             <p>
               Any disputes arising out of the website or services will be governed by the laws applicable in India, without regard to conflicts of law guidelines.
             </p>
 
-            <h2 className="font-display text-xl font-bold text-primary mt-6 mb-2">
+            <h2 className="font-display text-xl font-bold text-[#E1E0CC] mt-6 mb-2">
               5. Support and Queries
             </h2>
             <p>
               For legal inquiries, contact:{" "}
-              <a href={`mailto:${METADATA.email}`} className="text-[#2E6FAD] hover:underline font-medium">
+              <a href={`mailto:${METADATA.email}`} className="text-[#DEDBC8] hover:underline font-bold">
                 {METADATA.email}
               </a>.
             </p>
