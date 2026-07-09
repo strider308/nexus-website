@@ -11,10 +11,12 @@ interface ServiceDepthSceneProps {
 }
 
 const LAYERS = [
-  { label: "INPUTS & DATA INTAKE", z: 1.0, color: "#C0392B" },
-  { label: "WORKFLOW RULES & STATE", z: 0.2, color: "#2E6FAD" },
-  { label: "DASHBOARDS & VISIBILITY", z: -0.6, color: "#2A7D8A" },
-  { label: "AUDIT TRAILS & INVOICING", z: -1.4, color: "#1A2B4C" },
+  { label: "INPUTS & DATA INTAKE", z: 1.2, color: "#C0392B" },
+  { label: "WORKFLOW LOGIC & STATE", z: 0.7, color: "#2E6FAD" },
+  { label: "ROLES & PERMISSIONS", z: 0.2, color: "#9B59B6" },
+  { label: "AUTOMATION RULES", z: -0.3, color: "#27AE60" },
+  { label: "DASHBOARD VISIBILITY", z: -0.8, color: "#2A7D8A" },
+  { label: "HANDOFF & DOCUMENTATION", z: -1.3, color: "#E67E22" },
 ];
 
 export default function ServiceDepthScene({ selectedService }: ServiceDepthSceneProps) {
@@ -27,42 +29,62 @@ export default function ServiceDepthScene({ selectedService }: ServiceDepthScene
 
     // Constant slow drift rotation if normal motion
     if (!prefersReducedMotion) {
-      groupRef.current.rotation.y = Math.sin(time * 0.2) * 0.2;
-      groupRef.current.rotation.x = 0.4 + Math.cos(time * 0.2) * 0.05;
+      groupRef.current.rotation.y = Math.sin(time * 0.2) * 0.15;
+      groupRef.current.rotation.x = 0.35 + Math.cos(time * 0.2) * 0.05;
     } else {
       groupRef.current.rotation.y = 0;
-      groupRef.current.rotation.x = 0.4;
+      groupRef.current.rotation.x = 0.35;
     }
   });
 
-  // Shift highlighted color layers based on selected tab
-  const getHighlightColor = (layerIdx: number) => {
-    // Basic heuristics to match tabs
-    if (selectedService === "workflow" && layerIdx === 1) return "#2E6FAD";
-    if (selectedService === "automation" && layerIdx === 0) return "#C0392B";
-    if (selectedService === "dashboards" && layerIdx === 2) return "#2A7D8A";
-    if (selectedService === "mvp" && layerIdx === 3) return "#8B5CF6";
-    return null;
+  // Highlight specific layers based on selected tab
+  const isLayerActive = (layerIdx: number): boolean => {
+    const service = selectedService.toLowerCase();
+    if (service.includes("workflow")) {
+      // Custom workflow systems: emphasizes all layers
+      return true;
+    }
+    if (service.includes("automation")) {
+      // Automation layers: emphasizes automation and handoff
+      return layerIdx === 3 || layerIdx === 5;
+    }
+    if (service.includes("mvp") || service.includes("beta")) {
+      // MVP/private beta: emphasizes workflow logic and handoff/launch
+      return layerIdx === 1 || layerIdx === 5;
+    }
+    if (service.includes("dashboard")) {
+      // Owner dashboards: emphasizes visibility
+      return layerIdx === 4;
+    }
+    if (service.includes("ux") || service.includes("modernization")) {
+      // UX modernization: emphasizes interface (intake) and role clarity
+      return layerIdx === 0 || layerIdx === 2;
+    }
+    if (service.includes("ai") || service.includes("assisted")) {
+      // AI-assisted workflow: emphasizes logic, automation, and visibility
+      return layerIdx === 1 || layerIdx === 3 || layerIdx === 4;
+    }
+    return false;
   };
 
   return (
-    <group ref={groupRef} position={[0, 0.4, 0]}>
+    <group ref={groupRef} position={[0, 0.2, 0]}>
       {/* Lights */}
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[2, 4, 3]} intensity={1.2} />
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[2, 4, 3]} intensity={1.0} />
 
       {/* Stacked planes */}
       {LAYERS.map((layer, idx) => {
-        const highlightedColor = getHighlightColor(idx);
-        const isActive = highlightedColor !== null;
+        const isActive = isLayerActive(idx);
+        const displayColor = isActive ? layer.color : "#ffffff";
         
         return (
           <group key={idx} position={[0, 0, layer.z]}>
-            {/* Plain surface */}
+            {/* Plane surface */}
             <mesh rotation={[-1.2, 0, 0]}>
-              <planeGeometry args={[2.5, 1.2]} />
+              <planeGeometry args={[2.5, 0.8]} />
               <meshStandardMaterial 
-                color={isActive ? highlightedColor : "#ffffff"} 
+                color={displayColor} 
                 roughness={0.8}
                 metalness={0.2}
                 transparent
@@ -72,9 +94,9 @@ export default function ServiceDepthScene({ selectedService }: ServiceDepthScene
             
             {/* Border Wireframe outline */}
             <mesh rotation={[-1.2, 0, 0]} position={[0, 0, 0.01]}>
-              <planeGeometry args={[2.55, 1.25]} />
+              <planeGeometry args={[2.52, 0.82]} />
               <meshBasicMaterial 
-                color={isActive ? highlightedColor : "#1A2B4C"} 
+                color={isActive ? displayColor : "#1A2B4C"} 
                 wireframe 
                 transparent 
                 opacity={isActive ? 0.8 : 0.3}
@@ -83,9 +105,9 @@ export default function ServiceDepthScene({ selectedService }: ServiceDepthScene
 
             {/* Label */}
             <Text
-              position={[-1.4, -0.2, 0.1]}
+              position={[-1.3, -0.15, 0.05]}
               rotation={[-0.4, 0, 0]}
-              fontSize={0.09}
+              fontSize={0.08}
               color={isActive ? "#ffffff" : "#ffffff40"}
               anchorX="left"
               anchorY="middle"

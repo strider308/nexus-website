@@ -14,11 +14,14 @@ import { FounderSection } from "@/components/sections/FounderSection";
 import { TrustLimitsSection } from "@/components/sections/TrustLimitsSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
+import { SectionMinimap } from "@/components/three/SectionMinimap";
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Client layout extras (progress bar, spotlight mouse track, cookie banner) */}
       <LayoutExtras />
+      <SectionMinimap />
 
       {/* Sticky Top Header */}
       <SiteHeader />

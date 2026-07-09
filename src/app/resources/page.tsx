@@ -1,23 +1,13 @@
-import { Metadata } from "next";
+"use client";
+
+import React from "react";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { METADATA, HERO } from "@/lib/content/nexus";
+import { HERO } from "@/lib/content/nexus";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowRight, CheckSquare, ClipboardList, Eye, FileText, Settings } from "lucide-react";
-
-export const metadata: Metadata = {
-  title: "Workflow Resources & Checklists — Nexus",
-  description: "Free on-page checklists and scoping worksheets for mapping workflows, auditing handoffs, and preparing private beta rollouts. No email wall.",
-  alternates: {
-    canonical: `${METADATA.canonicalUrl}/resources`,
-  },
-  openGraph: {
-    title: "Workflow Resources & Checklists — Nexus",
-    description: "Free on-page checklists and scoping worksheets for mapping workflows, auditing handoffs, and preparing private beta rollouts. No email wall.",
-    url: `${METADATA.canonicalUrl}/resources`,
-  }
-};
+import { SystemCard3D } from "@/components/three/SystemCard3D";
 
 const RESOURCES = [
   {
@@ -123,10 +113,10 @@ export default function ResourcesPage() {
             {RESOURCES.map((res) => {
               const Icon = res.icon;
               return (
-                <div 
+                <SystemCard3D 
                   key={res.id} 
                   id={res.id}
-                  className="border border-border bg-background rounded-[12px] p-6 md:p-8 flex flex-col lg:flex-row justify-between gap-8 shadow-sm hover:shadow-md transition-shadow scroll-mt-24"
+                  className="border border-border bg-background rounded-[12px] p-6 md:p-8 flex flex-col lg:flex-row justify-between gap-8 shadow-sm hover:shadow-md transition-shadow scroll-mt-24 font-light text-muted-foreground"
                 >
                   {/* Left: Resource descriptions (5 Cols) */}
                   <div className="lg:w-[360px] shrink-0 flex flex-col justify-between">
@@ -137,7 +127,7 @@ export default function ResourcesPage() {
                       <h2 className="font-display text-xl md:text-2xl font-bold text-primary mb-3">
                         {res.title}
                       </h2>
-                      <p className="text-xs text-muted-foreground leading-relaxed font-light mb-6">
+                      <p className="text-xs leading-relaxed font-light mb-6">
                         {res.helpsWith}
                       </p>
 
@@ -188,7 +178,7 @@ export default function ResourcesPage() {
                     </ul>
                   </div>
 
-                </div>
+                </SystemCard3D>
               );
             })}
           </div>

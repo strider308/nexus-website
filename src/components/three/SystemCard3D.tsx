@@ -3,12 +3,11 @@
 import React, { useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
-interface SystemCard3DProps {
+interface SystemCard3DProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  className?: string;
 }
 
-export function SystemCard3D({ children, className = "" }: SystemCard3DProps) {
+export function SystemCard3D({ children, className = "", ...props }: SystemCard3DProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const cardRef = useRef<HTMLDivElement>(null);
   const [transformStyle, setTransformStyle] = useState("");
@@ -47,6 +46,7 @@ export function SystemCard3D({ children, className = "" }: SystemCard3DProps) {
         willChange: "transform"
       }}
       className={className}
+      {...props}
     >
       {children}
     </div>

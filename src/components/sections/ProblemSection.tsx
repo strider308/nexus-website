@@ -4,6 +4,18 @@ import { PROBLEM } from "@/lib/content/nexus";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/animated-section";
 import { AlertCircle, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+import { DepthFallback } from "../three/ThreeFallback";
+
+const ThreeCanvasShell = dynamic(
+  () => import("../three/ThreeCanvasShell").then((mod) => mod.ThreeCanvasShell),
+  { ssr: false, loading: () => <DepthFallback /> }
+);
+const BeforeAfterScene = dynamic(
+  () => import("../three/BeforeAfterScene"),
+  { ssr: false }
+);
 
 const TRANSFORMATIONS = [
   {
@@ -44,6 +56,7 @@ const TRANSFORMATIONS = [
 ];
 
 export function ProblemSection() {
+  const [isAfter, setIsAfter] = useState(false);
   return (
     <AnimatedSection id="company-brochure" className="w-full py-16 md:py-24 border-b border-border bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -66,46 +79,86 @@ export function ProblemSection() {
 
             {/* Before / After Nexus Transformation Comparison (Side-by-side Table) */}
             <div className="mt-8 pt-8 border-t border-border/80">
-              <h3 className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase mb-6">
-                Workflow Transformation
-              </h3>
+              <div className="flex items-center justify-between mb-6 pb-2 border-b border-border/40">
+                <h3 className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase">
+                  Workflow Transformation
+                </h3>
+                <div className="flex gap-2 bg-muted/30 p-1 rounded-full border border-border">
+                  <button
+                    onClick={() => setIsAfter(false)}
+                    className={cn(
+                      "text-[9px] font-mono font-bold tracking-wider uppercase px-3 py-1 rounded-full transition-all outline-none",
+                      !isAfter ? "bg-[#C0392B] text-white" : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    Before Nexus
+                  </button>
+                  <button
+                    onClick={() => setIsAfter(true)}
+                    className={cn(
+                      "text-[9px] font-mono font-bold tracking-wider uppercase px-3 py-1 rounded-full transition-all outline-none",
+                      isAfter ? "bg-[#2A7D8A] text-white" : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    After Nexus
+                  </button>
+                </div>
+              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-muted/10 border border-border rounded-[8px] p-5">
-                {/* Column: Before Nexus */}
-                <div className="flex flex-col gap-4">
-                  <span className="text-[10px] font-mono font-bold tracking-wider text-[#C0392B] uppercase flex items-center gap-1.5 mb-1 border-b border-border/60 pb-2">
-                    <AlertCircle className="h-3.5 w-3.5" /> BEFORE NEXUS
-                  </span>
-                  <div className="flex flex-col gap-4">
-                    {TRANSFORMATIONS.map((t, idx) => (
-                      <div key={idx} className="flex flex-col gap-1">
-                        <h4 className="text-xs font-bold text-primary">
-                          {t.label}: {t.before}
-                        </h4>
-                        <p className="text-[11px] text-muted-foreground leading-normal font-light">
-                          {t.beforeDetail}
-                        </p>
-                      </div>
-                    ))}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                {/* Tables comparison (7 Cols) */}
+                <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6 bg-muted/10 border border-border rounded-[8px] p-5">
+                  {/* Column: Before Nexus */}
+                  <div className={cn("flex flex-col gap-4 transition-opacity duration-300", isAfter && "opacity-45")}>
+                    <span className="text-[10px] font-mono font-bold tracking-wider text-[#C0392B] uppercase flex items-center gap-1.5 mb-1 border-b border-border/60 pb-2">
+                      <AlertCircle className="h-3.5 w-3.5" /> BEFORE NEXUS
+                    </span>
+                    <div className="flex flex-col gap-4">
+                      {TRANSFORMATIONS.map((t, idx) => (
+                        <div key={idx} className="flex flex-col gap-1">
+                          <h4 className="text-xs font-bold text-primary">
+                            {t.label}: {t.before}
+                          </h4>
+                          <p className="text-[11px] text-muted-foreground leading-normal font-light">
+                            {t.beforeDetail}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Column: After Nexus */}
+                  <div className={cn("flex flex-col gap-4 border-t md:border-t-0 md:border-l border-border/60 pt-4 md:pt-0 md:pl-6 transition-opacity duration-300", !isAfter && "opacity-45")}>
+                    <span className="text-[10px] font-mono font-bold tracking-wider text-[#2A7D8A] uppercase flex items-center gap-1.5 mb-1 border-b border-border/60 pb-2">
+                      <CheckCircle className="h-3.5 w-3.5" /> AFTER NEXUS
+                    </span>
+                    <div className="flex flex-col gap-4">
+                      {TRANSFORMATIONS.map((t, idx) => (
+                        <div key={idx} className="flex flex-col gap-1">
+                          <h4 className="text-xs font-bold text-[#2A7D8A]">
+                            {t.label}: {t.after}
+                          </h4>
+                          <p className="text-[11px] text-foreground/80 leading-normal font-light">
+                            {t.afterDetail}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                {/* Column: After Nexus */}
-                <div className="flex flex-col gap-4 border-t md:border-t-0 md:border-l border-border/60 pt-4 md:pt-0 md:pl-6">
-                  <span className="text-[10px] font-mono font-bold tracking-wider text-[#2A7D8A] uppercase flex items-center gap-1.5 mb-1 border-b border-border/60 pb-2">
-                    <CheckCircle className="h-3.5 w-3.5" /> AFTER NEXUS
-                  </span>
-                  <div className="flex flex-col gap-4">
-                    {TRANSFORMATIONS.map((t, idx) => (
-                      <div key={idx} className="flex flex-col gap-1">
-                        <h4 className="text-xs font-bold text-[#2A7D8A]">
-                          {t.label}: {t.after}
-                        </h4>
-                        <p className="text-[11px] text-foreground/80 leading-normal font-light">
-                          {t.afterDetail}
-                        </p>
-                      </div>
-                    ))}
+                {/* 3D Morph Visualizer (5 Cols, Desktop Only) */}
+                <div className="hidden lg:flex lg:col-span-5 border border-border rounded-[8px] bg-muted/20 items-center justify-center p-4 relative min-h-[300px]">
+                  <div className="absolute top-3 left-4 text-[9px] font-mono text-muted-foreground/60 uppercase select-none">
+                    Transformation Space
+                  </div>
+                  <div className="w-full h-full">
+                    <ThreeCanvasShell 
+                      ariaLabel="A 3D spatial transformation panel morphing between manual scattered operations and aligned automated workflow paths."
+                      fallback={<DepthFallback />}
+                    >
+                      <BeforeAfterScene isAfter={isAfter} />
+                    </ThreeCanvasShell>
                   </div>
                 </div>
               </div>

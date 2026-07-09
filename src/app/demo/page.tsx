@@ -1,7 +1,9 @@
-import { Metadata } from "next";
+"use client";
+
+import React, { useState } from "react";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { METADATA, HERO } from "@/lib/content/nexus";
+import { HERO } from "@/lib/content/nexus";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ClinicOSMockup } from "@/components/visuals/ClinicOSMockup";
@@ -12,19 +14,18 @@ import { SecureScanMockup } from "@/components/visuals/SecureScanMockup";
 import { SafeDateMockup } from "@/components/visuals/SafeDateMockup";
 import { BuildPublicMockup } from "@/components/visuals/BuildPublicMockup";
 import { ArrowRight } from "lucide-react";
+import nextDynamic from "next/dynamic";
+import { OrbitFallback } from "@/components/three/ThreeFallback";
+import { SystemCard3D } from "@/components/three/SystemCard3D";
 
-export const metadata: Metadata = {
-  title: "Demo Library & Walkthroughs — Nexus",
-  description: "Explore live walkthroughs and synthetic previews of ClinicOS, RestaurantOS, SecureScan, and other custom workflow systems shipped by Nexus.",
-  alternates: {
-    canonical: `${METADATA.canonicalUrl}/demo`,
-  },
-  openGraph: {
-    title: "Demo Library & Walkthroughs — Nexus",
-    description: "Explore live walkthroughs and synthetic previews of ClinicOS, RestaurantOS, SecureScan, and other custom workflow systems shipped by Nexus.",
-    url: `${METADATA.canonicalUrl}/demo`,
-  }
-};
+const ThreeCanvasShell = nextDynamic(
+  () => import("@/components/three/ThreeCanvasShell").then((mod) => mod.ThreeCanvasShell),
+  { ssr: false, loading: () => <OrbitFallback /> }
+);
+const DemoLibraryScene = nextDynamic(
+  () => import("@/components/three/DemoLibraryScene"),
+  { ssr: false }
+);
 
 const DEMO_CARDS = [
   {
@@ -93,6 +94,8 @@ const DEMO_CARDS = [
 ];
 
 export default function DemoPage() {
+  const [activeDemoId, setActiveDemoId] = useState<string | null>(null);
+
   return (
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
@@ -113,19 +116,21 @@ export default function DemoPage() {
             </p>
           </div>
 
-          {/* Demos List */}
-          <div className="flex flex-col gap-16 mb-20">
-            {DEMO_CARDS.map((card) => {
-              const Mockup = card.mockup;
-              return (
-                <div 
-                  key={card.id} 
-                  id={card.id}
-                  className="border border-border bg-background rounded-[12px] p-6 md:p-8 flex flex-col lg:grid lg:grid-cols-12 gap-8 shadow-sm hover:shadow-md transition-shadow scroll-mt-24"
-                >
-                  {/* Left: Metadata & Descriptions (5 Cols) */}
-                  <div className="lg:col-span-5 flex flex-col justify-between">
-                    <div>
+          {/* Demos Command Center Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-20">
+            {/* Left: Demos list (7 cols) */}
+            <div className="lg:col-span-7 flex flex-col gap-12">
+              {DEMO_CARDS.map((card) => {
+                const Mockup = card.mockup;
+                return (
+                  <SystemCard3D 
+                    key={card.id}
+                    className="border border-border bg-background rounded-[12px] p-6 md:p-8 flex flex-col gap-6 shadow-sm hover:shadow-md transition-shadow scroll-mt-24 font-light text-muted-foreground"
+                  >
+                    <div 
+                      onMouseEnter={() => setActiveDemoId(card.id)}
+                      onMouseLeave={() => setActiveDemoId(null)}
+                    >
                       <div className="flex items-center gap-2 mb-3">
                         <span className="text-[9px] font-mono font-bold text-white bg-slate-500 uppercase px-2 py-0.5 rounded-[4px]">
                           {card.type}
@@ -134,7 +139,7 @@ export default function DemoPage() {
                       <h2 className="font-display text-xl md:text-2xl font-bold text-primary mb-3">
                         {card.title}
                       </h2>
-                      <p className="text-xs text-muted-foreground leading-relaxed font-light mb-6">
+                      <p className="text-xs leading-relaxed font-light mb-4">
                         {card.proves}
                       </p>
 
@@ -150,30 +155,44 @@ export default function DemoPage() {
                       </div>
                     </div>
 
+                    {/* Mockup Display */}
+                    <div className="border border-border/80 rounded-[8px] overflow-hidden bg-muted/20 shadow-sm flex items-center justify-center p-2 sm:p-4">
+                      <div className="w-full aspect-[800/340] max-h-[300px]">
+                        <Mockup />
+                      </div>
+                    </div>
+
                     <a
                       href={HERO.ctaUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cn(
                         buttonVariants({ size: "default" }),
-                        "w-full bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none interactive-action mt-6"
+                        "w-full bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none interactive-action mt-2"
                       )}
                     >
                       <span>Discuss this model in your kickoff call</span>
                       <ArrowRight className="h-4 w-4" />
                     </a>
-                  </div>
+                  </SystemCard3D>
+                );
+              })}
+            </div>
 
-                  {/* Right: Mockup Display (7 Cols) */}
-                  <div className="lg:col-span-7 border border-border/80 rounded-[8px] overflow-hidden bg-muted/20 shadow-sm flex items-center justify-center p-2 sm:p-4">
-                    <div className="w-full aspect-[800/340] max-h-[300px]">
-                      <Mockup />
-                    </div>
-                  </div>
-
-                </div>
-              );
-            })}
+            {/* Right: 3D command console panel (5 cols, sticky) */}
+            <div className="hidden lg:block lg:col-span-5 sticky top-24 border border-border rounded-[12px] bg-muted/20 items-center justify-center p-4 min-h-[460px]">
+              <div className="absolute top-3 left-4 text-[9px] font-mono text-muted-foreground/60 uppercase select-none">
+                Control Console
+              </div>
+              <div className="w-full h-[420px]">
+                <ThreeCanvasShell 
+                  ariaLabel="A 3D command terminal console display mapping live order updates and queue pipelines."
+                  fallback={<OrbitFallback />}
+                >
+                  <DemoLibraryScene activeDemoId={activeDemoId} />
+                </ThreeCanvasShell>
+              </div>
+            </div>
           </div>
 
         </div>

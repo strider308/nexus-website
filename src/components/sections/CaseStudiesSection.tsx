@@ -24,6 +24,10 @@ const ProofOrbitScene = dynamic(
   () => import("../three/ProofOrbitScene"),
   { ssr: false }
 );
+const ProofConstellation = dynamic(
+  () => import("../three/ProofConstellation"),
+  { ssr: false }
+);
 import { ChevronDown, ChevronUp, Layers, Link as LinkIcon, Cpu } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 
@@ -113,6 +117,8 @@ const MAP_SYSTEMS = [
 export function CaseStudiesSection() {
   const [activeTab, setActiveTab] = useState<string>("clinicos");
   const [salesSheetExpanded, setSalesSheetExpanded] = useState<Record<string, boolean>>({});
+  const [hoveredSystemId, setHoveredSystemId] = useState<string | null>(null);
+  const [hoveredCapabilityId, setHoveredCapabilityId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
   const [mounted, setMounted] = useState(false);
 
@@ -525,49 +531,97 @@ export function CaseStudiesSection() {
               Capability Proof Map
             </h3>
             <p className="text-sm font-light text-muted-foreground leading-relaxed max-w-3xl">
-              A matrix view mapping our shipped proof systems against their core architectural capabilities.
+              A matrix view mapping our shipped proof systems against their core architectural capabilities. Hover over cells to inspect connections.
             </p>
           </div>
 
-          <div className="overflow-x-auto border border-border/60 bg-background/50 rounded-[8px] shadow-sm">
-            <table className="w-full text-left border-collapse min-w-[760px]">
-              <thead>
-                <tr className="border-b border-border bg-muted/20">
-                  <th className="p-4 text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-wider min-w-[120px]">
-                    System
-                  </th>
-                  {CAPABILITIES.map((cap) => (
-                    <th key={cap.id} className="p-4 text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-wider min-w-[100px]">
-                      {cap.label}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            {/* Table Matrix (7 Cols) */}
+            <div className="lg:col-span-7 overflow-x-auto border border-border/60 bg-background/50 rounded-[8px] shadow-sm">
+              <table className="w-full text-left border-collapse min-w-[760px]">
+                <thead>
+                  <tr className="border-b border-border bg-muted/20">
+                    <th className="p-4 text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-wider min-w-[120px]">
+                      System
                     </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {MAP_SYSTEMS.map((sys) => (
-                  <tr key={sys.id} className="border-b border-border/50 hover:bg-muted/10 transition-colors">
-                    <td className="p-4 text-xs font-bold text-primary">
-                      {sys.label}
-                    </td>
-                    {CAPABILITIES.map((cap) => {
-                      const hasCap = sys.capabilities.includes(cap.id);
-                      return (
-                        <td key={cap.id} className="p-4 text-xs">
-                          {hasCap ? (
-                            <span className="flex items-center gap-1.5 font-semibold text-[#2E6FAD]">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#2E6FAD] shrink-0" />
-                              Active
-                            </span>
-                          ) : (
-                            <span className="opacity-40 text-foreground/40">-</span>
-                          )}
-                        </td>
-                      );
-                    })}
+                    {CAPABILITIES.map((cap) => (
+                      <th 
+                        key={cap.id} 
+                        className={cn(
+                          "p-4 text-[10px] font-mono font-bold uppercase tracking-wider min-w-[100px] transition-colors duration-200",
+                          hoveredCapabilityId === cap.id ? "text-primary bg-muted" : "text-muted-foreground"
+                        )}
+                        onMouseEnter={() => setHoveredCapabilityId(cap.id)}
+                        onMouseLeave={() => setHoveredCapabilityId(null)}
+                      >
+                        {cap.label}
+                      </th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {MAP_SYSTEMS.map((sys) => (
+                    <tr 
+                      key={sys.id} 
+                      className={cn(
+                        "border-b border-border/50 transition-colors duration-200",
+                        hoveredSystemId === sys.id ? "bg-muted" : "hover:bg-muted/10"
+                      )}
+                      onMouseEnter={() => setHoveredSystemId(sys.id)}
+                      onMouseLeave={() => setHoveredSystemId(null)}
+                    >
+                      <td className="p-4 text-xs font-bold text-primary">
+                        {sys.label}
+                      </td>
+                      {CAPABILITIES.map((cap) => {
+                        const hasCap = sys.capabilities.includes(cap.id);
+                        return (
+                          <td 
+                            key={cap.id} 
+                            className="p-4 text-xs"
+                            onMouseEnter={() => {
+                              setHoveredSystemId(sys.id);
+                              setHoveredCapabilityId(cap.id);
+                            }}
+                            onMouseLeave={() => {
+                              setHoveredSystemId(null);
+                              setHoveredCapabilityId(null);
+                            }}
+                          >
+                            {hasCap ? (
+                              <span className="flex items-center gap-1.5 font-semibold text-[#2E6FAD]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#2E6FAD] shrink-0" />
+                                Active
+                              </span>
+                            ) : (
+                              <span className="opacity-40 text-foreground/40">-</span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* 3D Proof Constellation Visualizer (5 Cols, Desktop Only) */}
+            <div className="hidden lg:flex lg:col-span-5 border border-border rounded-[8px] bg-muted/20 items-center justify-center p-4 relative min-h-[340px]">
+              <div className="absolute top-3 left-4 text-[9px] font-mono text-muted-foreground/60 uppercase select-none">
+                System Mapping Constellation
+              </div>
+              <div className="w-full h-full">
+                <ThreeCanvasShell 
+                  ariaLabel="A 3D interactive connection matrix mapping shipped systems to core capabilities like workflow rules, automation actions, and owner dashboards."
+                  fallback={<OrbitFallback />}
+                >
+                  <ProofConstellation 
+                    activeSystemId={hoveredSystemId} 
+                    activeCapabilityId={hoveredCapabilityId} 
+                  />
+                </ThreeCanvasShell>
+              </div>
+            </div>
           </div>
         </div>
 
