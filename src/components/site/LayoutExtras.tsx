@@ -6,7 +6,7 @@ import { motion, useScroll, useSpring } from "motion/react";
 
 export function LayoutExtras() {
   const [showCookieBanner, setShowCookieBanner] = useState(false);
-  const [activeProductColor, setActiveProductColor] = useState("#1A2B4C");
+  const [activeProductColor, setActiveProductColor] = useState("#DEDBC8");
 
   // Framer Motion scroll progress (compositor thread tracking, 0 re-renders)
   const { scrollYProgress } = useScroll();
@@ -55,7 +55,7 @@ export function LayoutExtras() {
           if (PRODUCT_THEMES[id]) {
             setActiveProductColor(PRODUCT_THEMES[id].primary);
           } else if (id === "cover" || id === "services-brochure" || id === "company-brochure" || id === "company-founder") {
-            setActiveProductColor("#1A2B4C"); // Reset to main navy
+            setActiveProductColor("#DEDBC8"); // Reset to main cream
           }
         }
       });
@@ -112,10 +112,10 @@ export function LayoutExtras() {
           role="region" 
           aria-label="Cookie consent" 
           aria-live="polite"
-          className="fixed bottom-0 left-0 right-0 z-[110] bg-[#0C1828] text-white py-4 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-white/10 shadow-lg animate-slide-up"
+          className="fixed bottom-0 left-0 right-0 z-[110] bg-[#101010] text-[#E1E0CC] py-4 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-[#DEDBC8]/10 shadow-lg animate-slide-up"
         >
-          <p className="text-xs md:text-sm text-white/80 max-w-3xl leading-relaxed">
-            We use analytics cookies to understand how this site is used and improve it. See our{" "}
+          <p className="text-xs md:text-sm text-gray-300 max-w-3xl leading-relaxed">
+            We use cookies to analyze site traffic and enhance layout. Review our{" "}
             <a href="/privacy-policy" className="underline hover:text-white">
               Privacy Policy
             </a>{" "}
@@ -124,13 +124,13 @@ export function LayoutExtras() {
           <div className="flex gap-3 shrink-0">
             <button
               onClick={() => handleCookieChoice("declined")}
-              className="text-xs font-semibold px-4 py-2 border border-white/20 rounded-[6px] hover:bg-white/5 transition-colors cursor-pointer interactive-action"
+              className="text-xs font-mono font-bold px-4 py-2 border border-[#DEDBC8]/20 rounded-full hover:bg-[#DEDBC8]/10 hover:text-white transition-colors cursor-pointer"
             >
               Decline
             </button>
             <button
               onClick={() => handleCookieChoice("accepted")}
-              className="text-xs font-bold px-4 py-2 bg-white text-[#0C1828] rounded-[6px] hover:bg-white/90 transition-colors cursor-pointer interactive-action"
+              className="text-xs font-mono font-bold px-4 py-2 bg-[#DEDBC8] text-black rounded-full hover:opacity-95 transition-all cursor-pointer"
             >
               Accept
             </button>

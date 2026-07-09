@@ -77,10 +77,10 @@ export function ProblemSection() {
         </div>
 
         {/* Before/After Detail Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-12 pt-8">
+        <div className="flex flex-col gap-8 mt-12 pt-8">
           
-          {/* Side-by-Side Comparison tables (Left Column - 7 Cols) */}
-          <div className="lg:col-span-7 flex flex-col justify-start">
+          {/* Side-by-Side Comparison tables */}
+          <div className="w-full flex flex-col justify-start">
             <div className="flex items-center justify-between mb-6 pb-2 border-b border-[#DEDBC8]/10">
               <h3 className="text-xs md:text-sm font-mono font-bold tracking-[0.2em] uppercase text-gray-400">
                 How Nexus maps a workflow
@@ -149,8 +149,8 @@ export function ProblemSection() {
             </div>
           </div>
 
-          {/* Workflow Resolution Map (Right Column - 5 Cols) */}
-          <div className="lg:col-span-5 flex flex-col gap-6 lg:sticky lg:top-24">
+          {/* Workflow Resolution Map (Horizontal on Desktop) */}
+          <div className="w-full mt-4">
             <WorkflowResolutionPanel isAfter={isAfter} />
           </div>
 
@@ -167,107 +167,111 @@ interface WorkflowResolutionPanelProps {
 function WorkflowResolutionPanel({ isAfter }: WorkflowResolutionPanelProps) {
   return (
     <div 
-      className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[12px] p-6 shadow-sm overflow-hidden relative"
+      className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 shadow-lg overflow-hidden relative w-full"
       aria-label="Workflow resolution flow: scattered inputs are mapped by Nexus into a connected operational system."
     >
       <div className="absolute inset-0 opacity-[0.05] bg-noise pointer-events-none" />
 
-      {/* Title */}
-      <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#DEDBC8]/10 relative z-10">
-        <h3 className="text-sm font-mono font-bold tracking-wider text-[#DEDBC8] uppercase flex items-center gap-2 select-none">
-          <span className={cn("w-1.5 h-1.5 rounded-full animate-pulse", isAfter ? "bg-[#2A7D8A]" : "bg-[#C0392B]")} />
-          From scattered work to connected operations
+      {/* Header */}
+      <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#DEDBC8]/10 relative z-10">
+        <h3 className="text-sm md:text-base font-mono font-bold tracking-wider text-[#DEDBC8] uppercase flex items-center gap-2 select-none">
+          <span className="w-2 h-2 rounded-full bg-[#2A7D8A] animate-pulse" />
+          How Nexus turns messy operations into a working system
         </h3>
       </div>
 
-      <div className="flex flex-col gap-5 relative z-10">
-        {/* Step 1: Fragmented Inputs */}
-        <div className={cn("border border-[#DEDBC8]/10 bg-black/40 rounded-[8px] p-4 transition-all duration-300", isAfter ? "opacity-35" : "border-[#C0392B]/30 bg-[#C0392B]/[0.01]")}>
-          <span className="text-xs font-mono font-bold text-gray-400 uppercase block mb-2 select-none">
-            1. Scattered Inputs
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {["Chats", "Sheets", "Tasks", "Calls", "Billing Notes"].map((item, idx) => (
-              <span 
-                key={idx} 
-                className="text-xs px-2.5 py-1 bg-red-500/5 text-[#C0392B] border border-red-500/10 rounded-[4px] font-semibold"
-              >
-                {item}
-              </span>
-            ))}
+      {/* Desktop: 3 Columns side-by-side | Mobile: Stacked */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+        
+        {/* Column 1: Before Nexus */}
+        <div className={cn(
+          "border rounded-[16px] p-6 flex flex-col justify-between transition-all duration-300 min-h-[220px]",
+          isAfter 
+            ? "border-[#DEDBC8]/5 bg-black/20 opacity-35" 
+            : "border-red-500/20 bg-red-500/[0.02]"
+        )}>
+          <div>
+            <span className="text-xs font-mono font-bold text-red-400 uppercase block mb-4 select-none">
+              1. Before Nexus (Scattered Manual Operations)
+            </span>
+            <ul className="flex flex-col gap-3">
+              {[
+                "Scattered chats",
+                "Spreadsheets",
+                "Manual follow-ups",
+                "Unclear ownership",
+                "No live visibility"
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-center gap-2 text-sm text-gray-300 font-light">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+          <p className="text-xs text-gray-500 mt-6 border-t border-[#DEDBC8]/5 pt-3">
+            Friction, lost history, copy-paste errors
+          </p>
         </div>
 
-        {/* Step 2: Mapping Layer */}
-        <div className="border border-[#DEDBC8]/15 bg-black/30 rounded-[8px] p-4">
-          <span className="text-xs font-mono font-bold text-[#DEDBC8] uppercase block mb-2 select-none">
-            2. Nexus Mapping Layer
-          </span>
-          <div className="grid grid-cols-2 gap-2.5 text-xs text-gray-300 font-light">
-            <div className="flex items-center gap-1.5">
-              <span className="w-1 h-1 rounded-full bg-[#DEDBC8]" />
-              <span>roles defined</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-1 h-1 rounded-full bg-[#DEDBC8]" />
-              <span>states named</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-1 h-1 rounded-full bg-[#DEDBC8]" />
-              <span>handoffs clarified</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-1 h-1 rounded-full bg-[#DEDBC8]" />
-              <span>visibility points chosen</span>
-            </div>
+        {/* Column 2: Nexus Maps */}
+        <div className="border border-[#DEDBC8]/20 bg-black/40 rounded-[16px] p-6 flex flex-col justify-between min-h-[220px]">
+          <div>
+            <span className="text-xs font-mono font-bold text-[#DEDBC8] uppercase block mb-4 select-none">
+              2. Nexus Maps the Workflow
+            </span>
+            <ul className="flex flex-col gap-3">
+              {[
+                "Name the roles",
+                "Define the states",
+                "Assign ownership",
+                "Connect handoffs",
+                "Decide visibility points",
+                "Automate repeat actions"
+              ].map((step, idx) => (
+                <li key={idx} className="flex items-center gap-2 text-sm text-gray-300 font-light">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#DEDBC8] shrink-0" />
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+          <p className="text-xs text-gray-500 mt-6 border-t border-[#DEDBC8]/5 pt-3">
+            Encoding business rules into code
+          </p>
         </div>
 
-        {/* Step 3: Connected System */}
-        <div className={cn("border border-[#DEDBC8]/10 bg-black/40 rounded-[8px] p-4 transition-all duration-300", !isAfter ? "opacity-35" : "border-[#2A7D8A]/30 bg-[#2A7D8A]/[0.01]")}>
-          <span className="text-xs font-mono font-bold text-[#2A7D8A] uppercase block mb-2 select-none">
-            3. Connected System
-          </span>
-          <div className="grid grid-cols-2 gap-1.5">
-            {[
-              "role-based screens",
-              "status-aware workflow",
-              "automated handoffs",
-              "owner dashboard",
-              "audit trail"
-            ].map((item, idx) => (
-              <span 
-                key={idx} 
-                className="text-xs px-2 py-1.5 bg-[#2A7D8A]/5 text-[#2A7D8A] rounded-[4px] font-semibold text-center border border-[#2A7D8A]/10"
-              >
-                {item}
-              </span>
-            ))}
+        {/* Column 3: After Nexus */}
+        <div className={cn(
+          "border rounded-[16px] p-6 flex flex-col justify-between transition-all duration-300 min-h-[220px]",
+          !isAfter 
+            ? "border-[#DEDBC8]/5 bg-black/20 opacity-35" 
+            : "border-[#2A7D8A]/20 bg-[#2A7D8A]/[0.02]"
+        )}>
+          <div>
+            <span className="text-xs font-mono font-bold text-[#2A7D8A] uppercase block mb-4 select-none">
+              3. After Nexus (Connected System)
+            </span>
+            <ul className="flex flex-col gap-3">
+              {[
+                "Role-based screens",
+                "Status-aware workflow",
+                "Automated handoffs",
+                "Owner dashboard",
+                "Audit trail"
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-center gap-2 text-sm text-gray-300 font-light">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2A7D8A] shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+          <p className="text-xs text-gray-500 mt-6 border-t border-[#DEDBC8]/5 pt-3">
+            Predictable speed, live reporting metrics
+          </p>
         </div>
 
-        {/* Outcome Rows */}
-        <div className="border-t border-[#DEDBC8]/10 pt-4 mt-2 flex flex-col gap-2">
-          {[
-            { label: "Owner Visibility", status: "Live", isHighlight: isAfter },
-            { label: "Manual Handoff", status: "Automated", isHighlight: isAfter },
-            { label: "Customer Follow-up", status: "Status-aware", isHighlight: isAfter },
-            { label: "Process Memory", status: "Encoded", isHighlight: isAfter },
-            { label: "Work Ownership", status: "Assigned", isHighlight: isAfter }
-          ].map((row, idx) => (
-            <div key={idx} className="flex justify-between items-center text-sm border-b border-[#DEDBC8]/5 last:border-b-0 pb-1.5 last:pb-0">
-              <span className="text-gray-300 font-light">{row.label}</span>
-              <span className={cn(
-                "font-semibold font-mono text-xs px-2 py-0.5 rounded-[4px] border",
-                row.isHighlight 
-                  ? "bg-[#2A7D8A]/5 text-[#2A7D8A] border-[#2A7D8A]/10" 
-                  : "bg-red-500/5 text-[#C0392B] border-red-500/10"
-              )}>
-                {row.isHighlight ? row.status : "Scattered"}
-              </span>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

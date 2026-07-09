@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PRODUCT_THEMES } from "@/lib/design-tokens";
 
 interface FloatBtn {
   id: string;
@@ -11,13 +10,12 @@ interface FloatBtn {
 }
 
 const buttons: FloatBtn[] = [
-  { id: "clinicos", initials: "C", label: "ClinicOS", color: "#4A7BC4" },
-  { id: "aarogya", initials: "A", label: "Aarogya", color: "#6FA876" },
-  { id: "restaurantos", initials: "R", label: "RestaurantOS", color: "#C87B3A" },
-  { id: "shipwright", initials: "Sh", label: "ShipWright", color: "#8B7BC4" },
-  { id: "securescan", initials: "Sc", label: "SecureScan", color: "#3A9EAA" },
-  { id: "safedate", initials: "Sd", label: "SafeDate", color: "#C44A7A" },
-  { id: "buildpublic", initials: "Bp", label: "BuildPublic", color: "#4A8A5A" }
+  { id: "company-brochure", initials: "Co", label: "Company", color: "#E1E0CC" },
+  { id: "services-brochure", initials: "Se", label: "Services", color: "#DEDBC8" },
+  { id: "case-studies", initials: "Pr", label: "Proof", color: "#E1E0CC" },
+  { id: "engagement-models", initials: "Mo", label: "Models", color: "#DEDBC8" },
+  { id: "resources-preview", initials: "Re", label: "Resources", color: "#E1E0CC" },
+  { id: "contact", initials: "Ct", label: "Contact", color: "#DEDBC8" }
 ];
 
 export function FloatingProductNav() {
@@ -76,25 +74,23 @@ export function FloatingProductNav() {
       className="fixed bottom-6 right-6 md:right-8 z-40 hidden md:flex items-center gap-2 bg-[#101010]/95 backdrop-blur-md border border-[#DEDBC8]/15 rounded-full py-1.5 px-3 shadow-lg shadow-black/80 transition-all duration-300 md:hover:scale-105"
     >
       <span className="text-[10px] font-mono font-bold tracking-wider text-[#DEDBC8]/60 uppercase pl-1.5 pr-1 select-none">
-        Systems
+        Sections
       </span>
       <div className="flex gap-1.5">
         {buttons.map((btn) => {
           const isActive = btn.id === activeId;
-          const theme = PRODUCT_THEMES[btn.id] || { primary: btn.color };
           return (
             <a
               key={btn.id}
               href={`#${btn.id}`}
               onClick={(e) => handleClick(e, btn.id)}
               aria-label={`Scroll to ${btn.label}`}
-              aria-current={isActive ? "true" : undefined}
-              className="relative group w-8 h-8 rounded-full flex items-center justify-center font-display font-bold text-xs text-white transition-all duration-300 hover:scale-110 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#DEDBC8] focus-visible:ring-offset-2 focus-visible:ring-offset-black outline-none cursor-pointer"
-              style={{
-                backgroundColor: theme.primary,
-                border: isActive ? "2px solid #E1E0CC" : "none",
-                boxShadow: isActive ? `0 0 10px ${theme.primary}` : "none"
-              }}
+              aria-current={isActive ? "location" : undefined}
+              className={`relative group w-8 h-8 rounded-full flex items-center justify-center font-mono font-bold text-[10px] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#DEDBC8] focus-visible:ring-offset-2 focus-visible:ring-offset-black outline-none border cursor-pointer ${
+                isActive 
+                  ? "bg-[#DEDBC8] text-black border-[#DEDBC8] shadow-[0_0_12px_rgba(222,219,200,0.3)]" 
+                  : "bg-black/60 text-[#DEDBC8]/60 border-[#DEDBC8]/10 hover:text-[#DEDBC8] hover:border-[#DEDBC8]/30"
+              }`}
             >
               {btn.initials}
 

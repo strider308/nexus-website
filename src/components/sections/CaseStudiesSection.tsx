@@ -529,31 +529,31 @@ export function CaseStudiesSection() {
         </div>
 
         {/* Capability Proof Map */}
-        <div className="mt-16 pt-12 border-t border-border/80">
+        <div className="mt-16 pt-12 border-t border-[#DEDBC8]/10">
           <div className="mb-8">
-            <h3 className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase mb-2">
+            <h3 className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase mb-2">
               Capability Proof Map
             </h3>
-            <p className="text-sm font-light text-muted-foreground leading-relaxed max-w-3xl">
+            <p className="text-sm font-light text-gray-300 leading-relaxed max-w-3xl">
               A matrix view mapping our shipped proof systems against their core architectural capabilities. Hover over cells to inspect connections.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             {/* Table Matrix (7 Cols) */}
-            <div className="lg:col-span-7 overflow-x-auto border border-border/60 bg-background/50 rounded-[8px] shadow-sm">
+            <div className="lg:col-span-7 overflow-x-auto border border-[#DEDBC8]/10 bg-[#101010] rounded-[12px] shadow-sm">
               <table className="w-full text-left border-collapse min-w-[760px]">
                 <thead>
-                  <tr className="border-b border-border bg-muted/20">
-                    <th className="p-4 text-[10px] font-mono font-bold text-foreground/90 uppercase tracking-wider min-w-[120px]">
+                  <tr className="border-b border-[#DEDBC8]/10 bg-[#212121]">
+                    <th className="p-4 text-xs font-mono font-bold text-[#E1E0CC] uppercase tracking-wider min-w-[120px]">
                       System
                     </th>
                     {CAPABILITIES.map((cap) => (
                       <th 
                         key={cap.id} 
                         className={cn(
-                          "p-4 text-[10px] font-mono font-bold uppercase tracking-wider min-w-[100px] transition-colors duration-200",
-                          hoveredCapabilityId === cap.id ? "text-primary bg-muted" : "text-foreground/90"
+                          "p-4 text-xs font-mono font-bold uppercase tracking-wider min-w-[100px] transition-colors duration-200",
+                          hoveredCapabilityId === cap.id ? "text-[#E1E0CC] bg-[#212121]" : "text-[#DEDBC8]"
                         )}
                         onMouseEnter={() => setHoveredCapabilityId(cap.id)}
                         onMouseLeave={() => setHoveredCapabilityId(null)}
@@ -568,13 +568,13 @@ export function CaseStudiesSection() {
                     <tr 
                       key={sys.id} 
                       className={cn(
-                        "border-b border-border/50 transition-colors duration-200",
-                        hoveredSystemId === sys.id ? "bg-muted" : "hover:bg-muted/10"
+                        "border-b border-[#DEDBC8]/5 transition-colors duration-200",
+                        hoveredSystemId === sys.id ? "bg-[#212121]" : "hover:bg-[#212121]/40"
                       )}
                       onMouseEnter={() => setHoveredSystemId(sys.id)}
                       onMouseLeave={() => setHoveredSystemId(null)}
                     >
-                      <td className="p-4 text-xs font-bold text-primary">
+                      <td className="p-4 text-xs font-bold text-[#E1E0CC]">
                         {sys.label}
                       </td>
                       {CAPABILITIES.map((cap) => {
@@ -582,7 +582,7 @@ export function CaseStudiesSection() {
                         return (
                           <td 
                             key={cap.id} 
-                            className="p-4 text-xs"
+                            className="p-4 text-xs animate-fade-in"
                             onMouseEnter={() => {
                               setHoveredSystemId(sys.id);
                               setHoveredCapabilityId(cap.id);
@@ -593,12 +593,12 @@ export function CaseStudiesSection() {
                             }}
                           >
                             {hasCap ? (
-                              <span className="flex items-center gap-1.5 font-semibold text-[#2E6FAD]">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#2E6FAD] shrink-0" />
+                              <span className="flex items-center gap-1.5 font-semibold text-[#2A7D8A]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#2A7D8A] shrink-0 animate-pulse" />
                                 Active
                               </span>
                             ) : (
-                              <span className="opacity-40 text-foreground/40">-</span>
+                              <span className="text-gray-600 font-light select-none">-</span>
                             )}
                           </td>
                         );
@@ -610,8 +610,8 @@ export function CaseStudiesSection() {
             </div>
 
             {/* 3D Proof Constellation Visualizer (5 Cols, Desktop Only) */}
-            <div className="hidden lg:flex lg:col-span-5 border border-border rounded-[8px] bg-muted/20 items-center justify-center p-4 relative min-h-[340px]">
-              <div className="absolute top-3 left-4 text-[9px] font-mono text-muted-foreground/60 uppercase select-none">
+            <div className="hidden lg:flex lg:col-span-5 border border-[#DEDBC8]/10 rounded-[12px] bg-[#101010] items-center justify-center p-4 relative min-h-[340px]">
+              <div className="absolute top-3 left-4 text-xs font-mono text-[#DEDBC8]/60 uppercase select-none">
                 Proof systems and capabilities
               </div>
               <div className="w-full h-full">

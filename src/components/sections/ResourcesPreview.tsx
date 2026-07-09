@@ -8,24 +8,28 @@ import Link from "next/link";
 
 const RESOURCE_CARDS = [
   {
+    id: "mapping",
     title: "Workflow Mapping Checklist",
     desc: "Map out team roles, inputs, and handoff queues before writing scope to prevent development waste.",
     icon: ClipboardCheck,
     tag: "Audit Tool"
   },
   {
+    id: "mvp",
     title: "MVP Scope Worksheet",
     desc: "Define first-milestone features and strip out non-essential software blocks before launching beta code.",
     icon: LayoutGrid,
     tag: "Planning Guide"
   },
   {
+    id: "handoff",
     title: "Operational Handoff Audit",
     desc: "Identify silent queues and human handoff bottlenecks inside your business operations.",
     icon: ShieldAlert,
     tag: "Audit Tool"
   },
   {
+    id: "beta",
     title: "Private Beta Readiness Checklist",
     desc: "Audit database access rules, feedback loops, and friendly pilot testers for early launches.",
     icon: BadgeAlert,
@@ -71,31 +75,32 @@ export function ResourcesPreview() {
           {RESOURCE_CARDS.map((card, idx) => {
             const Icon = card.icon;
             return (
-              <div 
+              <Link 
                 key={idx}
-                className="bg-[#212121] rounded-2xl border border-[#DEDBC8]/10 p-6 flex flex-col justify-between overflow-hidden min-h-[220px] hover:border-[#DEDBC8]/30 transition-all duration-300 group"
+                href={`/resources#${card.id}`}
+                className="bg-[#212121] rounded-2xl border border-[#DEDBC8]/10 p-6 flex flex-col justify-between overflow-hidden min-h-[220px] hover:border-[#DEDBC8]/30 transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-[#DEDBC8] outline-none"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[8px] font-mono text-gray-500 font-bold uppercase tracking-widest">
+                    <span className="text-xs font-mono text-gray-400 font-bold uppercase tracking-widest">
                       {card.tag}
                     </span>
                     <Icon className="h-4 w-4 text-[#DEDBC8]/70" />
                   </div>
 
-                  <h3 className="text-[#E1E0CC] font-bold text-sm mb-2 group-hover:text-white transition-colors">
+                  <h3 className="text-[#E1E0CC] font-bold text-base mb-2 group-hover:text-white transition-colors">
                     {card.title}
                   </h3>
-                  <p className="text-[11px] text-gray-400 leading-relaxed font-light">
+                  <p className="text-sm text-gray-300 leading-relaxed font-light">
                     {card.desc}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#DEDBC8]/5 mt-4 flex items-center gap-1 text-[9px] font-mono font-bold text-[#DEDBC8]/60 uppercase group-hover:text-[#DEDBC8] transition-colors select-none">
+                <div className="pt-4 border-t border-[#DEDBC8]/5 mt-4 flex items-center gap-1 text-xs font-mono font-bold text-[#DEDBC8]/60 uppercase group-hover:text-[#DEDBC8] transition-colors select-none">
                   <span>Read checklist</span>
-                  <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

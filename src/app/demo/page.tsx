@@ -126,6 +126,7 @@ export default function DemoPage() {
                 return (
                   <SystemCard3D 
                     key={card.id}
+                    id={card.id}
                     className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 flex flex-col gap-6 hover:border-[#DEDBC8]/25 transition-all duration-300 scroll-mt-28 group"
                   >
                     <div 
@@ -133,25 +134,25 @@ export default function DemoPage() {
                       onMouseLeave={() => setActiveDemoId(null)}
                     >
                       <div className="flex items-center gap-2 mb-4">
-                        <span className="text-[8px] font-mono font-bold text-[#E1E0CC] border border-[#DEDBC8]/15 bg-black/40 uppercase px-2.5 py-0.5 rounded-full select-none">
+                        <span className="text-xs font-mono font-bold text-[#E1E0CC] border border-[#DEDBC8]/15 bg-black/40 uppercase px-2.5 py-0.5 rounded-full select-none">
                           {card.type}
                         </span>
                       </div>
                       <h2 className="font-display text-xl md:text-2xl font-bold text-[#E1E0CC] mb-3">
                         {card.title}
                       </h2>
-                      <p className="text-xs leading-relaxed font-light text-gray-400 mb-4">
+                      <p className="text-sm leading-relaxed font-light text-gray-300 mb-4">
                         {card.proves}
                       </p>
 
-                      <div className="border-t border-[#DEDBC8]/5 pt-4 mb-4 flex flex-col gap-3 font-light text-gray-400">
+                      <div className="border-t border-[#DEDBC8]/5 pt-4 mb-4 flex flex-col gap-3 font-light text-gray-300">
                         <div>
-                          <strong className="text-[9px] font-mono uppercase text-gray-500 block mb-0.5">Key Capabilities:</strong>
-                          <span className="text-xs text-[#E1E0CC] font-semibold">{card.capabilities}</span>
+                          <strong className="text-xs font-mono uppercase text-gray-400 block mb-0.5">Key Capabilities:</strong>
+                          <span className="text-sm text-[#E1E0CC] font-semibold">{card.capabilities}</span>
                         </div>
                         <div>
-                          <strong className="text-[9px] font-mono uppercase text-gray-500 block mb-0.5">Best Fit For:</strong>
-                          <span className="text-xs text-gray-300 font-light">{card.bestFit}</span>
+                          <strong className="text-xs font-mono uppercase text-gray-400 block mb-0.5">Best Fit For:</strong>
+                          <span className="text-sm text-gray-200 font-light">{card.bestFit}</span>
                         </div>
                       </div>
                     </div>

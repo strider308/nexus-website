@@ -161,7 +161,8 @@ export default function CaseStudiesPage() {
             {STUDIES_LIST.map((study) => (
               <div 
                 key={study.id} 
-                className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 flex flex-col lg:flex-row justify-between gap-8 hover:border-[#DEDBC8]/25 transition-all duration-300"
+                id={study.id}
+                className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 flex flex-col lg:flex-row justify-between gap-8 hover:border-[#DEDBC8]/25 transition-all duration-300 scroll-mt-28"
               >
                 {/* Left block: details */}
                 <div className="flex-grow max-w-3xl">

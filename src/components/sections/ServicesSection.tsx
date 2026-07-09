@@ -158,6 +158,108 @@ export function ServicesSection() {
 
         </div>
 
+        {/* Nexus Service Blueprint */}
+        <div className="mt-24 pt-16 border-t border-[#DEDBC8]/10">
+          <div className="max-w-3xl mb-12">
+            <span className="text-xs md:text-sm font-mono font-bold tracking-[0.2em] uppercase text-gray-400 mb-3 block">
+              System Architecture
+            </span>
+            <h3 className="font-display text-2xl md:text-4xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
+              Nexus Service Blueprint
+            </h3>
+            <p className="text-sm md:text-base font-light text-gray-300 leading-relaxed">
+              Our structured approach maps raw inputs to fully managed handoffs. We build every layer in this stack to ensure operational clarity and complete data integrity.
+            </p>
+          </div>
+
+          {/* Blueprint Steps Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 relative">
+            {/* Layer 1: Inputs */}
+            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">01 / INPUTS</span>
+                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Inputs</h4>
+                <p className="text-xs text-gray-300 font-light leading-relaxed">
+                  Forms, calls, spreadsheets, messages, files.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
+                e.g. Patient intake, QR orders
+              </div>
+            </div>
+
+            {/* Layer 2: Workflow Rules */}
+            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">02 / LOGIC</span>
+                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Workflow Rules</h4>
+                <p className="text-xs text-gray-300 font-light leading-relaxed">
+                  States, validations, approvals, calculations, routing logic.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
+                e.g. Multi-stage approvals
+              </div>
+            </div>
+
+            {/* Layer 3: Roles & Permissions */}
+            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">03 / ACCESS</span>
+                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Roles & Permissions</h4>
+                <p className="text-xs text-gray-300 font-light leading-relaxed">
+                  Owner, staff, admin, customer, partner access.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
+                e.g. Scoped screens & views
+              </div>
+            </div>
+
+            {/* Layer 4: Automation */}
+            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">04 / ACTIONS</span>
+                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Automation</h4>
+                <p className="text-xs text-gray-300 font-light leading-relaxed">
+                  Assignments, reminders, notifications, webhooks.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
+                e.g. State-aware SMS pings
+              </div>
+            </div>
+
+            {/* Layer 5: Dashboards */}
+            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">05 / VISIBILITY</span>
+                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Dashboards</h4>
+                <p className="text-xs text-gray-300 font-light leading-relaxed">
+                  Queues, status views, reports, owner visibility.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
+                e.g. Turnaround average logs
+              </div>
+            </div>
+
+            {/* Layer 6: Handoff & Documentation */}
+            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">06 / DEPLOY</span>
+                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Handoff & Docs</h4>
+                <p className="text-xs text-gray-300 font-light leading-relaxed">
+                  Training notes, audit trail, deployment, operating guide.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
+                e.g. Sandbox operating log
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </AnimatedSection>
   );
