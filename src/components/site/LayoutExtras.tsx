@@ -16,8 +16,8 @@ export function LayoutExtras() {
     restDelta: 0.001
   });
 
+  // 1. Mouse Spotlight Tracker (CSS-driven, 0 re-renders, with safe cleanup)
   useEffect(() => {
-    // 1. Mouse Spotlight Tracker (CSS-driven, 0 re-renders)
     const hasPointer = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
     const handleMouseMove = (e: MouseEvent) => {
       if (hasPointer) {
@@ -30,23 +30,31 @@ export function LayoutExtras() {
       window.addEventListener("mousemove", handleMouseMove, { passive: true });
     }
 
-    // 2. Cookie Consent Banner check
+    return () => {
+      if (hasPointer) {
+        window.removeEventListener("mousemove", handleMouseMove);
+      }
+    };
+  }, []);
+
+  // 2. Cookie Consent Banner check (isolated, guarded local storage access and timer cleanup)
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
     try {
       const consent = localStorage.getItem("nexus_cookie_pref");
       if (!consent) {
-        const timer = setTimeout(() => setShowCookieBanner(true), 1000);
-        return () => clearTimeout(timer);
+        timer = setTimeout(() => setShowCookieBanner(true), 1000);
       }
     } catch (e) {
       console.warn("Storage access failed", e);
     }
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      if (timer) clearTimeout(timer);
     };
   }, []);
 
-  // 3. Track Active Color based on viewport scroll sections
+  // 3. Track Active Color based on viewport scroll sections (Observer cleanup)
   useEffect(() => {
     const handleColorIntersection = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {

@@ -121,11 +121,19 @@ export function CaseStudiesSection() {
   const [hoveredCapabilityId, setHoveredCapabilityId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+    const media = window.matchMedia("(max-width: 768px)");
+    setIsMobile(media.matches);
+    const listener = () => setIsMobile(media.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
   }, []);
+
+  const showCanvas = mounted && !isMobile && !shouldReduceMotion;
 
   const activeStudy = CASE_STUDIES.find((study) => study.id === activeTab) || CASE_STUDIES[0];
   const MockupComponent = mockupMap[activeStudy.id];
@@ -338,12 +346,20 @@ export function CaseStudiesSection() {
                       Active Orbit Node
                     </div>
                     <div className="w-full h-full">
-                      <ThreeCanvasShell 
-                        ariaLabel="A 3D system orbit constellation mapping out ClinicOS, Aarogya, and other proof modules."
-                        fallback={<OrbitFallback />}
-                      >
-                        <ProofOrbitScene activeId={activeStudy.id} />
-                      </ThreeCanvasShell>
+                      {showCanvas ? (
+                        <ThreeCanvasShell 
+                          ariaLabel="A 3D system orbit constellation mapping out ClinicOS, Aarogya, and other proof modules."
+                          fallback={<OrbitFallback />}
+                          decorative={true}
+                          interactive={false}
+                          frameloop="demand"
+                          powerPreference="low-power"
+                        >
+                          <ProofOrbitScene activeId={activeStudy.id} />
+                        </ThreeCanvasShell>
+                      ) : (
+                        <OrbitFallback />
+                      )}
                     </div>
                   </div>
                 </div>
@@ -615,15 +631,23 @@ export function CaseStudiesSection() {
                 Proof systems and capabilities
               </div>
               <div className="w-full h-full">
-                <ThreeCanvasShell 
-                  ariaLabel="A 3D interactive connection matrix mapping shipped systems to core capabilities like workflow rules, automation actions, and owner dashboards."
-                  fallback={<OrbitFallback />}
-                >
-                  <ProofConstellation 
-                    activeSystemId={hoveredSystemId} 
-                    activeCapabilityId={hoveredCapabilityId} 
-                  />
-                </ThreeCanvasShell>
+                {showCanvas ? (
+                  <ThreeCanvasShell 
+                    ariaLabel="A 3D interactive connection matrix mapping shipped systems to core capabilities like workflow rules, automation actions, and owner dashboards."
+                    fallback={<OrbitFallback />}
+                    decorative={true}
+                    interactive={false}
+                    frameloop="always"
+                    powerPreference="low-power"
+                  >
+                    <ProofConstellation 
+                      activeSystemId={hoveredSystemId} 
+                      activeCapabilityId={hoveredCapabilityId} 
+                    />
+                  </ThreeCanvasShell>
+                ) : (
+                  <OrbitFallback />
+                )}
               </div>
             </div>
           </div>

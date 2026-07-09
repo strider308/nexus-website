@@ -17,6 +17,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(METADATA.canonicalUrl),
   title: METADATA.title,
   description: METADATA.description,
   alternates: {
@@ -84,7 +85,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Outpatient clinic operations platform covering patient registration, appointment booking, queue management, consultation, diagnostics, billing, and pharmacy.",
         "featureList": "Patient registration, appointment booking, live queue management, digital prescriptions, diagnostic orders, billing, pharmacy, owner dashboard",
-        "url": `${METADATA.canonicalUrl}/#clinicos`
+        "url": `${METADATA.canonicalUrl}/case-studies#clinicos`
       },
       {
         "@type": "SoftwareApplication",
@@ -93,7 +94,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Personal health information and routine tracker for blood pressure, blood glucose, weight, and medication. User-controlled data with export and deletion.",
         "featureList": "Metric logging, trend visualization, weekly summaries, medication reminders, data export, data deletion",
-        "url": `${METADATA.canonicalUrl}/#aarogya`
+        "url": `${METADATA.canonicalUrl}/case-studies#aarogya`
       },
       {
         "@type": "SoftwareApplication",
@@ -102,7 +103,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Restaurant ordering and operations platform covering QR menu, table ordering, kitchen queue, billing, and owner dashboard.",
         "featureList": "QR menu, table ordering, kitchen display, billing, cash reconciliation, inventory management, owner dashboard",
-        "url": `${METADATA.canonicalUrl}/#restaurantos`
+        "url": `${METADATA.canonicalUrl}/case-studies#restaurantos`
       },
       {
         "@type": "SoftwareApplication",
@@ -111,7 +112,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Async team execution workspace for task ownership, daily check-ins, progress tracking, and team accountability.",
         "featureList": "Task ownership, daily check-ins, progress tracking, team accountability, async-first workflow",
-        "url": `${METADATA.canonicalUrl}/#shipwright`
+        "url": `${METADATA.canonicalUrl}/case-studies#shipwright`
       },
       {
         "@type": "SoftwareApplication",
@@ -120,7 +121,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Developer-focused web-security scanning platform for authorized vulnerability detection, finding reports, and severity classification.",
         "featureList": "Automated vulnerability scanning, finding severity levels, detailed reports, scan history",
-        "url": `${METADATA.canonicalUrl}/#securescan`
+        "url": `${METADATA.canonicalUrl}/case-studies#securescan`
       },
       {
         "@type": "SoftwareApplication",
@@ -129,7 +130,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Dating-safety preparation and check-in product. Users share date plans with trusted contacts and set timed check-ins.",
         "featureList": "Date plan sharing, trusted contact network, timed check-ins, consent-aware sharing",
-        "url": `${METADATA.canonicalUrl}/#safedate`
+        "url": `${METADATA.canonicalUrl}/case-studies#safedate`
       },
       {
         "@type": "SoftwareApplication",
@@ -138,7 +139,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Founder execution and public-progress workspace. Private task management with a public-facing progress log for accountability and audience building.",
         "featureList": "Private task management, public progress log, milestone sharing, founder accountability",
-        "url": `${METADATA.canonicalUrl}/#buildpublic`
+        "url": `${METADATA.canonicalUrl}/case-studies#buildpublic`
       }
     ]
   };
@@ -158,7 +159,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground animate-fade-in">
         <a 
           href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#1A2B4C] text-white px-4 py-2 rounded-[6px] z-[200] font-semibold text-sm outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1A2B4C]/50"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#DEDBC8] text-black px-4 py-2 rounded-full z-[200] font-mono font-bold text-xs uppercase tracking-wider outline-none focus:ring-2 focus:ring-[#DEDBC8] focus:ring-offset-2 focus:ring-offset-black"
         >
           Skip to main content
         </a>

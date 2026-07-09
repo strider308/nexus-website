@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { HERO } from "@/lib/content/nexus";
 import dynamic from "next/dynamic";
 import { HeroFallback } from "../three/ThreeFallback";
@@ -18,6 +19,19 @@ const NexusSystemScene = dynamic(
 
 export function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const media = window.matchMedia("(max-width: 768px)");
+    setIsMobile(media.matches);
+    const listener = () => setIsMobile(media.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
+  const showCanvas = mounted && !isMobile && !shouldReduceMotion;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -51,12 +65,20 @@ export function Hero() {
         
         {/* Visual Background Canvas */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-          <ThreeCanvasShell 
-            ariaLabel="Workflow integration visualization mapping scattered chats, sheets, and tasks into a central Nexus network."
-            fallback={<HeroFallback />}
-          >
-            <NexusSystemScene />
-          </ThreeCanvasShell>
+          {showCanvas ? (
+            <ThreeCanvasShell 
+              ariaLabel="Workflow integration visualization mapping scattered chats, sheets, and tasks into a central Nexus network."
+              fallback={<HeroFallback />}
+              decorative={true}
+              interactive={false}
+              frameloop="always"
+              powerPreference="low-power"
+            >
+              <NexusSystemScene />
+            </ThreeCanvasShell>
+          ) : (
+            <HeroFallback />
+          )}
         </div>
 
         {/* Noise overlay */}

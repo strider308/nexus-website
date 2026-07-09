@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useMemo } from "react";
-import { motion, useInView, useScroll, useTransform, MotionValue } from "motion/react";
+import React, { useRef, useMemo, useState, useEffect } from "react";
+import { motion, useInView, useScroll, useTransform, MotionValue, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 interface WordsPullUpProps {
@@ -168,75 +168,85 @@ interface ScrollRevealParagraphProps {
   className?: string;
 }
 
-interface ScrollRevealCharProps {
-  char: string;
+interface ScrollRevealWordProps {
+  word: string;
   index: number;
-  totalChars: number;
+  totalWords: number;
   scrollYProgress: MotionValue<number>;
 }
 
-function ScrollRevealChar({ char, index, totalChars, scrollYProgress }: ScrollRevealCharProps) {
-  const charProgressStart = (index / totalChars) * 0.85;
-  const charProgressEnd = Math.min(1, charProgressStart + 0.15);
+function ScrollRevealWord({ word, index, totalWords, scrollYProgress }: ScrollRevealWordProps) {
+  const wordProgressStart = (index / totalWords) * 0.85;
+  const wordProgressEnd = Math.min(1, wordProgressStart + 0.15);
   
-  // Character reveal opacity linking
+  // Word reveal opacity linking
   const opacity = useTransform(
     scrollYProgress,
-    [charProgressStart, charProgressEnd],
+    [wordProgressStart, wordProgressEnd],
     [0.2, 1]
   );
-
-  // Render spaces seamlessly
-  if (char === " ") {
-    return (
-      <span className="inline-block">
-        &nbsp;
-      </span>
-    );
-  }
 
   return (
     <motion.span
       style={{ opacity }}
       className="inline-block transition-opacity duration-75"
     >
-      {char}
+      {word}
     </motion.span>
   );
 }
 
 export function ScrollRevealParagraph({ text, className }: ScrollRevealParagraphProps) {
   const containerRef = useRef<HTMLParagraphElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const media = window.matchMedia("(max-width: 768px)");
+    setIsMobile(media.matches);
+    const listener = () => setIsMobile(media.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 0.8", "end 0.2"],
   });
 
-  const chars = useMemo(() => text.split(""), [text]);
-  const totalChars = chars.length;
+  const words = useMemo(() => text.split(" "), [text]);
+  const totalWords = words.length;
+
+  const bypassAnimation = shouldReduceMotion || !mounted || isMobile;
 
   return (
     <p
       ref={containerRef}
-      className={cn("leading-relaxed select-none relative", className)}
-      aria-label={text}
+      className={cn("leading-relaxed relative", className)}
     >
-      {/* Screen reader content */}
-      <span className="sr-only">{text}</span>
-      
-      {/* Accessible character map with opacity transforms */}
-      <span aria-hidden="true" className="flex flex-wrap justify-center gap-x-[0.05em] gap-y-[0.1em]">
-        {chars.map((char, index) => (
-          <ScrollRevealChar
-            key={index}
-            char={char}
-            index={index}
-            totalChars={totalChars}
-            scrollYProgress={scrollYProgress}
-          />
-        ))}
-      </span>
+      {bypassAnimation ? (
+        <span>{text}</span>
+      ) : (
+        <>
+          {/* Screen reader content */}
+          <span className="sr-only">{text}</span>
+          
+          {/* Accessible word map with opacity transforms */}
+          <span aria-hidden="true" className="flex flex-wrap justify-center gap-x-[0.3em] gap-y-[0.1em] select-none">
+            {words.map((word, index) => (
+              <ScrollRevealWord
+                key={index}
+                word={word}
+                index={index}
+                totalWords={totalWords}
+                scrollYProgress={scrollYProgress}
+              />
+            ))}
+          </span>
+        </>
+      )}
     </p>
   );
 }

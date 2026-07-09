@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { HERO } from "@/lib/content/nexus";
@@ -17,6 +17,7 @@ import { ArrowRight } from "lucide-react";
 import nextDynamic from "next/dynamic";
 import { OrbitFallback } from "@/components/three/ThreeFallback";
 import { SystemCard3D } from "@/components/three/SystemCard3D";
+import { useReducedMotion } from "motion/react";
 
 const ThreeCanvasShell = nextDynamic(
   () => import("@/components/three/ThreeCanvasShell").then((mod) => mod.ThreeCanvasShell),
@@ -95,6 +96,20 @@ const DEMO_CARDS = [
 
 export default function DemoPage() {
   const [activeDemoId, setActiveDemoId] = useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const media = window.matchMedia("(max-width: 768px)");
+    setIsMobile(media.matches);
+    const listener = () => setIsMobile(media.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
+  const showCanvas = mounted && !isMobile && !shouldReduceMotion;
 
   return (
     <div className="flex flex-col min-h-screen bg-black relative">
@@ -187,12 +202,20 @@ export default function DemoPage() {
                 Control Console
               </div>
               <div className="w-full h-[420px]">
-                <ThreeCanvasShell 
-                  ariaLabel="A 3D command terminal console display mapping live order updates and queue pipelines."
-                  fallback={<OrbitFallback />}
-                >
-                  <DemoLibraryScene activeDemoId={activeDemoId} />
-                </ThreeCanvasShell>
+                {showCanvas ? (
+                  <ThreeCanvasShell 
+                    ariaLabel="A 3D command terminal console display mapping live order updates and queue pipelines."
+                    fallback={<OrbitFallback />}
+                    decorative={true}
+                    interactive={false}
+                    frameloop="always"
+                    powerPreference="low-power"
+                  >
+                    <DemoLibraryScene activeDemoId={activeDemoId} />
+                  </ThreeCanvasShell>
+                ) : (
+                  <OrbitFallback />
+                )}
               </div>
             </div>
           </div>

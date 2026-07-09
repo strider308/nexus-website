@@ -37,28 +37,44 @@ class WebGLErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryStat
 interface ThreeCanvasShellProps {
   children: ReactNode;
   fallback: ReactNode;
-  ariaLabel: string;
+  ariaLabel?: string;
+  interactive?: boolean;
+  decorative?: boolean;
+  frameloop?: "always" | "demand" | "never";
+  powerPreference?: "default" | "high-performance" | "low-power";
 }
 
-export function ThreeCanvasShell({ children, fallback, ariaLabel }: ThreeCanvasShellProps) {
+export function ThreeCanvasShell({ 
+  children, 
+  fallback, 
+  ariaLabel,
+  interactive = false,
+  decorative = true,
+  frameloop = "demand",
+  powerPreference = "low-power"
+}: ThreeCanvasShellProps) {
+  const wrapperProps = decorative 
+    ? { "aria-hidden": "true" as const }
+    : { role: "img", "aria-label": ariaLabel };
+
   return (
     <WebGLErrorBoundary fallback={fallback}>
       <Suspense fallback={fallback}>
         <div 
           className="w-full h-full relative" 
-          role="img" 
-          aria-label={ariaLabel}
+          {...wrapperProps}
         >
           <Canvas
             dpr={[1, 1.5]}
+            frameloop={frameloop}
             gl={{ 
               antialias: true, 
               alpha: true,
-              powerPreference: "high-performance",
+              powerPreference: powerPreference,
               preserveDrawingBuffer: false
             }}
             camera={{ position: [0, 0, 5], fov: 45 }}
-            style={{ pointerEvents: "auto" }}
+            style={{ pointerEvents: interactive ? "auto" : "none" }}
           >
             {children}
           </Canvas>
