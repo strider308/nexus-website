@@ -7,14 +7,14 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { ArrowRight, CheckCircle2, AlertCircle, Cpu, Layers } from "lucide-react";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import { DepthFallback } from "../three/ThreeFallback";
 
-const ThreeCanvasShell = dynamic(
+const ThreeCanvasShell = nextDynamic(
   () => import("../three/ThreeCanvasShell").then((mod) => mod.ThreeCanvasShell),
   { ssr: false, loading: () => <DepthFallback /> }
 );
-const ServiceDepthScene = dynamic(
+const ServiceDepthScene = nextDynamic(
   () => import("../three/ServiceDepthScene"),
   { ssr: false }
 );
@@ -22,116 +22,123 @@ const ServiceDepthScene = dynamic(
 const EXPLORER_SERVICES = [
   {
     id: "workflow",
-    name: "Custom workflow systems",
-    when: "Your team runs on scattered tools, manual handoffs, and owner memory.",
-    builds: "A role-aware operational system that connects intake, action, status, and visibility.",
-    roles: "Owner, operator, staff, customer/admin.",
-    proof: "ClinicOS, RestaurantOS, ShipWright",
-    starter: "Show us the workflow you currently manage manually.",
+    title: "Custom workflow systems",
+    desc: "We build tailored software applications designed around your specific team roles, operational steps, data inputs, and invoice approvals.",
+    proof: "ClinicOS Reference / RestaurantOS",
+    when: "Your team is manually copying data, tracking tasks in chat channels, or using fragile custom sheets.",
+    builds: "Multi-role workflow app, secure client portal page, and centralized task manager.",
+    roles: "Operator, Manager, Customer, and External Admin accounts.",
+    starter: "Replacing paper registers or shared spreadsheets with guided UI actions."
   },
   {
     id: "automation",
-    name: "Automation layers",
-    when: "Staff spend hours copying data between sheets, sending manual notifications, or checking statuses.",
-    builds: "Automated background pipelines, state-aware email/SMS notifications, and webhook integrations.",
-    roles: "Operator, staff, system administrator.",
-    proof: "ShipWright, Aarogya",
-    starter: "Which manual task does your team repeat more than ten times a day?",
+    title: "Automation layers",
+    desc: "We connect your existing databases, calendar triggers, chat feeds, and notifications to remove repetitive manual follow-ups.",
+    proof: "SafeDate Model / SecureScan logs",
+    when: "Staff spend hours chasing client approvals, sending milestone notifications, or updating statuses manually.",
+    builds: "Background event listeners, automated alerts triggers, and secure API webhooks.",
+    roles: "Internal staff, clients, and connected third-party systems.",
+    starter: "Eliminating manual task assignments and reminder emails."
   },
   {
     id: "mvp",
-    name: "MVP / private beta builds",
-    when: "You have a validated concept but need a secure, functional product to roll out to first users.",
-    builds: "A scoped product with secure authentication, core workflow engines, and feedback loops.",
-    roles: "Founder, early adopter, pilot user.",
-    proof: "BuildPublic, SafeDate, SecureScan",
-    starter: "What is the single core value your users must experience in day one?",
+    title: "MVP / private beta builds",
+    desc: "We construct lightweight, fast-loading initial versions of your software designed to validate assumptions with early pilot users.",
+    proof: "Aarogya Data / ShipWright Task Board",
+    when: "You are preparing a new app concept for private beta launch and need reliable state transitions.",
+    builds: "Staging sandbox deploy, user feedback forms, and database rules verification.",
+    roles: "Early pilot users and system administrators.",
+    starter: "Launching a secure, functional workspace for 10-15 friendly testers."
   },
   {
     id: "dashboards",
-    name: "Owner dashboards",
-    when: "You are running operations blind, relying on chats to know what is finished and what is stuck.",
-    builds: "Live consolidated dashboards showing queue metrics, table turnarounds, task status, and bottleneck alerts.",
-    roles: "Owner, stakeholder, manager.",
-    proof: "RestaurantOS, ClinicOS, Aarogya",
-    starter: "What metric do you wish you could see in real-time right now?",
+    title: "Owner dashboards",
+    desc: "We aggregate active room counts, table turnaround rates, and cash collections into consolidated dashboard views.",
+    proof: "BuildPublic Founder Workspace",
+    when: "Owners run business operations blind, lacking real-time data visibility.",
+    builds: "Metric counters, data history logs, and CSV download summaries.",
+    roles: "Business owners, stakeholders, and lead operators.",
+    starter: "Aggregating scattered chats and sheets into single-pane status screens."
   },
   {
     id: "ux",
-    name: "UX modernization",
-    when: "Legacy systems or complex sheets are making staff training slow and input errors common.",
-    builds: "Cleared-up digital pathways, role-tailored dashboards, and robust error prevention.",
-    roles: "Staff, employee, field operator.",
-    proof: "ClinicOS, Aarogya, RestaurantOS",
-    starter: "What is the most common input mistake your staff make in the current system?",
+    title: "UX modernization",
+    desc: "We redesign cluttered dashboards, consolidate overlapping navigation menus, and clean up visual layouts.",
+    proof: "ClinicOS Web Layout",
+    when: "System screens are too complex, leading to training fatigue or operator errors.",
+    builds: "Clean sidebar menu, unified forms flow, and responsive grid panels.",
+    roles: "Internal staff, operators, and customers.",
+    starter: "Simplifying multi-step forms into logical operational pathways."
   },
   {
     id: "ai",
-    name: "AI-assisted workflow features",
-    when: "Operators spend hours reading long transcripts, drafting standard updates, or manually prioritizing queues.",
-    builds: "Scoped summarization pipelines, template drafts, and smart suggestion logs with strict human oversight.",
-    roles: "Staff, customer support, data analyst.",
-    proof: "ClinicOS, SecureScan",
-    starter: "Where do your staff spend the most time reading or drafting text?",
-  },
+    title: "AI-assisted workflows",
+    desc: "We implement secure LLM prompt integrations to draft task notes or summarize client transcripts with human confirmation gates.",
+    proof: "SecureScan Analysis Assist",
+    when: "Staff spend hours reading transcripts, writing summaries, or drafting manual email reports.",
+    builds: "Draft text generators, background summarization scripts, and review checklists.",
+    roles: "Drafting engine and human review managers.",
+    starter: "Using automated models to draft summaries under manual control."
+  }
 ];
 
 const PROCESS_STEPS_DETAILS = [
   {
-    step: "01",
-    title: "Understand",
-    does: "Analyzes raw operational logs, spreadsheet structures, and role dynamics.",
-    provides: "Access to operational managers, current spreadsheets, and chat groups.",
-    delivers: "A scoped workflow map showing current bottlenecks.",
-    reduces: "Building features that don't match the actual workflow.",
+    step: "1",
+    title: "Workflow Mapping",
+    does: "We trace how work moves from intake trigger to completion.",
+    provides: "Current sheets, process logs, and staff walk-through notes.",
+    delivers: "Detailed stage transition diagrams mapping roles and database parameters.",
+    reduces: "Developer waste from building incorrect database relations."
   },
   {
-    step: "02",
-    title: "Map",
-    does: "Designs precise state transitions and role-based permissions.",
-    provides: "Rules for approvals, pricing structures, and handoff criteria.",
-    delivers: "Interactive wireframe screens showing each role's view.",
-    reduces: "Communication failures between operators, staff, and customers.",
+    step: "2",
+    title: "Visual Priming",
+    does: "We design clean UI panels and form stages before writing system code.",
+    provides: "Approval on data fields, user roles, and layout details.",
+    delivers: "High-fidelity clickable static prototypes showing actual user screens.",
+    reduces: "Scope creep and design rework during backend code builds."
   },
   {
-    step: "03",
-    title: "Build",
-    does: "Writes custom, secure web applications and automated pipelines.",
-    provides: "Branding assets, API access keys, and staging environment setups.",
-    delivers: "Fully built software deployed to a private staging url.",
-    reduces: "Code-debt or bloated frameworks that degrade performance.",
+    step: "3",
+    title: "Database Encode",
+    does: "We build correct state machines, access roles, and audit databases.",
+    provides: "Final verification of business rules and transition steps.",
+    delivers: "Secure API structures, access rules, and data validation layers.",
+    reduces: "Security bugs and unauthorized privilege access risks."
   },
   {
-    step: "04",
-    title: "Validate",
-    does: "Sets up feedback tracking and guides private beta users.",
-    provides: "5-10 friendly users or staff members to pilot the build.",
-    delivers: "Logged errors, resolved edge cases, and pilot feedback notes.",
-    reduces: "Operational friction during full-scale launch.",
+    step: "4",
+    title: "Pilot Handoff",
+    does: "We deploy the first system version to friendly pilot users.",
+    provides: "10-15 friendly testers tracking active operations in real time.",
+    delivers: "Active staging URL, error tracking setup, and client feedback forms.",
+    reduces: "Bugs and system crashes during live public launch."
   },
   {
-    step: "05",
-    title: "Launch",
-    does: "Runs production cutover checklists and transfers codebase.",
-    provides: "Production domain settings and DNS access.",
-    delivers: "Main production deployment live with all code handed over in Git.",
-    reduces: "Downtime, broken integrations, or vendor lock-in.",
-  },
+    step: "5",
+    title: "System Handoff",
+    does: "We clean up system logs, setup domain paths, and hand over the codebase.",
+    provides: "Approval on production build and final invoice signoff.",
+    delivers: "Full repository ownership and complete system documentation sheets.",
+    reduces: "Key-person risk by documenting all code and configurations."
+  }
 ];
 
 export function ServicesSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion();
-
   const [selectedService, setSelectedService] = useState<string>("workflow");
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const shouldReduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end center"],
+    offset: ["start end", "end start"]
   });
 
-  const desktopPathFill = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
-  const mobilePathFill = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const desktopPathFill = useTransform(scrollYProgress, [0.1, 0.7], ["0%", "80%"]);
+  const mobilePathFill = useTransform(scrollYProgress, [0.15, 0.85], ["0%", "100%"]);
 
   const activeServiceData = EXPLORER_SERVICES.find((s) => s.id === selectedService) || EXPLORER_SERVICES[0];
 
@@ -142,68 +149,44 @@ export function ServicesSection() {
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
           <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-muted-foreground mb-2 block">
-            {SERVICES.eyebrow}
+            Capabilities Ledger
           </span>
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-primary leading-tight mb-4">
-            {SERVICES.title}
+            Workflow layers Nexus builds
           </h2>
           <p className="text-base md:text-lg font-light text-muted-foreground leading-relaxed">
             {SERVICES.sub}
           </p>
         </div>
 
-        {/* Who We Work With */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {SERVICES.workWith.map((group, idx) => (
-            <div key={idx} className="border border-border bg-background rounded-[8px] p-6 shadow-sm">
-              <h3 className="font-display text-lg md:text-xl font-bold text-primary mb-4">
-                {group.title}
-              </h3>
-              <ul className="flex flex-col gap-3">
-                {group.bullets.map((bullet, bulletIdx) => (
-                  <li key={bulletIdx} className="flex items-start gap-2.5 text-xs md:text-sm text-foreground/85 font-light leading-relaxed">
-                    <CheckCircle2 className="h-4 w-4 text-[#2E6FAD] shrink-0 mt-0.5" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Core Engagement Services - Interactive Explorer */}
-        <div className="mb-16">
-          <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h3 className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase">
-                Core Engagement Services
-              </h3>
-              <p className="text-xs text-muted-foreground font-light mt-1">
-                Explore when each service matters, what we design, and our related proof.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-background border border-border rounded-[8px] p-5 shadow-sm">
-            {/* Left Side: Selectable Cards */}
-            <div className="lg:col-span-5 flex flex-col gap-2" role="tablist" aria-label="Services selector list">
+        {/* Services Explorer Tool */}
+        <div ref={sectionRef} className="mb-16 scroll-mt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            {/* Left Side: Services tab selection */}
+            <div className="lg:col-span-5 flex flex-col gap-3">
               {EXPLORER_SERVICES.map((service) => {
-                const isSelected = service.id === selectedService;
+                const isActive = selectedService === service.id;
                 return (
                   <button
                     key={service.id}
                     onClick={() => setSelectedService(service.id)}
-                    role="tab"
-                    aria-selected={isSelected}
                     className={cn(
-                      "w-full text-left px-4 py-3 rounded-[6px] border transition-all duration-200 flex items-center justify-between text-xs md:text-sm font-semibold cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
-                      isSelected
-                        ? "bg-muted border-border/80 text-primary shadow-sm"
-                        : "border-transparent text-muted-foreground hover:text-primary hover:bg-muted/30"
+                      "w-full text-left p-5 rounded-[8px] border transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
+                      isActive 
+                        ? "bg-background border-border shadow-sm border-l-4 border-l-[#2E6FAD]" 
+                        : "bg-transparent border-transparent hover:bg-background/40 hover:border-border/30"
                     )}
                   >
-                    <span>{service.name}</span>
-                    <ArrowRight className={cn("h-3.5 w-3.5 transition-transform duration-200 shrink-0", isSelected ? "translate-x-1 opacity-100" : "opacity-0")} />
+                    <h3 className={cn(
+                      "font-display text-sm md:text-base font-bold transition-colors",
+                      isActive ? "text-primary" : "text-foreground/80"
+                    )}>
+                      {service.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground font-light leading-relaxed mt-1">
+                      {service.desc}
+                    </p>
                   </button>
                 );
               })}
@@ -261,23 +244,26 @@ export function ServicesSection() {
                   </div>
                 </div>
 
-                {/* 3D Stack Visual (5 Cols, Desktop Only) */}
-                <div className="hidden md:flex md:col-span-5 border border-border/60 bg-muted/15 rounded-[8px] overflow-hidden items-center justify-center p-2 relative h-[240px]">
-                  <div className="absolute top-2 left-3 text-[8px] font-mono text-muted-foreground/60 uppercase select-none">
-                    Architecture Stack
+                {/* 3D Visual & Labeled Diagram (5 Cols, Desktop Only) */}
+                <div className="hidden md:flex md:col-span-5 flex-col gap-4">
+                  {/* Canvas Container */}
+                  <div className="border border-border/60 bg-muted/15 rounded-[8px] overflow-hidden items-center justify-center p-2 relative h-[210px] w-full">
+                    <div className="absolute top-2 left-3 text-[8px] font-mono text-muted-foreground/60 uppercase select-none">
+                      Architecture Model (3D)
+                    </div>
+                    <div className="w-full h-full">
+                      <ThreeCanvasShell 
+                        ariaLabel="3D spatial architecture stack representing data layers, process logic, and live dashboards."
+                        fallback={<DepthFallback />}
+                      >
+                        <ServiceDepthScene selectedService={selectedService} />
+                      </ThreeCanvasShell>
+                    </div>
                   </div>
-                  <div className="w-full h-full">
-                    <ThreeCanvasShell 
-                      ariaLabel="3D spatial architecture stack representing data layers, process logic, and live dashboards."
-                      fallback={<DepthFallback />}
-                    >
-                      <ServiceDepthScene selectedService={selectedService} />
-                    </ThreeCanvasShell>
-                  </div>
+
+                  {/* Labeled Static Diagram */}
+                  <StaticArchitectureStack selectedService={selectedService} />
                 </div>
-              </div>
-              <div className="text-[10px] text-muted-foreground font-mono mt-4 pt-2 border-t border-border/40 select-none">
-                Select cards on the left to inspect builds.
               </div>
             </div>
           </div>
@@ -315,7 +301,7 @@ export function ServicesSection() {
                       {step.title}
                     </h4>
 
-                    {/* Step parameters block (fully visible and scan-readable) */}
+                    {/* Step parameters block */}
                     <div className="flex flex-col gap-2.5 pt-3 border-t border-border/60 text-[10px] text-left font-light leading-relaxed text-foreground/95 w-full">
                       <div>
                         <strong className="text-[8px] font-mono text-muted-foreground uppercase block flex items-center gap-1">
@@ -342,12 +328,10 @@ export function ServicesSection() {
                         {step.reduces}
                       </div>
                     </div>
-
                   </div>
                 );
               })}
             </div>
-
           </div>
         </div>
 
@@ -434,5 +418,82 @@ export function ServicesSection() {
 
       </div>
     </AnimatedSection>
+  );
+}
+
+interface StaticArchitectureStackProps {
+  selectedService: string;
+}
+
+const ARCH_LAYERS = [
+  { id: "intake", label: "1. Intake Layer", desc: "Forms, calls, spreadsheets, messages, files" },
+  { id: "logic", label: "2. Logic Layer", desc: "Workflow states, rules, validations, calculations" },
+  { id: "role", label: "3. Role Layer", desc: "Owner, admin, staff, customer, partner accounts" },
+  { id: "automation", label: "4. Automation Layer", desc: "Notifications, assignments, reminders, webhooks" },
+  { id: "visibility", label: "5. Visibility Layer", desc: "Dashboards, status views, reports, queues" },
+  { id: "handoff", label: "6. Handoff Layer", desc: "Documentation, audit trail, deployment, training" },
+];
+
+function StaticArchitectureStack({ selectedService }: StaticArchitectureStackProps) {
+  const service = selectedService.toLowerCase();
+  
+  const isLayerHighlighted = (layerId: string) => {
+    if (service.includes("workflow")) return true; // all layers
+    if (service.includes("automation")) {
+      return layerId === "logic" || layerId === "automation" || layerId === "handoff";
+    }
+    if (service.includes("mvp") || service.includes("beta")) {
+      return layerId === "intake" || layerId === "logic" || layerId === "visibility" || layerId === "handoff";
+    }
+    if (service.includes("dashboard")) {
+      return layerId === "visibility" || layerId === "logic" || layerId === "role";
+    }
+    if (service.includes("ux") || service.includes("modernization")) {
+      return layerId === "intake" || layerId === "role" || layerId === "visibility";
+    }
+    if (service.includes("ai") || service.includes("assisted")) {
+      return layerId === "logic" || layerId === "automation" || layerId === "handoff";
+    }
+    return false;
+  };
+
+  return (
+    <div className="border border-border/80 bg-background/50 backdrop-blur-sm rounded-[12px] p-5 shadow-sm w-full">
+      <span className="text-[9px] font-mono font-bold text-muted-foreground uppercase block mb-4 select-none">
+        Service Architecture Stack
+      </span>
+      <div className="flex flex-col gap-3 relative pl-4">
+        {/* Connecting timeline line */}
+        <div className="absolute left-[3px] top-2 bottom-2 w-0.5 bg-border/40" />
+
+        {ARCH_LAYERS.map((layer) => {
+          const isHigh = isLayerHighlighted(layer.id);
+          return (
+            <div key={layer.id} className="relative flex flex-col gap-0.5 group">
+              {/* Bullet Node */}
+              <span className={cn(
+                "absolute left-[-16px] top-1.5 w-1.5 h-1.5 rounded-full border transition-all duration-300",
+                isHigh 
+                  ? "bg-[#2E6FAD] border-[#2E6FAD] scale-110 shadow-[0_0_8px_rgba(46,111,173,0.35)]" 
+                  : "bg-background border-border/60"
+              )} />
+              
+              <h4 className={cn(
+                "text-[9px] font-bold font-mono tracking-wide uppercase transition-colors duration-300",
+                isHigh ? "text-primary" : "text-muted-foreground/50"
+              )}>
+                {layer.label}
+              </h4>
+              <p className={cn(
+                "text-[10px] font-light leading-normal transition-colors duration-300",
+                isHigh ? "text-foreground/90 font-medium" : "text-muted-foreground/45"
+              )}>
+                {layer.desc}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
