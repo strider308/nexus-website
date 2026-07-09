@@ -1,3 +1,6 @@
+"use client";
+
+import { AnimatedSection } from "@/components/ui/animated-section";
 import { Cpu, Layers, GitBranch, Shield, Bell, Eye, Database, HelpCircle, CheckSquare } from "lucide-react";
 
 const PRIMITIVES = [
@@ -50,39 +53,41 @@ const PRIMITIVES = [
 
 export function WhyNexusCompounds() {
   return (
-    <section className="w-full py-16 border-b border-border bg-[#0C1828] text-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <AnimatedSection className="w-full py-20 md:py-28 border-b border-[#DEDBC8]/10 bg-black relative">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-noise" />
+
+      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-12">
-          <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-white/50 mb-2 block">
+        <div className="max-w-3xl mb-16">
+          <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] uppercase text-gray-500 mb-3 block">
             Scalable Infrastructure
           </span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-4">
+          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
             Why Nexus Compounds
           </h2>
-          <p className="text-base md:text-lg font-light text-white/70 leading-relaxed">
+          <p className="text-sm md:text-base font-light text-gray-400 leading-relaxed">
             The seven systems we shipped are not unrelated custom software projects. Every build strengthens and validates a core library of reusable workflow primitives, making each subsequent project faster to deploy and safer to operate.
           </p>
         </div>
 
         {/* Primitives Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {PRIMITIVES.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div 
                 key={idx} 
-                className="border border-white/10 bg-white/5 hover:border-white/20 p-6 rounded-[8px] flex gap-4 transition-colors"
+                className="border border-[#DEDBC8]/10 bg-[#101010] hover:border-[#DEDBC8]/25 p-6 rounded-[12px] flex gap-4 transition-all duration-300 group"
               >
-                <div className="p-2.5 rounded-[8px] bg-white/10 text-[#2E6FAD] shrink-0 h-10 w-10 flex items-center justify-center">
-                  <Icon className="h-5 w-5" />
+                <div className="p-2.5 rounded-[8px] bg-black/40 border border-[#DEDBC8]/10 text-[#DEDBC8] shrink-0 h-10 w-10 flex items-center justify-center transition-colors group-hover:bg-[#DEDBC8] group-hover:text-black">
+                  <Icon className="h-4 w-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white mb-2">
+                  <h3 className="text-sm font-bold text-[#E1E0CC] mb-2 group-hover:text-white transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed font-light">
+                  <p className="text-xs text-gray-400 leading-relaxed font-light">
                     {item.desc}
                   </p>
                 </div>
@@ -92,6 +97,6 @@ export function WhyNexusCompounds() {
         </div>
 
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

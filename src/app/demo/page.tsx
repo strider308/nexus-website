@@ -97,66 +97,67 @@ export default function DemoPage() {
   const [activeDemoId, setActiveDemoId] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-black relative">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-noise" />
       <SiteHeader />
       
-      <main id="main-content" className="flex-grow bg-background py-16 md:py-24">
+      <main id="main-content" className="flex-grow py-24 md:py-32 relative z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           
           {/* Header */}
-          <div className="max-w-3xl mb-16">
-            <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-muted-foreground mb-2 block">
+          <div className="max-w-3xl mb-20 text-center md:text-left">
+            <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] uppercase text-gray-500 mb-3 block">
               Reference Prototypes
             </span>
-            <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-primary leading-tight mb-4">
+            <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
               Demo Library
             </h1>
-            <p className="text-base md:text-lg font-light text-muted-foreground leading-relaxed">
+            <p className="text-sm md:text-base font-light text-gray-400 leading-relaxed">
               Explore walkthrough previews and synthetic models of our shipped proof systems. These reference previews demonstrate structural capabilities (roles, handoffs, dashboard indicators) in action.
             </p>
           </div>
 
           {/* Demos Command Center Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-20">
             {/* Left: Demos list (7 cols) */}
-            <div className="lg:col-span-7 flex flex-col gap-12">
+            <div className="lg:col-span-7 flex flex-col gap-6">
               {DEMO_CARDS.map((card) => {
                 const Mockup = card.mockup;
                 return (
                   <SystemCard3D 
                     key={card.id}
-                    className="border border-border bg-background rounded-[12px] p-6 md:p-8 flex flex-col gap-6 shadow-sm hover:shadow-md transition-shadow scroll-mt-24 font-light text-muted-foreground"
+                    className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 flex flex-col gap-6 hover:border-[#DEDBC8]/25 transition-all duration-300 scroll-mt-28 group"
                   >
                     <div 
                       onMouseEnter={() => setActiveDemoId(card.id)}
                       onMouseLeave={() => setActiveDemoId(null)}
                     >
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="text-[9px] font-mono font-bold text-white bg-slate-500 uppercase px-2 py-0.5 rounded-[4px]">
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="text-[8px] font-mono font-bold text-[#E1E0CC] border border-[#DEDBC8]/15 bg-black/40 uppercase px-2.5 py-0.5 rounded-full select-none">
                           {card.type}
                         </span>
                       </div>
-                      <h2 className="font-display text-xl md:text-2xl font-bold text-primary mb-3">
+                      <h2 className="font-display text-xl md:text-2xl font-bold text-[#E1E0CC] mb-3">
                         {card.title}
                       </h2>
-                      <p className="text-xs leading-relaxed font-light mb-4">
+                      <p className="text-xs leading-relaxed font-light text-gray-400 mb-4">
                         {card.proves}
                       </p>
 
-                      <div className="border-t border-border/60 pt-4 mb-4 flex flex-col gap-2">
+                      <div className="border-t border-[#DEDBC8]/5 pt-4 mb-4 flex flex-col gap-3 font-light text-gray-400">
                         <div>
-                          <strong className="text-[9px] font-mono uppercase text-muted-foreground block">Key Capabilities:</strong>
-                          <span className="text-xs text-primary font-medium">{card.capabilities}</span>
+                          <strong className="text-[9px] font-mono uppercase text-gray-500 block mb-0.5">Key Capabilities:</strong>
+                          <span className="text-xs text-[#E1E0CC] font-semibold">{card.capabilities}</span>
                         </div>
                         <div>
-                          <strong className="text-[9px] font-mono uppercase text-muted-foreground block">Best Fit For:</strong>
-                          <span className="text-xs text-foreground/80 font-light">{card.bestFit}</span>
+                          <strong className="text-[9px] font-mono uppercase text-gray-500 block mb-0.5">Best Fit For:</strong>
+                          <span className="text-xs text-gray-300 font-light">{card.bestFit}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Mockup Display */}
-                    <div className="border border-border/80 rounded-[8px] overflow-hidden bg-muted/20 shadow-sm flex items-center justify-center p-2 sm:p-4">
+                    <div className="border border-[#DEDBC8]/10 rounded-[12px] overflow-hidden bg-black/40 shadow-sm flex items-center justify-center p-2 sm:p-4">
                       <div className="w-full aspect-[800/340] max-h-[300px]">
                         <Mockup />
                       </div>
@@ -168,11 +169,11 @@ export default function DemoPage() {
                       rel="noopener noreferrer"
                       className={cn(
                         buttonVariants({ size: "default" }),
-                        "w-full bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none interactive-action mt-2"
+                        "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-semibold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300 mt-2"
                       )}
                     >
-                      <span>Discuss this model in your kickoff call</span>
-                      <ArrowRight className="h-4 w-4" />
+                      <span>Discuss in kickoff call</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
                     </a>
                   </SystemCard3D>
                 );
@@ -180,8 +181,8 @@ export default function DemoPage() {
             </div>
 
             {/* Right: 3D command console panel (5 cols, sticky) */}
-            <div className="hidden lg:block lg:col-span-5 sticky top-24 border border-border rounded-[12px] bg-muted/20 items-center justify-center p-4 min-h-[460px]">
-              <div className="absolute top-3 left-4 text-[9px] font-mono text-muted-foreground/60 uppercase select-none">
+            <div className="hidden lg:block lg:col-span-5 sticky top-28 border border-[#DEDBC8]/10 rounded-[20px] bg-[#101010] items-center justify-center p-4 min-h-[460px] shadow-lg">
+              <div className="absolute top-4.5 left-5 text-[9px] font-mono text-gray-500 uppercase select-none font-bold">
                 Control Console
               </div>
               <div className="w-full h-[420px]">

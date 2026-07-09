@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { DM_Sans, DM_Serif_Display } from "next/font/google";
+import { Almarai, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { METADATA } from "@/lib/content/nexus";
 
-const dmSans = DM_Sans({
+const almarai = Almarai({
   variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["arabic"],
+  weight: ["300", "400", "700", "800"],
 });
 
-const dmSerifDisplay = DM_Serif_Display({
-  variable: "--font-display",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-serif",
   subsets: ["latin"],
   weight: ["400"],
+  style: ["italic"],
 });
 
 export const metadata: Metadata = {
@@ -145,7 +146,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${dmSerifDisplay.variable} h-full antialiased`}
+      className={`${almarai.variable} ${instrumentSerif.variable} h-full antialiased`}
       style={{ scrollBehavior: "smooth", scrollPaddingTop: "80px" }}
     >
       <head>

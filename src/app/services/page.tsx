@@ -78,81 +78,82 @@ const SERVICES_LIST = [
 
 export default function ServicesPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-black relative">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-noise" />
       <SiteHeader />
       
-      <main id="main-content" className="flex-grow bg-background py-16 md:py-24">
+      <main id="main-content" className="flex-grow py-24 md:py-32 relative z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           
           {/* Header */}
-          <div className="max-w-3xl mb-16">
-            <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase text-muted-foreground mb-2 block">
+          <div className="max-w-3xl mb-20 text-center md:text-left">
+            <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] uppercase text-gray-500 mb-3 block">
               Capabilities Brochure
             </span>
-            <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-primary leading-tight mb-4">
+            <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
               Core Engagement Services
             </h1>
-            <p className="text-base md:text-lg font-light text-muted-foreground leading-relaxed">
+            <p className="text-sm md:text-base font-light text-gray-400 leading-relaxed">
               We design and build custom software that solves operational complexity. Explore our service scopes below, modeled on shipped proof systems.
             </p>
           </div>
 
           {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
             {SERVICES_LIST.map((srv) => (
               <div 
                 key={srv.id} 
-                className="border border-border bg-background rounded-[12px] p-6 md:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow"
+                className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group"
               >
                 <div>
-                  <h2 className="font-display text-xl md:text-2xl font-bold text-primary mb-4 pb-3 border-b border-border/60">
+                  <h2 className="font-display text-xl md:text-2xl font-bold text-[#E1E0CC] mb-6 pb-3 border-b border-[#DEDBC8]/5">
                     {srv.title}
                   </h2>
                   
                   {/* When this matters */}
-                  <div className="mb-4">
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase flex items-center gap-1 mb-1">
-                      <HelpCircle className="h-3 w-3 text-[#2E6FAD]" /> When This Matters
+                  <div className="mb-5">
+                    <span className="text-[9px] font-mono font-bold tracking-wider text-gray-500 uppercase flex items-center gap-1.5 mb-1.5">
+                      <HelpCircle className="h-3.5 w-3.5 text-[#DEDBC8]/60" /> When This Matters
                     </span>
-                    <p className="text-xs text-foreground/80 leading-relaxed font-light">
+                    <p className="text-xs text-gray-300 leading-relaxed font-light">
                       {srv.when}
                     </p>
                   </div>
 
                   {/* What we build */}
-                  <div className="mb-4">
-                    <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase flex items-center gap-1 mb-1">
-                      <Cpu className="h-3 w-3 text-[#2E6FAD]" /> What We Build
+                  <div className="mb-5">
+                    <span className="text-[9px] font-mono font-bold tracking-wider text-gray-500 uppercase flex items-center gap-1.5 mb-1.5">
+                      <Cpu className="h-3.5 w-3.5 text-[#DEDBC8]/60" /> What We Build
                     </span>
-                    <p className="text-xs text-primary font-medium leading-relaxed">
+                    <p className="text-xs text-[#E1E0CC] font-semibold leading-relaxed">
                       {srv.builds}
                     </p>
                   </div>
 
                   {/* Expected Inputs & Deliverables */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-border/40 mb-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-[#DEDBC8]/5 mb-6">
                     <div>
-                      <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase block mb-1">
+                      <span className="text-[8px] font-mono font-bold tracking-wider text-gray-500 uppercase block mb-1">
                         Expected Inputs
                       </span>
-                      <p className="text-[11px] text-foreground/70 leading-relaxed font-light">
+                      <p className="text-[11px] text-gray-400 leading-relaxed font-light">
                         {srv.inputs}
                       </p>
                     </div>
                     <div>
-                      <span className="text-[9px] font-mono font-bold tracking-wider text-muted-foreground uppercase block mb-1">
+                      <span className="text-[8px] font-mono font-bold tracking-wider text-gray-500 uppercase block mb-1">
                         Typical Deliverables
                       </span>
-                      <p className="text-[11px] text-foreground/70 leading-relaxed font-light">
+                      <p className="text-[11px] text-gray-400 leading-relaxed font-light">
                         {srv.deliverables}
                       </p>
                     </div>
                   </div>
 
                   {/* Related Proof */}
-                  <div className="bg-muted/30 p-3 rounded-[6px] border border-border/60 mb-6 flex justify-between items-center text-xs">
-                    <span className="font-mono text-[9px] text-muted-foreground uppercase font-bold">Related Proof:</span>
-                    <span className="font-semibold text-primary">{srv.proof}</span>
+                  <div className="bg-black/40 p-3.5 rounded-[12px] border border-[#DEDBC8]/5 mb-6 flex justify-between items-center text-xs">
+                    <span className="font-mono text-[9px] text-gray-500 uppercase font-bold">Related Proof:</span>
+                    <span className="font-mono text-[10px] font-semibold text-[#DEDBC8]">{srv.proof}</span>
                   </div>
                 </div>
 
@@ -162,34 +163,34 @@ export default function ServicesPage() {
                   rel="noopener noreferrer"
                   className={cn(
                     buttonVariants({ size: "default" }),
-                    "w-full bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none interactive-action mt-2"
+                    "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-semibold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300 mt-2"
                   )}
                 >
                   <span>Start a conversation</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </a>
               </div>
             ))}
           </div>
 
           {/* Expectations block */}
-          <div className="border border-[#2E6FAD]/25 bg-[#2E6FAD]/5 rounded-[12px] p-6 md:p-10 text-center max-w-4xl mx-auto">
-            <h3 className="font-display text-xl md:text-2xl font-bold text-primary mb-3">
+          <div className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[2rem] p-8 md:p-12 text-center max-w-4xl mx-auto shadow-lg">
+            <h3 className="font-display text-xl md:text-3xl font-bold text-[#E1E0CC] mb-4">
               Not sure which service fits?
             </h3>
-            <p className="text-xs md:text-sm text-muted-foreground font-light leading-relaxed mb-6 max-w-2xl mx-auto">
+            <p className="text-xs md:text-sm text-gray-400 font-light leading-relaxed mb-8 max-w-2xl mx-auto">
               Bring us your messy spreadsheet, paper checklists, or fragmented processes. We will map them out together during our kickoff scoping call and recommend the narrowest initial build.
             </p>
             <a
               href={HERO.ctaUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "bg-[#1A2B4C] hover:bg-[#1A2B4C]/90 text-white font-semibold rounded-[6px] focus-visible:ring-2 focus-visible:ring-[#1A2B4C]/50 focus-visible:ring-offset-2 outline-none interactive-action"
-              )}
+              className="group flex items-center justify-between gap-4 bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black rounded-full pl-5 pr-1.5 py-1.5 w-full max-w-xs mx-auto text-xs font-semibold tracking-wider uppercase transition-all duration-300 outline-none"
             >
-              <span>Map your workflow with us</span>
+              <span>Map your workflow</span>
+              <div className="bg-black rounded-full w-8 h-8 flex items-center justify-center transition-all duration-300 group-hover:scale-105 shrink-0">
+                <ArrowRight className="h-3.5 w-3.5 text-[#DEDBC8]" />
+              </div>
             </a>
           </div>
 

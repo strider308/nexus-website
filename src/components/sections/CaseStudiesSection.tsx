@@ -170,16 +170,20 @@ export function CaseStudiesSection() {
   };
 
   return (
-    <AnimatedSection id="case-studies" className="w-full py-16 md:py-24 border-b border-border bg-background">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <AnimatedSection id="case-studies" className="w-full py-20 md:py-28 border-b border-[#DEDBC8]/10 bg-black relative">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-noise" />
+      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-12">
-          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-primary leading-tight mb-6">
-            Seven systems. Five industries. One founder.
+        <div className="max-w-3xl mb-16">
+          <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] uppercase text-gray-500 mb-3 block">
+            Walkthrough Ledger
+          </span>
+          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
+            Proof Systems in Action
           </h2>
-          <p className="text-base md:text-lg font-light text-muted-foreground leading-relaxed">
-            These aren&apos;t products competing for your subscription — they&apos;re evidence. Each one was scoped, designed, and built end-to-end by Nexus, in a different domain, for a different kind of user. Read them as proof of what we can do with your workflow next.
+          <p className="text-sm md:text-base font-light text-gray-400 leading-relaxed">
+            Step-by-step walkthroughs of our shipped operational systems. Select a system below to inspect its interface, user roles, what this proves, and commercial disclaimers.
           </p>
         </div>
 
@@ -207,8 +211,8 @@ export function CaseStudiesSection() {
                   onClick={() => handleTabChange(study.id)}
                   className={`relative flex items-center gap-3 shrink-0 px-4 py-3 rounded-[6px] text-xs md:text-sm font-semibold tracking-tight transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 outline-none cursor-pointer z-10 ${
                     isActive
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-primary hover:bg-muted/30"
+                      ? "text-[#E1E0CC]"
+                      : "text-gray-400 hover:text-white hover:bg-[#101010]/50"
                   }`}
                   style={{
                     borderLeft: isActive ? `3px solid ${theme.primary}` : "3px solid transparent"

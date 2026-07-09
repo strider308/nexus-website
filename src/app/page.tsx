@@ -13,6 +13,7 @@ import { EngagementModels } from "@/components/sections/EngagementModels";
 import { FounderSection } from "@/components/sections/FounderSection";
 import { TrustLimitsSection } from "@/components/sections/TrustLimitsSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { ResourcesPreview } from "@/components/sections/ResourcesPreview";
 
 import { SectionMinimap } from "@/components/three/SectionMinimap";
 
@@ -36,6 +37,7 @@ export default function Home() {
         <WhyNexusCompounds />
         <CaseStudiesSection />
         <EngagementModels />
+        <ResourcesPreview />
         <FounderSection />
         <TrustLimitsSection />
         <FinalCTA />
