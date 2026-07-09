@@ -85,3 +85,89 @@ export function StaggerItem({ children, className = "" }: StaggerItemProps) {
     </motion.div>
   );
 }
+
+export function MotionSectionReveal({ children, id, className = "" }: AnimatedSectionProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.12,
+      },
+    },
+  };
+
+  return (
+    <motion.section
+      id={id}
+      className={className}
+      initial={shouldReduceMotion ? "show" : "hidden"}
+      whileInView="show"
+      viewport={{ once: true, margin: "-80px" }}
+      variants={containerVariants}
+    >
+      {children}
+    </motion.section>
+  );
+}
+
+export function RevealHeading({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const shouldReduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      variants={{
+        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function RevealCopy({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const shouldReduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      variants={{
+        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 15 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function RevealCards({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const shouldReduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      variants={{
+        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 15, scale: shouldReduceMotion ? 1 : 0.98 },
+        show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function RevealCTA({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const shouldReduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      variants={{
+        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}

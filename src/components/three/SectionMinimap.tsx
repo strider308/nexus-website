@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { motion, useReducedMotion } from "motion/react";
 
 const SECTIONS = [
   { id: "cover", label: "HERO" },
@@ -14,6 +15,7 @@ const SECTIONS = [
 
 export function SectionMinimap() {
   const [activeSection, setActiveSection] = useState("cover");
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const observerOptions = {
@@ -64,22 +66,29 @@ export function SectionMinimap() {
             <button
               key={sec.id}
               onClick={() => scrollToSection(sec.id)}
-              className="group flex items-center justify-end gap-2 text-right outline-none focus-visible:ring-1 focus-visible:ring-[#DEDBC8] focus-visible:ring-offset-1 focus-visible:ring-offset-black rounded-[4px] px-1"
+              className="group flex items-center justify-end gap-2 text-right outline-none focus-visible:ring-1 focus-visible:ring-[#DEDBC8] focus-visible:ring-offset-1 focus-visible:ring-offset-black rounded-[4px] px-1 relative"
               aria-label={`Scroll to ${sec.label}`}
               aria-current={isActive ? "location" : undefined}
             >
               <span className={cn(
-                "text-xs font-mono font-bold tracking-wider uppercase opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200",
+                "text-xs font-mono font-bold tracking-wider uppercase opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 select-none",
                 isActive ? "text-[#E1E0CC] opacity-100 translate-x-0" : "text-gray-300 group-hover:text-white"
               )}>
                 {sec.label}
               </span>
-              <span className={cn(
-                "w-1.5 h-1.5 rounded-full border transition-all duration-200",
-                isActive 
-                  ? "bg-[#DEDBC8] scale-125 border-[#DEDBC8] shadow-[0_0_8px_#DEDBC8]" 
-                  : "bg-transparent border-[#DEDBC8]/30 group-hover:bg-[#DEDBC8]/20 group-hover:border-[#DEDBC8]/50"
-              )} />
+              <span className="relative w-2 h-2 flex items-center justify-center">
+                {isActive && !shouldReduceMotion && (
+                  <motion.span
+                    layoutId="activeDotPill"
+                    className="absolute w-2 h-2 bg-[#DEDBC8] rounded-full shadow-[0_0_8px_rgba(222,219,200,0.8)] z-10"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                {isActive && shouldReduceMotion && (
+                  <span className="absolute w-2 h-2 bg-[#DEDBC8] rounded-full shadow-[0_0_8px_rgba(222,219,200,0.8)] z-10" />
+                )}
+                <span className="w-1.5 h-1.5 rounded-full bg-transparent border border-[#DEDBC8]/30 group-hover:border-[#DEDBC8]/50 z-0" />
+              </span>
             </button>
           );
         })}

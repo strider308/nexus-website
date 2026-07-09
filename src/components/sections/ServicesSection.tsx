@@ -1,8 +1,12 @@
 "use client";
 
+import React, { useState } from "react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Check, ArrowUpRight, Workflow, Cpu, Layers, BarChart3 } from "lucide-react";
 import { WordsPullUpMultiStyle } from "../ui/words-pull-up";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { staggerContainer, cardReveal, lineDraw } from "@/lib/motion/presets";
+import { cn } from "@/lib/utils";
 
 const PREMIUM_CARDS = [
   {
@@ -55,7 +59,95 @@ const PREMIUM_CARDS = [
   }
 ];
 
+const BLUEPRINT_LAYERS = [
+  {
+    num: "01 / INPUTS",
+    title: "Inputs",
+    desc: "Forms, calls, spreadsheets, messages, files.",
+    example: "e.g. Patient intake, QR orders",
+    layerId: 1,
+  },
+  {
+    num: "02 / LOGIC",
+    title: "Workflow Rules",
+    desc: "States, validations, approvals, calculations, routing logic.",
+    example: "e.g. Multi-stage approvals",
+    layerId: 2,
+  },
+  {
+    num: "03 / ACCESS",
+    title: "Roles & Permissions",
+    desc: "Owner, staff, admin, customer, partner access.",
+    example: "e.g. Scoped screens & views",
+    layerId: 3,
+  },
+  {
+    num: "04 / ACTIONS",
+    title: "Automation",
+    desc: "Assignments, reminders, notifications, webhooks.",
+    example: "e.g. State-aware SMS pings",
+    layerId: 4,
+  },
+  {
+    num: "05 / VISIBILITY",
+    title: "Dashboards",
+    desc: "Queues, status views, reports, owner visibility.",
+    example: "e.g. Turnaround average logs",
+    layerId: 5,
+  },
+  {
+    num: "06 / DEPLOY",
+    title: "Handoff & Docs",
+    desc: "Training notes, audit trail, deployment, operating guide.",
+    example: "e.g. Sandbox operating log",
+    layerId: 6,
+  },
+];
+
+const SERVICE_LAYER_HIGHLIGHTS: Record<number, number[]> = {
+  0: [1, 2, 3], // Custom Workflow Systems: Inputs, Logic, Access
+  1: [2, 4],    // Automation Layers: Logic, Actions
+  2: [2, 3, 6], // Private Beta Builds: Logic, Access, Deploy
+  3: [5],       // Owner Dashboards: Visibility
+};
+
 export function ServicesSection() {
+  const [selectedService, setSelectedService] = useState<number | null>(null);
+  const [hoveredService, setHoveredService] = useState<number | null>(null);
+  const [hoveredLayer, setHoveredLayer] = useState<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const activeService = hoveredService !== null ? hoveredService : selectedService;
+  const highlightedLayers = activeService !== null ? SERVICE_LAYER_HIGHLIGHTS[activeService] : null;
+
+  const isLayerHighlighted = (layerId: number) => {
+    if (highlightedLayers) {
+      return highlightedLayers.includes(layerId);
+    }
+    return false;
+  };
+
+  const blueprintContainerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.07,
+      },
+    },
+  };
+
+  const blueprintCardVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      },
+    },
+  };
+
   return (
     <AnimatedSection id="services-brochure" className="w-full py-20 md:py-28 border-b border-[#DEDBC8]/10 bg-black relative">
       <div className="absolute inset-0 pointer-events-none opacity-[0.12] bg-noise" />
@@ -81,7 +173,7 @@ export function ServicesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           
           {/* Card 1: Static Blueprint Visual Card */}
-          <div className="bg-[#212121] rounded-2xl border border-[#DEDBC8]/10 p-6 flex flex-col justify-between overflow-hidden min-h-[360px] relative group">
+          <div className="bg-[#212121] rounded-2xl border border-[#DEDBC8]/10 p-6 flex flex-col justify-between overflow-hidden min-h-[360px] relative group select-none">
             <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] bg-[size:12px_12px]" />
             
             {/* Embedded static SVG visual */}
@@ -110,18 +202,30 @@ export function ServicesSection() {
           {/* Cards 2-5: Premium Service Cards */}
           {PREMIUM_CARDS.map((card, idx) => {
             const Icon = card.icon;
+            const isSelected = selectedService === idx;
+            const isHovered = hoveredService === idx;
+            const isActive = isSelected || isHovered;
+
             return (
-              <div 
+              <button 
                 key={idx}
-                className="bg-[#212121] rounded-2xl border border-[#DEDBC8]/10 p-6 flex flex-col justify-between overflow-hidden min-h-[360px] relative group hover:border-[#DEDBC8]/30 transition-all duration-300"
+                onClick={() => setSelectedService(isSelected ? null : idx)}
+                onMouseEnter={() => setHoveredService(idx)}
+                onMouseLeave={() => setHoveredService(null)}
+                onFocus={() => setHoveredService(idx)}
+                onBlur={() => setHoveredService(null)}
+                className={cn(
+                  "bg-[#212121] rounded-2xl border text-left p-6 flex flex-col justify-between overflow-hidden min-h-[360px] relative group transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#DEDBC8] focus-visible:ring-offset-2 focus-visible:ring-offset-black cursor-pointer",
+                  isActive ? "border-[#2A7D8A] bg-[#2A7D8A]/[0.01]" : "border-[#DEDBC8]/10"
+                )}
               >
                 <div>
                   {/* Card Number & Icon */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-xs font-mono text-gray-400 font-bold">
+                    <span className={cn("text-xs font-mono font-bold transition-colors", isActive ? "text-[#2A7D8A]" : "text-gray-400")}>
                       {card.num}
                     </span>
-                    <Icon className="h-4 w-4 text-[#DEDBC8]/80 group-hover:text-[#DEDBC8] transition-colors" />
+                    <Icon className={cn("h-4 w-4 transition-colors", isActive ? "text-[#2A7D8A]" : "text-[#DEDBC8]/80 group-hover:text-[#DEDBC8]")} />
                   </div>
 
                   {/* Title & Description */}
@@ -144,15 +248,18 @@ export function ServicesSection() {
                 </div>
 
                 {/* Explore Action button */}
-                <div className="pt-6 border-t border-[#DEDBC8]/5 mt-6 flex justify-between items-center">
+                <div className="pt-6 border-t border-[#DEDBC8]/5 mt-6 w-full flex justify-between items-center">
                   <span className="text-xs font-mono font-bold text-[#DEDBC8]/60 uppercase">
                     Explore Service
                   </span>
-                  <div className="w-6 h-6 rounded-full bg-black/40 border border-[#DEDBC8]/10 flex items-center justify-center transition-all duration-300 group-hover:bg-[#DEDBC8] group-hover:border-[#DEDBC8] shrink-0">
-                    <ArrowUpRight className="h-3 w-3 text-[#DEDBC8] group-hover:text-black transition-colors" />
+                  <div className={cn(
+                    "w-6 h-6 rounded-full border flex items-center justify-center transition-all duration-300 shrink-0",
+                    isActive ? "bg-[#2A7D8A] border-[#2A7D8A]" : "bg-black/40 border-[#DEDBC8]/10 group-hover:bg-[#DEDBC8] group-hover:border-[#DEDBC8]"
+                  )}>
+                    <ArrowUpRight className={cn("h-3 w-3 transition-colors", isActive ? "text-white" : "text-[#DEDBC8] group-hover:text-black")} />
                   </div>
                 </div>
-              </div>
+              </button>
             );
           })}
 
@@ -173,91 +280,79 @@ export function ServicesSection() {
           </div>
 
           {/* Blueprint Steps Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 relative">
-            {/* Layer 1: Inputs */}
-            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
-              <div>
-                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">01 / INPUTS</span>
-                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Inputs</h4>
-                <p className="text-xs text-gray-300 font-light leading-relaxed">
-                  Forms, calls, spreadsheets, messages, files.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
-                e.g. Patient intake, QR orders
-              </div>
-            </div>
+          <motion.div 
+            variants={blueprintContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 relative"
+          >
+            {BLUEPRINT_LAYERS.map((layer, idx) => {
+              const isHighlighted = isLayerHighlighted(layer.layerId);
+              
+              return (
+                <motion.div 
+                  key={layer.layerId}
+                  variants={blueprintCardVariants}
+                  onMouseEnter={() => setHoveredLayer(layer.layerId)}
+                  onMouseLeave={() => setHoveredLayer(null)}
+                  onFocus={() => setHoveredLayer(layer.layerId)}
+                  onBlur={() => setHoveredLayer(null)}
+                  tabIndex={0}
+                  className={cn(
+                    "bg-[#101010] border rounded-[12px] p-5 flex flex-col justify-between relative group outline-none focus-visible:ring-2 focus-visible:ring-[#DEDBC8] min-h-[180px] transition-all duration-300",
+                    isHighlighted ? "border-[#2A7D8A] shadow-[0_0_15px_rgba(42,125,138,0.15)] scale-[1.02]" : "border-[#DEDBC8]/10",
+                    activeService !== null && !isHighlighted && "opacity-35"
+                  )}
+                >
+                  <AnimatePresence>
+                    {hoveredLayer === layer.layerId && (
+                      <motion.div
+                        layoutId="blueprintHoverPill"
+                        className="absolute inset-0 bg-[#DEDBC8]/5 border border-[#DEDBC8]/25 rounded-[12px] pointer-events-none z-0"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </AnimatePresence>
 
-            {/* Layer 2: Workflow Rules */}
-            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
-              <div>
-                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">02 / LOGIC</span>
-                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Workflow Rules</h4>
-                <p className="text-xs text-gray-300 font-light leading-relaxed">
-                  States, validations, approvals, calculations, routing logic.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
-                e.g. Multi-stage approvals
-              </div>
-            </div>
+                  <div className="relative z-10">
+                    <span className={cn(
+                      "text-[10px] font-mono font-bold block mb-2",
+                      isHighlighted ? "text-[#2A7D8A]" : "text-gray-500"
+                    )}>
+                      {layer.num}
+                    </span>
+                    <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">{layer.title}</h4>
+                    <p className="text-xs text-gray-300 font-light leading-relaxed">
+                      {layer.desc}
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono relative z-10">
+                    {layer.example}
+                  </div>
 
-            {/* Layer 3: Roles & Permissions */}
-            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
-              <div>
-                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">03 / ACCESS</span>
-                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Roles & Permissions</h4>
-                <p className="text-xs text-gray-300 font-light leading-relaxed">
-                  Owner, staff, admin, customer, partner access.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
-                e.g. Scoped screens & views
-              </div>
-            </div>
-
-            {/* Layer 4: Automation */}
-            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
-              <div>
-                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">04 / ACTIONS</span>
-                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Automation</h4>
-                <p className="text-xs text-gray-300 font-light leading-relaxed">
-                  Assignments, reminders, notifications, webhooks.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
-                e.g. State-aware SMS pings
-              </div>
-            </div>
-
-            {/* Layer 5: Dashboards */}
-            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
-              <div>
-                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">05 / VISIBILITY</span>
-                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Dashboards</h4>
-                <p className="text-xs text-gray-300 font-light leading-relaxed">
-                  Queues, status views, reports, owner visibility.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
-                e.g. Turnaround average logs
-              </div>
-            </div>
-
-            {/* Layer 6: Handoff & Documentation */}
-            <div className="bg-[#101010] border border-[#DEDBC8]/10 rounded-[12px] p-5 flex flex-col justify-between hover:border-[#DEDBC8]/25 transition-all duration-300 group">
-              <div>
-                <span className="text-[10px] font-mono font-bold text-gray-500 block mb-2">06 / DEPLOY</span>
-                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">Handoff & Docs</h4>
-                <p className="text-xs text-gray-300 font-light leading-relaxed">
-                  Training notes, audit trail, deployment, operating guide.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono">
-                e.g. Sandbox operating log
-              </div>
-            </div>
-          </div>
+                  {/* Connector Arrow (Desktop Only) */}
+                  {idx < 5 && (
+                    <div className="hidden xl:flex absolute top-1/2 -right-3.5 -translate-y-1/2 z-20 items-center justify-center pointer-events-none">
+                      <svg className="w-5 h-5 text-[#DEDBC8]/20" viewBox="0 0 24 24" fill="none">
+                        <motion.path
+                          d="M 4 12 L 20 12 M 14 6 L 20 12 L 14 18"
+                          stroke={isHighlighted && isLayerHighlighted(BLUEPRINT_LAYERS[idx + 1].layerId) ? "#2A7D8A" : "rgba(222, 219, 200, 0.1)"}
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          initial={{ pathLength: 0 }}
+                          whileInView={{ pathLength: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
 
       </div>

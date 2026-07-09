@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 
 interface FloatBtn {
   id: string;
@@ -21,6 +22,7 @@ const buttons: FloatBtn[] = [
 export function FloatingProductNav() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScrollVisibility = () => {
@@ -86,16 +88,27 @@ export function FloatingProductNav() {
               onClick={(e) => handleClick(e, btn.id)}
               aria-label={`Scroll to ${btn.label}`}
               aria-current={isActive ? "location" : undefined}
-              className={`relative group w-8 h-8 rounded-full flex items-center justify-center font-mono font-bold text-[10px] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#DEDBC8] focus-visible:ring-offset-2 focus-visible:ring-offset-black outline-none border cursor-pointer ${
+              className={`relative group w-8 h-8 rounded-full flex items-center justify-center font-mono font-bold text-[10px] transition-all duration-300 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#DEDBC8] focus-visible:ring-offset-2 focus-visible:ring-offset-black outline-none border cursor-pointer select-none ${
                 isActive 
-                  ? "bg-[#DEDBC8] text-black border-[#DEDBC8] shadow-[0_0_12px_rgba(222,219,200,0.3)]" 
+                  ? "border-[#DEDBC8]/10 text-black shadow-[0_0_12px_rgba(222,219,200,0.15)]" 
                   : "bg-black/60 text-[#DEDBC8]/60 border-[#DEDBC8]/10 hover:text-[#DEDBC8] hover:border-[#DEDBC8]/30"
               }`}
             >
-              {btn.initials}
+              {isActive && !shouldReduceMotion && (
+                <motion.span
+                  layoutId="activeFloatPill"
+                  className="absolute inset-0 bg-[#DEDBC8] rounded-full z-0"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+              {isActive && shouldReduceMotion && (
+                <span className="absolute inset-0 bg-[#DEDBC8] rounded-full z-0" />
+              )}
+              
+              <span className="relative z-10">{btn.initials}</span>
 
               {/* Tooltip */}
-              <span className="absolute bottom-[calc(100%+8px)] left-1/2 transform -translate-x-1/2 bg-black border border-[#DEDBC8]/15 text-[#E1E0CC] font-mono text-[10px] font-bold px-2 py-1 rounded-[4px] opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-md">
+              <span className="absolute bottom-[calc(100%+8px)] left-1/2 transform -translate-x-1/2 bg-black border border-[#DEDBC8]/15 text-[#E1E0CC] font-mono text-[10px] font-bold px-2 py-1 rounded-[4px] opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-md z-30">
                 {btn.label}
               </span>
             </a>

@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatedSection } from "@/components/ui/animated-section";
+import { MotionSectionReveal, RevealHeading, RevealCopy, RevealCards, RevealCTA } from "@/components/ui/animated-section";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { HERO } from "@/lib/content/nexus";
@@ -54,7 +54,7 @@ const MODELS = [
 
 export function EngagementModels() {
   return (
-    <AnimatedSection id="engagement-models" className="w-full py-20 md:py-28 border-b border-[#DEDBC8]/10 bg-black relative">
+    <MotionSectionReveal id="engagement-models" className="w-full py-20 md:py-28 border-b border-[#DEDBC8]/10 bg-black relative">
       <div className="absolute inset-0 pointer-events-none opacity-[0.08] bg-noise" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
@@ -64,16 +64,20 @@ export function EngagementModels() {
           <span className="text-xs md:text-sm font-mono font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">
             Engagement Framework
           </span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
-            How Engagements Work
-          </h2>
-          <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed">
-            We work with founders and operators through three structured models designed to reduce development waste and clarify delivery goals.
-          </p>
+          <RevealHeading>
+            <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
+              How Engagements Work
+            </h2>
+          </RevealHeading>
+          <RevealCopy>
+            <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed">
+              We work with founders and operators through three structured models designed to reduce development waste and clarify delivery goals.
+            </p>
+          </RevealCopy>
         </div>
 
         {/* Models Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+        <RevealCards className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
           {MODELS.map((item, idx) => {
             const Icon = item.icon;
             return (
@@ -99,19 +103,19 @@ export function EngagementModels() {
                     <span className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase block mb-1">
                       BEST FIT
                     </span>
-                    <p className="text-sm text-gray-300 leading-relaxed font-light">
+                    <p className="text-xs md:text-sm text-gray-300 font-light leading-relaxed">
                       {item.bestFor}
                     </p>
                   </div>
 
-                  <div className="mb-6">
+                  <div>
                     <span className="text-xs font-mono font-bold tracking-wider text-gray-400 uppercase block mb-2">
-                      DELIVERABLES
+                      KEY DELIVERABLES
                     </span>
                     <ul className="flex flex-col gap-2">
                       {item.deliverables.map((del, dIdx) => (
-                        <li key={dIdx} className="flex items-start gap-2 text-sm text-gray-300 font-light leading-normal">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#DEDBC8]/70 shrink-0 mt-1.5" />
+                        <li key={dIdx} className="flex items-start gap-2 text-xs md:text-sm text-gray-300 font-light">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#DEDBC8] shrink-0 mt-2" />
                           <span>{del}</span>
                         </li>
                       ))}
@@ -119,28 +123,42 @@ export function EngagementModels() {
                   </div>
                 </div>
 
-                <a
-                  href={HERO.ctaUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    buttonVariants({ size: "default" }),
-                    "w-full bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black font-semibold rounded-full flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-[#DEDBC8]/50 focus-visible:ring-offset-2 outline-none transition-all duration-300 mt-4"
-                  )}
-                >
-                  <span>Start a conversation</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </a>
+                <div className="pt-6 border-t border-[#DEDBC8]/5 mt-6">
+                  <a 
+                    href={HERO.ctaUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="group/cta flex items-center justify-between gap-4 bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 text-black rounded-full pl-5 pr-1.5 py-1.5 text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 w-full"
+                  >
+                    <span>Request sprint</span>
+                    <div className="bg-black rounded-full w-7 h-7 flex items-center justify-center transition-all duration-300 group-hover/cta:scale-105 shrink-0">
+                      <ArrowRight className="h-3 w-3 text-[#DEDBC8]" />
+                    </div>
+                  </a>
+                </div>
               </SystemCard3D>
             );
           })}
-        </div>
+        </RevealCards>
 
-        <p className="text-center text-sm text-gray-400 font-mono">
-          Scoping calls are founder-led. Send the workflow, and we&apos;ll help shape the first system.
-        </p>
+        {/* Supporting CTA */}
+        <RevealCTA>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-[#DEDBC8]/10 pt-10 mt-12">
+            <p className="text-xs md:text-sm font-light text-gray-400 max-w-2xl leading-relaxed text-center sm:text-left">
+              Not sure which model is best for your current operations? Book a 30-minute scoping call with our founder. We’ll map out the stages together.
+            </p>
+            <a 
+              href={HERO.ctaUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={cn(buttonVariants({ size: "default" }), "rounded-full font-mono font-bold text-xs uppercase tracking-wider text-black bg-[#DEDBC8] hover:bg-[#DEDBC8]/90 transition-all shrink-0 cursor-pointer")}
+            >
+              Book Scoping Call
+            </a>
+          </div>
+        </RevealCTA>
 
       </div>
-    </AnimatedSection>
+    </MotionSectionReveal>
   );
 }

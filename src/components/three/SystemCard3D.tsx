@@ -24,11 +24,11 @@ export function SystemCard3D({ children, className = "", ...props }: SystemCard3
     const xPercent = x / rect.width - 0.5;
     const yPercent = y / rect.height - 0.5;
 
-    // Rotate bounds max 12 degrees
-    const rotateX = -yPercent * 12;
-    const rotateY = xPercent * 12;
+    // Rotate bounds max 4 degrees for calm, restrained premium feel
+    const rotateX = -yPercent * 4;
+    const rotateY = xPercent * 4;
 
-    setTransformStyle(`perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`);
+    setTransformStyle(`perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.005, 1.005, 1.005)`);
   };
 
   const handleMouseLeave = () => {

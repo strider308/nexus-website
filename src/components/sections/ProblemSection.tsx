@@ -2,8 +2,10 @@
 
 import { AlertCircle, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { WordsPullUpMultiStyle, ScrollRevealParagraph } from "../ui/words-pull-up";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { lineDraw, cardReveal, fadeIn } from "@/lib/motion/presets";
 
 const TRANSFORMATIONS = [
   {
@@ -165,6 +167,8 @@ interface WorkflowResolutionPanelProps {
 }
 
 function WorkflowResolutionPanel({ isAfter }: WorkflowResolutionPanelProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div 
       className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 shadow-lg overflow-hidden relative w-full"
@@ -180,16 +184,22 @@ function WorkflowResolutionPanel({ isAfter }: WorkflowResolutionPanelProps) {
         </h3>
       </div>
 
-      {/* Desktop: 3 Columns side-by-side | Mobile: Stacked */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+      {/* Desktop: 5 Columns grid for side-by-side with animated arrow lines | Mobile: Stacked */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] gap-6 lg:gap-4 items-stretch relative z-10">
         
         {/* Column 1: Before Nexus */}
-        <div className={cn(
-          "border rounded-[16px] p-6 flex flex-col justify-between transition-all duration-300 min-h-[220px]",
-          isAfter 
-            ? "border-[#DEDBC8]/5 bg-black/20 opacity-35" 
-            : "border-red-500/20 bg-red-500/[0.02]"
-        )}>
+        <motion.div 
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+          whileInView={{ opacity: isAfter ? 0.35 : 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className={cn(
+            "border rounded-[16px] p-6 flex flex-col justify-between min-h-[220px] transition-colors duration-500",
+            isAfter 
+              ? "border-[#DEDBC8]/5 bg-black/20" 
+              : "border-red-500/20 bg-red-500/[0.02]"
+          )}
+        >
           <div>
             <span className="text-xs font-mono font-bold text-red-400 uppercase block mb-4 select-none">
               1. Before Nexus (Scattered Manual Operations)
@@ -212,10 +222,33 @@ function WorkflowResolutionPanel({ isAfter }: WorkflowResolutionPanelProps) {
           <p className="text-xs text-gray-500 mt-6 border-t border-[#DEDBC8]/5 pt-3">
             Friction, lost history, copy-paste errors
           </p>
+        </motion.div>
+
+        {/* Connector 1 */}
+        <div className="hidden lg:flex items-center justify-center shrink-0">
+          <svg className="w-8 h-8 text-[#DEDBC8]/30" viewBox="0 0 32 32" fill="none">
+            <motion.path
+              d="M 2 16 L 30 16 M 22 8 L 30 16 L 22 24"
+              stroke={isAfter ? "#DEDBC8" : "#EF4444"}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            />
+          </svg>
         </div>
 
         {/* Column 2: Nexus Maps */}
-        <div className="border border-[#DEDBC8]/20 bg-black/40 rounded-[16px] p-6 flex flex-col justify-between min-h-[220px]">
+        <motion.div 
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="border border-[#DEDBC8]/20 bg-black/40 rounded-[16px] p-6 flex flex-col justify-between min-h-[220px]"
+        >
           <div>
             <span className="text-xs font-mono font-bold text-[#DEDBC8] uppercase block mb-4 select-none">
               2. Nexus Maps the Workflow
@@ -239,15 +272,44 @@ function WorkflowResolutionPanel({ isAfter }: WorkflowResolutionPanelProps) {
           <p className="text-xs text-gray-500 mt-6 border-t border-[#DEDBC8]/5 pt-3">
             Encoding business rules into code
           </p>
+        </motion.div>
+
+        {/* Connector 2 */}
+        <div className="hidden lg:flex items-center justify-center shrink-0">
+          <svg className="w-8 h-8 text-[#DEDBC8]/30" viewBox="0 0 32 32" fill="none">
+            <motion.path
+              d="M 2 16 L 30 16 M 22 8 L 30 16 L 22 24"
+              stroke={isAfter ? "#2A7D8A" : "#DEDBC8"}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ pathLength: 0, opacity: 0.1 }}
+              animate={{ 
+                pathLength: isAfter ? 1 : 0, 
+                opacity: isAfter ? 1 : 0.1,
+                stroke: isAfter ? "#2A7D8A" : "rgba(222, 219, 200, 0.2)"
+              }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            />
+          </svg>
         </div>
 
         {/* Column 3: After Nexus */}
-        <div className={cn(
-          "border rounded-[16px] p-6 flex flex-col justify-between transition-all duration-300 min-h-[220px]",
-          !isAfter 
-            ? "border-[#DEDBC8]/5 bg-black/20 opacity-35" 
-            : "border-[#2A7D8A]/20 bg-[#2A7D8A]/[0.02]"
-        )}>
+        <motion.div 
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 15 }}
+          animate={{ 
+            opacity: isAfter ? 1 : 0.35, 
+            y: 0,
+            scale: isAfter ? 1 : (shouldReduceMotion ? 1 : 0.98)
+          }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className={cn(
+            "border rounded-[16px] p-6 flex flex-col justify-between min-h-[220px] transition-colors duration-500",
+            !isAfter 
+              ? "border-[#DEDBC8]/5 bg-black/20" 
+              : "border-[#2A7D8A]/20 bg-[#2A7D8A]/[0.02]"
+          )}
+        >
           <div>
             <span className="text-xs font-mono font-bold text-[#2A7D8A] uppercase block mb-4 select-none">
               3. After Nexus (Connected System)
@@ -270,7 +332,7 @@ function WorkflowResolutionPanel({ isAfter }: WorkflowResolutionPanelProps) {
           <p className="text-xs text-gray-500 mt-6 border-t border-[#DEDBC8]/5 pt-3">
             Predictable speed, live reporting metrics
           </p>
-        </div>
+        </motion.div>
 
       </div>
     </div>

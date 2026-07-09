@@ -561,18 +561,21 @@ export function CaseStudiesSection() {
               <table className="w-full text-left border-collapse min-w-[760px]">
                 <thead>
                   <tr className="border-b border-[#DEDBC8]/10 bg-[#212121]">
-                    <th className="p-4 text-xs font-mono font-bold text-[#E1E0CC] uppercase tracking-wider min-w-[120px]">
+                    <th className="p-4 text-xs font-mono font-bold text-[#E1E0CC] uppercase tracking-wider min-w-[120px] select-none">
                       System
                     </th>
                     {CAPABILITIES.map((cap) => (
                       <th 
                         key={cap.id} 
+                        tabIndex={0}
                         className={cn(
-                          "p-4 text-xs font-mono font-bold uppercase tracking-wider min-w-[100px] transition-colors duration-200",
+                          "p-4 text-xs font-mono font-bold uppercase tracking-wider min-w-[100px] transition-colors duration-200 outline-none focus-visible:bg-black focus-visible:text-white cursor-default select-none",
                           hoveredCapabilityId === cap.id ? "text-[#E1E0CC] bg-[#212121]" : "text-[#DEDBC8]"
                         )}
                         onMouseEnter={() => setHoveredCapabilityId(cap.id)}
                         onMouseLeave={() => setHoveredCapabilityId(null)}
+                        onFocus={() => setHoveredCapabilityId(cap.id)}
+                        onBlur={() => setHoveredCapabilityId(null)}
                       >
                         {cap.label}
                       </th>
@@ -583,22 +586,36 @@ export function CaseStudiesSection() {
                   {MAP_SYSTEMS.map((sys) => (
                     <tr 
                       key={sys.id} 
+                      tabIndex={0}
                       className={cn(
-                        "border-b border-[#DEDBC8]/5 transition-colors duration-200",
+                        "border-b border-[#DEDBC8]/5 transition-colors duration-200 outline-none focus-visible:bg-[#212121]",
                         hoveredSystemId === sys.id ? "bg-[#212121]" : "hover:bg-[#212121]/40"
                       )}
                       onMouseEnter={() => setHoveredSystemId(sys.id)}
                       onMouseLeave={() => setHoveredSystemId(null)}
+                      onFocus={() => setHoveredSystemId(sys.id)}
+                      onBlur={() => setHoveredSystemId(null)}
                     >
                       <td className="p-4 text-xs font-bold text-[#E1E0CC]">
                         {sys.label}
                       </td>
                       {CAPABILITIES.map((cap) => {
                         const hasCap = sys.capabilities.includes(cap.id);
+                        const isFocusedCell = hoveredSystemId === sys.id && hoveredCapabilityId === cap.id;
+                        const isRowColActive = hoveredSystemId === sys.id || hoveredCapabilityId === cap.id;
+
                         return (
                           <td 
                             key={cap.id} 
-                            className="p-4 text-xs animate-fade-in"
+                            tabIndex={0}
+                            className={cn(
+                              "p-4 text-xs outline-none transition-all duration-200 cursor-default select-none relative",
+                              isFocusedCell 
+                                ? "bg-[#2A7D8A]/10 text-white font-semibold ring-1 ring-inset ring-[#2A7D8A]/35" 
+                                : isRowColActive 
+                                  ? "bg-[#2A7D8A]/[0.02] text-gray-200" 
+                                  : "text-gray-400"
+                            )}
                             onMouseEnter={() => {
                               setHoveredSystemId(sys.id);
                               setHoveredCapabilityId(cap.id);
@@ -607,14 +624,25 @@ export function CaseStudiesSection() {
                               setHoveredSystemId(null);
                               setHoveredCapabilityId(null);
                             }}
+                            onFocus={() => {
+                              setHoveredSystemId(sys.id);
+                              setHoveredCapabilityId(cap.id);
+                            }}
+                            onBlur={() => {
+                              setHoveredSystemId(null);
+                              setHoveredCapabilityId(null);
+                            }}
                           >
                             {hasCap ? (
-                              <span className="flex items-center gap-1.5 font-semibold text-[#2A7D8A]">
+                              <motion.span 
+                                layout
+                                className="flex items-center gap-1.5 font-semibold text-[#2A7D8A]"
+                              >
                                 <span className="w-1.5 h-1.5 rounded-full bg-[#2A7D8A] shrink-0 animate-pulse" />
                                 Active
-                              </span>
+                              </motion.span>
                             ) : (
-                              <span className="text-gray-600 font-light select-none">-</span>
+                              <span className="text-gray-600 font-light">—</span>
                             )}
                           </td>
                         );
