@@ -104,6 +104,8 @@ export default function ProofConstellation({ activeSystemId, activeCapabilityId 
         const isActive = activeSystemId === sys.id;
         const displayColor = isActive ? "#2A7D8A" : "#2E6FAD";
         const scale = isActive ? 1.5 : 1.0;
+        // High contrast text colors: active white, inactive slate-200
+        const textColor = isActive ? "#ffffff" : "#cbd5e1";
 
         return (
           <group key={sys.id} position={[-1.8, sys.y, 0]} scale={scale}>
@@ -117,8 +119,8 @@ export default function ProofConstellation({ activeSystemId, activeCapabilityId 
             </mesh>
             <Text
               position={[-0.15, 0, 0]}
-              fontSize={0.1}
-              color={isActive ? "#ffffff" : "#ffffff60"}
+              fontSize={0.11}
+              color={textColor}
               anchorX="right"
               anchorY="middle"
             >
@@ -133,6 +135,8 @@ export default function ProofConstellation({ activeSystemId, activeCapabilityId 
         const isActive = activeCapabilityId === cap.id;
         const displayColor = isActive ? "#2A7D8A" : "#1A2B4C";
         const scale = isActive ? 1.4 : 1.0;
+        // High contrast text colors: active white, inactive slate-200
+        const textColor = isActive ? "#ffffff" : "#cbd5e1";
 
         return (
           <group key={cap.id} position={[1.8, cap.y, 0]} scale={scale}>
@@ -145,8 +149,8 @@ export default function ProofConstellation({ activeSystemId, activeCapabilityId 
             </mesh>
             <Text
               position={[0.18, 0, 0]}
-              fontSize={0.1}
-              color={isActive ? "#ffffff" : "#ffffff60"}
+              fontSize={0.11}
+              color={textColor}
               anchorX="left"
               anchorY="middle"
             >

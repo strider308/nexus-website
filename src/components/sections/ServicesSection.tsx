@@ -249,7 +249,7 @@ export function ServicesSection() {
                   {/* Canvas Container */}
                   <div className="border border-border/60 bg-muted/15 rounded-[8px] overflow-hidden items-center justify-center p-2 relative h-[210px] w-full">
                     <div className="absolute top-2 left-3 text-[8px] font-mono text-muted-foreground/60 uppercase select-none">
-                      Architecture Model (3D)
+                      Nexus Service Blueprint (3D)
                     </div>
                     <div className="w-full h-full">
                       <ThreeCanvasShell 
@@ -460,7 +460,7 @@ function StaticArchitectureStack({ selectedService }: StaticArchitectureStackPro
   return (
     <div className="border border-border/80 bg-background/50 backdrop-blur-sm rounded-[12px] p-5 shadow-sm w-full">
       <span className="text-[9px] font-mono font-bold text-muted-foreground uppercase block mb-4 select-none">
-        Service Architecture Stack
+        Nexus Service Blueprint
       </span>
       <div className="flex flex-col gap-3 relative pl-4">
         {/* Connecting timeline line */}

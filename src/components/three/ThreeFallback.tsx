@@ -101,7 +101,7 @@ export function OrbitFallback() {
           );
         })}
       </svg>
-      <span className="text-[8px] font-mono text-muted-foreground/55 uppercase mt-4 tracking-wider">System Mapping Constellation</span>
+      <span className="text-[8px] font-mono text-muted-foreground/55 uppercase mt-4 tracking-wider">Proof systems and capabilities</span>
     </div>
   );
 }
@@ -123,7 +123,7 @@ export function DepthFallback() {
           );
         })}
       </svg>
-      <span className="text-[8px] font-mono text-muted-foreground/55 uppercase mt-4 tracking-wider">Service Architecture Layers</span>
+      <span className="text-[8px] font-mono text-muted-foreground/55 uppercase mt-4 tracking-wider">Nexus Service Blueprint</span>
     </div>
   );
 }

@@ -541,7 +541,7 @@ export function CaseStudiesSection() {
               <table className="w-full text-left border-collapse min-w-[760px]">
                 <thead>
                   <tr className="border-b border-border bg-muted/20">
-                    <th className="p-4 text-[10px] font-mono font-bold text-muted-foreground uppercase tracking-wider min-w-[120px]">
+                    <th className="p-4 text-[10px] font-mono font-bold text-foreground/90 uppercase tracking-wider min-w-[120px]">
                       System
                     </th>
                     {CAPABILITIES.map((cap) => (
@@ -549,7 +549,7 @@ export function CaseStudiesSection() {
                         key={cap.id} 
                         className={cn(
                           "p-4 text-[10px] font-mono font-bold uppercase tracking-wider min-w-[100px] transition-colors duration-200",
-                          hoveredCapabilityId === cap.id ? "text-primary bg-muted" : "text-muted-foreground"
+                          hoveredCapabilityId === cap.id ? "text-primary bg-muted" : "text-foreground/90"
                         )}
                         onMouseEnter={() => setHoveredCapabilityId(cap.id)}
                         onMouseLeave={() => setHoveredCapabilityId(null)}
@@ -608,7 +608,7 @@ export function CaseStudiesSection() {
             {/* 3D Proof Constellation Visualizer (5 Cols, Desktop Only) */}
             <div className="hidden lg:flex lg:col-span-5 border border-border rounded-[8px] bg-muted/20 items-center justify-center p-4 relative min-h-[340px]">
               <div className="absolute top-3 left-4 text-[9px] font-mono text-muted-foreground/60 uppercase select-none">
-                System Mapping Constellation
+                Proof systems and capabilities
               </div>
               <div className="w-full h-full">
                 <ThreeCanvasShell 

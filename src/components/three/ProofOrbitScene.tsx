@@ -84,7 +84,7 @@ export default function ProofOrbitScene({ activeId }: ProofOrbitSceneProps) {
       <Text
         position={[0, 0.5, 0]}
         fontSize={0.14}
-        color="#2E6FAD"
+        color="#7fbbf3"
         anchorX="center"
         anchorY="middle"
       >
@@ -128,7 +128,7 @@ export default function ProofOrbitScene({ activeId }: ProofOrbitSceneProps) {
               <Text
                 position={[x, y + 0.22, 0]}
                 fontSize={0.12}
-                color={isActive ? "#ffffff" : "#ffffff70"}
+                color={isActive ? "#ffffff" : "#cbd5e1"}
                 anchorX="center"
                 anchorY="middle"
               >

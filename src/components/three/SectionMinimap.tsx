@@ -69,7 +69,7 @@ export function SectionMinimap() {
             >
               <span className={cn(
                 "text-[9px] font-mono font-bold tracking-wider uppercase opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200",
-                isActive ? "text-primary opacity-100 translate-x-0" : "text-muted-foreground"
+                isActive ? "text-[#E1E0CC] opacity-100 translate-x-0" : "text-[#cbd5e1] group-hover:text-white"
               )}>
                 {sec.label}
               </span>
