@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useIsHydrated, useMediaQuery } from "@/hooks/useClientState";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { HERO } from "@/lib/content/nexus";
@@ -97,17 +98,8 @@ const DEMO_CARDS = [
 export default function DemoPage() {
   const [activeDemoId, setActiveDemoId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const media = window.matchMedia("(max-width: 768px)");
-    setIsMobile(media.matches);
-    const listener = () => setIsMobile(media.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
+  const mounted = useIsHydrated();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const showCanvas = mounted && !isMobile && !shouldReduceMotion;
 

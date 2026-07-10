@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useRef, useMemo, useState, useEffect } from "react";
+import React, { useRef, useMemo } from "react";
+import { useIsHydrated, useMediaQuery } from "@/hooks/useClientState";
 import { motion, useInView, useScroll, useTransform, MotionValue, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -199,17 +200,8 @@ function ScrollRevealWord({ word, index, totalWords, scrollYProgress }: ScrollRe
 export function ScrollRevealParagraph({ text, className }: ScrollRevealParagraphProps) {
   const containerRef = useRef<HTMLParagraphElement>(null);
   const shouldReduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const media = window.matchMedia("(max-width: 768px)");
-    setIsMobile(media.matches);
-    const listener = () => setIsMobile(media.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
+  const mounted = useIsHydrated();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const { scrollYProgress } = useScroll({
     target: containerRef,

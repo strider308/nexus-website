@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useIsHydrated, useMediaQuery } from "@/hooks/useClientState";
 import { HERO } from "@/lib/content/nexus";
 import dynamic from "next/dynamic";
 import { HeroFallback } from "../three/ThreeFallback";
@@ -19,17 +20,8 @@ const NexusSystemScene = dynamic(
 
 export function Hero() {
   const shouldReduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const media = window.matchMedia("(max-width: 768px)");
-    setIsMobile(media.matches);
-    const listener = () => setIsMobile(media.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
+  const mounted = useIsHydrated();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const showCanvas = mounted && !isMobile && !shouldReduceMotion;
 

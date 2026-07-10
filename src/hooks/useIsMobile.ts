@@ -1,22 +1,10 @@
-"use client";
+/**
+ * useIsMobile — thin wrapper around useMediaQuery for convenience.
+ * Uses useSyncExternalStore internally — no setState inside effects.
+ */
 
-import { useEffect, useState } from "react";
+import { useMediaQuery } from "./useClientState";
 
 export function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // SSR guard
-    if (typeof window === "undefined") return;
-
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < breakpoint);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, [breakpoint]);
-
-  return isMobile;
+  return useMediaQuery(`(max-width: ${breakpoint}px)`);
 }

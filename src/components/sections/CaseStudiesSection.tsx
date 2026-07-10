@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useIsHydrated, useMediaQuery } from "@/hooks/useClientState";
 import { CASE_STUDIES } from "@/lib/content/nexus";
 import { PRODUCT_THEMES } from "@/lib/design-tokens";
 import { ClinicOSMockup } from "../visuals/ClinicOSMockup";
@@ -120,18 +121,8 @@ export function CaseStudiesSection() {
   const [hoveredSystemId, setHoveredSystemId] = useState<string | null>(null);
   const [hoveredCapabilityId, setHoveredCapabilityId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-    const media = window.matchMedia("(max-width: 768px)");
-    setIsMobile(media.matches);
-    const listener = () => setIsMobile(media.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
+  const mounted = useIsHydrated();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const showCanvas = mounted && !isMobile && !shouldReduceMotion;
 

@@ -5,7 +5,7 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { Check, ArrowUpRight, Workflow, Cpu, Layers, BarChart3 } from "lucide-react";
 import { WordsPullUpMultiStyle } from "../ui/words-pull-up";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { staggerContainer, cardReveal, lineDraw } from "@/lib/motion/presets";
+
 import { cn } from "@/lib/utils";
 
 const PREMIUM_CARDS = [

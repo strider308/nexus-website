@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   CINEMATIC_TRANSITIONS_ENABLED,
   CINEMATIC_SESSION_KEY,
 } from "@/lib/cinematic/config";
+import { useIsHydrated, useMediaQuery } from "@/hooks/useClientState";
 import { CinematicEntrance } from "./CinematicEntrance";
 
 /**
@@ -15,39 +16,44 @@ import { CinematicEntrance } from "./CinematicEntrance";
  *   2. prefers-reduced-motion — skips overlay if set
  *   3. sessionStorage — plays once per browser session
  *
+ * Uses useSyncExternalStore-backed hooks so no setState runs inside effects.
  * Fails silently if sessionStorage is unavailable (private-browsing, etc.).
- * Once the entrance completes it marks the session so subsequent navigations
- * within the same tab won't re-play the overlay.
  */
 export function CinematicProvider() {
-  const [shouldShow, setShouldShow] = useState(false);
+  const mounted = useIsHydrated();
+  const prefersReduced = useMediaQuery("(prefers-reduced-motion: reduce)");
   const [done, setDone] = useState(false);
 
-  useEffect(() => {
-    if (!CINEMATIC_TRANSITIONS_ENABLED) return;
-
-    // Skip if user prefers reduced motion
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    // Skip if already played this session
+  // Read sessionStorage once, after hydration. useMemo recalculates when
+  // `mounted` transitions false → true (exactly once, on first client render).
+  const alreadySeen = useMemo(() => {
+    if (!mounted) return false;
     try {
-      if (sessionStorage.getItem(CINEMATIC_SESSION_KEY) === "1") return;
+      return sessionStorage.getItem(CINEMATIC_SESSION_KEY) === "1";
     } catch {
-      // sessionStorage unavailable — safe to skip entrance
-      return;
+      // sessionStorage unavailable — skip entrance safely
+      return true;
     }
+  }, [mounted]);
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setShouldShow(true);
-    // Prevent scrolling during entrance
+  const shouldShow =
+    CINEMATIC_TRANSITIONS_ENABLED &&
+    mounted &&
+    !prefersReduced &&
+    !alreadySeen;
+
+  // Block scrolling only while the entrance is active.
+  // This effect reads no state synchronously — it only manages a DOM side-effect.
+  useEffect(() => {
+    if (!shouldShow || done) return;
     document.documentElement.style.overflow = "hidden";
-  }, []);
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [shouldShow, done]);
 
   function handleComplete() {
     setDone(true);
-    // Restore scroll
-    document.documentElement.style.overflow = "";
-    // Mark session so it won't replay
     try {
       sessionStorage.setItem(CINEMATIC_SESSION_KEY, "1");
     } catch {

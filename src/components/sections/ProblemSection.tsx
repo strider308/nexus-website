@@ -2,10 +2,10 @@
 
 import { AlertCircle, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { WordsPullUpMultiStyle, ScrollRevealParagraph } from "../ui/words-pull-up";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { lineDraw, cardReveal, fadeIn } from "@/lib/motion/presets";
+import { motion, useReducedMotion } from "motion/react";
+
 
 const TRANSFORMATIONS = [
   {
