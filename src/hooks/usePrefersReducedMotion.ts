@@ -1,27 +1,11 @@
-"use client";
+/**
+ * usePrefersReducedMotion — thin wrapper over useMediaQuery.
+ * Kept for backwards compatibility with SystemCard3D.tsx.
+ * New code should use useReducedMotion() from motion/react instead.
+ */
 
-import { useEffect, useState } from "react";
+import { useMediaQuery } from "./useClientState";
 
-export function usePrefersReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  });
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const listener = (event: MediaQueryListEvent) => {
-      setPrefersReducedMotion(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", listener);
-    return () => {
-      mediaQuery.removeEventListener("change", listener);
-    };
-  }, []);
-
-  return prefersReducedMotion;
+export function usePrefersReducedMotion(): boolean {
+  return useMediaQuery("(prefers-reduced-motion: reduce)");
 }
