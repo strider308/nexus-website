@@ -5,16 +5,19 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 interface SceneProps {
-  scrollProgress: number;
+  scrollRef: React.RefObject<number>;
 }
 
-export function OpeningScene({ scrollProgress }: SceneProps) {
+export function OpeningScene({ scrollRef }: SceneProps) {
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.MeshBasicMaterial>(null);
   const gridRef = useRef<THREE.GridHelper>(null);
 
   useFrame((state) => {
+    if (typeof document !== "undefined" && document.hidden) return;
+
     const time = state.clock.getElapsedTime();
+    const scrollProgress = scrollRef.current ?? 0;
     
     // Calculate opacity envelope: peak at 0.0, fade to 0.0 by 0.25
     let opacity = 0;

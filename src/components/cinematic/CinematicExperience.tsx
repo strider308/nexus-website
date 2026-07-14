@@ -17,7 +17,8 @@ interface CinematicExperienceProps {
 }
 
 export function CinematicExperience({ children }: CinematicExperienceProps) {
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const [activeChapter, setActiveChapter] = useState<number>(0);
+  const scrollProgressRef = React.useRef<number>(0);
   const tier = usePerformanceTier();
   const reducedMotion = useReducedMotion();
 
@@ -27,15 +28,15 @@ export function CinematicExperience({ children }: CinematicExperienceProps) {
   return (
     <div className="relative min-h-screen bg-[#070707]">
       {/* 1. Scroll Director (coordinates scroll percentage via GSAP ScrollTrigger) */}
-      <ScrollDirector onProgress={setScrollProgress} />
+      <ScrollDirector scrollRef={scrollProgressRef} onChapterChange={setActiveChapter} />
 
       {/* 2. Unified Background Scene Layer (Canvas or SVG Fallback) */}
       {quality === "fallback" ? (
         <div className="fixed inset-0 z-0 pointer-events-none select-none">
-          <CinematicFallback scrollProgress={scrollProgress} />
+          <CinematicFallback activeChapter={activeChapter} />
         </div>
       ) : (
-        <CinematicCanvas scrollProgress={scrollProgress} qualityTier={quality} />
+        <CinematicCanvas scrollRef={scrollProgressRef} activeChapter={activeChapter} qualityTier={quality} />
       )}
 
       {/* 3. HTML Narrative Chapters Container (scrolling naturally above WebGL) */}

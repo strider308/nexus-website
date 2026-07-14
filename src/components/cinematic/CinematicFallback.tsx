@@ -4,22 +4,11 @@ import React from "react";
 import { motion } from "motion/react";
 
 interface CinematicFallbackProps {
-  scrollProgress: number;
+  activeChapter: number;
 }
 
-export function CinematicFallback({ scrollProgress }: CinematicFallbackProps) {
-  // Determine active chapter based on scroll progress
-  // Segment range mapping
-  const getActiveChapter = (p: number) => {
-    if (p < 0.15) return 0; // Opening
-    if (p < 0.35) return 1; // Fragmented
-    if (p < 0.55) return 2; // Mapping
-    if (p < 0.75) return 3; // Architecture
-    if (p < 0.90) return 4; // Proof
-    return 5; // Final
-  };
-
-  const chapter = getActiveChapter(scrollProgress);
+export function CinematicFallback({ activeChapter }: CinematicFallbackProps) {
+  const chapter = activeChapter;
 
   return (
     <div className="absolute inset-0 w-full h-full bg-[#070707] z-0 overflow-hidden pointer-events-none select-none flex items-center justify-center">

@@ -58,7 +58,7 @@ export default function RootLayout({
     "url": METADATA.canonicalUrl,
     "description": "Nexus builds custom software and automation for complex workflows across any industry. The seven systems listed here — spanning clinic operations, personal health, restaurants, team execution, web security, dating safety, and founder tools — are proof-of-work case studies, not a fixed product catalog.",
     "foundingLocation": { "@type": "Place", "addressCountry": "IN" },
-    "dateModified": "2026-06-22",
+    "dateModified": "2026-07-14",
     "contactPoint": {
       "@type": "ContactPoint",
       "email": METADATA.email,
@@ -77,7 +77,7 @@ export default function RootLayout({
         "serviceType": "Software development",
         "description": "Custom software, automation, and workflow systems built end-to-end for founders, operators, and product teams across any industry. Includes product strategy, multi-role operational systems, UX modernization, private-beta rollout, security-conscious engineering, and AI-assisted workflow features.",
         "areaServed": "Worldwide",
-        "url": `${METADATA.canonicalUrl}/#services-brochure`
+        "url": `${METADATA.canonicalUrl}/services`
       },
       {
         "@type": "SoftwareApplication",
@@ -86,7 +86,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Outpatient clinic operations platform covering patient registration, appointment booking, queue management, consultation, diagnostics, billing, and pharmacy.",
         "featureList": "Patient registration, appointment booking, live queue management, digital prescriptions, diagnostic orders, billing, pharmacy, owner dashboard",
-        "url": `${METADATA.canonicalUrl}/case-studies#clinicos`
+        "url": `${METADATA.canonicalUrl}/work#clinicos`
       },
       {
         "@type": "SoftwareApplication",
@@ -95,7 +95,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Personal health information and routine tracker for blood pressure, blood glucose, weight, and medication. User-controlled data with export and deletion.",
         "featureList": "Metric logging, trend visualization, weekly summaries, medication reminders, data export, data deletion",
-        "url": `${METADATA.canonicalUrl}/case-studies#aarogya`
+        "url": `${METADATA.canonicalUrl}/work#aarogya`
       },
       {
         "@type": "SoftwareApplication",
@@ -104,7 +104,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Restaurant ordering and operations platform covering QR menu, table ordering, kitchen queue, billing, and owner dashboard.",
         "featureList": "QR menu, table ordering, kitchen display, billing, cash reconciliation, inventory management, owner dashboard",
-        "url": `${METADATA.canonicalUrl}/case-studies#restaurantos`
+        "url": `${METADATA.canonicalUrl}/work#restaurantos`
       },
       {
         "@type": "SoftwareApplication",
@@ -113,7 +113,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Async team execution workspace for task ownership, daily check-ins, progress tracking, and team accountability.",
         "featureList": "Task ownership, daily check-ins, progress tracking, team accountability, async-first workflow",
-        "url": `${METADATA.canonicalUrl}/case-studies#shipwright`
+        "url": `${METADATA.canonicalUrl}/work#shipwright`
       },
       {
         "@type": "SoftwareApplication",
@@ -122,7 +122,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Developer-focused web-security scanning platform for authorized vulnerability detection, finding reports, and severity classification.",
         "featureList": "Automated vulnerability scanning, finding severity levels, detailed reports, scan history",
-        "url": `${METADATA.canonicalUrl}/case-studies#securescan`
+        "url": `${METADATA.canonicalUrl}/work#securescan`
       },
       {
         "@type": "SoftwareApplication",
@@ -131,7 +131,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Dating-safety preparation and check-in product. Users share date plans with trusted contacts and set timed check-ins.",
         "featureList": "Date plan sharing, trusted contact network, timed check-ins, consent-aware sharing",
-        "url": `${METADATA.canonicalUrl}/case-studies#safedate`
+        "url": `${METADATA.canonicalUrl}/work#safedate`
       },
       {
         "@type": "SoftwareApplication",
@@ -140,7 +140,7 @@ export default function RootLayout({
         "operatingSystem": "Web",
         "description": "Founder execution and public-progress workspace. Private task management with a public-facing progress log for accountability and audience building.",
         "featureList": "Private task management, public progress log, milestone sharing, founder accountability",
-        "url": `${METADATA.canonicalUrl}/case-studies#buildpublic`
+        "url": `${METADATA.canonicalUrl}/work#buildpublic`
       }
     ]
   };
@@ -164,9 +164,11 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <MotionConfig reducedMotion="user">
-          {children}
-        </MotionConfig>
+        <main id="main-content" className="flex-1 flex flex-col w-full">
+          <MotionConfig reducedMotion="user">
+            {children}
+          </MotionConfig>
+        </main>
       </body>
     </html>
   );

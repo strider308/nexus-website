@@ -9,14 +9,24 @@ export function CinematicEntrance() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const seen = typeof window !== "undefined" ? sessionStorage.getItem("nexus_entrance_seen") : "true";
+    let seen = "true";
+    try {
+      if (typeof window !== "undefined") {
+        seen = sessionStorage.getItem("nexus_entrance_seen") || "";
+      }
+    } catch {
+      seen = "true"; // skip animation on storage blocker
+    }
+
     if (reducedMotion || seen) {
       const frame = requestAnimationFrame(() => {
         setVisible(false);
       });
       return () => cancelAnimationFrame(frame);
     } else {
-      sessionStorage.setItem("nexus_entrance_seen", "true");
+      try {
+        sessionStorage.setItem("nexus_entrance_seen", "true");
+      } catch {}
       const timer = setTimeout(() => {
         setVisible(false);
       }, 1200);

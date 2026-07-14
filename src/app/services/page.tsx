@@ -2,18 +2,19 @@
 
 import React from "react";
 import { SiteHeader } from "@/components/ui/SiteHeader";
+import { SiteFooter } from "@/components/ui/SiteFooter";
 import { SERVICES } from "@/content/nexus";
 import { motion } from "motion/react";
 
 export default function ServicesPage() {
   return (
-    <div className="relative min-h-screen bg-[#070707] text-[#dedbc8] pt-24 pb-20 px-6 md:px-12 select-none">
+    <div className="relative min-h-screen bg-[#070707] text-[#dedbc8] pt-24 select-none">
       <SiteHeader />
       
       {/* Background Noise Layer */}
       <div className="absolute inset-0 opacity-[0.04] bg-noise pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto flex flex-col gap-12 relative z-10">
+      <div className="max-w-5xl mx-auto flex flex-col gap-12 relative z-10 px-6 md:px-12 pb-24">
         {/* Page Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,7 +62,31 @@ export default function ServicesPage() {
             </motion.div>
           ))}
         </div>
+
+        {/* Conversion CTA Block */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="border border-[#dedbc8]/14 bg-[#0d0d0d] p-8 md:p-12 text-center flex flex-col items-center gap-6 mt-12"
+        >
+          <h2 className="font-serif text-3xl md:text-5xl font-light italic text-[#dedbc8] tracking-tight">
+            Ready to structure your workflow?
+          </h2>
+          <p className="text-sm md:text-base font-light text-gray-400 max-w-xl leading-relaxed">
+            Every software build starts with a custom diagnostic map. Let&apos;s design the system stack for your handoffs.
+          </p>
+          <a
+            href="/contact"
+            className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300"
+          >
+            Start a Diagnostic Conversation
+          </a>
+        </motion.div>
       </div>
+
+      <SiteFooter />
     </div>
   );
 }

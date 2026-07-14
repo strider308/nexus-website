@@ -12,6 +12,7 @@ import { MappingChapter } from "@/components/chapters/MappingChapter";
 import { ArchitectureChapter } from "@/components/chapters/ArchitectureChapter";
 import { ProofChapter } from "@/components/chapters/ProofChapter";
 import { FinalChapter } from "@/components/chapters/FinalChapter";
+import { SiteFooter } from "@/components/ui/SiteFooter";
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
           <ArchitectureChapter />
           <ProofChapter />
           <FinalChapter />
+          <SiteFooter />
         </div>
       </CinematicExperience>
     </>

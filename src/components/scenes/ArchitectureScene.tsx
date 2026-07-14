@@ -5,18 +5,21 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 interface SceneProps {
-  scrollProgress: number;
+  scrollRef: React.RefObject<number>;
 }
 
 const LAYERS_COUNT = 6;
 const LAYER_SPACING = 0.45;
 
-export function ArchitectureScene({ scrollProgress }: SceneProps) {
+export function ArchitectureScene({ scrollRef }: SceneProps) {
   const groupRef = useRef<THREE.Group>(null);
   const signalRef = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
+    if (typeof document !== "undefined" && document.hidden) return;
+
     const time = state.clock.getElapsedTime();
+    const scrollProgress = scrollRef.current ?? 0;
 
     // Opacity envelope: active between 0.50 and 0.85, peaking at 0.65
     let opacity = 0;

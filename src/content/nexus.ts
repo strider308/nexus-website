@@ -118,8 +118,18 @@ export const SERVICES: ServiceItem[] = [
 ];
 
 export const LEGAL = {
-  privacyPolicy: "This Privacy Policy describes how Nexus collects, uses, and discloses information in connection with this site. We only process data necessary for providing our services. Security measures are implemented to guard against unauthorized access.",
-  termsOfService: "By using this site, you agree to these terms. Nexus provides custom software planning and engineering. All outcomes depend on adoption, setup, and norms. Automated scanning does not guarantee total protection; medical/safety products do not replace professional advice."
+  privacyPolicy: [
+    "1. Information Collection: Nexus respect your privacy. We only collect the minimal personal information you explicitly choose to share when contacting us via email. We do not use third-party analytics cookies or trackers to log your browsing patterns on this website.",
+    "2. How We Use Data: Any details or workflow descriptions you send us are used solely to evaluate your custom software requirements, prepare diagnostic blueprints, and carry out our engineering obligations.",
+    "3. Information Sharing: We do not sell, trade, or transfer your operational data to outside parties. We only share information with third parties when necessary to fulfill software hosting configurations or as explicitly required by law.",
+    "4. Security: We apply industry-standard security measures, including transport-layer encryption (HTTPS) and access controls, to safeguard all communications and diagnostic inputs."
+  ],
+  termsOfService: [
+    "1. Acceptance of Terms: By using this site, you agree to these Terms of Service. If you do not accept these terms, you must discontinue using our services and website.",
+    "2. Scope of Service: Nexus designs, prototypes, and builds custom role-aware software platforms, database triggers, and operational dashboards. We do not sell pre-configured packages; all outcomes are custom integrations.",
+    "3. Limits of Responsibility: Our custom scanning tools do not replace certified penetration testing. Aarogya does not provide medical diagnostic advice. SafeDate is a companion tool and cannot guarantee physical safety. The user assumes full responsibility for the configuration, adoption, and operational oversight of these workflows.",
+    "4. Governing Law: These terms and any custom software development agreements are governed by local engineering standards, without regard to conflicts of law rules."
+  ]
 };
 
 export const CONTACT = {

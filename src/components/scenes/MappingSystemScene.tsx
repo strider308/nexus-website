@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 interface SceneProps {
-  scrollProgress: number;
+  scrollRef: React.RefObject<number>;
 }
 
 const NODES_COUNT = 8;
@@ -25,10 +25,14 @@ const STATIC_MAPPINGS = Array.from({ length: NODES_COUNT }).map((_, idx) => {
   };
 });
 
-export function MappingSystemScene({ scrollProgress }: SceneProps) {
+export function MappingSystemScene({ scrollRef }: SceneProps) {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame(() => {
+    if (typeof document !== "undefined" && document.hidden) return;
+
+    const scrollProgress = scrollRef.current ?? 0;
+    
     // Opacity envelope: active between 0.30 and 0.65, peaking at 0.48
     let opacity = 0;
     if (scrollProgress >= 0.30 && scrollProgress <= 0.65) {

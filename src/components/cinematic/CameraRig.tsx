@@ -6,24 +6,30 @@ import * as THREE from "three";
 import { getCameraPointForProgress } from "@/lib/cinematic/chapter-map";
 
 interface CameraRigProps {
-  scrollProgress: number;
+  scrollRef: React.RefObject<number>;
 }
 
-export function CameraRig({ scrollProgress }: CameraRigProps) {
+export function CameraRig({ scrollRef }: CameraRigProps) {
   const currentTarget = useRef(new THREE.Vector3(0, 0, 0));
+  const targetPosVec = useRef(new THREE.Vector3(0, 0, 0));
+  const targetLookVec = useRef(new THREE.Vector3(0, 0, 0));
 
   useFrame((state) => {
-    const pt = getCameraPointForProgress(scrollProgress);
+    if (typeof document !== "undefined" && document.hidden) return;
+
+    const progress = scrollRef.current ?? 0;
+    const pt = getCameraPointForProgress(progress);
     
-    // 1. Interpolate camera position
-    const targetPos = new THREE.Vector3(...pt.position);
-    state.camera.position.lerp(targetPos, 0.08);
+    // 1. Interpolate camera position using pre-allocated vector ref
+    targetPosVec.current.set(pt.position[0], pt.position[1], pt.position[2]);
+    state.camera.position.lerp(targetPosVec.current, 0.08);
     
-    // 2. Interpolate looking target point
-    const targetLook = new THREE.Vector3(...pt.target);
-    currentTarget.current.lerp(targetLook, 0.08);
+    // 2. Interpolate looking target point using pre-allocated vector ref
+    targetLookVec.current.set(pt.target[0], pt.target[1], pt.target[2]);
+    currentTarget.current.lerp(targetLookVec.current, 0.08);
     state.camera.lookAt(currentTarget.current);
   });
 
   return null;
 }
+export default CameraRig;

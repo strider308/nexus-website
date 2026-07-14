@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 interface SceneProps {
-  scrollProgress: number;
+  scrollRef: React.RefObject<number>;
 }
 
 const NODES_COUNT = 18;
@@ -28,11 +28,14 @@ const STATIC_NODES = Array.from({ length: NODES_COUNT }).map((_, idx) => {
   };
 });
 
-export function FragmentedWorkflowScene({ scrollProgress }: SceneProps) {
+export function FragmentedWorkflowScene({ scrollRef }: SceneProps) {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
+    if (typeof document !== "undefined" && document.hidden) return;
+
     const time = state.clock.getElapsedTime();
+    const scrollProgress = scrollRef.current ?? 0;
     
     // Opacity envelope: active between 0.10 and 0.45, peaking at 0.25
     let opacity = 0;

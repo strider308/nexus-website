@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 interface SceneProps {
-  scrollProgress: number;
+  scrollRef: React.RefObject<number>;
 }
 
 const SYSTEMS_COUNT = 7;
@@ -37,11 +37,14 @@ const STATIC_SYSTEMS = Array.from({ length: SYSTEMS_COUNT }).map((_, idx) => {
   };
 });
 
-export function ProofSystemsScene({ scrollProgress }: SceneProps) {
+export function ProofSystemsScene({ scrollRef }: SceneProps) {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
+    if (typeof document !== "undefined" && document.hidden) return;
+
     const time = state.clock.getElapsedTime();
+    const scrollProgress = scrollRef.current ?? 0;
 
     // Opacity envelope: active between 0.70 and 0.95, peaking at 0.82
     let opacity = 0;
@@ -61,8 +64,8 @@ export function ProofSystemsScene({ scrollProgress }: SceneProps) {
         const sys = STATIC_SYSTEMS[idx];
         if (!sys) return;
 
-        // Pulse scale
-        const pulse = sys.scale * (1 + Math.sin(time * sys.speed + idx) * 0.1);
+        // Pulse scale reduced from 0.1 (10%) to 0.04 (4%) for visual restraint
+        const pulse = sys.scale * (1 + Math.sin(time * sys.speed + idx) * 0.04);
         child.scale.setScalar(pulse);
 
         const mesh = child as THREE.Mesh;
@@ -80,7 +83,7 @@ export function ProofSystemsScene({ scrollProgress }: SceneProps) {
       {/* 7 Constellation Orbs representing proof systems */}
       {STATIC_SYSTEMS.map((sys, idx) => (
         <mesh key={idx} position={sys.position}>
-          <sphereGeometry args={[1, 16, 16]} />
+          <sphereGeometry args={[1, 12, 12]} />
           <meshStandardMaterial 
             color={sys.color}
             emissive={sys.color}

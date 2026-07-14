@@ -17,21 +17,22 @@ import { ProofSystemsScene } from "../scenes/ProofSystemsScene";
 import { FinalAssemblyScene } from "../scenes/FinalAssemblyScene";
 
 interface CinematicCanvasProps {
-  scrollProgress: number;
+  scrollRef: React.RefObject<number>;
+  activeChapter: number;
   qualityTier: "high" | "balanced" | "low" | "fallback";
 }
 
-export function CinematicCanvas({ scrollProgress, qualityTier }: CinematicCanvasProps) {
+export function CinematicCanvas({ scrollRef, activeChapter, qualityTier }: CinematicCanvasProps) {
   // If fallback tier is detected, render 2D SVG directly with zero WebGL overhead
   if (qualityTier === "fallback") {
-    return <CinematicFallback scrollProgress={scrollProgress} />;
+    return <CinematicFallback activeChapter={activeChapter} />;
   }
 
   const dpr = qualityTier === "high" ? 1.5 : qualityTier === "balanced" ? 1.2 : 1.0;
 
   return (
     <div className="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none select-none">
-      <WebGLErrorBoundary fallback={<CinematicFallback scrollProgress={scrollProgress} />}>
+      <WebGLErrorBoundary fallback={<CinematicFallback activeChapter={activeChapter} />}>
         <Canvas
           camera={{ fov: 45, near: 0.1, far: 20, position: [0, 0, 5] }}
           dpr={[1, dpr]}
@@ -42,6 +43,7 @@ export function CinematicCanvas({ scrollProgress, qualityTier }: CinematicCanvas
             preserveDrawingBuffer: false,
           }}
           style={{ width: "100%", height: "100%" }}
+          aria-hidden="true"
         >
           {/* Quality Manager & Performance Watcher */}
           <SceneQualityManager />
@@ -50,16 +52,16 @@ export function CinematicCanvas({ scrollProgress, qualityTier }: CinematicCanvas
           <SceneLighting />
 
           {/* Camera Interpolator Rig */}
-          <CameraRig scrollProgress={scrollProgress} />
+          <CameraRig scrollRef={scrollRef} />
 
           {/* Cinematic R3F Scenes */}
           <group>
-            <OpeningScene scrollProgress={scrollProgress} />
-            <FragmentedWorkflowScene scrollProgress={scrollProgress} />
-            <MappingSystemScene scrollProgress={scrollProgress} />
-            <ArchitectureScene scrollProgress={scrollProgress} />
-            <ProofSystemsScene scrollProgress={scrollProgress} />
-            <FinalAssemblyScene scrollProgress={scrollProgress} />
+            <OpeningScene scrollRef={scrollRef} />
+            <FragmentedWorkflowScene scrollRef={scrollRef} />
+            <MappingSystemScene scrollRef={scrollRef} />
+            <ArchitectureScene scrollRef={scrollRef} />
+            <ProofSystemsScene scrollRef={scrollRef} />
+            <FinalAssemblyScene scrollRef={scrollRef} />
           </group>
         </Canvas>
       </WebGLErrorBoundary>
