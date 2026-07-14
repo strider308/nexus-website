@@ -1,54 +1,38 @@
-import { SiteHeader } from "@/components/site/SiteHeader";
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { LayoutExtras } from "@/components/site/LayoutExtras";
-import { FloatingProductNav } from "@/components/site/FloatingProductNav";
-import { Hero } from "@/components/sections/Hero";
-import { ProofStrip } from "@/components/sections/ProofStrip";
-import { ProblemSection } from "@/components/sections/ProblemSection";
-import { ServicesSection } from "@/components/sections/ServicesSection";
-import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
-import { ProofLedger } from "@/components/sections/ProofLedger";
-import { WhyNexusCompounds } from "@/components/sections/WhyNexusCompounds";
-import { EngagementModels } from "@/components/sections/EngagementModels";
-import { FounderSection } from "@/components/sections/FounderSection";
-import { TrustLimitsSection } from "@/components/sections/TrustLimitsSection";
-import { FinalCTA } from "@/components/sections/FinalCTA";
-import { ResourcesPreview } from "@/components/sections/ResourcesPreview";
+"use client";
 
-import { SectionMinimap } from "@/components/three/SectionMinimap";
+import React from "react";
+import { CinematicExperience } from "@/components/cinematic/CinematicExperience";
+import { CinematicEntrance } from "@/components/ui/CinematicEntrance";
+import { SiteHeader } from "@/components/ui/SiteHeader";
+
+// Import HTML narrative chapters
+import { OpeningChapter } from "@/components/chapters/OpeningChapter";
+import { FragmentedChapter } from "@/components/chapters/FragmentedChapter";
+import { MappingChapter } from "@/components/chapters/MappingChapter";
+import { ArchitectureChapter } from "@/components/chapters/ArchitectureChapter";
+import { ProofChapter } from "@/components/chapters/ProofChapter";
+import { FinalChapter } from "@/components/chapters/FinalChapter";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Client layout extras (progress bar, spotlight mouse track, cookie banner) */}
-      <LayoutExtras />
-      <SectionMinimap />
+    <>
+      {/* 1. Cinematic entrance logo intro overlay */}
+      <CinematicEntrance />
 
-      {/* Sticky Top Header */}
+      {/* 2. Global header navigation */}
       <SiteHeader />
 
-      <main id="main-content" className="flex-grow">
-        {/* Sections */}
-        <Hero />
-        <ProofStrip />
-        <ProblemSection />
-        <ServicesSection />
-        <ProofLedger />
-        <WhyNexusCompounds />
-        <CaseStudiesSection />
-        <EngagementModels />
-        <ResourcesPreview />
-        <FounderSection />
-        <TrustLimitsSection />
-        <FinalCTA />
-      </main>
-
-      {/* Persistent Bottom shortcuts navigation */}
-      <FloatingProductNav />
-
-      {/* Footer */}
-      <SiteFooter />
-    </div>
+      {/* 3. Infinite scrolling narrative experience */}
+      <CinematicExperience>
+        <div className="flex flex-col w-full">
+          <OpeningChapter />
+          <FragmentedChapter />
+          <MappingChapter />
+          <ArchitectureChapter />
+          <ProofChapter />
+          <FinalChapter />
+        </div>
+      </CinematicExperience>
+    </>
   );
 }
-export const dynamic = "force-static";

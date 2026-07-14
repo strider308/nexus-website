@@ -1,0 +1,25 @@
+/* Cinematic 3D Rebuild Design Tokens */
+
+:root {
+  /* Color Palette */
+  --color-black: #070707;
+  --color-black-soft: #0d0d0d;
+  --color-cream: #dedbc8;
+  --color-cream-bright: #f0edda;
+  --color-blue: #2e6fad;
+  --color-teal: #2a7d8a;
+  --color-navy: #1a2b4c;
+  --color-grey: #8b8b84;
+  --color-line: rgba(222, 219, 200, 0.14);
+
+  /* Backgrounds */
+  --space-bg: var(--color-black);
+  --section-bg: var(--color-black-soft);
+
+  /* Typography */
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  
+  /* Borders and Lines */
+  --border-thin: 1px solid var(--color-line);
+}

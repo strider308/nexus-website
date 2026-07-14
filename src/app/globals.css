@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "../styles/tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -52,53 +53,44 @@
 }
 
 :root {
-  --background: #000000;
-  --foreground: #E1E0CC;
+  --background: #070707;
+  --foreground: #dedbc8;
   
-  --card: #101010;
-  --card-foreground: #E1E0CC;
+  --card: #0d0d0d;
+  --card-foreground: #dedbc8;
   
-  --popover: #101010;
-  --popover-foreground: #E1E0CC;
+  --popover: #0d0d0d;
+  --popover-foreground: #dedbc8;
   
-  --primary: #DEDBC8;
-  --primary-foreground: #000000;
+  --primary: #dedbc8;
+  --primary-foreground: #070707;
   
-  --secondary: #212121;
-  --secondary-foreground: #E1E0CC;
+  --secondary: #0d0d0d;
+  --secondary-foreground: #dedbc8;
   
-  --muted: #101010;
-  --muted-foreground: #94a3b8;
+  --muted: #0d0d0d;
+  --muted-foreground: #8b8b84;
   
   --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(225, 224, 204, 0.1);
-  --input: rgba(225, 224, 204, 0.15);
-  --ring: #DEDBC8;
+  --border: rgba(222, 219, 200, 0.14);
+  --input: rgba(222, 219, 200, 0.14);
+  --ring: #dedbc8;
   
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 0px; /* Restrained border-radius: no excessive rounded corners as per design specs */
   
-  --sidebar: #101010;
-  --sidebar-foreground: #E1E0CC;
-  --sidebar-primary: #DEDBC8;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #212121;
-  --sidebar-accent-foreground: #E1E0CC;
-  --sidebar-border: rgba(225, 224, 204, 0.1);
-  --sidebar-ring: #DEDBC8;
-  
-  /* Shared Product Colors */
-  --c-clinicos: #4A7BC4;
-  --c-aarogya: #6FA876;
-  --c-restaurant: #C87B3A;
-  --c-shipwright: #8B7BC4;
-  --c-securescan: #3A9EAA;
-  --c-safedate: #C44A7A;
-  --c-buildpublic: #4A8A5A;
+  --sidebar: #0d0d0d;
+  --sidebar-foreground: #dedbc8;
+  --sidebar-primary: #dedbc8;
+  --sidebar-primary-foreground: #070707;
+  --sidebar-accent: #0d0d0d;
+  --sidebar-accent-foreground: #dedbc8;
+  --sidebar-border: rgba(222, 219, 200, 0.14);
+  --sidebar-ring: #dedbc8;
 }
 
 @layer base {
