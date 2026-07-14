@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { CinematicExperience } from "@/components/cinematic/CinematicExperience";
 import { CinematicEntrance } from "@/components/ui/CinematicEntrance";
@@ -10,6 +8,7 @@ import { OpeningChapter } from "@/components/chapters/OpeningChapter";
 import { FragmentedChapter } from "@/components/chapters/FragmentedChapter";
 import { MappingChapter } from "@/components/chapters/MappingChapter";
 import { ArchitectureChapter } from "@/components/chapters/ArchitectureChapter";
+import { TrustChapter } from "@/components/chapters/TrustChapter";
 import { ProofChapter } from "@/components/chapters/ProofChapter";
 import { FinalChapter } from "@/components/chapters/FinalChapter";
 import { SiteFooter } from "@/components/ui/SiteFooter";
@@ -30,6 +29,7 @@ export default function Home() {
           <FragmentedChapter />
           <MappingChapter />
           <ArchitectureChapter />
+          <TrustChapter />
           <ProofChapter />
           <FinalChapter />
           <SiteFooter />

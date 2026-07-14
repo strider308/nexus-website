@@ -16,13 +16,16 @@ export function FinalAssemblyScene({ scrollRef }: SceneProps) {
   useFrame((state) => {
     if (typeof document !== "undefined" && document.hidden) return;
 
-    const time = state.clock.getElapsedTime();
     const scrollProgress = scrollRef.current ?? 0;
+    // Gating check: only calculate when active
+    if (scrollProgress < 0.78) return;
 
-    // Opacity envelope: active from 0.85 onwards, peaking at 0.95 and locking constant
+    const time = state.clock.getElapsedTime();
+
+    // Opacity envelope: active from 0.80 onwards, peaking at 0.90 and locking constant
     let opacity = 0;
-    if (scrollProgress >= 0.85) {
-      opacity = Math.min(1, (scrollProgress - 0.85) / 0.10);
+    if (scrollProgress >= 0.80) {
+      opacity = Math.min(1, (scrollProgress - 0.80) / 0.10);
     }
 
     if (groupRef.current) {

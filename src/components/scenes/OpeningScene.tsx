@@ -16,13 +16,16 @@ export function OpeningScene({ scrollRef }: SceneProps) {
   useFrame((state) => {
     if (typeof document !== "undefined" && document.hidden) return;
 
-    const time = state.clock.getElapsedTime();
     const scrollProgress = scrollRef.current ?? 0;
+    // Gating check: only calculate when active
+    if (scrollProgress > 0.16) return;
+
+    const time = state.clock.getElapsedTime();
     
-    // Calculate opacity envelope: peak at 0.0, fade to 0.0 by 0.25
+    // Calculate opacity envelope: peak at 0.0, fade to 0.0 by 0.14
     let opacity = 0;
-    if (scrollProgress <= 0.25) {
-      opacity = 1 - scrollProgress / 0.25;
+    if (scrollProgress <= 0.14) {
+      opacity = 1 - scrollProgress / 0.14;
     }
 
     if (materialRef.current) {

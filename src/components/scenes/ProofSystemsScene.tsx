@@ -43,16 +43,19 @@ export function ProofSystemsScene({ scrollRef }: SceneProps) {
   useFrame((state) => {
     if (typeof document !== "undefined" && document.hidden) return;
 
-    const time = state.clock.getElapsedTime();
     const scrollProgress = scrollRef.current ?? 0;
+    // Gating check: only calculate when active
+    if (scrollProgress < 0.60 || scrollProgress > 0.90) return;
 
-    // Opacity envelope: active between 0.70 and 0.95, peaking at 0.82
+    const time = state.clock.getElapsedTime();
+
+    // Opacity envelope: active between 0.62 and 0.88, peaking at 0.77
     let opacity = 0;
-    if (scrollProgress >= 0.70 && scrollProgress <= 0.95) {
-      if (scrollProgress < 0.82) {
-        opacity = (scrollProgress - 0.70) / 0.12;
+    if (scrollProgress >= 0.62 && scrollProgress <= 0.88) {
+      if (scrollProgress < 0.77) {
+        opacity = (scrollProgress - 0.62) / 0.15;
       } else {
-        opacity = 1 - (scrollProgress - 0.82) / 0.13;
+        opacity = 1 - (scrollProgress - 0.77) / 0.11;
       }
     }
 

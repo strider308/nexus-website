@@ -31,7 +31,7 @@ export function SiteHeader() {
                 key={link.href}
                 href={link.href}
                 className={`font-mono text-xs uppercase tracking-wider transition-colors duration-300 ${
-                  isActive ? "text-[#2a7d8a] font-bold" : "text-gray-400 hover:text-[#dedbc8]"
+                  isActive ? "text-[#2a7d8a] font-bold" : "text-gray-300 hover:text-[#dedbc8]"
                 }`}
               >
                 {link.label}

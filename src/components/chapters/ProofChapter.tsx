@@ -9,16 +9,19 @@ export function ProofChapter() {
   const [activeSystemIdx, setActiveSystemIdx] = useState<number>(0);
 
   return (
-    <section className="h-screen flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-none">
+    <section 
+      data-chapter-index={5}
+      className="min-h-screen flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text py-20"
+    >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Left: Headline & Systems list */}
         <div className="lg:col-span-6 flex flex-col gap-6">
           <div className="flex flex-col gap-3">
-            <span className="text-xs md:text-sm font-mono tracking-[0.2em] text-[#c87b3a] uppercase font-bold">
-              04 // PROOF
+            <span className="text-xs font-mono tracking-wider text-gray-400 uppercase font-bold">
+              [ Case Studies ]
             </span>
             <h2 className="font-serif text-3xl md:text-5xl font-light text-[#dedbc8] tracking-tight leading-none italic">
-              Seven systems. Five industries.
+              Proven custom architectures.
             </h2>
           </div>
 

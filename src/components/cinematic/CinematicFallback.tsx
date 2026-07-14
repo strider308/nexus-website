@@ -69,8 +69,23 @@ export function CinematicFallback({ activeChapter }: CinematicFallbackProps) {
         </div>
       )}
 
-      {/* Chapter 5: Proof Systems - Constellation */}
+      {/* Chapter 5: Trust - Structured human collaboration lines */}
       {chapter === 4 && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg className="w-72 h-72 opacity-25" viewBox="0 0 100 100">
+            <line x1="10" y1="50" x2="90" y2="50" stroke="#dedbc8" strokeWidth="0.25" />
+            <line x1="50" y1="10" x2="50" y2="90" stroke="#dedbc8" strokeWidth="0.25" />
+            <circle cx="50" cy="50" r="4" fill="none" stroke="#2e6fad" strokeWidth="0.5" />
+            <circle cx="20" cy="50" r="2" fill="#2a7d8a" />
+            <circle cx="80" cy="50" r="2" fill="#2a7d8a" />
+            <circle cx="50" cy="20" r="2" fill="#2a7d8a" />
+            <circle cx="50" cy="80" r="2" fill="#2a7d8a" />
+          </svg>
+        </div>
+      )}
+
+      {/* Chapter 6: Proof Systems - Constellation */}
+      {chapter === 5 && (
         <div className="absolute inset-0 flex items-center justify-center">
           <svg className="w-80 h-80 opacity-20" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="30" fill="none" stroke="#dedbc8" strokeWidth="0.2" strokeDasharray="3 3" />
@@ -83,8 +98,8 @@ export function CinematicFallback({ activeChapter }: CinematicFallbackProps) {
         </div>
       )}
 
-      {/* Chapter 6: Final - Clean Resolved core */}
-      {chapter === 5 && (
+      {/* Chapter 7: Final - Clean Resolved core */}
+      {chapter === 6 && (
         <motion.div 
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1.0, opacity: 0.25 }}

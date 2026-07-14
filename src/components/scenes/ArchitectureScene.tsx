@@ -18,21 +18,24 @@ export function ArchitectureScene({ scrollRef }: SceneProps) {
   useFrame((state) => {
     if (typeof document !== "undefined" && document.hidden) return;
 
-    const time = state.clock.getElapsedTime();
     const scrollProgress = scrollRef.current ?? 0;
+    // Gating check: only calculate when active
+    if (scrollProgress < 0.40 || scrollProgress > 0.64) return;
 
-    // Opacity envelope: active between 0.50 and 0.85, peaking at 0.65
+    const time = state.clock.getElapsedTime();
+
+    // Opacity envelope: active between 0.42 and 0.62, peaking at 0.49
     let opacity = 0;
-    if (scrollProgress >= 0.50 && scrollProgress <= 0.85) {
-      if (scrollProgress < 0.65) {
-        opacity = (scrollProgress - 0.50) / 0.15;
+    if (scrollProgress >= 0.42 && scrollProgress <= 0.62) {
+      if (scrollProgress < 0.49) {
+        opacity = (scrollProgress - 0.42) / 0.07;
       } else {
-        opacity = 1 - (scrollProgress - 0.65) / 0.20;
+        opacity = 1 - (scrollProgress - 0.49) / 0.13;
       }
     }
 
     // Stack reveals in sequence based on scroll progress within the segment
-    const segmentProgress = Math.max(0, Math.min(1, (scrollProgress - 0.50) / 0.18));
+    const segmentProgress = Math.max(0, Math.min(1, (scrollProgress - 0.42) / 0.14));
 
     if (groupRef.current) {
       groupRef.current.children.forEach((child, idx) => {

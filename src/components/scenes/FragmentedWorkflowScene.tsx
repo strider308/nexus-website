@@ -34,16 +34,19 @@ export function FragmentedWorkflowScene({ scrollRef }: SceneProps) {
   useFrame((state) => {
     if (typeof document !== "undefined" && document.hidden) return;
 
-    const time = state.clock.getElapsedTime();
     const scrollProgress = scrollRef.current ?? 0;
+    // Gating check: only calculate when active
+    if (scrollProgress < 0.10 || scrollProgress > 0.30) return;
+
+    const time = state.clock.getElapsedTime();
     
-    // Opacity envelope: active between 0.10 and 0.45, peaking at 0.25
+    // Opacity envelope: active between 0.12 and 0.28, peaking at 0.20
     let opacity = 0;
-    if (scrollProgress >= 0.10 && scrollProgress <= 0.45) {
-      if (scrollProgress < 0.25) {
-        opacity = (scrollProgress - 0.10) / 0.15;
+    if (scrollProgress >= 0.12 && scrollProgress <= 0.28) {
+      if (scrollProgress < 0.20) {
+        opacity = (scrollProgress - 0.12) / 0.08;
       } else {
-        opacity = 1 - (scrollProgress - 0.25) / 0.20;
+        opacity = 1 - (scrollProgress - 0.20) / 0.08;
       }
     }
 

@@ -32,19 +32,21 @@ export function MappingSystemScene({ scrollRef }: SceneProps) {
     if (typeof document !== "undefined" && document.hidden) return;
 
     const scrollProgress = scrollRef.current ?? 0;
+    // Gating check: only calculate when active
+    if (scrollProgress < 0.26 || scrollProgress > 0.44) return;
     
-    // Opacity envelope: active between 0.30 and 0.65, peaking at 0.48
+    // Opacity envelope: active between 0.28 and 0.42, peaking at 0.35
     let opacity = 0;
-    if (scrollProgress >= 0.30 && scrollProgress <= 0.65) {
-      if (scrollProgress < 0.48) {
-        opacity = (scrollProgress - 0.30) / 0.18;
+    if (scrollProgress >= 0.28 && scrollProgress <= 0.42) {
+      if (scrollProgress < 0.35) {
+        opacity = (scrollProgress - 0.28) / 0.07;
       } else {
-        opacity = 1 - (scrollProgress - 0.48) / 0.17;
+        opacity = 1 - (scrollProgress - 0.35) / 0.07;
       }
     }
 
     // Move nodes from start positions to mapped coordinates along scroll progress within this chapter segment
-    const segmentProgress = Math.max(0, Math.min(1, (scrollProgress - 0.30) / 0.25));
+    const segmentProgress = Math.max(0, Math.min(1, (scrollProgress - 0.28) / 0.14));
 
     if (groupRef.current) {
       groupRef.current.children.forEach((child, idx) => {

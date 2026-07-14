@@ -24,6 +24,10 @@ export const CAMERA_POINTS: Record<ChapterIndex, CameraPoint> = {
     position: [2.2, 0.8, 3.8],
     target: [-0.2, -0.3, 0],
   },
+  [CHAPTERS.TRUST]: {
+    position: [1.2, -0.5, 4.5],
+    target: [0, 0, 0],
+  },
   [CHAPTERS.PROOF]: {
     position: [-1.2, 1.2, 4.5],
     target: [0, 0.2, -0.5],

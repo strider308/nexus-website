@@ -11,18 +11,38 @@ interface ScrollDirectorProps {
   onChapterChange: (chapter: number) => void;
 }
 
+interface ChapterRange {
+  index: number;
+  start: number;
+  end: number;
+}
+
 export function ScrollDirector({ scrollRef, onChapterChange }: ScrollDirectorProps) {
   useEffect(() => {
     let lastChapter = -1;
+    let cachedRanges: ChapterRange[] = [];
 
-    const getActiveChapter = (p: number) => {
-      if (p < 0.15) return 0; // Opening
-      if (p < 0.35) return 1; // Fragmented
-      if (p < 0.55) return 2; // Mapping
-      if (p < 0.75) return 3; // Architecture
-      if (p < 0.90) return 4; // Proof
-      return 5; // Final
+    const recalculateRanges = () => {
+      const sections = document.querySelectorAll("[data-chapter-index]");
+      if (sections.length === 0) return;
+      
+      const heights = Array.from(sections).map((s) => s.getBoundingClientRect().height);
+      const totalHeight = heights.reduce((sum, h) => sum + h, 0);
+
+      let currentOffset = 0;
+      cachedRanges = heights.map((h, idx) => {
+        const start = currentOffset / totalHeight;
+        const end = (currentOffset + h) / totalHeight;
+        currentOffset += h;
+        return { index: idx, start, end };
+      });
     };
+
+    // Calculate initial ranges
+    recalculateRanges();
+
+    // Trigger on resize
+    window.addEventListener("resize", recalculateRanges);
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -34,7 +54,14 @@ export function ScrollDirector({ scrollRef, onChapterChange }: ScrollDirectorPro
           const progress = self.progress;
           scrollRef.current = progress;
           
-          const currentChapter = getActiveChapter(progress);
+          let currentChapter = 0;
+          for (const range of cachedRanges) {
+            if (progress >= range.start && progress <= range.end) {
+              currentChapter = range.index;
+              break;
+            }
+          }
+
           if (currentChapter !== lastChapter) {
             lastChapter = currentChapter;
             onChapterChange(currentChapter);
@@ -44,6 +71,7 @@ export function ScrollDirector({ scrollRef, onChapterChange }: ScrollDirectorPro
     });
 
     return () => {
+      window.removeEventListener("resize", recalculateRanges);
       ctx.revert();
     };
   }, [scrollRef, onChapterChange]);

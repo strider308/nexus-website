@@ -18,7 +18,7 @@ export function SiteFooter() {
           >
             Nexus
           </Link>
-          <p className="text-xs font-light text-gray-500 max-w-sm">
+          <p className="text-xs font-light text-gray-400 max-w-sm">
             Custom software and automation for complex workflows.
           </p>
         </div>
@@ -26,24 +26,24 @@ export function SiteFooter() {
         {/* Right Side: Navigation Links & Copyright */}
         <div className="flex flex-col md:items-end gap-4">
           <nav className="flex flex-wrap gap-x-6 gap-y-2">
-            <Link href="/work" className="font-mono text-[10px] uppercase tracking-wider text-gray-400 hover:text-[#dedbc8] transition-colors">
+            <Link href="/work" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
               Work
             </Link>
-            <Link href="/services" className="font-mono text-[10px] uppercase tracking-wider text-gray-400 hover:text-[#dedbc8] transition-colors">
+            <Link href="/services" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
               Services
             </Link>
-            <Link href="/contact" className="font-mono text-[10px] uppercase tracking-wider text-gray-400 hover:text-[#dedbc8] transition-colors">
+            <Link href="/contact" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
               Contact
             </Link>
-            <Link href="/privacy-policy" className="font-mono text-[10px] uppercase tracking-wider text-gray-400 hover:text-[#dedbc8] transition-colors">
+            <Link href="/privacy-policy" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms-of-service" className="font-mono text-[10px] uppercase tracking-wider text-gray-400 hover:text-[#dedbc8] transition-colors">
+            <Link href="/terms-of-service" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
               Terms of Service
             </Link>
           </nav>
 
-          <div className="flex flex-col md:items-end gap-1 text-[10px] font-mono text-gray-600">
+          <div className="flex flex-col md:items-end gap-1 text-xs font-mono text-gray-400">
             <span>{CONTACT.email}</span>
             <span>&copy; {currentYear} Nexus. All rights reserved.</span>
           </div>
