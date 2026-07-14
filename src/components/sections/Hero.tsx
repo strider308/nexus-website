@@ -9,6 +9,11 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { WordsPullUp } from "../ui/words-pull-up";
 
+// 3D Cinematic Website Experiment Imports
+import { CINEMATIC_3D_ENABLED, CINEMATIC_3D_DEBUG } from "@/lib/cinematic-3d/config";
+import { Cinematic3DProvider, useCinematic3D } from "../cinematic-3d/Cinematic3DProvider";
+import { Cinematic3DFallback } from "../cinematic-3d/Cinematic3DFallback";
+
 const ThreeCanvasShell = dynamic(
   () => import("../three/ThreeCanvasShell").then((mod) => mod.ThreeCanvasShell),
   { ssr: false, loading: () => <HeroFallback /> }
@@ -17,6 +22,52 @@ const NexusSystemScene = dynamic(
   () => import("../three/NexusSystemScene"),
   { ssr: false }
 );
+
+const Cinematic3DCanvas = dynamic(
+  () => import("../cinematic-3d/Cinematic3DCanvas").then((mod) => mod.Cinematic3DCanvas),
+  { ssr: false, loading: () => <Cinematic3DFallback /> }
+);
+const NexusOperatingField = dynamic(
+  () => import("../cinematic-3d/NexusOperatingField").then((mod) => mod.NexusOperatingField),
+  { ssr: false }
+);
+
+function Cinematic3DDebugBadge() {
+  const { is3DActive, quality, isMobile, reducedMotion, webglError, isEnabled } = useCinematic3D();
+  
+  if (!CINEMATIC_3D_DEBUG) return null;
+
+  let status = "Inactive";
+  if (!isEnabled) status = "Flag Disabled";
+  else if (reducedMotion) status = "Reduced Motion Skip";
+  else if (isMobile) status = "Mobile Fallback";
+  else if (webglError) status = "WebGL Error Fallback";
+  else if (is3DActive) status = `Active (${quality.dpr}x DPR)`;
+
+  return (
+    <div className="absolute top-4 left-4 z-[99] bg-black/85 text-[10px] text-[#DEDBC8]/90 border border-[#DEDBC8]/30 px-2 py-1 rounded font-mono select-none pointer-events-auto shadow-lg shadow-black/80">
+      3D Status: <span className="font-bold text-sky-400">{status}</span>
+    </div>
+  );
+}
+
+function HeroCinematic3DContainer() {
+  const { is3DActive } = useCinematic3D();
+
+  return (
+    <div className="w-full h-full relative">
+      <Cinematic3DDebugBadge />
+      {is3DActive ? (
+        <Cinematic3DCanvas fallback={<Cinematic3DFallback />}>
+          <NexusOperatingField />
+        </Cinematic3DCanvas>
+      ) : (
+        <Cinematic3DFallback />
+      )}
+    </div>
+  );
+}
+
 
 export function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -57,7 +108,11 @@ export function Hero() {
         
         {/* Visual Background Canvas */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-          {showCanvas ? (
+          {CINEMATIC_3D_ENABLED || CINEMATIC_3D_DEBUG ? (
+            <Cinematic3DProvider>
+              <HeroCinematic3DContainer />
+            </Cinematic3DProvider>
+          ) : showCanvas ? (
             <ThreeCanvasShell 
               ariaLabel="Workflow integration visualization mapping scattered chats, sheets, and tasks into a central Nexus network."
               fallback={<HeroFallback />}
