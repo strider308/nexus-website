@@ -36,7 +36,13 @@ function getWebGLSupportSnapshot(): boolean {
   }
 }
 
-export function Cinematic3DProvider({ children }: { children: ReactNode }) {
+export function Cinematic3DProvider({
+  children,
+  isEnabledOverride,
+}: {
+  children: ReactNode;
+  isEnabledOverride?: boolean;
+}) {
   const isHydrated = useIsHydrated();
   const isMobile = useIsMobile();
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
@@ -55,7 +61,7 @@ export function Cinematic3DProvider({ children }: { children: ReactNode }) {
 
 
 
-  const isEnabled = CINEMATIC_3D_ENABLED;
+  const isEnabled = isEnabledOverride !== undefined ? isEnabledOverride : CINEMATIC_3D_ENABLED;
   
   // Decide whether WebGL can run
   const is3DActive =

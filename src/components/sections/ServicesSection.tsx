@@ -4,9 +4,22 @@ import React, { useState } from "react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Check, ArrowUpRight, Workflow, Cpu, Layers, BarChart3 } from "lucide-react";
 import { WordsPullUpMultiStyle } from "../ui/words-pull-up";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-
+import { motion, AnimatePresence, useReducedMotion, Variants } from "motion/react";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
+import { SERVICE_BLUEPRINT_3D_ENABLED, CINEMATIC_3D_DEBUG } from "@/lib/cinematic-3d/config";
+import { Cinematic3DProvider, useCinematic3D } from "../cinematic-3d/Cinematic3DProvider";
+import { Cinematic3DFallback } from "../cinematic-3d/Cinematic3DFallback";
+
+const Cinematic3DCanvas = dynamic(
+  () => import("../cinematic-3d/Cinematic3DCanvas").then((mod) => mod.Cinematic3DCanvas),
+  { ssr: false, loading: () => <Cinematic3DFallback variant="blueprint" /> }
+);
+
+const BlueprintStackField = dynamic(
+  () => import("../cinematic-3d/BlueprintStackField").then((mod) => mod.BlueprintStackField),
+  { ssr: false }
+);
 
 const PREMIUM_CARDS = [
   {
@@ -267,95 +280,275 @@ export function ServicesSection() {
 
         {/* Nexus Service Blueprint */}
         <div className="mt-24 pt-16 border-t border-[#DEDBC8]/10">
-          <div className="max-w-3xl mb-12">
-            <span className="text-xs md:text-sm font-mono font-bold tracking-[0.2em] uppercase text-gray-400 mb-3 block">
-              System Architecture
-            </span>
-            <h3 className="font-display text-2xl md:text-4xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
-              Nexus Service Blueprint
-            </h3>
-            <p className="text-sm md:text-base font-light text-gray-300 leading-relaxed">
-              Our structured approach maps raw inputs to fully managed handoffs. We build every layer in this stack to ensure operational clarity and complete data integrity.
-            </p>
-          </div>
-
-          {/* Blueprint Steps Grid */}
-          <motion.div 
-            variants={blueprintContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 relative"
-          >
-            {BLUEPRINT_LAYERS.map((layer, idx) => {
-              const isHighlighted = isLayerHighlighted(layer.layerId);
-              
-              return (
-                <motion.div 
-                  key={layer.layerId}
-                  variants={blueprintCardVariants}
-                  onMouseEnter={() => setHoveredLayer(layer.layerId)}
-                  onMouseLeave={() => setHoveredLayer(null)}
-                  onFocus={() => setHoveredLayer(layer.layerId)}
-                  onBlur={() => setHoveredLayer(null)}
-                  tabIndex={0}
-                  className={cn(
-                    "bg-[#101010] border rounded-[12px] p-5 flex flex-col justify-between relative group outline-none focus-visible:ring-2 focus-visible:ring-[#DEDBC8] min-h-[180px] transition-all duration-300",
-                    isHighlighted ? "border-[#2A7D8A] shadow-[0_0_15px_rgba(42,125,138,0.15)] scale-[1.02]" : "border-[#DEDBC8]/10",
-                    activeService !== null && !isHighlighted && "opacity-35"
-                  )}
-                >
-                  <AnimatePresence>
-                    {hoveredLayer === layer.layerId && (
-                      <motion.div
-                        layoutId="blueprintHoverPill"
-                        className="absolute inset-0 bg-[#DEDBC8]/5 border border-[#DEDBC8]/25 rounded-[12px] pointer-events-none z-0"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </AnimatePresence>
-
-                  <div className="relative z-10">
-                    <span className={cn(
-                      "text-[10px] font-mono font-bold block mb-2",
-                      isHighlighted ? "text-[#2A7D8A]" : "text-gray-500"
-                    )}>
-                      {layer.num}
-                    </span>
-                    <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">{layer.title}</h4>
-                    <p className="text-xs text-gray-300 font-light leading-relaxed">
-                      {layer.desc}
-                    </p>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono relative z-10">
-                    {layer.example}
-                  </div>
-
-                  {/* Connector Arrow (Desktop Only) */}
-                  {idx < 5 && (
-                    <div className="hidden xl:flex absolute top-1/2 -right-3.5 -translate-y-1/2 z-20 items-center justify-center pointer-events-none">
-                      <svg className="w-5 h-5 text-[#DEDBC8]/20" viewBox="0 0 24 24" fill="none">
-                        <motion.path
-                          d="M 4 12 L 20 12 M 14 6 L 20 12 L 14 18"
-                          stroke={isHighlighted && isLayerHighlighted(BLUEPRINT_LAYERS[idx + 1].layerId) ? "#2A7D8A" : "rgba(222, 219, 200, 0.1)"}
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          initial={{ pathLength: 0 }}
-                          whileInView={{ pathLength: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                        />
-                      </svg>
-                    </div>
-                  )}
-                </motion.div>
-              );
-            })}
-          </motion.div>
+          {SERVICE_BLUEPRINT_3D_ENABLED || CINEMATIC_3D_DEBUG ? (
+            <Cinematic3DProvider isEnabledOverride={SERVICE_BLUEPRINT_3D_ENABLED}>
+              <ServiceBlueprintWrapper
+                hoveredLayer={hoveredLayer}
+                setHoveredLayer={setHoveredLayer}
+                activeService={activeService}
+                isLayerHighlighted={isLayerHighlighted}
+                blueprintContainerVariants={blueprintContainerVariants}
+                blueprintCardVariants={blueprintCardVariants}
+              />
+            </Cinematic3DProvider>
+          ) : (
+            <ServiceBlueprintStatic
+              hoveredLayer={hoveredLayer}
+              setHoveredLayer={setHoveredLayer}
+              activeService={activeService}
+              isLayerHighlighted={isLayerHighlighted}
+              blueprintContainerVariants={blueprintContainerVariants}
+              blueprintCardVariants={blueprintCardVariants}
+            />
+          )}
         </div>
 
       </div>
     </AnimatedSection>
+  );
+}
+
+function Cinematic3DDebugBadge() {
+  const { is3DActive, quality, isMobile, reducedMotion, webglError, isEnabled } = useCinematic3D();
+  
+  if (!CINEMATIC_3D_DEBUG) return null;
+
+  let status = "Inactive";
+  if (!isEnabled) status = "Flag Disabled";
+  else if (reducedMotion) status = "Reduced Motion Skip";
+  else if (isMobile) status = "Mobile Fallback";
+  else if (webglError) status = "WebGL Error Fallback";
+  else if (is3DActive) status = `Active (${quality.dpr}x DPR)`;
+
+  return (
+    <div className="absolute top-2 right-2 z-[99] bg-black/85 text-[9px] text-[#DEDBC8]/90 border border-[#DEDBC8]/30 px-1.5 py-0.5 rounded font-mono select-none pointer-events-auto">
+      3D: <span className="font-bold text-sky-400">{status}</span>
+    </div>
+  );
+}
+
+interface BlueprintLayoutProps {
+  hoveredLayer: number | null;
+  setHoveredLayer: (val: number | null) => void;
+  activeService: number | null;
+  isLayerHighlighted: (layerId: number) => boolean;
+  blueprintContainerVariants: Variants;
+  blueprintCardVariants: Variants;
+}
+
+function ServiceBlueprintWrapper({
+  hoveredLayer,
+  setHoveredLayer,
+  activeService,
+  isLayerHighlighted,
+  blueprintContainerVariants,
+  blueprintCardVariants,
+}: BlueprintLayoutProps) {
+  const { is3DActive } = useCinematic3D();
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      {/* Left side column: descriptions & steps */}
+      <div className="lg:col-span-8">
+        <div className="max-w-2xl mb-12">
+          <span className="text-xs md:text-sm font-mono font-bold tracking-[0.2em] uppercase text-gray-400 mb-3 block">
+            System Architecture
+          </span>
+          <h3 className="font-display text-2xl md:text-4xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
+            Nexus Service Blueprint
+          </h3>
+          <p className="text-sm md:text-base font-light text-gray-300 leading-relaxed">
+            Our structured approach maps raw inputs to fully managed handoffs. We build every layer in this stack to ensure operational clarity and complete data integrity.
+          </p>
+        </div>
+
+        {/* Blueprint Steps Grid */}
+        <motion.div 
+          variants={blueprintContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 relative"
+        >
+          {BLUEPRINT_LAYERS.map((layer, idx) => {
+            const isHighlighted = isLayerHighlighted(layer.layerId);
+            
+            return (
+              <motion.div 
+                key={layer.layerId}
+                variants={blueprintCardVariants}
+                onMouseEnter={() => setHoveredLayer(layer.layerId)}
+                onMouseLeave={() => setHoveredLayer(null)}
+                onFocus={() => setHoveredLayer(layer.layerId)}
+                onBlur={() => setHoveredLayer(null)}
+                tabIndex={0}
+                className={cn(
+                  "bg-[#101010] border rounded-[12px] p-5 flex flex-col justify-between relative group outline-none focus-visible:ring-2 focus-visible:ring-[#DEDBC8] min-h-[180px] transition-all duration-300",
+                  isHighlighted ? "border-[#2A7D8A] shadow-[0_0_15px_rgba(42,125,138,0.15)] scale-[1.02]" : "border-[#DEDBC8]/10",
+                  activeService !== null && !isHighlighted && "opacity-35"
+                )}
+              >
+                <AnimatePresence>
+                  {hoveredLayer === layer.layerId && (
+                    <motion.div
+                      layoutId="blueprintHoverPill"
+                      className="absolute inset-0 bg-[#DEDBC8]/5 border border-[#DEDBC8]/25 rounded-[12px] pointer-events-none z-0"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </AnimatePresence>
+
+                <div className="relative z-10">
+                  <span className={cn(
+                    "text-[10px] font-mono font-bold block mb-2",
+                    isHighlighted ? "text-[#2A7D8A]" : "text-gray-500"
+                  )}>
+                    {layer.num}
+                  </span>
+                  <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">{layer.title}</h4>
+                  <p className="text-xs text-gray-300 font-light leading-relaxed">
+                    {layer.desc}
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono relative z-10">
+                  {layer.example}
+                </div>
+
+                {/* Connector Arrow (Desktop Only) */}
+                {idx < 5 && (
+                  <div className="hidden xl:flex absolute top-1/2 -right-3.5 -translate-y-1/2 z-20 items-center justify-center pointer-events-none">
+                    <svg className="w-5 h-5 text-[#DEDBC8]/20" viewBox="0 0 24 24" fill="none">
+                      <motion.path
+                        d="M 4 12 L 20 12 M 14 6 L 20 12 L 14 18"
+                        stroke={isHighlighted && isLayerHighlighted(BLUEPRINT_LAYERS[idx + 1].layerId) ? "#2A7D8A" : "rgba(222, 219, 200, 0.1)"}
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                      />
+                    </svg>
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
+
+      {/* Right side column: 3D Blueprint stack visual */}
+      <div className="hidden lg:block lg:col-span-4 sticky top-24 aspect-square rounded-2xl border border-[#DEDBC8]/10 bg-[#101010]/40 overflow-hidden relative min-h-[400px]">
+        <div className="absolute inset-0 pointer-events-none opacity-45">
+          <Cinematic3DDebugBadge />
+          {is3DActive ? (
+            <Cinematic3DCanvas fallback={<Cinematic3DFallback variant="blueprint" />}>
+              <BlueprintStackField activeService={activeService} />
+            </Cinematic3DCanvas>
+          ) : (
+            <Cinematic3DFallback variant="blueprint" />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ServiceBlueprintStatic({
+  hoveredLayer,
+  setHoveredLayer,
+  activeService,
+  isLayerHighlighted,
+  blueprintContainerVariants,
+  blueprintCardVariants,
+}: BlueprintLayoutProps) {
+  return (
+    <>
+      <div className="max-w-3xl mb-12">
+        <span className="text-xs md:text-sm font-mono font-bold tracking-[0.2em] uppercase text-gray-400 mb-3 block">
+          System Architecture
+        </span>
+        <h3 className="font-display text-2xl md:text-4xl font-bold tracking-tight text-[#E1E0CC] leading-tight mb-4">
+          Nexus Service Blueprint
+        </h3>
+        <p className="text-sm md:text-base font-light text-gray-300 leading-relaxed">
+          Our structured approach maps raw inputs to fully managed handoffs. We build every layer in this stack to ensure operational clarity and complete data integrity.
+        </p>
+      </div>
+
+      <motion.div 
+        variants={blueprintContainerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 relative"
+      >
+        {BLUEPRINT_LAYERS.map((layer, idx) => {
+          const isHighlighted = isLayerHighlighted(layer.layerId);
+          
+          return (
+            <motion.div 
+              key={layer.layerId}
+              variants={blueprintCardVariants}
+              onMouseEnter={() => setHoveredLayer(layer.layerId)}
+              onMouseLeave={() => setHoveredLayer(null)}
+              onFocus={() => setHoveredLayer(layer.layerId)}
+              onBlur={() => setHoveredLayer(null)}
+              tabIndex={0}
+              className={cn(
+                "bg-[#101010] border rounded-[12px] p-5 flex flex-col justify-between relative group outline-none focus-visible:ring-2 focus-visible:ring-[#DEDBC8] min-h-[180px] transition-all duration-300",
+                isHighlighted ? "border-[#2A7D8A] shadow-[0_0_15px_rgba(42,125,138,0.15)] scale-[1.02]" : "border-[#DEDBC8]/10",
+                activeService !== null && !isHighlighted && "opacity-35"
+              )}
+            >
+              <AnimatePresence>
+                {hoveredLayer === layer.layerId && (
+                  <motion.div
+                    layoutId="blueprintHoverPill"
+                    className="absolute inset-0 bg-[#DEDBC8]/5 border border-[#DEDBC8]/25 rounded-[12px] pointer-events-none z-0"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </AnimatePresence>
+
+              <div className="relative z-10">
+                <span className={cn(
+                  "text-[10px] font-mono font-bold block mb-2",
+                  isHighlighted ? "text-[#2A7D8A]" : "text-gray-500"
+                )}>
+                  {layer.num}
+                </span>
+                <h4 className="text-sm font-bold text-[#E1E0CC] mb-2">{layer.title}</h4>
+                <p className="text-xs text-gray-300 font-light leading-relaxed">
+                  {layer.desc}
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#DEDBC8]/5 text-[10px] text-gray-400 font-mono relative z-10">
+                {layer.example}
+              </div>
+
+              {idx < 5 && (
+                <div className="hidden xl:flex absolute top-1/2 -right-3.5 -translate-y-1/2 z-20 items-center justify-center pointer-events-none">
+                  <svg className="w-5 h-5 text-[#DEDBC8]/20" viewBox="0 0 24 24" fill="none">
+                    <motion.path
+                      d="M 4 12 L 20 12 M 14 6 L 20 12 L 14 18"
+                      stroke={isHighlighted && isLayerHighlighted(BLUEPRINT_LAYERS[idx + 1].layerId) ? "#2A7D8A" : "rgba(222, 219, 200, 0.1)"}
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      initial={{ pathLength: 0 }}
+                      whileInView={{ pathLength: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  </svg>
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
+      </motion.div>
+    </>
   );
 }

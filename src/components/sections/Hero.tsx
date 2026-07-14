@@ -10,7 +10,7 @@ import { ArrowRight } from "lucide-react";
 import { WordsPullUp } from "../ui/words-pull-up";
 
 // 3D Cinematic Website Experiment Imports
-import { CINEMATIC_3D_ENABLED, CINEMATIC_3D_DEBUG } from "@/lib/cinematic-3d/config";
+import { HERO_3D_ENABLED, CINEMATIC_3D_DEBUG } from "@/lib/cinematic-3d/config";
 import { Cinematic3DProvider, useCinematic3D } from "../cinematic-3d/Cinematic3DProvider";
 import { Cinematic3DFallback } from "../cinematic-3d/Cinematic3DFallback";
 
@@ -108,8 +108,8 @@ export function Hero() {
         
         {/* Visual Background Canvas */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-          {CINEMATIC_3D_ENABLED || CINEMATIC_3D_DEBUG ? (
-            <Cinematic3DProvider>
+          {HERO_3D_ENABLED || CINEMATIC_3D_DEBUG ? (
+            <Cinematic3DProvider isEnabledOverride={HERO_3D_ENABLED}>
               <HeroCinematic3DContainer />
             </Cinematic3DProvider>
           ) : showCanvas ? (

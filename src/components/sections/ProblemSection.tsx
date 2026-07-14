@@ -5,6 +5,20 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { WordsPullUpMultiStyle, ScrollRevealParagraph } from "../ui/words-pull-up";
 import { motion, useReducedMotion } from "motion/react";
+import dynamic from "next/dynamic";
+import { TRANSFORMATION_3D_ENABLED, CINEMATIC_3D_DEBUG } from "@/lib/cinematic-3d/config";
+import { Cinematic3DProvider, useCinematic3D } from "../cinematic-3d/Cinematic3DProvider";
+import { Cinematic3DFallback } from "../cinematic-3d/Cinematic3DFallback";
+
+const Cinematic3DCanvas = dynamic(
+  () => import("../cinematic-3d/Cinematic3DCanvas").then((mod) => mod.Cinematic3DCanvas),
+  { ssr: false, loading: () => <Cinematic3DFallback variant="transformation" /> }
+);
+
+const WorkflowTransformationField = dynamic(
+  () => import("../cinematic-3d/WorkflowTransformationField").then((mod) => mod.WorkflowTransformationField),
+  { ssr: false }
+);
 
 
 const TRANSFORMATIONS = [
@@ -162,19 +176,62 @@ export function ProblemSection() {
   );
 }
 
+function Cinematic3DDebugBadge() {
+  const { is3DActive, quality, isMobile, reducedMotion, webglError, isEnabled } = useCinematic3D();
+  
+  if (!CINEMATIC_3D_DEBUG) return null;
+
+  let status = "Inactive";
+  if (!isEnabled) status = "Flag Disabled";
+  else if (reducedMotion) status = "Reduced Motion Skip";
+  else if (isMobile) status = "Mobile Fallback";
+  else if (webglError) status = "WebGL Error Fallback";
+  else if (is3DActive) status = `Active (${quality.dpr}x DPR)`;
+
+  return (
+    <div className="absolute top-2 right-2 z-[99] bg-black/85 text-[9px] text-[#DEDBC8]/90 border border-[#DEDBC8]/30 px-1.5 py-0.5 rounded font-mono select-none pointer-events-auto">
+      3D: <span className="font-bold text-sky-400">{status}</span>
+    </div>
+  );
+}
+
 interface WorkflowResolutionPanelProps {
   isAfter: boolean;
 }
 
 function WorkflowResolutionPanel({ isAfter }: WorkflowResolutionPanelProps) {
+  return (
+    <Cinematic3DProvider isEnabledOverride={TRANSFORMATION_3D_ENABLED}>
+      <WorkflowResolutionPanelInner isAfter={isAfter} />
+    </Cinematic3DProvider>
+  );
+}
+
+function WorkflowResolutionPanelInner({ isAfter }: WorkflowResolutionPanelProps) {
   const shouldReduceMotion = useReducedMotion();
+  const { is3DActive, isEnabled } = useCinematic3D();
+  const show3DContainer = isEnabled || CINEMATIC_3D_DEBUG;
 
   return (
     <div 
       className="border border-[#DEDBC8]/10 bg-[#101010] rounded-[20px] p-6 md:p-8 shadow-lg overflow-hidden relative w-full"
       aria-label="Workflow resolution flow: scattered inputs are mapped by Nexus into a connected operational system."
     >
-      <div className="absolute inset-0 opacity-[0.05] bg-noise pointer-events-none" />
+      {/* 3D Canvas Background layer */}
+      {show3DContainer && (
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-30">
+          <Cinematic3DDebugBadge />
+          {is3DActive ? (
+            <Cinematic3DCanvas fallback={<Cinematic3DFallback variant="transformation" />}>
+              <WorkflowTransformationField isAfter={isAfter} />
+            </Cinematic3DCanvas>
+          ) : (
+            <Cinematic3DFallback variant="transformation" />
+          )}
+        </div>
+      )}
+
+      <div className="absolute inset-0 opacity-[0.05] bg-noise pointer-events-none z-[1]" />
 
       {/* Header */}
       <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#DEDBC8]/10 relative z-10">

@@ -5,6 +5,15 @@
 export const CINEMATIC_3D_ENABLED =
   process.env.NEXT_PUBLIC_3D_CINEMATIC === "true";
 
+export const HERO_3D_ENABLED =
+  CINEMATIC_3D_ENABLED && process.env.NEXT_PUBLIC_3D_HERO !== "false";
+
+export const TRANSFORMATION_3D_ENABLED =
+  CINEMATIC_3D_ENABLED && process.env.NEXT_PUBLIC_3D_TRANSFORMATION === "true";
+
+export const SERVICE_BLUEPRINT_3D_ENABLED =
+  CINEMATIC_3D_ENABLED && process.env.NEXT_PUBLIC_3D_SERVICE_BLUEPRINT === "true";
+
 export const CINEMATIC_3D_DEBUG =
   process.env.NEXT_PUBLIC_3D_CINEMATIC_DEBUG === "true";
 
