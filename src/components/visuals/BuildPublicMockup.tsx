@@ -10,82 +10,82 @@ export function BuildPublicMockup() {
       <rect width="800" height="340" fill="#F0F4F1"/>
       {/* Header */}
       <rect width="800" height="44" fill="#2A5A3A"/>
-      <text x="16" y="17" font-family="sans-serif" font-size="10" fill="white" opacity=".7">BuildPublic</text>
-      <text x="16" y="33" font-family="sans-serif" font-size="13" font-weight="700" fill="white">Meera Iyer · Fieldnotes app</text>
+      <text x="16" y="17" fontFamily="sans-serif" fontSize="10" fill="white" opacity=".7">BuildPublic</text>
+      <text x="16" y="33" fontFamily="sans-serif" fontSize="13" fontWeight="700" fill="white">Meera Iyer · Fieldnotes app</text>
       
       {/* Live page indicator */}
       <g>
         <motion.circle cx="682" cy="17" r="2.5" fill="#5A7F5E" animate={{ opacity: [0.35, 1, 0.35] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} />
-        <text x="780" y="20" font-family="sans-serif" font-size="10" fill="white" opacity=".7" text-anchor="end">Public page live</text>
+        <text x="780" y="20" fontFamily="sans-serif" fontSize="10" fill="white" opacity=".7" textAnchor="end">Public page live</text>
       </g>
       <rect x="668" y="24" width="116" height="14" rx="7" fill="white" opacity=".15"/>
-      <text x="726" y="34" font-family="sans-serif" font-size="9" fill="white" opacity=".7" text-anchor="middle">fieldnotes.buildpublic.co</text>
+      <text x="726" y="34" fontFamily="sans-serif" fontSize="9" fill="white" opacity=".7" textAnchor="middle">fieldnotes.buildpublic.co</text>
  
       {/* Private side */}
-      <rect x="16" y="56" width="380" height="272" rx="8" fill="white" stroke="#E5E8ED" stroke-width="0.5"/>
+      <rect x="16" y="56" width="380" height="272" rx="8" fill="white" stroke="#E5E8ED" strokeWidth="0.5"/>
       <rect x="16" y="56" width="380" height="36" rx="8" fill="#1A2B4C" opacity=".06"/>
       <rect x="16" y="74" width="380" height="18" fill="#1A2B4C" opacity=".06"/>
-      <text x="28" y="76" font-family="sans-serif" font-size="11" font-weight="700" fill="#1A2B4C">MY TASKS</text>
+      <text x="28" y="76" fontFamily="sans-serif" fontSize="11" fontWeight="700" fill="#1A2B4C">MY TASKS</text>
       <rect x="316" y="64" width="68" height="20" rx="4" fill="#2A5A3A"/>
-      <text x="350" y="78" font-family="sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle">🔒 Private</text>
+      <text x="350" y="78" fontFamily="sans-serif" fontSize="9" fontWeight="700" fill="white" textAnchor="middle">🔒 Private</text>
  
-      <text x="28" y="112" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">THIS WEEK</text>
+      <text x="28" y="112" fontFamily="sans-serif" fontSize="10" fontWeight="700" fill="#6B6B6B">THIS WEEK</text>
       <rect x="28" y="118" width="14" height="14" rx="3" fill="#2A5A3A"/>
-      <text x="35" y="129" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">✓</text>
-      <text x="50" y="130" font-family="sans-serif" font-size="12" fill="#6B6B6B" text-decoration="line-through">Launch beta waitlist page</text>
+      <text x="35" y="129" fontFamily="sans-serif" fontSize="9" fill="white" textAnchor="middle">✓</text>
+      <text x="50" y="130" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B" textDecoration="line-through">Launch beta waitlist page</text>
  
       <rect x="28" y="140" width="14" height="14" rx="3" fill="#2A5A3A"/>
-      <text x="35" y="151" font-family="sans-serif" font-size="9" fill="white" text-anchor="middle">✓</text>
-      <text x="50" y="152" font-family="sans-serif" font-size="12" fill="#6B6B6B" text-decoration="line-through">Write first 3 blog posts</text>
+      <text x="35" y="151" fontFamily="sans-serif" fontSize="9" fill="white" textAnchor="middle">✓</text>
+      <text x="50" y="152" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B" textDecoration="line-through">Write first 3 blog posts</text>
  
-      <rect x="28" y="162" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5"/>
-      <text x="50" y="174" font-family="sans-serif" font-size="12" fill="#1A2B4C" font-weight="600">Get 50 waitlist signups</text>
-      <text x="382" y="174" font-family="sans-serif" font-size="10" fill="#E07A20" text-anchor="end" font-weight="600">↑ 31 so far</text>
+      <rect x="28" y="162" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" strokeWidth="1.5"/>
+      <text x="50" y="174" fontFamily="sans-serif" fontSize="12" fill="#1A2B4C" fontWeight="600">Get 50 waitlist signups</text>
+      <text x="382" y="174" fontFamily="sans-serif" fontSize="10" fill="#E07A20" textAnchor="end" fontWeight="600">↑ 31 so far</text>
  
-      <rect x="28" y="184" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5"/>
-      <text x="50" y="196" font-family="sans-serif" font-size="12" fill="#1A2B4C">Cold email 20 potential users</text>
+      <rect x="28" y="184" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" strokeWidth="1.5"/>
+      <text x="50" y="196" fontFamily="sans-serif" fontSize="12" fill="#1A2B4C">Cold email 20 potential users</text>
  
-      <rect x="28" y="206" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5"/>
-      <text x="50" y="218" font-family="sans-serif" font-size="12" fill="#1A2B4C">Record product demo video</text>
+      <rect x="28" y="206" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" strokeWidth="1.5"/>
+      <text x="50" y="218" fontFamily="sans-serif" fontSize="12" fill="#1A2B4C">Record product demo video</text>
  
-      <text x="28" y="242" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">NEXT WEEK</text>
-      <rect x="28" y="248" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5" opacity=".5"/>
-      <text x="50" y="260" font-family="sans-serif" font-size="12" fill="#6B6B6B">Launch on Product Hunt</text>
+      <text x="28" y="242" fontFamily="sans-serif" fontSize="10" fontWeight="700" fill="#6B6B6B">NEXT WEEK</text>
+      <rect x="28" y="248" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" strokeWidth="1.5" opacity=".5"/>
+      <text x="50" y="260" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B">Launch on Product Hunt</text>
       
-      <rect x="28" y="268" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5" opacity=".5"/>
-      <text x="50" y="280" font-family="sans-serif" font-size="12" fill="#6B6B6B">Onboard first 10 beta users</text>
+      <rect x="28" y="268" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" strokeWidth="1.5" opacity=".5"/>
+      <text x="50" y="280" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B">Onboard first 10 beta users</text>
       
-      <rect x="28" y="288" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" stroke-width="1.5" opacity=".5"/>
-      <text x="50" y="298" font-family="sans-serif" font-size="12" fill="#6B6B6B">Add analytics tracking dashboard</text>
+      <rect x="28" y="288" width="14" height="14" rx="3" fill="white" stroke="#E5E8ED" strokeWidth="1.5" opacity=".5"/>
+      <text x="50" y="298" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B">Add analytics tracking dashboard</text>
  
       {/* Public side */}
-      <rect x="412" y="56" width="372" height="272" rx="8" fill="white" stroke="#E5E8ED" stroke-width="0.5"/>
+      <rect x="412" y="56" width="372" height="272" rx="8" fill="white" stroke="#E5E8ED" strokeWidth="0.5"/>
       <rect x="412" y="56" width="372" height="36" rx="8" fill="#2A5A3A" opacity=".06"/>
       <rect x="412" y="74" width="372" height="18" fill="#2A5A3A" opacity=".06"/>
-      <text x="424" y="76" font-family="sans-serif" font-size="11" font-weight="700" fill="#2A5A3A">PUBLIC ROADMAP</text>
+      <text x="424" y="76" fontFamily="sans-serif" fontSize="11" fontWeight="700" fill="#2A5A3A">PUBLIC ROADMAP</text>
       <rect x="712" y="64" width="60" height="20" rx="4" fill="#2A5A3A" opacity=".12"/>
-      <text x="742" y="78" font-family="sans-serif" font-size="9" font-weight="700" fill="#2A5A3A" text-anchor="middle">📢 Public</text>
+      <text x="742" y="78" fontFamily="sans-serif" fontSize="9" fontWeight="700" fill="#2A5A3A" textAnchor="middle">📢 Public</text>
  
-      <text x="424" y="112" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">SHIPPED</text>
+      <text x="424" y="112" fontFamily="sans-serif" fontSize="10" fontWeight="700" fill="#6B6B6B">SHIPPED</text>
       <circle cx="430" cy="126" r="3.5" fill="#2A5A3A"/>
-      <text x="444" y="130" font-family="sans-serif" font-size="12" fill="#6B6B6B">Waitlist landing page is live</text>
+      <text x="444" y="130" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B">Waitlist landing page is live</text>
       
       <circle cx="430" cy="148" r="3.5" fill="#2A5A3A"/>
-      <text x="444" y="152" font-family="sans-serif" font-size="12" fill="#6B6B6B">Waitlist reached 30 signups</text>
+      <text x="444" y="152" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B">Waitlist reached 30 signups</text>
  
-      <text x="424" y="184" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">UP NEXT</text>
+      <text x="424" y="184" fontFamily="sans-serif" fontSize="10" fontWeight="700" fill="#6B6B6B">UP NEXT</text>
       <circle cx="430" cy="198" r="3.5" fill="#E07A20"/>
-      <text x="444" y="202" font-family="sans-serif" font-size="12" fill="#1A2B4C" font-weight="600">Product demo walkthrough video</text>
+      <text x="444" y="202" fontFamily="sans-serif" fontSize="12" fill="#1A2B4C" fontWeight="600">Product demo walkthrough video</text>
       
       <circle cx="430" cy="222" r="3.5" fill="#6B6B6B" opacity=".5"/>
-      <text x="444" y="226" font-family="sans-serif" font-size="12" fill="#6B6B6B">Private beta launch (10 users)</text>
+      <text x="444" y="226" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B">Private beta launch (10 users)</text>
  
-      <text x="424" y="258" font-family="sans-serif" font-size="10" font-weight="700" fill="#6B6B6B">LATER</text>
+      <text x="424" y="258" fontFamily="sans-serif" fontSize="10" fontWeight="700" fill="#6B6B6B">LATER</text>
       <circle cx="430" cy="272" r="3.5" fill="#6B6B6B" opacity=".5"/>
-      <text x="444" y="276" font-family="sans-serif" font-size="12" fill="#6B6B6B">Public launch on Product Hunt</text>
+      <text x="444" y="276" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B">Public launch on Product Hunt</text>
       
       <circle cx="430" cy="296" r="3.5" fill="#6B6B6B" opacity=".5"/>
-      <text x="444" y="300" font-family="sans-serif" font-size="12" fill="#6B6B6B">Self-serve registration &amp; billing</text>
+      <text x="444" y="300" fontFamily="sans-serif" fontSize="12" fill="#6B6B6B">Self-serve registration &amp; billing</text>
     </svg>
   );
 }
