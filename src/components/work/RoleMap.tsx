@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 interface RoleMapProps {
   systemId: string;
@@ -9,183 +10,140 @@ interface RoleMapProps {
 }
 
 export function RoleMap({ systemId, users, accentColor }: RoleMapProps) {
-  // Generate a custom diagram flow based on the systemId
-  const renderFlowDiagram = () => {
-    if (systemId === "clinicos") {
-      return (
-        <div className="flex flex-col gap-4 bg-[#0d0d0d] p-6 border border-[#dedbc8]/10 rounded-sm">
-          <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block font-bold">
-            Patient Journey &amp; Desk Handoffs Map
-          </span>
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between text-center text-xs font-mono py-4">
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded">
-              <span className="text-gray-400 block mb-1">FRONT DESK</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">01 // Receptionist</span>
-              <p className="text-[9px] text-gray-500 mt-1">Registers patient and assigns same-day queue tokens</p>
-            </div>
-            
-            <div className="text-gray-500 font-bold hidden md:block">&rarr;</div>
-            <div className="text-gray-500 font-bold block md:hidden">&darr;</div>
+  const [activeIdx, setActiveIdx] = useState<number>(0);
 
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded" style={{ borderColor: accentColor }}>
-              <span className="block mb-1" style={{ color: accentColor }}>CHAMBER</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">02 // Doctor</span>
-              <p className="text-[9px] text-gray-500 mt-1">Prescribes medications and directs diagnostic orders</p>
-            </div>
-
-            <div className="text-gray-500 font-bold hidden md:block">&rarr;</div>
-            <div className="text-gray-500 font-bold block md:hidden">&darr;</div>
-
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded">
-              <span className="text-gray-400 block mb-1">CASHIER</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">03 // Billing</span>
-              <p className="text-[9px] text-gray-500 mt-1">Reconciles fees and confirms receipt clearances</p>
-            </div>
-
-            <div className="text-gray-500 font-bold hidden md:block">&rarr;</div>
-            <div className="text-gray-500 font-bold block md:hidden">&darr;</div>
-
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded">
-              <span className="text-gray-400 block mb-1">PHARMACY</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">04 // Pharmacist</span>
-              <p className="text-[9px] text-gray-500 mt-1">Dispenses stock items matching locked digit slips</p>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    if (systemId === "restaurantos") {
-      return (
-        <div className="flex flex-col gap-4 bg-[#0d0d0d] p-6 border border-[#dedbc8]/10 rounded-sm">
-          <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block font-bold">
-            Table-to-Kitchen Service Coordination Map
-          </span>
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between text-center text-xs font-mono py-4">
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded">
-              <span className="text-gray-400 block mb-1">DINING TABLE</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">01 // Table Guest</span>
-              <p className="text-[9px] text-gray-500 mt-1">Scans menu and dispatches order round tickets</p>
-            </div>
-
-            <div className="text-gray-500 font-bold hidden md:block">&rarr;</div>
-            <div className="text-gray-500 font-bold block md:hidden">&darr;</div>
-
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded">
-              <span className="text-gray-400 block mb-1">SERVICE FLOORS</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">02 // Floor Waiter</span>
-              <p className="text-[9px] text-gray-500 mt-1">Approves menu queues and delivers ready dishes</p>
-            </div>
-
-            <div className="text-gray-500 font-bold hidden md:block">&rarr;</div>
-            <div className="text-gray-500 font-bold block md:hidden">&darr;</div>
-
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded" style={{ borderColor: accentColor }}>
-              <span className="block mb-1" style={{ color: accentColor }}>KITCHEN DEPTS</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">03 // Kitchen Chef</span>
-              <p className="text-[9px] text-gray-500 mt-1">Splits items by prep station and signals ready indicators</p>
-            </div>
-
-            <div className="text-gray-500 font-bold hidden md:block">&rarr;</div>
-            <div className="text-gray-500 font-bold block md:hidden">&darr;</div>
-
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded">
-              <span className="text-gray-400 block mb-1">CASH COUNTERS</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">04 // Cashier</span>
-              <p className="text-[9px] text-gray-500 mt-1">Compiles final floor tickets and matches drawer receipts</p>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    if (systemId === "shipwright") {
-      return (
-        <div className="flex flex-col gap-4 bg-[#0d0d0d] p-6 border border-[#dedbc8]/10 rounded-sm">
-          <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block font-bold">
-            Async Team Execution dependency workflow
-          </span>
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between text-center text-xs font-mono py-4">
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded">
-              <span className="text-gray-400 block mb-1">MILESTONES BOARD</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">01 // Product Manager</span>
-              <p className="text-[9px] text-gray-500 mt-1">Outlines priority tasks and maps core dependencies</p>
-            </div>
-
-            <div className="text-gray-500 font-bold hidden md:block">&rarr;</div>
-            <div className="text-gray-500 font-bold block md:hidden">&darr;</div>
-
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded" style={{ borderColor: accentColor }}>
-              <span className="block mb-1" style={{ color: accentColor }}>BACKLOG QUEUES</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">02 // Developer</span>
-              <p className="text-[9px] text-gray-500 mt-1">Claims tickets, submits work, and flags blocks</p>
-            </div>
-
-            <div className="text-gray-500 font-bold hidden md:block">&rarr;</div>
-            <div className="text-gray-500 font-bold block md:hidden">&darr;</div>
-
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded">
-              <span className="text-gray-400 block mb-1">REVIEWS PANEL</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">03 // Engineering Lead</span>
-              <p className="text-[9px] text-gray-500 mt-1">Clears dependency blocker alerts and approves tickets</p>
-            </div>
-
-            <div className="text-gray-500 font-bold hidden md:block">&rarr;</div>
-            <div className="text-gray-500 font-bold block md:hidden">&darr;</div>
-
-            <div className="border border-[#dedbc8]/20 p-3 bg-black flex-1 w-full rounded">
-              <span className="text-gray-400 block mb-1">DIGESTS LOGS</span>
-              <span className="font-bold fill-[#dedbc8] uppercase">04 // Operator</span>
-              <p className="text-[9px] text-gray-500 mt-1">Compiles automated status logs and records context</p>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    return null;
-  };
+  // Group roles for display
+  const parsedRoles = users.map((u) => {
+    const parts = u.split(": ");
+    return {
+      title: parts[0] || "User Role",
+      desc: parts[1] || "Performs system actions inside the active workspace.",
+    };
+  });
 
   return (
-    <div className="flex flex-col gap-6 py-8 border-t border-[#dedbc8]/10">
+    <div className="flex flex-col gap-6 py-8 border-t border-[#dedbc8]/10 w-full select-none">
       <div className="flex flex-col gap-2">
         <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
-          Operations Roles &amp; Team Map
+          Workspace Roles &amp; Handoffs Map
         </span>
         <h2 className="font-serif text-3xl font-light italic text-[#dedbc8] tracking-tight">
-          Who interacts with the system
+          Who Uses the System
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mt-4">
-        {/* User list */}
-        <div className="lg:col-span-5 flex flex-col gap-3">
-          <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
-            Designed-For Audience Roles
-          </span>
-          <div className="grid grid-cols-1 gap-2.5">
-            {users.map((user, idx) => {
-              const parts = user.split(" — ");
-              return (
-                <div key={idx} className="flex gap-3 text-xs leading-relaxed font-light text-gray-300">
-                  <span className="font-mono font-bold" style={{ color: accentColor }}>
-                    [0{idx + 1}]
-                  </span>
-                  <div>
-                    <strong className="text-[#dedbc8] uppercase font-bold block">{parts[0]}</strong>
-                    {parts[1] && <span className="text-gray-400 text-[11px] block mt-0.5">{parts[1]}</span>}
-                  </div>
-                </div>
-              );
-            })}
+      {/* Desktop Layout: CPU-style circular surrounding role nodes map */}
+      <div className="hidden md:grid grid-cols-12 gap-10 items-center mt-6">
+        
+        {/* Left: CPU surrounding nodes graph representation */}
+        <div className="col-span-7 relative bg-[#0d0d0d] border border-[#dedbc8]/10 p-6 overflow-hidden min-h-[350px] flex items-center justify-center">
+          
+          {/* Central Workflow Engine Hub */}
+          <div className="z-10 size-24 rounded-full border border-gray-600 bg-[#070707] flex flex-col items-center justify-center p-2 text-center text-white">
+            <span className="font-mono text-[8px] text-gray-500 uppercase tracking-widest leading-none">SYSTEM</span>
+            <span className="font-sans text-xs font-bold uppercase tracking-wider mt-1 text-[#2a7d8a]">CORE</span>
+          </div>
+
+          {/* Render surrounding node buttons based on trigonometry positions */}
+          {parsedRoles.map((role, idx) => {
+            const isActive = activeIdx === idx;
+            const count = parsedRoles.length;
+            const angle = (idx * 360) / count;
+            // Radius of orbit in pixels
+            const r = 100;
+            // Transform positions using circular orbit
+            const x = Math.round(r * Math.cos((angle * Math.PI) / 180));
+            const y = Math.round(r * Math.sin((angle * Math.PI) / 180));
+
+            return (
+              <button
+                key={idx}
+                onClick={() => setActiveIdx(idx)}
+                onFocus={() => setActiveIdx(idx)}
+                className={`absolute z-20 px-3 py-1.5 border font-mono text-[9px] uppercase tracking-wider transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] ${
+                  isActive
+                    ? "bg-[#2a7d8a]/5 border-[#2a7d8a] text-white"
+                    : "bg-[#070707] border-gray-700 text-gray-500 hover:border-gray-500 hover:text-gray-300"
+                }`}
+                style={{
+                  transform: `translate(${x}px, ${y}px)`,
+                }}
+              >
+                0{idx + 1} // {role.title.split(" // ")[0]}
+              </button>
+            );
+          })}
+
+          {/* Orbital path lines */}
+          <div className="absolute inset-0 pointer-events-none z-0">
+            <svg className="w-full h-full" viewBox="0 0 400 350">
+              {/* Central connecting orbit circle */}
+              <circle cx="200" cy="175" r="100" stroke="rgba(222,219,200,0.04)" strokeWidth="1.5" fill="none" />
+              {/* Highlight line to active node */}
+              {(() => {
+                const angle = (activeIdx * 360) / parsedRoles.length;
+                const radians = (angle * Math.PI) / 180;
+                const xTarget = 200 + 100 * Math.cos(radians);
+                const yTarget = 175 + 100 * Math.sin(radians);
+                return (
+                  <line 
+                    x1="200" 
+                    y1="175" 
+                    x2={xTarget} 
+                    y2={yTarget} 
+                    stroke={accentColor} 
+                    strokeWidth="1.5" 
+                    strokeDasharray="4 4"
+                  />
+                );
+              })()}
+            </svg>
           </div>
         </div>
 
-        {/* Diagram card */}
-        <div className="lg:col-span-7 flex flex-col gap-3">
-          {renderFlowDiagram()}
+        {/* Right: Selected Node prose description panel */}
+        <div className="col-span-5 border border-[#dedbc8]/10 bg-[#0d0d0d] p-8 min-h-[350px] flex flex-col justify-between">
+          <div className="flex flex-col gap-4">
+            <span className="font-mono text-[9px] text-[#2a7d8a] uppercase tracking-widest font-bold">
+              ROLE DEFINITION SPEC // 0{activeIdx + 1}
+            </span>
+            <h3 className="font-serif text-2xl font-light text-white italic tracking-tight">
+              {parsedRoles[activeIdx].title}
+            </h3>
+            <p className="text-xs text-gray-300 leading-relaxed font-light font-sans mt-2">
+              {parsedRoles[activeIdx].desc}
+            </p>
+          </div>
+
+          <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-[10px] font-mono text-gray-500 uppercase">
+            <span>PERMS: L1_ACCESS</span>
+            <span>TOKEN: LOCKED</span>
+          </div>
         </div>
+
       </div>
+
+      {/* Mobile Layout: Simple Accordion */}
+      <div className="md:hidden mt-4">
+        <Accordion defaultValue={["role-0"]} className="w-full border border-[#dedbc8]/10 bg-[#0d0d0d] p-4">
+          {parsedRoles.map((role, idx) => (
+            <AccordionItem key={idx} value={`role-${idx}`} className="border-b border-[#dedbc8]/5">
+              <AccordionTrigger className="hover:no-underline py-4 text-left">
+                <div className="flex gap-3 items-center">
+                  <span className="font-mono text-[10px] text-gray-500">0{idx + 1}</span>
+                  <span className="font-sans text-xs font-bold uppercase text-white tracking-wider">{role.title}</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="pb-4">
+                <p className="text-xs text-gray-300 font-light font-sans leading-relaxed">
+                  {role.desc}
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+
     </div>
   );
 }

@@ -1,44 +1,119 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { CaseStudyData } from "@/content/case-studies";
+import { InterfaceFrame } from "@/components/work/InterfaceFrame";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { gsap, useGSAP } from "@/lib/gsap/register";
+import { useGSAPReducedMotion } from "@/hooks/useGSAPReducedMotion";
+import Link from "next/link";
 
 interface CaseStudyHeroProps {
   study: CaseStudyData;
 }
 
 export function CaseStudyHero({ study }: CaseStudyHeroProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
+  const isReduced = useGSAPReducedMotion();
+
+  useGSAP(
+    () => {
+      if (isReduced || !visualRef.current) return;
+
+      // 3D perspective scroll tilt rotation
+      gsap.fromTo(
+        visualRef.current,
+        {
+          transformPerspective: 1000,
+          rotateX: 6,
+          scale: 0.9,
+          opacity: 0.8,
+        },
+        {
+          rotateX: 0,
+          scale: 1,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 20%",
+            end: "bottom 80%",
+            scrub: true,
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
+  const handleScrollToWorkflow = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.querySelector("#workflow-section");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-6 max-w-4xl">
-      {/* Eyebrow info */}
-      <div className="flex flex-wrap gap-3 items-center">
-        <span 
-          className="text-xs font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded border"
-          style={{ 
-            color: study.accentColor, 
-            borderColor: `${study.accentColor}30`, 
-            backgroundColor: `${study.accentColor}05` 
-          }}
-        >
-          {study.industry}
-        </span>
-        <span className="text-xs font-mono text-[#2a7d8a] bg-[#2a7d8a]/5 border border-[#2a7d8a]/20 px-2 py-0.5 rounded font-bold uppercase">
-          {study.status}
-        </span>
+    <div ref={containerRef} className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center py-10 w-full">
+      {/* Left Column: Metadata & Positioning */}
+      <div className="lg:col-span-5 flex flex-col gap-5">
+        <div className="flex flex-wrap gap-2.5 items-center">
+          <Badge variant="available">{study.industry}</Badge>
+          <Badge variant="referenceBuild">{study.status}</Badge>
+        </div>
+
+        <h1 className="font-serif text-4xl md:text-6xl font-light text-[#dedbc8] tracking-tight leading-[1.05] italic pb-1">
+          {study.name}
+        </h1>
+
+        <p className="text-sm font-mono text-gray-500 uppercase tracking-widest leading-none mt-1">
+          POSITIONING: &ldquo;{study.positioning}&rdquo;
+        </p>
+
+        <p className="text-base text-gray-300 leading-relaxed font-sans mt-2">
+          {study.longDefinition}
+        </p>
+
+        <div className="flex flex-col gap-1 border-t border-[#dedbc8]/5 pt-4">
+          <span className="font-mono text-[9px] text-gray-500 uppercase tracking-wider font-bold">INTENDED ROLES</span>
+          <span className="text-xs text-gray-300 font-bold uppercase">{study.intendedUsers.join(", ")}</span>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-wrap gap-3 mt-4">
+          <Link
+            href="/contact"
+            className="border border-[#dedbc8] bg-[#dedbc8] px-5 py-3 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none text-center"
+          >
+            Start consult
+          </Link>
+          <a
+            href="#workflow-section"
+            onClick={handleScrollToWorkflow}
+            className="border border-[#dedbc8]/20 px-5 py-3 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none text-center"
+          >
+            View workflow &darr;
+          </a>
+        </div>
       </div>
 
-      {/* Main Title & Positioning */}
-      <h1 className="font-serif text-5xl md:text-7xl font-light text-[#dedbc8] tracking-tight leading-none italic">
-        {study.name}
-      </h1>
-      <p className="text-xl md:text-2xl font-light text-gray-300 leading-relaxed italic max-w-2xl border-l-2 pl-4 border-gray-700">
-        &ldquo;{study.positioning}&rdquo;
-      </p>
-
-      {/* Summary */}
-      <p className="text-base md:text-lg font-light text-gray-400 leading-relaxed max-w-3xl">
-        {study.shortDefinition}
-      </p>
+      {/* Right Column: Visual Mockup with 3D Perspective Scroll */}
+      <div className="lg:col-span-7 flex flex-col justify-center items-center w-full relative">
+        <div 
+          ref={visualRef}
+          className="w-full border border-[#dedbc8]/14 bg-[#0d0d0d] overflow-hidden will-change-transform"
+          style={{ transformOrigin: "top center" }}
+        >
+          <InterfaceFrame 
+            systemId={study.slug} 
+            frameId={study.visualFrames[0]} 
+            caption={`${study.name} primary systems core interface.`}
+          />
+        </div>
+      </div>
     </div>
   );
 }

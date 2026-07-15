@@ -1,71 +1,72 @@
 "use client";
 
-import React from "react";
-import { motion } from "motion/react";
+import React, { useRef } from "react";
+import { GSAPReveal } from "@/components/motion/GSAPReveal";
+import { GSAPStagger } from "@/components/motion/GSAPStagger";
 
 export function TrustChapter() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
     <section 
       data-chapter-index={4}
-      className="min-h-[80vh] flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto py-20 select-text"
+      ref={containerRef}
+      className="min-h-[85vh] flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto py-24 select-text"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col gap-6 max-w-2xl"
-      >
-        <span className="text-xs font-mono tracking-wider text-gray-400 uppercase font-bold">
-          [ Human Trust ]
-        </span>
-        
-        <h2 className="font-serif text-4xl md:text-6xl font-light text-[#dedbc8] tracking-tight leading-tight italic">
-          Founder-led engineering, defined boundaries.
-        </h2>
+      <div className="flex flex-col gap-8 max-w-3xl">
+        <GSAPReveal yOffset={20} duration={0.8}>
+          <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
+            [ OPERATIONAL INTEGRITY ]
+          </span>
+          <h2 className="font-serif text-3xl md:text-6xl font-light text-[#dedbc8] tracking-tight leading-tight italic mt-2">
+            Founder-led engineering, defined boundaries.
+          </h2>
+        </GSAPReveal>
 
-        <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed">
-          We do not delegate your system architecture to junior developers. Every line of code is designed and reviewed by our founders. We build with clear posture, thorough documentation, and rigorous boundaries.
-        </p>
+        <GSAPReveal yOffset={15} duration={0.8} delay={0.15}>
+          <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed font-sans max-w-2xl">
+            We do not delegate your critical system architecture to junior agency pools. Every line of database synchronization and sequence rule is designed and written by our founders. We build with clear posture, thorough documentation, and strict boundaries.
+          </p>
+        </GSAPReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
-          <div className="border-l-2 border-[#2a7d8a] pl-4 flex flex-col gap-2">
+        <GSAPStagger selector=".trust-card" yOffset={15} stagger={0.1} delay={0.3} className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+          <div className="trust-card border-l-2 border-[#2a7d8a] pl-4 flex flex-col gap-2 opacity-0">
             <h3 className="font-mono text-xs uppercase tracking-wider text-[#dedbc8] font-bold">
               Founder-Led Delivery
             </h3>
-            <p className="text-xs text-gray-400 font-light leading-relaxed">
-              Direct technical access. You work directly with the systems engineers building the automation layers.
+            <p className="text-xs text-gray-400 font-light leading-relaxed font-sans">
+              Direct technical access. You design and plan directly with the systems engineers building the automation layers.
             </p>
           </div>
 
-          <div className="border-l-2 border-[#2e6fad] pl-4 flex flex-col gap-2">
+          <div className="trust-card border-l-2 border-[#2e6fad] pl-4 flex flex-col gap-2 opacity-0">
             <h3 className="font-mono text-xs uppercase tracking-wider text-[#dedbc8] font-bold">
               Thorough Documentation
             </h3>
-            <p className="text-xs text-gray-400 font-light leading-relaxed">
-              Every state machine, database schema, and custom API trigger is fully mapped and documented for your internal engineering handover.
+            <p className="text-xs text-gray-400 font-light leading-relaxed font-sans">
+              Every state machine, database schema, and custom API trigger is fully mapped and logged for your internal engineering handover.
             </p>
           </div>
 
-          <div className="border-l-2 border-[#dedbc8]/30 pl-4 flex flex-col gap-2">
+          <div className="trust-card border-l-2 border-[#dedbc8]/30 pl-4 flex flex-col gap-2 opacity-0">
             <h3 className="font-mono text-xs uppercase tracking-wider text-[#dedbc8] font-bold">
               Security-First Posture
             </h3>
-            <p className="text-xs text-gray-400 font-light leading-relaxed">
-              Role-aware authorization, input hygiene, and encrypted database columns protect your transactions by default.
+            <p className="text-xs text-gray-400 font-light leading-relaxed font-sans">
+              Role-aware authorization, parameterized SQL input filters, and encrypted data columns protect transactions by default.
             </p>
           </div>
 
-          <div className="border-l-2 border-gray-600 pl-4 flex flex-col gap-2">
+          <div className="trust-card border-l-2 border-gray-600 pl-4 flex flex-col gap-2 opacity-0">
             <h3 className="font-mono text-xs uppercase tracking-wider text-[#dedbc8] font-bold">
               Support Boundaries
             </h3>
-            <p className="text-xs text-gray-400 font-light leading-relaxed">
-              We define clear operational limits. We build independent software systems, not ongoing consulting overhead.
+            <p className="text-xs text-gray-400 font-light leading-relaxed font-sans">
+              We define clear operational limits. We deliver independent, maintainable software systems, not ongoing consulting retainer overhead.
             </p>
           </div>
-        </div>
-      </motion.div>
+        </GSAPStagger>
+      </div>
     </section>
   );
 }

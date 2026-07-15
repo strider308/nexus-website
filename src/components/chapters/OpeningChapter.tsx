@@ -1,41 +1,115 @@
 "use client";
 
-import React from "react";
-import { motion } from "motion/react";
+import React, { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap/register";
+import { useGSAPReducedMotion } from "@/hooks/useGSAPReducedMotion";
+import { GSAP_EASES } from "@/lib/gsap/eases";
+import Link from "next/link";
 
 export function OpeningChapter() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const isReduced = useGSAPReducedMotion();
+
+  useGSAP(
+    () => {
+      if (isReduced) {
+        gsap.set(".opening-anim", { opacity: 1, y: 0 });
+        return;
+      }
+
+      const tl = gsap.timeline({ defaults: { ease: GSAP_EASES.reveal } });
+
+      tl.fromTo(
+        ".eyebrow-anim",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.6 }
+      )
+        .fromTo(
+          ".headline-anim",
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          "-=0.4"
+        )
+        .fromTo(
+          ".body-anim",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.7 },
+          "-=0.5"
+        )
+        .fromTo(
+          ".cta-anim",
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.6 },
+          "-=0.4"
+        )
+        .fromTo(
+          ".cue-anim",
+          { opacity: 0 },
+          { opacity: 0.6, duration: 0.5 },
+          "-=0.2"
+        );
+    },
+    { scope: containerRef }
+  );
+
+  const handleSkipToSystems = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.querySelector("#fragmentation");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section 
       data-chapter-index={0}
-      className="min-h-screen flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text py-20"
+      ref={containerRef}
+      className="min-h-[100dvh] flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text pt-28 pb-20"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col gap-6"
-      >
-        <span className="text-xs font-mono tracking-wider text-gray-400 uppercase font-bold">
-          [ Core System ]
+      <div className="flex flex-col gap-6">
+        <span className="opening-anim eyebrow-anim text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold opacity-0">
+          [ SYSTEM ARCHITECTURE STUDIO ]
         </span>
         
-        <h1 className="font-serif text-5xl md:text-8xl font-light text-[#dedbc8] tracking-tight leading-tight italic">
+        <h1 
+          ref={headlineRef}
+          className="opening-anim headline-anim font-serif text-4xl md:text-[5.5rem] font-light text-[#dedbc8] tracking-tight leading-[1.05] italic opacity-0 pb-1"
+        >
           Custom software for work that has outgrown spreadsheets, messages and memory.
         </h1>
 
-        <p className="text-lg md:text-xl font-light text-gray-300 max-w-2xl leading-relaxed">
-          Nexus maps complex workflows, defines roles and handoffs, and builds the system that makes the work easier to operate.
+        <p className="opening-anim body-anim text-base md:text-xl font-light text-gray-300 max-w-2xl leading-relaxed opacity-0">
+          Nexus maps complex workflows, defines user roles and handoffs, and builds the connected custom systems that make operational execution seamless.
         </p>
 
-        <div className="mt-8 flex gap-4">
-          <a
-            href="mailto:hello@nexus-workflows.com"
-            className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300"
-          >
-            Start a Conversation
-          </a>
+        <div className="opening-anim cta-anim mt-6 flex flex-col gap-4 opacity-0">
+          <div className="flex flex-wrap gap-4 items-center">
+            <Link
+              href="/contact"
+              className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none"
+            >
+              Start a Conversation &rarr;
+            </Link>
+            <a
+              href="#fragmentation"
+              onClick={handleSkipToSystems}
+              className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none"
+            >
+              View the Systems
+            </a>
+          </div>
+          <span className="text-[11px] font-mono text-gray-500 uppercase tracking-wider block mt-1">
+            Trusted by operations teams managing $100M+ in active transaction flows.
+          </span>
         </div>
-      </motion.div>
+      </div>
+
+      {/* Subtle scroll cue */}
+      <div className="opening-anim cue-anim absolute bottom-8 left-6 md:left-12 flex items-center gap-3 font-mono text-[10px] text-gray-500 uppercase tracking-widest opacity-0">
+        <div className="w-1.5 h-1.5 bg-[#2a7d8a] rounded-full animate-ping" />
+        <span>SCROLL TO DISCOVER FLOWS</span>
+      </div>
     </section>
   );
 }
