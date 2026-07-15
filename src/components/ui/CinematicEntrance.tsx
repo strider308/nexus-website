@@ -49,7 +49,7 @@ export function CinematicEntrance() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="flex flex-col items-center gap-4"
           >
-            <span className="font-serif text-5xl italic text-[#dedbc8] tracking-tight">
+            <span className="font-sans text-5xl font-bold tracking-tighter text-[#dedbc8]">
               Nexus
             </span>
             <motion.div

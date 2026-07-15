@@ -3,7 +3,6 @@
 import React, { useState, useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap/register";
 import { useGSAPReducedMotion } from "@/hooks/useGSAPReducedMotion";
-import { GSAP_EASES } from "@/lib/gsap/eases";
 
 interface LayerData {
   id: number;
@@ -51,10 +50,10 @@ export function ArchitectureChapter() {
         <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
           [ SYSTEM ARCHITECTURE ]
         </span>
-        <h2 className="font-serif text-3xl md:text-5xl font-light text-[#dedbc8] tracking-tight leading-tight italic">
+        <h2 className="type-heading text-3xl md:text-5xl text-[#dedbc8] tracking-tight">
           Engineered for Outcomes
         </h2>
-        <p className="text-base font-light text-gray-300 leading-relaxed font-sans max-w-2xl">
+        <p className="type-body text-base text-gray-300 max-w-2xl">
           We replace fragmented tools with a singular, layered architectural engine where every component maps directly to an operational control point.
         </p>
       </div>
@@ -65,11 +64,11 @@ export function ArchitectureChapter() {
         {/* Left: CPU Blueprint Grid */}
         <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-6 relative p-6 bg-[#0d0d0d] border border-[#dedbc8]/10 rounded-none overflow-hidden min-h-[380px] justify-items-center items-center">
           
-          {/* Central Workflow Engine Core */}
+          {/* Central Workflow Engine Hub Core */}
           <div className="md:col-start-2 md:row-start-2 z-20 size-32 bg-[#070707] border-2 border-[#2a7d8a] flex flex-col items-center justify-center p-3 text-center shadow-[0_0_24px_rgba(42,125,138,0.15)] select-none">
-            <span className="font-mono text-[9px] text-[#2a7d8a] uppercase tracking-wider font-bold">CORE ENGINE</span>
+            <span className="font-mono text-xs text-[#2a7d8a] uppercase tracking-wider font-bold">CORE ENGINE</span>
             <span className="font-sans text-xs font-bold uppercase tracking-wide text-white mt-1">WORKFLOW</span>
-            <span className="font-mono text-[8px] text-gray-500 uppercase mt-0.5 tracking-widest">ACTIVE PORT: 08</span>
+            <span className="font-mono text-xs text-gray-500 uppercase mt-0.5 tracking-widest">ACTIVE PORT: 08</span>
           </div>
 
           {/* Surrounding Nodes */}
@@ -99,12 +98,12 @@ export function ArchitectureChapter() {
                 aria-label={`Show details for ${layer.name}`}
               >
                 <div className="flex flex-col gap-1">
-                  <span className="font-mono text-[9px] text-gray-500 font-bold uppercase">STAGE 0{layer.id}</span>
+                  <span className="font-mono text-xs text-gray-500 font-bold uppercase">STAGE 0{layer.id}</span>
                   <h4 className={`font-sans text-xs font-bold uppercase tracking-wide ${isActive ? "text-white" : "text-gray-300"}`}>
                     {layer.name}
                   </h4>
                 </div>
-                <span className="font-mono text-[8px] text-gray-500 self-end">SYS {layer.id}</span>
+                <span className="font-mono text-xs text-gray-500 self-end">SYS {layer.id}</span>
               </button>
             );
           })}
@@ -143,21 +142,21 @@ export function ArchitectureChapter() {
         {/* Right: Active Layer Description Panel */}
         <div className="lg:col-span-5 flex flex-col gap-5 border border-[#dedbc8]/10 bg-[#0d0d0d] p-8 min-h-[380px] justify-between">
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-[9px] text-[#2a7d8a] uppercase tracking-widest font-bold">
+            <span className="font-mono text-xs text-[#2a7d8a] uppercase tracking-widest font-bold">
               NODE SPECIFICATION // STACK 0{LAYERS[activeIdx].id}
             </span>
-            <h3 className="font-serif text-2xl font-light text-white italic tracking-tight">
+            <h3 className="type-heading text-2xl text-white">
               {LAYERS[activeIdx].name}
             </h3>
             <span className="font-mono text-xs text-[#2a7d8a] font-bold">
               {LAYERS[activeIdx].desc}
             </span>
-            <p className="text-sm font-light text-gray-300 leading-relaxed font-sans mt-2">
+            <p className="type-body text-sm text-gray-300 leading-relaxed mt-2">
               {LAYERS[activeIdx].details}
             </p>
           </div>
 
-          <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-[10px] font-mono text-gray-500 uppercase">
+          <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-xs font-mono text-gray-500 uppercase">
             <span>PORT_STATE: LOCKED</span>
             <span>ENCRYPT: SHA-256</span>
           </div>

@@ -37,8 +37,8 @@ export function MappingChapter() {
       }
 
       // 2. Sequential nodes highlight
-      const nodes = gsap.utils.toArray(".step-node");
-      nodes.forEach((node: any, idx) => {
+      const nodes = gsap.utils.toArray<Element>(".step-node");
+      nodes.forEach((node) => {
         gsap.fromTo(
           node,
           { opacity: 0.2, scale: 0.96 },
@@ -57,7 +57,7 @@ export function MappingChapter() {
       });
 
       // 3. Desktop Pinned Section (only > 768px viewports)
-      let mm = gsap.matchMedia();
+      const mm = gsap.matchMedia();
       mm.add("(min-width: 768px)", () => {
         gsap.to(pinRef.current, {
           scrollTrigger: {
@@ -96,10 +96,10 @@ export function MappingChapter() {
           <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
             [ STRUCTURAL BLUEPRINT ]
           </span>
-          <h2 className="font-serif text-3xl md:text-5xl font-light text-[#dedbc8] tracking-tight leading-tight italic">
+          <h2 className="type-heading text-3xl md:text-5xl text-[#dedbc8] tracking-tight">
             We map the operating rules.
           </h2>
-          <p className="text-base font-light text-gray-300 leading-relaxed font-sans">
+          <p className="type-body text-base text-gray-300">
             Before engineering custom code, we define the state limits. We align who owns the task, what event triggers the database state, and where logs sync across systems.
           </p>
         </div>
@@ -131,7 +131,7 @@ export function MappingChapter() {
                 <span className="size-1.5 bg-transparent rounded-full" />
               </div>
 
-              <span className="font-mono text-[9px] text-[#2a7d8a] font-bold uppercase tracking-wider">
+              <span className="font-mono text-xs text-[#2a7d8a] font-bold uppercase tracking-wider">
                 STAGE 0{idx + 1}
               </span>
               <h3 className="font-sans text-sm font-bold uppercase tracking-wide text-[#dedbc8]">

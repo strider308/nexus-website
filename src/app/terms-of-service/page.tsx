@@ -24,7 +24,7 @@ export default function TermsOfServicePage() {
           <span className="text-xs font-mono tracking-[0.2em] text-gray-500 uppercase font-bold">
             LEGAL INFORMATION
           </span>
-          <h1 className="font-serif text-4xl md:text-5xl font-light italic tracking-tight">
+          <h1 className="type-heading text-4xl md:text-5xl tracking-tight text-[#dedbc8]">
             Terms of Service
           </h1>
           <div className="h-[1px] bg-[#dedbc8]/14 w-full my-4" />

@@ -139,15 +139,15 @@ export function InterfaceFrame({ systemId, frameId, caption }: InterfaceFramePro
               <line x1="0" y1="40" x2="800" y2="40" stroke="rgba(222,219,200,0.14)" />
               <rect x="20" y="60" width="240" height="120" fill="none" stroke="rgba(222,219,200,0.1)" />
               <text x="32" y="80" className="fill-gray-500">SHIFT VOLUMES</text>
-              <text x="32" y="110" className="font-serif text-2xl font-light italic fill-[#dedbc8]">42 Patients</text>
+              <text x="32" y="110" className="font-sans text-2xl font-bold fill-[#dedbc8]">42 Patients</text>
               <text x="32" y="130" className="fill-green-400 font-bold">GP: 28 // Speciality: 14</text>
               <rect x="280" y="60" width="240" height="120" fill="none" stroke="rgba(222,219,200,0.1)" />
               <text x="292" y="80" className="fill-gray-500">AVERAGE WAIT TIMES</text>
-              <text x="292" y="110" className="font-serif text-2xl font-light italic fill-[#dedbc8]">14.8 minutes</text>
+              <text x="292" y="110" className="font-sans text-2xl font-bold fill-[#dedbc8]">14.8 minutes</text>
               <text x="292" y="130" className="fill-orange-400 font-bold">Chamber 01 Delay Alert</text>
               <rect x="540" y="60" width="240" height="120" fill="none" stroke="rgba(222,219,200,0.1)" />
               <text x="552" y="80" className="fill-gray-500">SHIFT REVENUE</text>
-              <text x="552" y="110" className="font-serif text-2xl font-light italic fill-[#dedbc8]">$1,482.50</text>
+              <text x="552" y="110" className="font-sans text-2xl font-bold fill-[#dedbc8]">$1,482.50</text>
               <text x="552" y="130" className="fill-green-400 font-bold">100% Cashier Reconciled</text>
               <rect x="20" y="200" width="760" height="140" fill="none" stroke="rgba(222,219,200,0.1)" />
               <text x="32" y="220" className="font-bold fill-gray-400">IMMUTABLE OPERATIONS TRANSACTIONS AUDIT REGISTER</text>
@@ -487,7 +487,7 @@ export function InterfaceFrame({ systemId, frameId, caption }: InterfaceFramePro
               <text x="20" y="24" className="font-bold fill-white text-[11px]">SAFEDATE // ACTIVE TIMER COUNTDOWN</text>
               <line x1="0" y1="40" x2="800" y2="40" stroke="rgba(222,219,200,0.14)" />
               <rect x="50" y="80" width="300" height="180" fill="none" stroke="#c44a7a" strokeWidth="1.5" />
-              <text x="70" y="120" className="fill-[#c44a7a] font-serif text-3xl font-light italic">04m 32s</text>
+              <text x="70" y="120" className="fill-[#c44a7a] font-sans text-3xl font-bold">04m 32s</text>
               <text x="70" y="160" className="fill-white font-bold">Check-in Required</text>
               <rect x="70" y="180" width="120" height="28" fill="#c44a7a" />
               <text x="130" y="197" className="fill-[#070707] font-bold text-center" textAnchor="middle">I AM SAFE</text>
@@ -561,7 +561,7 @@ export function InterfaceFrame({ systemId, frameId, caption }: InterfaceFramePro
         {renderMockup()}
       </div>
       {caption && (
-        <span className="text-[11px] font-mono text-gray-500 mt-1 uppercase tracking-wide block">
+        <span className="text-xs font-mono text-gray-500 mt-1 uppercase tracking-wide block">
           Fig: {caption}
         </span>
       )}

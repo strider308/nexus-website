@@ -78,10 +78,10 @@ export default function ContactPage() {
           <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
             DIAGNOSTIC ENGAGEMENT
           </span>
-          <h1 className="font-serif text-5xl md:text-7xl font-light italic mt-3 tracking-tight">
+          <h1 className="type-display text-5xl md:text-7xl mt-3 text-[#dedbc8]">
             Start a Conversation
           </h1>
-          <p className="text-base font-light text-gray-300 max-w-xl leading-relaxed mt-2">
+          <p className="type-body text-base text-gray-300 max-w-xl mt-2">
             Tell us about your manual spreadsheets, message lists, or disconnected databases. We will help map the operational rules and build the systems.
           </p>
         </div>
@@ -111,7 +111,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="name" className="text-[10px] font-mono uppercase tracking-wider text-gray-400 font-bold">Your Name</Label>
+                    <Label htmlFor="name" className="text-xs font-mono uppercase tracking-wider text-gray-400 font-bold">Your Name</Label>
                     <Input
                       id="name"
                       required
@@ -122,7 +122,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="email" className="text-[10px] font-mono uppercase tracking-wider text-gray-400 font-bold">Work Email</Label>
+                    <Label htmlFor="email" className="text-xs font-mono uppercase tracking-wider text-gray-400 font-bold">Work Email</Label>
                     <Input
                       type="email"
                       id="email"
@@ -136,7 +136,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="company" className="text-[10px] font-mono uppercase tracking-wider text-gray-400 font-bold">Company / Project Name</Label>
+                  <Label htmlFor="company" className="text-xs font-mono uppercase tracking-wider text-gray-400 font-bold">Company / Project Name</Label>
                   <Input
                     id="company"
                     required
@@ -148,7 +148,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="engagement" className="text-[10px] font-mono uppercase tracking-wider text-gray-400 font-bold">Engagement Track</Label>
+                  <Label htmlFor="engagement" className="text-xs font-mono uppercase tracking-wider text-gray-400 font-bold">Engagement Track</Label>
                   <select
                     id="engagement"
                     value={formData.engagement}
@@ -163,7 +163,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="workflow" className="text-[10px] font-mono uppercase tracking-wider text-gray-400 font-bold">Describe the Current Workflow &amp; Silos</Label>
+                  <Label htmlFor="workflow" className="text-xs font-mono uppercase tracking-wider text-gray-400 font-bold">Describe the Current Workflow &amp; Silos</Label>
                   <Textarea
                     id="workflow"
                     required
@@ -178,11 +178,11 @@ export default function ContactPage() {
                   <Button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="border border-[#dedbc8] bg-[#dedbc8] text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none w-full py-6 cursor-pointer"
+                    className="border border-[#dedbc8] bg-[#dedbc8] text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none w-full py-6 cursor-pointer"
                   >
                     {status === "submitting" ? "Submitting Request..." : "Submit Diagnostic Request"}
                   </Button>
-                  <span className="text-[10px] font-mono text-gray-500 text-center mt-2">
+                  <span className="text-xs font-mono text-gray-500 text-center mt-2">
                     Privacy Assurance: Your operational details are protected under NDA principles.
                   </span>
                 </div>
@@ -201,7 +201,7 @@ export default function ContactPage() {
                 <a href={CONTACT.url} className="text-sm font-mono text-[#2a7d8a] hover:underline font-bold">
                   {CONTACT.email}
                 </a>
-                <span className="text-[10px] font-mono text-gray-500">{"// Response within 1 business day"}</span>
+                <span className="text-xs font-mono text-gray-500">{"// Response within 1 business day"}</span>
               </div>
             </div>
           </div>
@@ -211,7 +211,7 @@ export default function ContactPage() {
             
             {/* Sequence flow map */}
             <div className="border border-[#dedbc8]/10 bg-[#0d0d0d] p-8 flex flex-col gap-6 relative overflow-hidden">
-              <h2 className="font-serif text-xl italic text-[#dedbc8] tracking-tight border-b border-[#dedbc8]/10 pb-3">
+              <h2 className="type-heading text-xl text-[#dedbc8] border-b border-[#dedbc8]/10 pb-3">
                 What Happens Next
               </h2>
 
@@ -232,21 +232,21 @@ export default function ContactPage() {
 
                 <div className="flex flex-col gap-1 relative">
                   <div className="absolute -left-[37px] top-1 size-3 bg-[#0d0d0d] border border-gray-600 rounded-full z-10" />
-                  <span className="text-[9px] font-mono text-[#2a7d8a] font-bold">STEP 01</span>
+                  <span className="text-xs font-mono text-[#2a7d8a] font-bold">STEP 01</span>
                   <span className="text-xs font-bold uppercase tracking-wide">Workflow Audit</span>
                   <span className="text-xs text-gray-400 font-light font-sans mt-0.5">We analyze your spreadsheet logic and identify blockers.</span>
                 </div>
 
                 <div className="flex flex-col gap-1 relative">
                   <div className="absolute -left-[37px] top-1 size-3 bg-[#0d0d0d] border border-gray-600 rounded-full z-10" />
-                  <span className="text-[9px] font-mono text-[#2a7d8a] font-bold">STEP 02</span>
+                  <span className="text-xs font-mono text-[#2a7d8a] font-bold">STEP 02</span>
                   <span className="text-xs font-bold uppercase tracking-wide">Interactive Diagnostic</span>
                   <span className="text-xs text-gray-400 font-light font-sans mt-0.5">A joint session to map roles and transition triggers.</span>
                 </div>
 
                 <div className="flex flex-col gap-1 relative">
                   <div className="absolute -left-[37px] top-1 size-3 bg-[#0d0d0d] border border-gray-600 rounded-full z-10" />
-                  <span className="text-[9px] font-mono text-[#2a7d8a] font-bold">STEP 03</span>
+                  <span className="text-xs font-mono text-[#2a7d8a] font-bold">STEP 03</span>
                   <span className="text-xs font-bold uppercase tracking-wide">Stack &amp; Proposal</span>
                   <span className="text-xs text-gray-400 font-light font-sans mt-0.5">We propose a software architecture and execution plan.</span>
                 </div>
@@ -255,7 +255,7 @@ export default function ContactPage() {
 
             {/* Quick Posture Checklist */}
             <div className="border border-[#dedbc8]/10 bg-[#0d0d0d] p-6 flex flex-col gap-4">
-              <h3 className="font-serif text-lg italic text-[#dedbc8] tracking-tight">Our Direct Commitments</h3>
+              <h3 className="type-heading text-lg text-[#dedbc8]">Our Direct Commitments</h3>
               <ul className="flex flex-col gap-3 text-xs text-gray-400 font-light leading-relaxed font-sans">
                 <li className="flex gap-2 items-start">
                   <span className="text-green-400">&bull;</span>

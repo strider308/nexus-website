@@ -74,12 +74,12 @@ export function OpeningChapter() {
         
         <h1 
           ref={headlineRef}
-          className="opening-anim headline-anim font-serif text-4xl md:text-[5.5rem] font-light text-[#dedbc8] tracking-tight leading-[1.05] italic opacity-0 pb-1"
+          className="opening-anim headline-anim type-display text-4xl md:text-[5.5rem] text-[#dedbc8] opacity-0 pb-1"
         >
           Custom software for work that has outgrown spreadsheets, messages and memory.
         </h1>
 
-        <p className="opening-anim body-anim text-base md:text-xl font-light text-gray-300 max-w-2xl leading-relaxed opacity-0">
+        <p className="opening-anim body-anim type-body text-base md:text-xl text-gray-300 max-w-2xl opacity-0">
           Nexus maps complex workflows, defines user roles and handoffs, and builds the connected custom systems that make operational execution seamless.
         </p>
 
@@ -87,26 +87,26 @@ export function OpeningChapter() {
           <div className="flex flex-wrap gap-4 items-center">
             <Link
               href="/contact"
-              className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none"
+              className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none"
             >
               Start a Conversation &rarr;
             </Link>
             <a
               href="#fragmentation"
               onClick={handleSkipToSystems}
-              className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none"
+              className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none"
             >
               View the Systems
             </a>
           </div>
-          <span className="text-[11px] font-mono text-gray-500 uppercase tracking-wider block mt-1">
+          <span className="text-xs font-mono text-gray-500 uppercase tracking-wider block mt-1">
             Trusted by operations teams managing $100M+ in active transaction flows.
           </span>
         </div>
       </div>
 
       {/* Subtle scroll cue */}
-      <div className="opening-anim cue-anim absolute bottom-8 left-6 md:left-12 flex items-center gap-3 font-mono text-[10px] text-gray-500 uppercase tracking-widest opacity-0">
+      <div className="opening-anim cue-anim absolute bottom-8 left-6 md:left-12 flex items-center gap-3 font-mono text-xs text-gray-500 uppercase tracking-widest opacity-0">
         <div className="w-1.5 h-1.5 bg-[#2a7d8a] rounded-full animate-ping" />
         <span>SCROLL TO DISCOVER FLOWS</span>
       </div>

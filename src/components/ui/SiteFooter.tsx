@@ -14,7 +14,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-2">
           <Link 
             href="/" 
-            className="font-serif text-xl italic text-[#dedbc8] tracking-tight hover:opacity-80 transition-opacity"
+            className="font-sans text-xl font-bold tracking-tighter text-[#dedbc8] hover:opacity-80 transition-opacity"
           >
             Nexus
           </Link>
@@ -26,19 +26,19 @@ export function SiteFooter() {
         {/* Right Side: Navigation Links & Copyright */}
         <div className="flex flex-col md:items-end gap-4">
           <nav className="flex flex-wrap gap-x-6 gap-y-2">
-            <Link href="/work" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
+            <Link href="/work" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
               Work
             </Link>
-            <Link href="/services" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
+            <Link href="/services" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
               Services
             </Link>
-            <Link href="/contact" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
+            <Link href="/contact" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
               Contact
             </Link>
-            <Link href="/privacy-policy" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
+            <Link href="/privacy-policy" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms-of-service" className="font-mono text-xs uppercase tracking-wider text-gray-300 hover:text-[#dedbc8] transition-colors">
+            <Link href="/terms-of-service" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
               Terms of Service
             </Link>
           </nav>

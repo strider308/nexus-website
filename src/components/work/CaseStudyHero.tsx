@@ -4,7 +4,6 @@ import React, { useRef } from "react";
 import { CaseStudyData } from "@/content/case-studies";
 import { InterfaceFrame } from "@/components/work/InterfaceFrame";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { gsap, useGSAP } from "@/lib/gsap/register";
 import { useGSAPReducedMotion } from "@/hooks/useGSAPReducedMotion";
 import Link from "next/link";
@@ -65,20 +64,20 @@ export function CaseStudyHero({ study }: CaseStudyHeroProps) {
           <Badge variant="referenceBuild">{study.status}</Badge>
         </div>
 
-        <h1 className="font-serif text-4xl md:text-6xl font-light text-[#dedbc8] tracking-tight leading-[1.05] italic pb-1">
+        <h1 className="type-heading text-4xl md:text-6xl text-[#dedbc8] pb-1">
           {study.name}
         </h1>
 
-        <p className="text-sm font-mono text-gray-500 uppercase tracking-widest leading-none mt-1">
+        <p className="text-xs font-mono text-gray-500 uppercase tracking-widest leading-none mt-1">
           POSITIONING: &ldquo;{study.positioning}&rdquo;
         </p>
 
-        <p className="text-base text-gray-300 leading-relaxed font-sans mt-2">
+        <p className="type-body text-base text-gray-300 mt-2">
           {study.longDefinition}
         </p>
 
         <div className="flex flex-col gap-1 border-t border-[#dedbc8]/5 pt-4">
-          <span className="font-mono text-[9px] text-gray-500 uppercase tracking-wider font-bold">INTENDED ROLES</span>
+          <span className="font-mono text-xs text-gray-500 uppercase tracking-wider font-bold">INTENDED ROLES</span>
           <span className="text-xs text-gray-300 font-bold uppercase">{study.intendedUsers.join(", ")}</span>
         </div>
 
@@ -86,14 +85,14 @@ export function CaseStudyHero({ study }: CaseStudyHeroProps) {
         <div className="flex flex-wrap gap-3 mt-4">
           <Link
             href="/contact"
-            className="border border-[#dedbc8] bg-[#dedbc8] px-5 py-3 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none text-center"
+            className="border border-[#dedbc8] bg-[#dedbc8] px-5 py-3 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none text-center"
           >
             Start consult
           </Link>
           <a
             href="#workflow-section"
             onClick={handleScrollToWorkflow}
-            className="border border-[#dedbc8]/20 px-5 py-3 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none text-center"
+            className="border border-[#dedbc8]/20 px-5 py-3 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none text-center"
           >
             View workflow &darr;
           </a>

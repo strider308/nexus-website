@@ -3,7 +3,6 @@
 import React, { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap/register";
 import { useGSAPReducedMotion } from "@/hooks/useGSAPReducedMotion";
-import { GSAP_EASES } from "@/lib/gsap/eases";
 
 interface MediaExpansionProps {
   children: React.ReactNode;

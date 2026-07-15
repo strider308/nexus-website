@@ -13,10 +13,10 @@ export function WorkIndexHero() {
         <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
           [ ARCHIVES DECK // EVIDENCE DECK ]
         </span>
-        <h1 className="font-serif text-5xl md:text-8rem font-light italic leading-none tracking-tight text-[#dedbc8]">
+        <h1 className="type-display text-5xl md:text-8rem text-[#dedbc8]">
           Proven Architectures
         </h1>
-        <p className="text-base md:text-xl font-light text-gray-300 leading-relaxed font-sans max-w-2xl mt-2">
+        <p className="type-body text-base md:text-xl text-gray-300 max-w-2xl mt-2">
           We replace fragmented spreadsheets, email silos, and paper registers with connected software engines. Below is the operational ledger of seven custom systems we designed and built end-to-end.
         </p>
       </div>

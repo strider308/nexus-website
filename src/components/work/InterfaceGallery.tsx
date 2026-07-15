@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { InterfaceFrame } from "./InterfaceFrame";
 import type { CarouselApi } from "@/components/ui/carousel";
@@ -108,10 +107,10 @@ export function InterfaceGallery({ systemId, frames, accentColor }: InterfaceGal
   return (
     <div className="flex flex-col gap-6 py-8 border-t border-[#dedbc8]/10 w-full select-none">
       <div className="flex flex-col gap-2">
-        <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+        <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
           System Interface Evidence
         </span>
-        <h2 className="font-serif text-3xl font-light italic text-[#dedbc8] tracking-tight">
+        <h2 className="type-heading text-3xl text-[#dedbc8] tracking-tight">
           Reconstructed Console Excerpts
         </h2>
       </div>
@@ -124,7 +123,7 @@ export function InterfaceGallery({ systemId, frames, accentColor }: InterfaceGal
             <button
               key={idx}
               onClick={() => handleTabChange(idx)}
-              className={`px-3 py-2 font-mono text-[10px] uppercase tracking-wider transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] ${
+              className={`px-3 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] ${
                 isActive ? "text-[#dedbc8] font-bold border-b-2" : "text-gray-400 hover:text-gray-200"
               }`}
               style={{
@@ -167,7 +166,7 @@ export function InterfaceGallery({ systemId, frames, accentColor }: InterfaceGal
         </Carousel>
       </div>
 
-      <div className="mt-8 font-mono text-[10px] text-gray-500 uppercase flex justify-between items-center pr-12">
+      <div className="mt-8 font-mono text-xs text-gray-500 uppercase flex justify-between items-center pr-12">
         <span>EXCERPT FRAME INDEX: 0{activeFrameIdx + 1} / 0{frames.length}</span>
         <span>VERIFY LOG: COMPLETE</span>
       </div>

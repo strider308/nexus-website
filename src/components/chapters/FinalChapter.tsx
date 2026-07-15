@@ -18,13 +18,13 @@ export function FinalChapter() {
           <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
             [ DIAGNOSTIC ENGAGEMENT ]
           </span>
-          <h2 className="font-serif text-4xl md:text-7.5rem font-light text-[#dedbc8] tracking-tight leading-[0.95] italic mt-2">
+          <h2 className="type-display text-4xl md:text-7.5rem text-[#dedbc8] mt-2">
             Bring us the workflow.
           </h2>
         </GSAPReveal>
         
         <GSAPReveal yOffset={15} duration={0.8} delay={0.15}>
-          <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed font-sans mt-2">
+          <p className="type-body text-base md:text-lg text-gray-300 mt-2">
             We will map it, design the system stack, and build the custom software that connects the work. Let&apos;s start an operational diagnostic conversation today.
           </p>
         </GSAPReveal>
@@ -32,13 +32,13 @@ export function FinalChapter() {
         <GSAPReveal yOffset={15} duration={0.8} delay={0.3} className="mt-6 flex flex-col sm:flex-row gap-4">
           <Link
             href="/contact"
-            className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 text-center rounded-none"
+            className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 text-center rounded-none"
           >
             Describe your workflow
           </Link>
           <Link
             href="/work"
-            className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 text-center rounded-none"
+            className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 text-center rounded-none"
           >
             Explore all systems
           </Link>

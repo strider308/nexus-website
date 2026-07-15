@@ -12,13 +12,13 @@ export function OperationalProblem({ study }: OperationalProblemProps) {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start py-8">
       {/* Problem text */}
       <div className="lg:col-span-5 flex flex-col gap-4">
-        <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+        <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
           The Operational Challenge
         </span>
-        <h2 className="font-serif text-3xl font-light italic text-[#dedbc8] tracking-tight">
+        <h2 className="type-heading text-3xl text-[#dedbc8] tracking-tight">
           How the process fragments
         </h2>
-        <div className="text-sm md:text-base font-light text-gray-300 leading-relaxed flex flex-col gap-4">
+        <div className="type-body text-sm md:text-base text-gray-300 leading-relaxed flex flex-col gap-4">
           {study.problemNarrative.map((p, idx) => (
             <p key={idx}>{p}</p>
           ))}
@@ -27,7 +27,7 @@ export function OperationalProblem({ study }: OperationalProblemProps) {
 
       {/* Before / After Table */}
       <div className="lg:col-span-7 flex flex-col gap-4">
-        <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+        <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
           Workflow Transition Mapping
         </span>
         <div className="border border-[#dedbc8]/10 bg-[#0d0d0d] overflow-hidden">

@@ -21,20 +21,20 @@ export function CapabilityMatrix() {
   return (
     <div className="flex flex-col gap-6 py-8 border-t border-[#dedbc8]/10">
       <div className="flex flex-col gap-2">
-        <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+        <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
           Capabilities Index
         </span>
-        <h2 className="font-serif text-3xl md:text-5xl font-light italic text-[#dedbc8] tracking-tight">
+        <h2 className="type-heading text-3xl md:text-5xl text-[#dedbc8] tracking-tight">
           System Comparison Matrix
         </h2>
-        <p className="text-sm font-light text-gray-400 max-w-xl">
+        <p className="type-body text-sm text-gray-400 max-w-xl">
           A side-by-side check of what our custom builds organize across separate operational tracks.
         </p>
       </div>
 
       {/* Desktop/Tablet Viewport Table */}
       <div className="hidden lg:block overflow-x-auto border border-[#dedbc8]/10 bg-[#0d0d0d] mt-4">
-        <table className="w-full text-left font-mono text-[9px] text-gray-300 divide-y divide-[#dedbc8]/10">
+        <table className="w-full text-left font-mono text-xs text-gray-300 divide-y divide-[#dedbc8]/10">
           <thead className="bg-[#070707] text-[#dedbc8] font-bold">
             <tr>
               {columns.map((col) => (
@@ -76,7 +76,7 @@ export function CapabilityMatrix() {
               <span className="text-sm font-bold text-[#dedbc8] uppercase tracking-wide">{row.systemName}</span>
             </div>
             
-            <div className="grid grid-cols-2 gap-x-4 gap-y-3 font-mono text-[10px]">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-3 font-mono text-xs">
               <div className="flex flex-col gap-0.5">
                 <span className="text-gray-500 uppercase font-bold">Multi-Role</span>
                 <span className="text-gray-300">{row.multiRole}</span>

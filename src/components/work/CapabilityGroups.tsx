@@ -16,10 +16,10 @@ export function CapabilityGroups({ groups, accentColor }: CapabilityGroupsProps)
   return (
     <div className="flex flex-col gap-6 py-8 border-t border-[#dedbc8]/10 w-full select-none">
       <div className="flex flex-col gap-2">
-        <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+        <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
           System Capability Groups
         </span>
-        <h2 className="font-serif text-3xl font-light italic text-[#dedbc8] tracking-tight">
+        <h2 className="type-heading text-3xl text-[#dedbc8] tracking-tight">
           What the system organizes
         </h2>
       </div>
@@ -32,7 +32,7 @@ export function CapabilityGroups({ groups, accentColor }: CapabilityGroupsProps)
               <TabsTrigger 
                 key={idx} 
                 value={String(idx)}
-                className="w-full text-left font-mono text-[10px] uppercase tracking-wider justify-start px-4 py-2 hover:bg-[#dedbc8]/5 border-none"
+                className="w-full text-left font-mono text-xs uppercase tracking-wider justify-start px-4 py-2 hover:bg-[#dedbc8]/5 border-none"
               >
                 {group.title}
               </TabsTrigger>

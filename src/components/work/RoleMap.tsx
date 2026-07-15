@@ -9,7 +9,7 @@ interface RoleMapProps {
   accentColor: string;
 }
 
-export function RoleMap({ systemId, users, accentColor }: RoleMapProps) {
+export function RoleMap({ users, accentColor }: RoleMapProps) {
   const [activeIdx, setActiveIdx] = useState<number>(0);
 
   // Group roles for display
@@ -24,10 +24,10 @@ export function RoleMap({ systemId, users, accentColor }: RoleMapProps) {
   return (
     <div className="flex flex-col gap-6 py-8 border-t border-[#dedbc8]/10 w-full select-none">
       <div className="flex flex-col gap-2">
-        <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+        <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
           Workspace Roles &amp; Handoffs Map
         </span>
-        <h2 className="font-serif text-3xl font-light italic text-[#dedbc8] tracking-tight">
+        <h2 className="type-heading text-3xl text-[#dedbc8] tracking-tight">
           Who Uses the System
         </h2>
       </div>
@@ -40,7 +40,7 @@ export function RoleMap({ systemId, users, accentColor }: RoleMapProps) {
           
           {/* Central Workflow Engine Hub */}
           <div className="z-10 size-24 rounded-full border border-gray-600 bg-[#070707] flex flex-col items-center justify-center p-2 text-center text-white">
-            <span className="font-mono text-[8px] text-gray-500 uppercase tracking-widest leading-none">SYSTEM</span>
+            <span className="font-mono text-xs text-gray-500 uppercase tracking-widest leading-none">SYSTEM</span>
             <span className="font-sans text-xs font-bold uppercase tracking-wider mt-1 text-[#2a7d8a]">CORE</span>
           </div>
 
@@ -60,7 +60,7 @@ export function RoleMap({ systemId, users, accentColor }: RoleMapProps) {
                 key={idx}
                 onClick={() => setActiveIdx(idx)}
                 onFocus={() => setActiveIdx(idx)}
-                className={`absolute z-20 px-3 py-1.5 border font-mono text-[9px] uppercase tracking-wider transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] ${
+                className={`absolute z-20 px-3 py-1.5 border font-mono text-xs uppercase tracking-wider transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] ${
                   isActive
                     ? "bg-[#2a7d8a]/5 border-[#2a7d8a] text-white"
                     : "bg-[#070707] border-gray-700 text-gray-500 hover:border-gray-500 hover:text-gray-300"
@@ -69,7 +69,7 @@ export function RoleMap({ systemId, users, accentColor }: RoleMapProps) {
                   transform: `translate(${x}px, ${y}px)`,
                 }}
               >
-                0{idx + 1} // {role.title.split(" // ")[0]}
+                0{idx + 1} {"//"} {role.title.split(" // ")[0]}
               </button>
             );
           })}
@@ -104,10 +104,10 @@ export function RoleMap({ systemId, users, accentColor }: RoleMapProps) {
         {/* Right: Selected Node prose description panel */}
         <div className="col-span-5 border border-[#dedbc8]/10 bg-[#0d0d0d] p-8 min-h-[350px] flex flex-col justify-between">
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-[9px] text-[#2a7d8a] uppercase tracking-widest font-bold">
+            <span className="font-mono text-xs text-[#2a7d8a] uppercase tracking-widest font-bold">
               ROLE DEFINITION SPEC // 0{activeIdx + 1}
             </span>
-            <h3 className="font-serif text-2xl font-light text-white italic tracking-tight">
+            <h3 className="type-heading text-2xl text-white">
               {parsedRoles[activeIdx].title}
             </h3>
             <p className="text-xs text-gray-300 leading-relaxed font-light font-sans mt-2">
@@ -115,7 +115,7 @@ export function RoleMap({ systemId, users, accentColor }: RoleMapProps) {
             </p>
           </div>
 
-          <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-[10px] font-mono text-gray-500 uppercase">
+          <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-xs font-mono text-gray-500 uppercase">
             <span>PERMS: L1_ACCESS</span>
             <span>TOKEN: LOCKED</span>
           </div>
@@ -130,7 +130,7 @@ export function RoleMap({ systemId, users, accentColor }: RoleMapProps) {
             <AccordionItem key={idx} value={`role-${idx}`} className="border-b border-[#dedbc8]/5">
               <AccordionTrigger className="hover:no-underline py-4 text-left">
                 <div className="flex gap-3 items-center">
-                  <span className="font-mono text-[10px] text-gray-500">0{idx + 1}</span>
+                  <span className="font-mono text-xs text-gray-500">0{idx + 1}</span>
                   <span className="font-sans text-xs font-bold uppercase text-white tracking-wider">{role.title}</span>
                 </div>
               </AccordionTrigger>

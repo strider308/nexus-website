@@ -24,12 +24,12 @@ export function IntegrationBoundary({
         {/* Connected Environment (Left) */}
         <div className="flex flex-col gap-4 border border-[#dedbc8]/10 bg-[#0d0d0d] p-6 shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
           <div className="flex justify-between items-center border-b border-[#dedbc8]/5 pb-3">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
               Connected Environment
             </span>
             <Badge variant="available">Active integrations</Badge>
           </div>
-          <h3 className="font-serif text-xl italic text-white tracking-tight">
+          <h3 className="type-heading text-xl text-white tracking-tight">
             How the software connects
           </h3>
           <ul className="flex flex-col gap-3 text-xs text-gray-300 font-light leading-relaxed font-sans mt-2">
@@ -45,12 +45,12 @@ export function IntegrationBoundary({
         {/* Boundaries (Right) */}
         <div className="flex flex-col gap-4 border border-[#dedbc8]/10 bg-[#0d0d0d] p-6 shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
           <div className="flex justify-between items-center border-b border-[#dedbc8]/5 pb-3">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
               Boundaries
             </span>
             <Badge variant="limitation">Out of scope</Badge>
           </div>
-          <h3 className="font-serif text-xl italic text-white tracking-tight">
+          <h3 className="type-heading text-xl text-white tracking-tight">
             What remains outside scope
           </h3>
           <ul className="flex flex-col gap-3 text-xs text-gray-300 font-light leading-relaxed font-sans mt-2">

@@ -18,13 +18,13 @@ export function TrustChapter() {
           <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
             [ OPERATIONAL INTEGRITY ]
           </span>
-          <h2 className="font-serif text-3xl md:text-6xl font-light text-[#dedbc8] tracking-tight leading-tight italic mt-2">
+          <h2 className="type-heading text-3xl md:text-6xl text-[#dedbc8] tracking-tight mt-2">
             Founder-led engineering, defined boundaries.
           </h2>
         </GSAPReveal>
 
         <GSAPReveal yOffset={15} duration={0.8} delay={0.15}>
-          <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed font-sans max-w-2xl">
+          <p className="type-body text-base md:text-lg text-gray-300 max-w-2xl">
             We do not delegate your critical system architecture to junior agency pools. Every line of database synchronization and sequence rule is designed and written by our founders. We build with clear posture, thorough documentation, and strict boundaries.
           </p>
         </GSAPReveal>

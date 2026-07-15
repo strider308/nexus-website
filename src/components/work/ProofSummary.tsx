@@ -14,10 +14,10 @@ export function ProofSummary({ points, architecturalNotes, accentColor }: ProofS
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* What this proves */}
         <div className="flex flex-col gap-4">
-          <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+          <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
             Operational Proof
           </span>
-          <h3 className="font-serif text-xl italic text-[#dedbc8] tracking-tight">
+          <h3 className="type-heading text-xl text-[#dedbc8] tracking-tight">
             What the build proves
           </h3>
           <ul className="flex flex-col gap-2.5 text-xs text-gray-300 font-light leading-relaxed">
@@ -33,10 +33,10 @@ export function ProofSummary({ points, architecturalNotes, accentColor }: ProofS
         {/* Architectural Notes */}
         {architecturalNotes && architecturalNotes.length > 0 && (
           <div className="flex flex-col gap-4">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
               Engineering Architecture
             </span>
-            <h3 className="font-serif text-xl italic text-[#dedbc8] tracking-tight">
+            <h3 className="type-heading text-xl text-[#dedbc8] tracking-tight">
               Design &amp; code decisions
             </h3>
             <ul className="flex flex-col gap-2.5 text-xs text-gray-400 font-light leading-relaxed">

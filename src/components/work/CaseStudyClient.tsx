@@ -13,9 +13,8 @@ import { IntegrationBoundary } from "@/components/work/IntegrationBoundary";
 import { ProofSummary } from "@/components/work/ProofSummary";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SiteFooter } from "@/components/ui/SiteFooter";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { gsap, useGSAP } from "@/lib/gsap/register";
+import { useGSAP } from "@/lib/gsap/register";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAPReducedMotion } from "@/hooks/useGSAPReducedMotion";
 
@@ -88,7 +87,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
       <div className="fixed top-16 left-0 w-full bg-[#070707]/90 border-b border-[#dedbc8]/10 py-3.5 z-40 hidden md:block backdrop-blur-xs">
         <div className="max-w-5xl mx-auto flex items-center justify-between px-6">
           <div className="flex gap-6 items-center">
-            <span className="font-mono text-[10px] text-gray-500 font-bold uppercase">CASE STUDY PROGRESS:</span>
+            <span className="font-mono text-xs text-gray-500 font-bold uppercase">CASE STUDY PROGRESS:</span>
             <div className="flex gap-2">
               {acts.map((act) => {
                 const isActive = activeAct === act.id;
@@ -97,7 +96,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
                     key={act.id}
                     href={act.target}
                     onClick={(e) => handleScrollToAct(act.target, e)}
-                    className={`font-mono text-[10px] uppercase tracking-wider px-3 py-1 transition-all duration-300 ${
+                    className={`font-mono text-xs uppercase tracking-wider px-3 py-1 transition-all duration-300 ${
                       isActive 
                         ? "text-[#070707] bg-[#dedbc8] font-bold" 
                         : "text-gray-400 hover:text-gray-200 hover:bg-[#dedbc8]/5"
@@ -111,7 +110,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
           </div>
           {/* Scroll progress slider line */}
           <div className="w-32 flex items-center gap-2">
-            <span className="font-mono text-[9px] text-gray-500">{Math.round(scrollPercent)}%</span>
+            <span className="font-mono text-xs text-gray-500">{Math.round(scrollPercent)}%</span>
             <Progress value={scrollPercent} className="h-[2px] bg-gray-800" />
           </div>
         </div>
@@ -140,25 +139,25 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 01 // SYSTEM CONTEXT
             </span>
-            <h2 className="font-serif text-3xl md:text-5xl font-light italic text-[#dedbc8] tracking-tight leading-none">
+            <h2 className="type-heading text-3xl md:text-5xl text-[#dedbc8] tracking-tight">
               Operating Background &amp; Silos
             </h2>
           </div>
 
           <div className="flex flex-col gap-4">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">A. System Definition</span>
-            <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed max-w-4xl font-sans">
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">A. System Definition</span>
+            <p className="type-body text-base text-gray-300 leading-relaxed max-w-4xl">
               {study.longDefinition}
             </p>
           </div>
 
           <div className="border-t border-[#dedbc8]/5 pt-8">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">B. Operational Problem</span>
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">B. Operational Problem</span>
             <OperationalProblem study={study} />
           </div>
 
           <div className="border-t border-[#dedbc8]/5 pt-8 flex flex-col gap-4">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">Fragmented Before-State Process</span>
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">Fragmented Before-State Process</span>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#0d0d0d] p-6 border border-[#dedbc8]/10 text-xs">
               {study.beforeWorkflow.slice(0, 3).map((item, idx) => {
                 const parts = item.split(": ");
@@ -181,18 +180,18 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 02 // OPERATIONS WORKFLOW
             </span>
-            <h2 className="font-serif text-3xl md:text-5xl font-light italic text-[#dedbc8] tracking-tight leading-none">
+            <h2 className="type-heading text-3xl md:text-5xl text-[#dedbc8] tracking-tight">
               Roles &amp; Hand-offs Timeline
             </h2>
           </div>
 
           <div id="workflow-section">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">C. Audience Roles Matrix</span>
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">C. Audience Roles Matrix</span>
             <RoleMap systemId={study.slug} users={study.userRoleDescriptions} accentColor={study.accentColor} />
           </div>
 
           <div className="border-t border-[#dedbc8]/5 pt-8">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">D. End-to-End Stepper Path</span>
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">D. End-to-End Stepper Path</span>
             <WorkflowJourney stages={study.workflowStages} accentColor={study.accentColor} />
           </div>
         </section>
@@ -205,26 +204,26 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 03 // THE BUILD SYSTEM
             </span>
-            <h2 className="font-serif text-3xl md:text-5xl font-light italic text-[#dedbc8] tracking-tight leading-none">
+            <h2 className="type-heading text-3xl md:text-5xl text-[#dedbc8] tracking-tight">
               Functional Modules &amp; Evidences
             </h2>
           </div>
 
           <div>
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">E. Reconstructed Evidence Mockups</span>
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">E. Reconstructed Evidence Mockups</span>
             <InterfaceGallery systemId={study.slug} frames={study.visualFrames} accentColor={study.accentColor} />
           </div>
 
           <div className="border-t border-[#dedbc8]/5 pt-8">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">F. Module Explanations</span>
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">F. Module Explanations</span>
             <CapabilityGroups groups={study.capabilityGroups} accentColor={study.accentColor} />
           </div>
 
           <div className="border-t border-[#dedbc8]/5 pt-8 flex flex-col gap-6">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">Information &amp; Automation State Rules</span>
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">Information &amp; Automation State Rules</span>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex flex-col gap-3">
-                <h3 className="font-serif text-xl italic text-[#dedbc8]">Key System Interactions</h3>
+                <h3 className="type-heading text-xl text-[#dedbc8]">Key System Interactions</h3>
                 <ul className="flex flex-col gap-2.5 text-xs text-gray-300 font-light leading-relaxed font-sans">
                   {study.keyInteractions.map((item, idx) => (
                     <li key={idx} className="flex gap-2 items-start">
@@ -235,7 +234,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
                 </ul>
               </div>
               <div className="flex flex-col gap-3">
-                <h3 className="font-serif text-xl italic text-[#dedbc8]">Automation State Rules</h3>
+                <h3 className="type-heading text-xl text-[#dedbc8]">Automation State Rules</h3>
                 <ul className="flex flex-col gap-2.5 text-xs text-gray-300 font-light leading-relaxed font-sans">
                   {study.automationRules.map((item, idx) => (
                     <li key={idx} className="flex gap-2 items-start">
@@ -274,13 +273,13 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 04 // CLEAR BOUNDARIES
             </span>
-            <h2 className="font-serif text-3xl md:text-5xl font-light italic text-[#dedbc8] tracking-tight leading-none">
+            <h2 className="type-heading text-3xl md:text-5xl text-[#dedbc8] tracking-tight">
               Scope, Exclusions &amp; Integrations
             </h2>
           </div>
 
           <div>
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold font-sans">H. Boundaries &amp; API Integrations</span>
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold font-sans">H. Boundaries &amp; API Integrations</span>
             <IntegrationBoundary
               integrations={study.integrationNarrative}
               limitations={study.limitations}
@@ -301,7 +300,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
 
           <div className="border-t border-[#dedbc8]/5 pt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex flex-col gap-3">
-              <h3 className="font-serif text-xl italic text-[#dedbc8]">Current Scope &amp; Deliverables</h3>
+              <h3 className="type-heading text-xl text-[#dedbc8]">Current Scope &amp; Deliverables</h3>
               <ul className="flex flex-col gap-2 text-xs text-gray-300 font-light leading-relaxed font-sans">
                 {study.currentScope.map((item, idx) => (
                   <li key={idx} className="flex gap-2 items-start">
@@ -312,7 +311,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
               </ul>
             </div>
             <div className="flex flex-col gap-3">
-              <h3 className="font-serif text-xl italic text-[#dedbc8]">Future Roadmap Direction</h3>
+              <h3 className="type-heading text-xl text-[#dedbc8]">Future Roadmap Direction</h3>
               <ul className="flex flex-col gap-2 text-xs text-gray-300 font-light leading-relaxed font-sans">
                 {study.futureDirection.map((item, idx) => (
                   <li key={idx} className="flex gap-2 items-start">
@@ -333,7 +332,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 05 // SYSTEM VERDICT
             </span>
-            <h2 className="font-serif text-3xl md:text-5xl font-light italic text-[#dedbc8] tracking-tight leading-none">
+            <h2 className="type-heading text-3xl md:text-5xl text-[#dedbc8] tracking-tight">
               Architectural Proofs &amp; Outcomes
             </h2>
           </div>
@@ -348,7 +347,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
 
           {/* Related projects selection */}
           <div className="border-t border-[#dedbc8]/5 pt-8 flex flex-col gap-6">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">Explore other proof systems</span>
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">Explore other proof systems</span>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {related.map((item) => (
                 <Link 
@@ -357,11 +356,11 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
                   className="border border-[#dedbc8]/10 bg-[#0d0d0d] p-5 hover:border-[#dedbc8]/40 transition-colors flex flex-col justify-between min-h-[140px]"
                 >
                   <div className="flex flex-col gap-2">
-                    <span className="font-mono text-[9px] text-gray-500 font-bold uppercase">{item.category}</span>
+                    <span className="font-mono text-xs text-gray-500 font-bold uppercase">{item.category}</span>
                     <span className="text-sm font-bold text-[#dedbc8] uppercase tracking-wide">{item.name}</span>
-                    <p className="text-[11px] text-gray-400 font-light leading-relaxed line-clamp-2">{item.shortDefinition}</p>
+                    <p className="text-xs text-gray-400 font-light leading-relaxed line-clamp-2">{item.shortDefinition}</p>
                   </div>
-                  <span className="font-mono text-[9px] mt-4 block" style={{ color: item.accentColor }}>VIEW SCHEMAS &rarr;</span>
+                  <span className="font-mono text-xs mt-4 block" style={{ color: item.accentColor }}>VIEW SCHEMAS &rarr;</span>
                 </Link>
               ))}
             </div>
@@ -369,22 +368,22 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
 
           {/* Call to action */}
           <div className="border border-[#dedbc8]/14 bg-[#0d0d0d] p-8 md:p-12 text-center flex flex-col items-center gap-6 mt-8">
-            <h2 className="font-serif text-3xl font-light italic text-[#dedbc8] tracking-tight">
+            <h2 className="type-heading text-2xl md:text-3xl text-[#dedbc8] tracking-tight">
               Map your workflow into a custom system
             </h2>
-            <p className="text-sm md:text-base font-light text-gray-300 max-w-xl leading-relaxed font-sans">
+            <p className="type-body text-sm md:text-base text-gray-300 max-w-xl leading-relaxed">
               Discuss a pilot build or request architectural schema consults directly with our engineering team.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-2">
               <Link
                 href="/contact"
-                className="border border-[#dedbc8] bg-[#dedbc8] px-6 py-3 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none text-center"
+                className="border border-[#dedbc8] bg-[#dedbc8] px-6 py-3 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none text-center"
               >
                 Describe your workflow &rarr;
               </Link>
               <Link
                 href="/work"
-                className="border border-[#dedbc8]/20 px-6 py-3 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none text-center"
+                className="border border-[#dedbc8]/20 px-6 py-3 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none text-center"
               >
                 Back to Work Index
               </Link>

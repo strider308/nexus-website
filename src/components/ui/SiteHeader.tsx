@@ -3,28 +3,24 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sheet, SheetTrigger, SheetContent, SheetClose } from "@/components/ui/sheet";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { Menu } from "lucide-react";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [isMotionPaused, setIsMotionPaused] = useState(false);
-  const isReduced = useReducedMotion();
-
-  // Load initial motion preference
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("nexus_motion_paused");
-      if (saved !== null) {
-        setIsMotionPaused(saved === "true");
+  const [isMotionPaused, setIsMotionPaused] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("nexus_motion_paused");
+        return saved === "true";
+      } catch {
+        return false;
       }
-    } catch {
-      // safe fallback
     }
-  }, []);
+    return false;
+  });
 
   const handleToggleMotion = () => {
     const nextVal = !isMotionPaused;
@@ -40,6 +36,7 @@ export function SiteHeader() {
 
   // Close sheet when route changes
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false);
   }, [pathname]);
 
@@ -54,7 +51,7 @@ export function SiteHeader() {
         {/* Logo */}
         <Link 
           href="/" 
-          className="font-serif text-xl italic text-[#dedbc8] tracking-tight hover:opacity-80 transition-opacity"
+          className="font-sans text-xl font-bold tracking-tighter text-[#dedbc8] hover:opacity-80 transition-opacity"
         >
           Nexus
         </Link>
@@ -67,8 +64,8 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`font-mono text-xs uppercase tracking-wider relative py-1.5 transition-colors duration-300 ${
-                  isActive ? "text-[#dedbc8] font-bold" : "text-gray-400 hover:text-[#dedbc8]"
+                className={`font-sans text-[13px] font-medium tracking-wide relative py-1.5 transition-colors duration-300 ${
+                  isActive ? "text-[#dedbc8] font-semibold" : "text-gray-400 hover:text-[#dedbc8]"
                 }`}
               >
                 {link.label}
@@ -84,8 +81,8 @@ export function SiteHeader() {
 
           <Link
             href="/contact"
-            className={`font-mono text-xs uppercase tracking-wider relative py-1.5 transition-colors duration-300 ${
-              pathname === "/contact" ? "text-[#dedbc8] font-bold" : "text-gray-400 hover:text-[#dedbc8]"
+            className={`font-sans text-[13px] font-medium tracking-wide relative py-1.5 transition-colors duration-300 ${
+              pathname === "/contact" ? "text-[#dedbc8] font-semibold" : "text-gray-400 hover:text-[#dedbc8]"
             }`}
           >
             Contact
@@ -97,7 +94,7 @@ export function SiteHeader() {
           {/* Quick Pause Motion control */}
           <button
             onClick={handleToggleMotion}
-            className="border border-[#dedbc8]/14 px-2 py-1 text-[9px] font-mono uppercase tracking-wider text-gray-400 hover:border-gray-500 hover:text-white transition-colors"
+            className="border border-[#dedbc8]/14 px-2 py-1 text-xs font-mono uppercase tracking-wider text-gray-400 hover:border-gray-500 hover:text-white transition-colors"
             title="Toggle global animation scrubbers"
           >
             {isMotionPaused ? "Resume Motion" : "Pause Motion"}
@@ -112,7 +109,7 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent side="right" className="bg-[#070707] border-l border-[#dedbc8]/10 p-6 flex flex-col justify-between h-full">
               <div className="flex flex-col gap-8 mt-12">
-                <span className="font-mono text-[10px] text-gray-500 uppercase tracking-widest font-bold border-b border-[#dedbc8]/5 pb-2">
+                <span className="font-mono text-xs text-gray-500 uppercase tracking-widest font-bold border-b border-[#dedbc8]/5 pb-2">
                   Navigation Matrix
                 </span>
                 <nav className="flex flex-col gap-6">
@@ -122,8 +119,8 @@ export function SiteHeader() {
                       <Link
                         key={link.href}
                         href={link.href}
-                        className={`font-mono text-base uppercase tracking-wider ${
-                          isActive ? "text-[#2a7d8a] font-bold" : "text-gray-300 hover:text-[#dedbc8]"
+                        className={`font-sans text-base tracking-wide ${
+                          isActive ? "text-[#2a7d8a] font-semibold" : "text-gray-300 hover:text-[#dedbc8]"
                         }`}
                       >
                         {link.label}
@@ -132,8 +129,8 @@ export function SiteHeader() {
                   })}
                   <Link
                     href="/contact"
-                    className={`font-mono text-base uppercase tracking-wider ${
-                      pathname === "/contact" ? "text-[#2a7d8a] font-bold" : "text-gray-300 hover:text-[#dedbc8]"
+                    className={`font-sans text-base tracking-wide ${
+                      pathname === "/contact" ? "text-[#2a7d8a] font-semibold" : "text-gray-300 hover:text-[#dedbc8]"
                     }`}
                   >
                     Contact
@@ -145,14 +142,14 @@ export function SiteHeader() {
               <div className="flex flex-col gap-6 border-t border-[#dedbc8]/5 pt-6">
                 <button
                   onClick={handleToggleMotion}
-                  className="w-full flex items-center justify-between border border-[#dedbc8]/14 p-3 text-[10px] font-mono uppercase tracking-wider text-[#dedbc8] hover:bg-[#dedbc8]/5"
+                  className="w-full flex items-center justify-between border border-[#dedbc8]/14 p-3 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:bg-[#dedbc8]/5"
                 >
                   <span>Animation System</span>
                   <span className="text-[#2a7d8a] font-bold">
                     {isMotionPaused ? "PAUSED" : "ACTIVE"}
                   </span>
                 </button>
-                <div className="text-[10px] font-mono text-gray-500 uppercase tracking-wider text-center">
+                <div className="text-xs font-mono text-gray-500 uppercase tracking-wider text-center">
                   NEXUS SYSTEMS CO. // EST 2026
                 </div>
               </div>

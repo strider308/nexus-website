@@ -8,7 +8,6 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 import { gsap, useGSAP } from "@/lib/gsap/register";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAPReducedMotion } from "@/hooks/useGSAPReducedMotion";
-import { GSAPReveal } from "@/components/motion/GSAPReveal";
 import { Badge } from "@/components/ui/badge";
 
 interface StageData {
@@ -115,7 +114,7 @@ export default function ServicesPage() {
       });
 
       // Desktop Pinned Left Rail
-      let mm = gsap.matchMedia();
+      const mm = gsap.matchMedia();
       mm.add("(min-width: 1024px)", () => {
         ScrollTrigger.create({
           trigger: containerRef.current,
@@ -130,7 +129,7 @@ export default function ServicesPage() {
     { scope: containerRef }
   );
 
-  const handleScrollToStage = (idx: number, e: React.MouseEvent) => {
+  const handleScrollToStage = (idx: number, e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     e.preventDefault();
     const element = document.querySelector(`#stage-section-${idx}`);
     if (element) {
@@ -151,10 +150,10 @@ export default function ServicesPage() {
           <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
             ENGAGEMENT MODELS
           </span>
-          <h1 className="font-serif text-5xl md:text-7xl font-light italic mt-3 tracking-tight">
+          <h1 className="type-display text-5xl md:text-7xl mt-3 text-[#dedbc8]">
             How We Build Systems
           </h1>
-          <p className="text-base font-light text-gray-300 max-w-2xl leading-relaxed">
+          <p className="type-body text-base text-gray-300 max-w-2xl leading-relaxed">
             Nexus operates in five sequential engagement stages, taking a process from a spreadsheet diagnostic to a production-grade custom software build.
           </p>
         </div>
@@ -164,33 +163,34 @@ export default function ServicesPage() {
           
           {/* Left: Sticky progress list (Desktop only) */}
           <div ref={leftRailRef} className="hidden lg:flex lg:col-span-4 flex-col gap-4 pr-6 border-r border-[#dedbc8]/10 min-h-[350px]">
-            <span className="font-mono text-[9px] text-gray-500 uppercase tracking-widest font-bold block mb-2">
+            <span className="font-mono text-xs text-gray-500 uppercase tracking-widest font-bold block mb-2">
               ENGAGEMENT STAGES
             </span>
             <div className="flex flex-col gap-2.5 relative">
               {STAGES.map((stage, idx) => {
                 const isActive = activeStageIdx === idx;
                 return (
-                  <a
+                  <button
                     key={stage.id}
-                    href={`#stage-section-${idx}`}
                     onClick={(e) => handleScrollToStage(idx, e)}
-                    className={`text-left p-3 border transition-all duration-300 outline-none ${
+                    className={`text-left p-3.5 border transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] flex justify-between items-center ${
                       isActive
-                        ? "border-[#dedbc8] bg-[#0d0d0d] pl-5 text-[#dedbc8]"
+                        ? "border-[#dedbc8] bg-[#0d0d0d] text-white"
                         : "border-transparent bg-transparent text-gray-500 hover:text-gray-300"
                     }`}
                   >
-                    <span className="font-mono text-[9px] text-[#2a7d8a] font-bold block">STAGE 0{stage.id}</span>
-                    <span className="font-sans text-xs font-bold uppercase tracking-wider">{stage.title}</span>
-                  </a>
+                    <div className="flex gap-4 items-center">
+                      <span className="font-mono text-xs text-gray-400">0{stage.id}</span>
+                      <span className="font-sans text-xs font-bold uppercase tracking-wider">{stage.title}</span>
+                    </div>
+                  </button>
                 );
               })}
             </div>
           </div>
 
           {/* Right: Stages details (Desktop scrolls past, Mobile renders accordion) */}
-          <div className="lg:col-span-8 flex flex-col gap-20 w-full">
+          <div className="col-span-12 lg:col-span-8 flex flex-col gap-12 lg:gap-24 w-full">
             {/* Desktop continuous vertical scroll blocks */}
             <div className="hidden lg:flex flex-col gap-20">
               {STAGES.map((stage, idx) => (
@@ -201,40 +201,40 @@ export default function ServicesPage() {
                 >
                   <div className="flex flex-col gap-4">
                     <div className="flex justify-between items-center border-b border-[#dedbc8]/5 pb-3">
-                      <span className="font-mono text-[9px] text-[#2a7d8a] font-bold uppercase tracking-wider">
-                        STAGE 0{stage.id} // ENGAGEMENT MODEL
+                      <span className="font-mono text-xs text-[#2a7d8a] font-bold uppercase tracking-wider">
+                        STAGE 0{stage.id} {"//"} ENGAGEMENT MODEL
                       </span>
                       <Badge variant="referenceBuild">STAGE 0{stage.id}</Badge>
                     </div>
 
-                    <h3 className="font-serif text-3xl font-light text-white italic tracking-tight">
+                    <h3 className="type-heading text-3xl text-white tracking-tight">
                       {stage.title}
                     </h3>
 
                     <div className="grid grid-cols-2 gap-4 mt-2 font-sans text-xs">
                       <div className="flex flex-col gap-1">
-                        <span className="font-mono text-[9px] text-gray-500 uppercase tracking-wider font-bold">BEST FOR</span>
+                        <span className="font-mono text-xs text-gray-500 uppercase tracking-wider font-bold">BEST FOR</span>
                         <span className="text-gray-300 leading-relaxed">{stage.bestFor}</span>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <span className="font-mono text-[9px] text-gray-500 uppercase tracking-wider font-bold">INPUTS REQUIRED</span>
+                        <span className="font-mono text-xs text-gray-500 uppercase tracking-wider font-bold">INPUTS REQUIRED</span>
                         <span className="text-gray-300 leading-relaxed">{stage.inputs}</span>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4 mt-2 font-sans text-xs">
                       <div className="flex flex-col gap-1">
-                        <span className="font-mono text-[9px] text-gray-500 uppercase tracking-wider font-bold">ACTIVITIES</span>
+                        <span className="font-mono text-xs text-gray-500 uppercase tracking-wider font-bold">ACTIVITIES</span>
                         <span className="text-gray-300 leading-relaxed">{stage.activities}</span>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <span className="font-mono text-[9px] text-gray-500 uppercase tracking-wider font-bold">DELIVERABLES</span>
+                        <span className="font-mono text-xs text-gray-500 uppercase tracking-wider font-bold">DELIVERABLES</span>
                         <span className="text-gray-300 leading-relaxed font-bold">{stage.deliverables}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-[10px] font-mono text-gray-500 uppercase">
+                  <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-xs font-mono text-gray-500 uppercase">
                     <span>GATE: {stage.typicalDecisionGate}</span>
                     <span>NEXT: {stage.whatComesNext}</span>
                   </div>
@@ -249,7 +249,7 @@ export default function ServicesPage() {
                   <AccordionItem key={idx} value={`service-${idx}`} className="border-b border-[#dedbc8]/5">
                     <AccordionTrigger className="hover:no-underline py-4 text-left">
                       <div className="flex gap-3 items-center">
-                        <span className="font-mono text-[10px] text-gray-500">0{stage.id}</span>
+                        <span className="font-mono text-xs text-gray-500">0{stage.id}</span>
                         <span className="font-sans text-xs font-bold uppercase text-white tracking-wider">{stage.title}</span>
                       </div>
                     </AccordionTrigger>
@@ -259,7 +259,7 @@ export default function ServicesPage() {
                         <p><strong>Inputs:</strong> {stage.inputs}</p>
                         <p><strong>Activities:</strong> {stage.activities}</p>
                         <p><strong>Deliverables:</strong> {stage.deliverables}</p>
-                        <div className="border-t border-[#dedbc8]/5 pt-3 font-mono text-[9px] text-gray-500 uppercase">
+                        <div className="border-t border-[#dedbc8]/5 pt-3 font-mono text-xs text-gray-500 uppercase">
                           <p>Gate: {stage.typicalDecisionGate}</p>
                           <p className="mt-1">Next: {stage.whatComesNext}</p>
                         </div>
@@ -276,20 +276,20 @@ export default function ServicesPage() {
         {/* Fit Assessment Selection Tabs */}
         <section className="border-t border-[#dedbc8]/10 pt-16 flex flex-col gap-8 w-full select-none">
           <div className="flex flex-col gap-2">
-            <span className="text-[10px] font-mono tracking-wider text-gray-500 uppercase font-bold">
+            <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
               Posturing Checklist
             </span>
-            <h2 className="font-serif text-3xl font-light italic text-[#dedbc8] tracking-tight">
+            <h2 className="type-heading text-3xl text-[#dedbc8] tracking-tight">
               Is Nexus a Fit?
             </h2>
           </div>
 
           <Tabs defaultValue="good-fit" className="w-full">
             <TabsList className="grid grid-cols-2 max-w-sm mb-6 border border-[#dedbc8]/10 bg-[#0d0d0d] p-[2px]">
-              <TabsTrigger value="good-fit" className="font-mono text-[10px] uppercase py-2">
+              <TabsTrigger value="good-fit" className="font-mono text-xs uppercase py-2">
                 Good Fit Criteria
               </TabsTrigger>
-              <TabsTrigger value="not-fit" className="font-mono text-[10px] uppercase py-2">
+              <TabsTrigger value="not-fit" className="font-mono text-xs uppercase py-2">
                 Not a Fit Criteria
               </TabsTrigger>
             </TabsList>

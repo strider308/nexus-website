@@ -2,10 +2,8 @@ import React from "react";
 import { Metadata } from "next";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SiteFooter } from "@/components/ui/SiteFooter";
-import { DETAILED_CASE_STUDIES } from "@/content/case-studies";
 import { WorkIndexHero } from "@/components/work/WorkIndexHero";
-import { FeaturedProjectRail } from "@/components/work/FeaturedProjectRail";
-import { SupportingProjectStack } from "@/components/work/SupportingProjectStack";
+import { SevenProjectShowcase } from "@/components/work/SevenProjectShowcase";
 import { CapabilityMatrix } from "@/components/work/CapabilityMatrix";
 
 export const metadata: Metadata = {
@@ -14,15 +12,6 @@ export const metadata: Metadata = {
 };
 
 export default function WorkIndexPage() {
-  // Split projects into featured (3) and supporting (4)
-  const featured = DETAILED_CASE_STUDIES.filter(
-    (item) => item.slug === "clinicos" || item.slug === "restaurantos" || item.slug === "shipwright"
-  );
-  
-  const supporting = DETAILED_CASE_STUDIES.filter(
-    (item) => item.slug !== "clinicos" && item.slug !== "restaurantos" && item.slug !== "shipwright"
-  );
-
   return (
     <div className="relative min-h-screen bg-[#070707] text-[#dedbc8] pt-16 select-text">
       <SiteHeader />
@@ -36,13 +25,10 @@ export default function WorkIndexPage() {
         {/* 1. Hero header (media expansion scroll) */}
         <WorkIndexHero />
 
-        {/* 2. Featured Systems Alternating Rail */}
-        <FeaturedProjectRail projects={featured} />
+        {/* 2. Seven Systems Alternating Rail Showcase */}
+        <SevenProjectShowcase />
 
-        {/* 3. Supporting specialized sub-systems stack */}
-        <SupportingProjectStack projects={supporting} />
-
-        {/* 4. Capability comparison matrix table */}
+        {/* 3. Capability comparison matrix table */}
         <CapabilityMatrix />
 
       </div>

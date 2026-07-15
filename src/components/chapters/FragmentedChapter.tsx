@@ -82,18 +82,18 @@ export function FragmentedChapter() {
           [ PROCESS FRAGMENTATION ]
         </span>
         
-        <h2 className="font-serif text-3xl md:text-6xl font-light text-[#dedbc8] tracking-tight leading-tight italic">
+        <h2 className="type-heading text-3xl md:text-6xl text-[#dedbc8] tracking-tight">
           Important work rarely fails because people do not care.
         </h2>
 
-        <p className="text-base md:text-lg font-light text-gray-300 leading-relaxed max-w-2xl font-sans">
+        <p className="type-body text-base md:text-lg text-gray-300 max-w-2xl">
           It fails because the process is scattered across phone calls, sheets, chats, and verbal syncs. Information disappears inside separate functional silos.
         </p>
 
         {/* 3 Concrete Workflow Examples */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 relative">
           <div className="fragment-card fragment-card-0 border border-[#dedbc8]/10 bg-[#0d0d0d] p-6 flex flex-col gap-3.5 opacity-0 will-change-transform">
-            <span className="text-[10px] font-mono text-red-400 font-bold uppercase tracking-wider">
+            <span className="text-xs font-mono text-red-400 font-bold uppercase tracking-wider">
               Healthcare Operations
             </span>
             <h3 className="font-sans text-sm font-bold uppercase tracking-wide">
@@ -105,7 +105,7 @@ export function FragmentedChapter() {
           </div>
 
           <div className="fragment-card fragment-card-1 border border-[#dedbc8]/10 bg-[#0d0d0d] p-6 flex flex-col gap-3.5 opacity-0 will-change-transform">
-            <span className="text-[10px] font-mono text-red-400 font-bold uppercase tracking-wider">
+            <span className="text-xs font-mono text-red-400 font-bold uppercase tracking-wider">
               Food &amp; Beverage POS
             </span>
             <h3 className="font-sans text-sm font-bold uppercase tracking-wide">
@@ -117,7 +117,7 @@ export function FragmentedChapter() {
           </div>
 
           <div className="fragment-card fragment-card-2 border border-[#dedbc8]/10 bg-[#0d0d0d] p-6 flex flex-col gap-3.5 opacity-0 will-change-transform">
-            <span className="text-[10px] font-mono text-red-400 font-bold uppercase tracking-wider">
+            <span className="text-xs font-mono text-red-400 font-bold uppercase tracking-wider">
               Engineering Workspace
             </span>
             <h3 className="font-sans text-sm font-bold uppercase tracking-wide">
