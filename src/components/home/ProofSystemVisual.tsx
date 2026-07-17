@@ -14,7 +14,7 @@ export function ProofSystemVisual({ systemId, frameId, className = "", style }: 
   return (
     <div 
       style={style}
-      className={`w-full border border-[#dedbc8]/14 bg-[#0d0d0d] overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.5)] ${className}`}
+      className={`proof-system-visual w-full border border-[#dedbc8]/14 bg-[#0d0d0d] overflow-hidden shadow-[0_4px_30px_rgba(0,0,0,0.5)] ${className}`}
     >
       <InterfaceFrame
         systemId={systemId}

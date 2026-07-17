@@ -224,3 +224,18 @@
   font-size: 0.75rem;
   color: rgba(225, 224, 204, 0.8);
 }
+
+.proof-system-visual svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+}
+
+.proof-system-visual text,
+.proof-system-visual line,
+.proof-system-visual rect,
+.proof-system-visual path {
+  vector-effect: non-scaling-stroke;
+}

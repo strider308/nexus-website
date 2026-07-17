@@ -87,40 +87,49 @@ export function SevenProofSystems() {
           },
         });
 
-        // 1. Initial State (hidden, smaller scale, shifted down, blurred)
+        // 1. Set initial state + promote layer willChange (Phase 5)
         tl.set(visual, {
           visibility: "visible",
-          pointerEvents: "auto",
+          pointerEvents: "none",
           opacity: 0,
-          scale: 0.82,
-          y: 42,
-          filter: "blur(4px)",
+          scale: 0.93,
+          y: 28,
+          transformOrigin: "center center",
+          willChange: "transform, opacity",
         });
 
-        // 2. Entry to Center Zoom
+        // 2. Enter & Enlarge (Phase 2)
         tl.to(visual, {
           opacity: 1,
-          scale: 1.10, // Noticeably grow, doesn't clip
+          scale: 1.03,
           y: 0,
-          filter: "blur(0px)",
+          duration: 0.28,
           ease: "power2.out",
-          duration: 0.5,
         });
 
-        // 3. Center to Exit (scale up & slide up, fading out)
+        // 3. Hold active at peak size (Phase 2)
+        tl.to(visual, {
+          opacity: 1,
+          scale: 1.07,
+          y: 0,
+          duration: 0.34,
+          ease: "none",
+        });
+
+        // 4. Exit (Phase 2)
         tl.to(visual, {
           opacity: 0,
-          scale: 1.18,
-          y: -30,
-          filter: "blur(4px)",
+          scale: 1.10,
+          y: -18,
+          duration: 0.38,
           ease: "power2.in",
-          duration: 0.5,
         });
 
-        // 4. End State (hidden)
+        // 5. End State (hidden, will-change auto to reduce compositor overhead)
         tl.set(visual, {
           visibility: "hidden",
           pointerEvents: "none",
+          willChange: "auto",
         });
       });
 
@@ -232,8 +241,8 @@ export function SevenProofSystems() {
         </div>
 
         {/* Right Sticky Visual panel (Col span 6) */}
-        <div ref={rightVisualRef} className="col-span-6 sticky top-[12%] h-[600px] flex flex-col justify-center items-center w-full">
-          <div className="relative w-full h-[520px] max-w-[850px] min-h-[520px]">
+        <div ref={rightVisualRef} className="col-span-6 sticky top-[10%] h-[660px] flex items-center justify-center w-full">
+          <div className="relative w-full h-[580px] min-h-[560px] max-w-[740px] xl:max-w-[880px] 2xl:max-w-[960px]">
             {DETAILED_CASE_STUDIES.map((project, idx) => {
               const isActive = activeIndex === idx;
               
@@ -255,7 +264,7 @@ export function SevenProofSystems() {
                     visualsRefs.current[idx] = el;
                   }}
                   style={inlineStyle}
-                  className={`absolute inset-0 w-full h-full flex items-center justify-center will-change-[transform,opacity] ${
+                  className={`absolute inset-0 w-full h-full flex items-center justify-center ${
                     isMotionDisabled
                       ? ""
                       : "pointer-events-none select-none opacity-0 invisible"
