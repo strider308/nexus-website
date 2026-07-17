@@ -38,45 +38,72 @@ export const CAMERA_POINTS: Record<ChapterIndex, CameraPoint> = {
   },
 };
 
+export interface ChapterRange {
+  index: number;
+  start: number;
+  end: number;
+}
+
 // Returns interpolated camera properties based on global scroll progress [0, 1]
-export function getCameraPointForProgress(progress: number): CameraPoint {
+export function getCameraPointForProgress(progress: number, ranges: ChapterRange[]): CameraPoint {
   // Clamp progress
   const p = Math.max(0, Math.min(1, progress));
 
+  const smoothstep = (x: number) => x * x * (3 - 2 * x);
+
   const keys = Object.keys(CAMERA_POINTS).map(Number) as ChapterIndex[];
-  
-  // Find which chapter span we are currently in
-  for (let i = 0; i < keys.length - 1; i++) {
-    const currentIdx = keys[i];
-    const nextIdx = keys[i + 1];
-    
-    // Simple segment mapping
-    const segStart = i / (keys.length - 1);
-    const segEnd = (i + 1) / (keys.length - 1);
-    
-    if (p >= segStart && p <= segEnd) {
-      const segProgress = (p - segStart) / (segEnd - segStart);
+
+  if (!ranges || ranges.length === 0) {
+    // Simple segment mapping fallback
+    for (let i = 0; i < keys.length - 1; i++) {
+      const currentIdx = keys[i];
+      const nextIdx = keys[i + 1];
       
-      const startPoint = CAMERA_POINTS[currentIdx];
-      const endPoint = CAMERA_POINTS[nextIdx];
+      const segStart = i / (keys.length - 1);
+      const segEnd = (i + 1) / (keys.length - 1);
       
-      // Interpolate position
-      const position: [number, number, number] = [
-        startPoint.position[0] + (endPoint.position[0] - startPoint.position[0]) * segProgress,
-        startPoint.position[1] + (endPoint.position[1] - startPoint.position[1]) * segProgress,
-        startPoint.position[2] + (endPoint.position[2] - startPoint.position[2]) * segProgress,
-      ];
+      if (p >= segStart && p <= segEnd) {
+        const segProgress = (p - segStart) / (segEnd - segStart);
+        const eased = smoothstep(segProgress);
+        return interpolatePoints(currentIdx, nextIdx, eased);
+      }
+    }
+    return CAMERA_POINTS[CHAPTERS.FINAL];
+  }
+
+  // Map progress using actual measured chapter ranges
+  for (let i = 0; i < ranges.length; i++) {
+    const range = ranges[i];
+    if (p >= range.start && p <= range.end) {
+      const rangeSpan = range.end - range.start;
+      const localProgress = rangeSpan > 0 ? (p - range.start) / rangeSpan : 0;
+      const clampedLocal = Math.max(0, Math.min(1, localProgress));
+      const easedLocal = smoothstep(clampedLocal);
       
-      // Interpolate target
-      const target: [number, number, number] = [
-        startPoint.target[0] + (endPoint.target[0] - startPoint.target[0]) * segProgress,
-        startPoint.target[1] + (endPoint.target[1] - startPoint.target[1]) * segProgress,
-        startPoint.target[2] + (endPoint.target[2] - startPoint.target[2]) * segProgress,
-      ];
+      const currentIdx = range.index as ChapterIndex;
+      const nextIdx = Math.min(keys.length - 1, currentIdx + 1) as ChapterIndex;
       
-      return { position, target };
+      return interpolatePoints(currentIdx, nextIdx, easedLocal);
     }
   }
   
   return CAMERA_POINTS[CHAPTERS.FINAL];
+}
+
+function interpolatePoints(currentIdx: ChapterIndex, nextIdx: ChapterIndex, t: number): CameraPoint {
+  const startPoint = CAMERA_POINTS[currentIdx];
+  const endPoint = CAMERA_POINTS[nextIdx];
+  
+  return {
+    position: [
+      startPoint.position[0] + (endPoint.position[0] - startPoint.position[0]) * t,
+      startPoint.position[1] + (endPoint.position[1] - startPoint.position[1]) * t,
+      startPoint.position[2] + (endPoint.position[2] - startPoint.position[2]) * t,
+    ],
+    target: [
+      startPoint.target[0] + (endPoint.target[0] - startPoint.target[0]) * t,
+      startPoint.target[1] + (endPoint.target[1] - startPoint.target[1]) * t,
+      startPoint.target[2] + (endPoint.target[2] - startPoint.target[2]) * t,
+    ],
+  };
 }

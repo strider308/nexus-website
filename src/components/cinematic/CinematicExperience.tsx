@@ -7,6 +7,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { ScrollDirector } from "./ScrollDirector";
 import { CinematicFallback } from "./CinematicFallback";
 import { NarrativeControls } from "./NarrativeControls";
+import { ChapterRange } from "@/lib/cinematic/chapter-map";
 
 const CinematicCanvas = dynamic(() => import("./CinematicCanvas"), {
   ssr: false,
@@ -64,13 +65,15 @@ export function CinematicExperience({ children }: CinematicExperienceProps) {
     }
   };
 
+  const rangesRef = React.useRef<ChapterRange[]>([]);
+
   // Force fallback static 2D design for low-tier devices, reduced motion, or paused motion
   const quality = (reducedMotion || isMotionPaused) ? "fallback" : tier;
 
   return (
     <div className="relative min-h-screen bg-[#070707]">
       {/* 1. Scroll Director (coordinates scroll percentage via GSAP ScrollTrigger) */}
-      <ScrollDirector scrollRef={scrollProgressRef} onChapterChange={setActiveChapter} />
+      <ScrollDirector scrollRef={scrollProgressRef} rangesRef={rangesRef} onChapterChange={setActiveChapter} />
 
       {/* 2. Unified Background Scene Layer (Canvas or SVG Fallback) */}
       {quality === "fallback" ? (
@@ -78,7 +81,7 @@ export function CinematicExperience({ children }: CinematicExperienceProps) {
           <CinematicFallback activeChapter={activeChapter} />
         </div>
       ) : (
-        <CinematicCanvas scrollRef={scrollProgressRef} activeChapter={activeChapter} qualityTier={quality} />
+        <CinematicCanvas scrollRef={scrollProgressRef} rangesRef={rangesRef} activeChapter={activeChapter} qualityTier={quality} />
       )}
 
       {/* 3. Narrative UI Controls overlay */}

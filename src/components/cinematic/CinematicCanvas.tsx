@@ -16,13 +16,16 @@ import { ArchitectureScene } from "../scenes/ArchitectureScene";
 import { ProofSystemsScene } from "../scenes/ProofSystemsScene";
 import { FinalAssemblyScene } from "../scenes/FinalAssemblyScene";
 
+import { ChapterRange } from "@/lib/cinematic/chapter-map";
+
 interface CinematicCanvasProps {
   scrollRef: React.RefObject<number>;
+  rangesRef: React.RefObject<ChapterRange[]>;
   activeChapter: number;
   qualityTier: "high" | "balanced" | "low" | "fallback";
 }
 
-export function CinematicCanvas({ scrollRef, activeChapter, qualityTier }: CinematicCanvasProps) {
+export function CinematicCanvas({ scrollRef, rangesRef, activeChapter, qualityTier }: CinematicCanvasProps) {
   // If fallback tier is detected, render 2D SVG directly with zero WebGL overhead
   if (qualityTier === "fallback") {
     return <CinematicFallback activeChapter={activeChapter} />;
@@ -52,11 +55,11 @@ export function CinematicCanvas({ scrollRef, activeChapter, qualityTier }: Cinem
           <SceneLighting />
 
           {/* Camera Interpolator Rig */}
-          <CameraRig scrollRef={scrollRef} />
+          <CameraRig scrollRef={scrollRef} rangesRef={rangesRef} />
 
           {/* Cinematic R3F Scenes */}
           <group>
-            <OpeningScene scrollRef={scrollRef} />
+            <OpeningScene scrollRef={scrollRef} rangesRef={rangesRef} />
             <FragmentedWorkflowScene scrollRef={scrollRef} />
             <MappingSystemScene scrollRef={scrollRef} />
             <ArchitectureScene scrollRef={scrollRef} />

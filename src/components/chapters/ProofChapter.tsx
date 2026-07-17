@@ -10,7 +10,7 @@ export function ProofChapter() {
     <section 
       data-chapter-index={5}
       ref={containerRef}
-      className="min-h-screen relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text py-24"
+      className="min-h-screen relative z-10 px-6 md:px-12 max-w-7xl mx-auto select-text py-24"
     >
       <div className="flex flex-col gap-6 mb-16">
         <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">

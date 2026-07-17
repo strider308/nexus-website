@@ -83,7 +83,7 @@ export function OpeningChapter() {
           Nexus maps complex workflows, defines user roles and handoffs, and builds the connected custom systems that make operational execution seamless.
         </p>
 
-        <div className="opening-anim cta-anim mt-6 flex flex-col gap-4 opacity-0">
+        <div className="opening-anim cta-anim mt-6 flex flex-col opacity-0">
           <div className="flex flex-wrap gap-4 items-center">
             <Link
               href="/contact"
@@ -99,9 +99,6 @@ export function OpeningChapter() {
               View the Systems
             </a>
           </div>
-          <span className="text-xs font-mono text-gray-500 uppercase tracking-wider block mt-1">
-            Trusted by operations teams managing $100M+ in active transaction flows.
-          </span>
         </div>
       </div>
 

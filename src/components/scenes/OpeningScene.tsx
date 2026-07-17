@@ -4,42 +4,81 @@ import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
+import { ChapterRange } from "@/lib/cinematic/chapter-map";
+
 interface SceneProps {
   scrollRef: React.RefObject<number>;
+  rangesRef: React.RefObject<ChapterRange[]>;
 }
 
-export function OpeningScene({ scrollRef }: SceneProps) {
+export function OpeningScene({ scrollRef, rangesRef }: SceneProps) {
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.MeshBasicMaterial>(null);
   const gridRef = useRef<THREE.GridHelper>(null);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (typeof document !== "undefined" && document.hidden) return;
 
     const scrollProgress = scrollRef.current ?? 0;
-    // Gating check: only calculate when active
-    if (scrollProgress > 0.16) return;
+    const ranges = rangesRef.current ?? [];
 
-    const time = state.clock.getElapsedTime();
-    
-    // Calculate opacity envelope: peak at 0.0, fade to 0.0 by 0.14
-    let opacity = 0;
-    if (scrollProgress <= 0.14) {
-      opacity = 1 - scrollProgress / 0.14;
+    let localProgress = 0;
+    if (ranges.length > 0) {
+      const openingRange = ranges[0];
+      localProgress = (scrollProgress - openingRange.start) / (openingRange.end - openingRange.start);
+      localProgress = Math.max(0, Math.min(1, localProgress));
+    } else {
+      localProgress = Math.max(0, Math.min(1, scrollProgress / 0.14));
+    }
+
+    const eased = THREE.MathUtils.smoothstep(localProgress, 0, 1);
+
+    // Apply final hidden state before skipping frame calculations
+    if (eased >= 0.999) {
+      if (materialRef.current) materialRef.current.opacity = 0;
+      if (gridRef.current && gridRef.current.material) {
+        (gridRef.current.material as THREE.Material).opacity = 0;
+      }
+      if (groupRef.current) {
+        groupRef.current.scale.setScalar(0.92);
+        groupRef.current.position.z = -0.6;
+      }
+      return;
+    }
+
+    let targetOpacity = 1;
+    let targetScale = 1;
+    let targetZ = 0;
+
+    if (eased <= 0.55) {
+      const t = eased / 0.55;
+      targetOpacity = 1 - 0.2 * t;
+      targetScale = 1 + 0.04 * t;
+      targetZ = -0.1 * t;
+    } else {
+      const t = (eased - 0.55) / 0.45;
+      targetOpacity = 0.8 * (1 - t);
+      targetScale = 1.04 - 0.12 * t;
+      targetZ = -0.1 - 0.5 * t;
     }
 
     if (materialRef.current) {
-      materialRef.current.opacity = opacity;
+      materialRef.current.opacity = THREE.MathUtils.damp(materialRef.current.opacity, targetOpacity, 8, delta);
     }
     if (gridRef.current && gridRef.current.material) {
-      (gridRef.current.material as THREE.Material).opacity = opacity * 0.15;
+      const gridMat = gridRef.current.material as THREE.Material;
+      gridMat.opacity = THREE.MathUtils.damp(gridMat.opacity, targetOpacity * 0.15, 8, delta);
     }
 
-    // Subtle rotation and pulsing
     if (groupRef.current) {
-      groupRef.current.rotation.y = time * 0.15;
-      const pulse = 1 + Math.sin(time * 2) * 0.04;
-      groupRef.current.scale.setScalar(pulse);
+      // Incremental slow rotation
+      groupRef.current.rotation.y += delta * 0.2;
+      
+      const currentScale = groupRef.current.scale.x;
+      const nextScale = THREE.MathUtils.damp(currentScale, targetScale, 8, delta);
+      groupRef.current.scale.setScalar(nextScale);
+
+      groupRef.current.position.z = THREE.MathUtils.damp(groupRef.current.position.z, targetZ, 8, delta);
     }
   });
 

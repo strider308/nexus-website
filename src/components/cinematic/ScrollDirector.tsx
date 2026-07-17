@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface ScrollDirectorProps {
   scrollRef: React.MutableRefObject<number>;
+  rangesRef: React.MutableRefObject<ChapterRange[]>;
   onChapterChange: (chapter: number) => void;
 }
 
@@ -17,7 +18,7 @@ interface ChapterRange {
   end: number;
 }
 
-export function ScrollDirector({ scrollRef, onChapterChange }: ScrollDirectorProps) {
+export function ScrollDirector({ scrollRef, rangesRef, onChapterChange }: ScrollDirectorProps) {
   useEffect(() => {
     let lastChapter = -1;
     let cachedRanges: ChapterRange[] = [];
@@ -30,19 +31,38 @@ export function ScrollDirector({ scrollRef, onChapterChange }: ScrollDirectorPro
       const totalHeight = heights.reduce((sum, h) => sum + h, 0);
 
       let currentOffset = 0;
-      cachedRanges = heights.map((h, idx) => {
+      const ranges = heights.map((h, idx) => {
         const start = currentOffset / totalHeight;
         const end = (currentOffset + h) / totalHeight;
         currentOffset += h;
         return { index: idx, start, end };
       });
+      rangesRef.current = ranges;
+      cachedRanges = ranges;
     };
 
     // Calculate initial ranges
     recalculateRanges();
 
-    // Trigger on resize
-    window.addEventListener("resize", recalculateRanges);
+    // Trigger on resize (debounced)
+    let resizeTimeout: NodeJS.Timeout | null = null;
+    const handleResize = () => {
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        recalculateRanges();
+        ScrollTrigger.refresh();
+      }, 100);
+    };
+
+    // Observe size changes on narrative chapters to dynamic recalculate ranges
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+
+    const sections = document.querySelectorAll("[data-chapter-index]");
+    sections.forEach((sec) => resizeObserver.observe(sec));
+
+    window.addEventListener("resize", handleResize);
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -71,10 +91,12 @@ export function ScrollDirector({ scrollRef, onChapterChange }: ScrollDirectorPro
     });
 
     return () => {
-      window.removeEventListener("resize", recalculateRanges);
+      window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
+      if (resizeTimeout) clearTimeout(resizeTimeout);
       ctx.revert();
     };
-  }, [scrollRef, onChapterChange]);
+  }, [scrollRef, rangesRef, onChapterChange]);
 
   return null;
 }

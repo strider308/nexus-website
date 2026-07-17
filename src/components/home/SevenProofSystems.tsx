@@ -19,21 +19,108 @@ export function SevenProofSystems() {
   const rightVisualRef = useRef<HTMLDivElement>(null);
   const isReduced = useGSAPReducedMotion();
 
+  // Ref arrays for ScrollTrigger binding
+  const blocksRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const visualsRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lastActiveIndexRef = useRef<number>(0);
+
+  // Load global pause motion state
+  const [isMotionPaused] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("nexus_motion_paused");
+        return saved === "true";
+      } catch {
+        return false;
+      }
+    }
+    return false;
+  });
+
   useGSAP(
     () => {
-      if (isReduced) return;
+      // Clean up lists
+      blocksRefs.current = blocksRefs.current.slice(0, DETAILED_CASE_STUDIES.length);
+      visualsRefs.current = visualsRefs.current.slice(0, DETAILED_CASE_STUDIES.length);
 
-      // Track active index based on section viewport position
+      const isMotionDisabled = isReduced || isMotionPaused;
+
+      if (isMotionDisabled) {
+        // Fallback: simple ScrollTrigger to update active navigator index
+        DETAILED_CASE_STUDIES.forEach((project, idx) => {
+          const block = blocksRefs.current[idx];
+          if (!block) return;
+
+          ScrollTrigger.create({
+            trigger: block,
+            start: "top 45%",
+            end: "bottom 45%",
+            onToggle: (self) => {
+              if (self.isActive && lastActiveIndexRef.current !== idx) {
+                lastActiveIndexRef.current = idx;
+                setActiveIndex(idx);
+              }
+            },
+          });
+        });
+        return;
+      }
+
+      // Track active index based on section viewport position + zoom animations
       DETAILED_CASE_STUDIES.forEach((project, idx) => {
-        ScrollTrigger.create({
-          trigger: `#proof-block-${idx}`,
-          start: "top 35%",
-          end: "bottom 35%",
-          onToggle: (self) => {
-            if (self.isActive) {
-              setActiveIndex(idx);
-            }
+        const block = blocksRefs.current[idx];
+        const visual = visualsRefs.current[idx];
+        if (!block || !visual) return;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: block,
+            start: "top 72%",
+            end: "bottom 28%",
+            scrub: 0.6,
+            onToggle: (self) => {
+              if (self.isActive && lastActiveIndexRef.current !== idx) {
+                lastActiveIndexRef.current = idx;
+                setActiveIndex(idx);
+              }
+            },
           },
+        });
+
+        // 1. Initial State (hidden, smaller scale, shifted down, blurred)
+        tl.set(visual, {
+          visibility: "visible",
+          pointerEvents: "auto",
+          opacity: 0,
+          scale: 0.82,
+          y: 42,
+          filter: "blur(4px)",
+        });
+
+        // 2. Entry to Center Zoom
+        tl.to(visual, {
+          opacity: 1,
+          scale: 1.10, // Noticeably grow, doesn't clip
+          y: 0,
+          filter: "blur(0px)",
+          ease: "power2.out",
+          duration: 0.5,
+        });
+
+        // 3. Center to Exit (scale up & slide up, fading out)
+        tl.to(visual, {
+          opacity: 0,
+          scale: 1.18,
+          y: -30,
+          filter: "blur(4px)",
+          ease: "power2.in",
+          duration: 0.5,
+        });
+
+        // 4. End State (hidden)
+        tl.set(visual, {
+          visibility: "hidden",
+          pointerEvents: "none",
         });
       });
 
@@ -50,7 +137,7 @@ export function SevenProofSystems() {
           scrub: true,
         });
 
-        // Pin right visual
+        // Pin right visual stage
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: "top 12%",
@@ -61,7 +148,7 @@ export function SevenProofSystems() {
         });
       });
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced, isMotionPaused] }
   );
 
   const handleSelectProject = (idx: number) => {
@@ -72,14 +159,16 @@ export function SevenProofSystems() {
     }
   };
 
+  const isMotionDisabled = isReduced || isMotionPaused;
+
   return (
     <div ref={containerRef} className="w-full relative select-text">
       
       {/* Desktop 3-Column Split (Navigator - Content - Visual) */}
       <div className="hidden lg:grid grid-cols-12 gap-10 items-start relative w-full">
         
-        {/* Left Sticky Navigator (Col span 3) */}
-        <div ref={leftRailRef} className="col-span-3 flex flex-col gap-4 pr-4 border-r border-[#dedbc8]/10 min-h-[400px]">
+        {/* Left Sticky Navigator (Col span 2) */}
+        <div ref={leftRailRef} className="col-span-2 flex flex-col gap-4 pr-4 border-r border-[#dedbc8]/10 min-h-[400px]">
           <ProofSystemNavigator
             projects={DETAILED_CASE_STUDIES}
             activeIndex={activeIndex}
@@ -87,14 +176,17 @@ export function SevenProofSystems() {
           />
         </div>
 
-        {/* Center Scroll Narrative content (Col span 5) */}
-        <div className="col-span-5 flex flex-col gap-24 py-8">
+        {/* Center Scroll Narrative content (Col span 4) */}
+        <div className="col-span-4 flex flex-col gap-24 py-8">
           {DETAILED_CASE_STUDIES.map((project, idx) => {
             const projectNum = String(idx + 1).padStart(2, "0");
             return (
               <div
                 key={project.slug}
                 id={`proof-block-${idx}`}
+                ref={(el) => {
+                  blocksRefs.current[idx] = el;
+                }}
                 className="flex flex-col gap-5 min-h-[500px] border-b border-[#dedbc8]/5 pb-16 justify-center"
               >
                 <div className="flex items-center gap-3">
@@ -139,12 +231,45 @@ export function SevenProofSystems() {
           })}
         </div>
 
-        {/* Right Sticky Visual panel (Col span 4) */}
-        <div ref={rightVisualRef} className="col-span-4 flex flex-col justify-center items-center min-h-[400px]">
-          <ProofSystemVisual
-            systemId={DETAILED_CASE_STUDIES[activeIndex].slug}
-            frameId={DETAILED_CASE_STUDIES[activeIndex].visualFrames[0]}
-          />
+        {/* Right Sticky Visual panel (Col span 6) */}
+        <div ref={rightVisualRef} className="col-span-6 sticky top-[12%] h-[600px] flex flex-col justify-center items-center w-full">
+          <div className="relative w-full h-[520px] max-w-[850px] min-h-[520px]">
+            {DETAILED_CASE_STUDIES.map((project, idx) => {
+              const isActive = activeIndex === idx;
+              
+              const inlineStyle: React.CSSProperties = isMotionDisabled
+                ? {
+                    opacity: isActive ? 1 : 0,
+                    visibility: isActive ? "visible" : "hidden",
+                    pointerEvents: isActive ? "auto" : "none",
+                    transform: "scale(1) translateY(0px)",
+                    filter: "blur(0px)",
+                    transition: "opacity 0.3s ease-in-out, visibility 0.3s ease-in-out",
+                  }
+                : {};
+
+              return (
+                <div
+                  key={project.slug}
+                  ref={(el) => {
+                    visualsRefs.current[idx] = el;
+                  }}
+                  style={inlineStyle}
+                  className={`absolute inset-0 w-full h-full flex items-center justify-center will-change-[transform,opacity] ${
+                    isMotionDisabled
+                      ? ""
+                      : "pointer-events-none select-none opacity-0 invisible"
+                  }`}
+                >
+                  <ProofSystemVisual
+                    systemId={project.slug}
+                    frameId={project.visualFrames[0]}
+                    className="w-full"
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
 
       </div>
