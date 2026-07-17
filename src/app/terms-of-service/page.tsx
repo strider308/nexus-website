@@ -8,12 +8,12 @@ import { motion } from "motion/react";
 
 export default function TermsOfServicePage() {
   return (
-    <div className="relative min-h-screen bg-[#070707] text-[#dedbc8] pt-24 flex flex-col justify-between select-none">
+    <div className="relative min-h-screen bg-[#070707] text-[#dedbc8] pt-24 flex flex-col justify-between select-text">
       <SiteHeader />
       
       {/* Background Noise Layer */}
       <div className="absolute inset-0 opacity-[0.04] bg-noise pointer-events-none" />
-
+ 
       <div className="max-w-3xl mx-auto flex flex-col gap-8 relative z-10 px-6 md:px-12 flex-1 py-16 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -31,7 +31,7 @@ export default function TermsOfServicePage() {
           
           <div className="flex flex-col gap-6 select-all">
             {LEGAL.termsOfService.map((paragraph, index) => (
-              <p key={index} className="text-sm md:text-base font-light text-gray-300 leading-relaxed">
+              <p key={index} className="text-sm md:text-base font-normal text-gray-300 leading-relaxed">
                 {paragraph}
               </p>
             ))}

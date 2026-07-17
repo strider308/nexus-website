@@ -8,7 +8,7 @@ import { CapabilityMatrix } from "@/components/work/CapabilityMatrix";
 
 export const metadata: Metadata = {
   title: "Proof Systems // Nexus Work Ledger",
-  description: "A directory of shipped operational state machines built end-to-end. We map fragmented processes into connected custom software systems.",
+  description: "A directory of custom software proof systems and operational architectures designed end-to-end.",
 };
 
 export default function WorkIndexPage() {

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { BRAND_CONFIG } from "@/content/nexus";
 import { usePathname } from "next/navigation";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -150,7 +151,7 @@ export function SiteHeader() {
                   </span>
                 </button>
                 <div className="text-xs font-mono text-gray-500 uppercase tracking-wider text-center">
-                  NEXUS SYSTEMS CO. // EST 2026
+                  {BRAND_CONFIG.shortName.toUpperCase()} // EST {BRAND_CONFIG.estYear}
                 </div>
               </div>
             </SheetContent>

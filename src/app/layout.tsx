@@ -3,6 +3,8 @@ import { Manrope, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { METADATA } from "@/content/nexus";
 import { MotionConfig } from "motion/react";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -69,7 +71,7 @@ export default function RootLayout({
       METADATA.socials.x,
       METADATA.socials.linkedin,
       METADATA.socials.github
-    ],
+    ].filter(Boolean),
     "makesOffer": [
       {
         "@type": "Service",
@@ -169,6 +171,8 @@ export default function RootLayout({
             {children}
           </MotionConfig>
         </main>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

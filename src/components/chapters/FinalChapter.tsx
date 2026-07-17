@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import { GSAPReveal } from "@/components/motion/GSAPReveal";
+import { BRAND_CONFIG } from "@/content/nexus";
 
 export function FinalChapter() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,7 +20,7 @@ export function FinalChapter() {
             [ DIAGNOSTIC ENGAGEMENT ]
           </span>
           <h2 className="type-display text-4xl md:text-7.5rem text-[#dedbc8] mt-2">
-            Bring us the workflow.
+            Map &rarr; Design &rarr; Build.
           </h2>
         </GSAPReveal>
         
@@ -34,13 +35,13 @@ export function FinalChapter() {
             href="/contact"
             className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 text-center rounded-none"
           >
-            Describe your workflow
+            {BRAND_CONFIG.primaryCTA}
           </Link>
           <Link
             href="/work"
             className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 text-center rounded-none"
           >
-            Explore all systems
+            {BRAND_CONFIG.secondaryCTA}
           </Link>
         </GSAPReveal>
       </div>

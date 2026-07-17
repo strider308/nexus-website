@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { CONTACT } from "@/content/nexus";
+import { BRAND_CONFIG } from "@/content/nexus";
 
 export function SiteFooter() {
   const currentYear = new Date().getFullYear();
@@ -16,10 +16,10 @@ export function SiteFooter() {
             href="/" 
             className="font-sans text-xl font-bold tracking-tighter text-[#dedbc8] hover:opacity-80 transition-opacity"
           >
-            Nexus
+            {BRAND_CONFIG.shortName}
           </Link>
-          <p className="text-xs font-light text-gray-400 max-w-sm">
-            Custom software and automation for complex workflows.
+          <p className="text-xs font-normal text-gray-400 max-w-sm">
+            {BRAND_CONFIG.primaryStatement}
           </p>
         </div>
 
@@ -41,11 +41,14 @@ export function SiteFooter() {
             <Link href="/terms-of-service" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
               Terms of Service
             </Link>
+            <Link href="/accessibility" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
+              Accessibility
+            </Link>
           </nav>
 
           <div className="flex flex-col md:items-end gap-1 text-xs font-mono text-gray-400">
-            <span>{CONTACT.email}</span>
-            <span>&copy; {currentYear} Nexus. All rights reserved.</span>
+            <span>{BRAND_CONFIG.email}</span>
+            <span>&copy; {currentYear} {BRAND_CONFIG.shortName}. All rights reserved.</span>
           </div>
         </div>
       </div>

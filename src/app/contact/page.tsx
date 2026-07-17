@@ -3,7 +3,8 @@
 import React, { useState, useRef } from "react";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SiteFooter } from "@/components/ui/SiteFooter";
-import { CONTACT } from "@/content/nexus";
+import { BRAND_CONFIG } from "@/content/nexus";
+import { useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -19,9 +20,22 @@ export default function ContactPage() {
     workflow: "",
     engagement: "diagnostic",
   });
+  const [honeypot, setHoneypot] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [serverErrorMessage, setServerErrorMessage] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<SVGPathElement>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const engagementParam = params.get("engagement");
+      if (engagementParam && ["diagnostic", "prototype", "build", "modernization"].includes(engagementParam)) {
+        setFormData((prev) => ({ ...prev, engagement: engagementParam }));
+      }
+    }
+  }, []);
 
   useGSAP(
     () => {
@@ -41,16 +55,42 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
+    setServerErrorMessage("");
+
+    // Basic Client validation
+    const newErrors: Record<string, string> = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = "Valid work email is required";
+    if (!formData.company.trim()) newErrors.company = "Company name is required";
+    if (!formData.workflow.trim()) newErrors.workflow = "Workflow description is required";
+    
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      // Focus first error field
+      const firstErrorField = Object.keys(newErrors)[0];
+      const element = document.getElementById(firstErrorField);
+      if (element) element.focus();
+      return;
+    }
+
     setStatus("submitting");
 
-    // Simulate submission latency
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-
     try {
-      setStatus("success");
-      toast.success("Operational diagnostic request submitted.", {
-        description: "Our engineering team will respond within 1 business day.",
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, honeypot }),
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Server submission failed.");
+      }
+
+      setStatus("success");
+      toast.success("Operational diagnostic request submitted.");
       setFormData({
         name: "",
         email: "",
@@ -58,9 +98,11 @@ export default function ContactPage() {
         workflow: "",
         engagement: "diagnostic",
       });
-    } catch {
+    } catch (err: any) {
       setStatus("error");
-      toast.error("Submission failed. Please email hello@nexus-workflows.com directly.");
+      const msg = err?.message || "Submission failed. Please check connection and try again.";
+      setServerErrorMessage(msg);
+      toast.error(msg);
     }
   };
 
@@ -96,8 +138,8 @@ export default function ContactPage() {
                 <h2 className="text-sm font-mono uppercase tracking-widest text-[#2a7d8a] font-bold">
                   Diagnostic Intake Received
                 </h2>
-                <p className="text-xs text-gray-300 leading-relaxed font-light font-sans">
-                  Thank you for outlining your workflow. A systems engineer will audit your description and contact you via email within **1 business day** to schedule a diagnostic session.
+                <p className="text-xs text-gray-300 leading-relaxed font-normal font-sans">
+                  Thank you for outlining your workflow. A systems engineer will audit your description and contact you via email to schedule a diagnostic session.
                 </p>
                 <div className="h-[1px] bg-[#2a7d8a]/20 my-2" />
                 <button
@@ -108,7 +150,19 @@ export default function ContactPage() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
+                {/* Honeypot hidden input */}
+                <div className="hidden" aria-hidden="true">
+                  <input
+                    type="text"
+                    name="bot_field"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
                     <Label htmlFor="name" className="text-xs font-mono uppercase tracking-wider text-gray-400 font-bold">Your Name</Label>
@@ -118,8 +172,13 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Samir Sharma"
-                      className="bg-[#0d0d0d] border-[#dedbc8]/20 text-[#dedbc8] rounded-none focus-visible:ring-1 focus-visible:ring-[#dedbc8]"
+                      aria-invalid={errors.name ? "true" : "false"}
+                      aria-describedby={errors.name ? "name-error" : undefined}
+                      className={`bg-[#0d0d0d] border-[#dedbc8]/20 text-[#dedbc8] rounded-none focus-visible:ring-1 focus-visible:ring-[#dedbc8] ${errors.name ? "border-red-500" : ""}`}
                     />
+                    {errors.name && (
+                      <span id="name-error" className="text-red-400 text-xs font-mono">{errors.name}</span>
+                    )}
                   </div>
                   <div className="flex flex-col gap-2">
                     <Label htmlFor="email" className="text-xs font-mono uppercase tracking-wider text-gray-400 font-bold">Work Email</Label>
@@ -130,8 +189,13 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="e.g. samir@clinicos.com"
-                      className="bg-[#0d0d0d] border-[#dedbc8]/20 text-[#dedbc8] rounded-none focus-visible:ring-1 focus-visible:ring-[#dedbc8]"
+                      aria-invalid={errors.email ? "true" : "false"}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                      className={`bg-[#0d0d0d] border-[#dedbc8]/20 text-[#dedbc8] rounded-none focus-visible:ring-1 focus-visible:ring-[#dedbc8] ${errors.email ? "border-red-500" : ""}`}
                     />
+                    {errors.email && (
+                      <span id="email-error" className="text-red-400 text-xs font-mono">{errors.email}</span>
+                    )}
                   </div>
                 </div>
 
@@ -143,8 +207,13 @@ export default function ContactPage() {
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     placeholder="e.g. Outpatient Clinic Services Group"
-                    className="bg-[#0d0d0d] border-[#dedbc8]/20 text-[#dedbc8] rounded-none focus-visible:ring-1 focus-visible:ring-[#dedbc8]"
+                    aria-invalid={errors.company ? "true" : "false"}
+                    aria-describedby={errors.company ? "company-error" : undefined}
+                    className={`bg-[#0d0d0d] border-[#dedbc8]/20 text-[#dedbc8] rounded-none focus-visible:ring-1 focus-visible:ring-[#dedbc8] ${errors.company ? "border-red-500" : ""}`}
                   />
+                  {errors.company && (
+                    <span id="company-error" className="text-red-400 text-xs font-mono">{errors.company}</span>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -163,15 +232,25 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="workflow" className="text-xs font-mono uppercase tracking-wider text-gray-400 font-bold">Describe the Current Workflow &amp; Silos</Label>
+                  <Label htmlFor="workflow" className="text-xs font-mono uppercase tracking-wider text-gray-400 font-bold flex flex-col gap-1">
+                    <span>Describe the Current Workflow &amp; Silos</span>
+                    <span className="text-[10px] text-red-400/80 font-normal normal-case tracking-normal font-sans">
+                      Do not include passwords, patient records, payment-card information, access tokens or other sensitive records.
+                    </span>
+                  </Label>
                   <Textarea
                     id="workflow"
                     required
                     value={formData.workflow}
                     onChange={(e) => setFormData({ ...formData, workflow: e.target.value })}
                     placeholder="What manual spreadsheets, chat chains, or databases are currently disconnected? What is the main blocker?"
-                    className="bg-[#0d0d0d] border-[#dedbc8]/20 text-[#dedbc8] rounded-none focus-visible:ring-1 focus-visible:ring-[#dedbc8] min-h-[120px]"
+                    aria-invalid={errors.workflow ? "true" : "false"}
+                    aria-describedby={errors.workflow ? "workflow-error" : undefined}
+                    className={`bg-[#0d0d0d] border-[#dedbc8]/20 text-[#dedbc8] rounded-none focus-visible:ring-1 focus-visible:ring-[#dedbc8] min-h-[120px] ${errors.workflow ? "border-red-500" : ""}`}
                   />
+                  {errors.workflow && (
+                    <span id="workflow-error" className="text-red-400 text-xs font-mono">{errors.workflow}</span>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-2 pt-2">
@@ -180,10 +259,10 @@ export default function ContactPage() {
                     disabled={status === "submitting"}
                     className="border border-[#dedbc8] bg-[#dedbc8] text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none w-full py-6 cursor-pointer"
                   >
-                    {status === "submitting" ? "Submitting Request..." : "Submit Diagnostic Request"}
+                    {status === "submitting" ? "Submitting Request..." : BRAND_CONFIG.primaryCTA}
                   </Button>
                   <span className="text-xs font-mono text-gray-500 text-center mt-2">
-                    Privacy Assurance: Your operational details are protected under NDA principles.
+                    We use the information you provide only to review and respond to your enquiry. Please review our Privacy Policy.
                   </span>
                 </div>
               </form>
@@ -194,14 +273,13 @@ export default function ContactPage() {
               <h3 className="text-xs font-mono uppercase tracking-wider text-[#dedbc8] font-bold">
                 Alternative: Email Us Directly
               </h3>
-              <p className="text-xs text-gray-400 font-light leading-relaxed font-sans">
+              <p className="text-xs text-gray-400 font-normal leading-relaxed font-sans">
                 If you prefer not to use our web intake, you can email our inbox at:
               </p>
               <div className="flex items-center gap-2 mt-1">
-                <a href={CONTACT.url} className="text-sm font-mono text-[#2a7d8a] hover:underline font-bold">
-                  {CONTACT.email}
+                <a href={`mailto:${BRAND_CONFIG.email}`} className="text-sm font-mono text-[#2a7d8a] hover:underline font-bold">
+                  {BRAND_CONFIG.email}
                 </a>
-                <span className="text-xs font-mono text-gray-500">{"// Response within 1 business day"}</span>
               </div>
             </div>
           </div>

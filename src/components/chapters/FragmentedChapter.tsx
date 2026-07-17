@@ -99,7 +99,7 @@ export function FragmentedChapter() {
             <h3 className="font-sans text-sm font-bold uppercase tracking-wide">
               Outpatient Queue Drifts
             </h3>
-            <p className="text-xs text-gray-400 leading-relaxed font-light font-sans">
+            <p className="text-xs text-gray-400 leading-relaxed font-normal font-sans">
               Registration data sits in silos while waiting queues, lab orders, and pharmacy inventory are written on paper slips, causing patient delays.
             </p>
           </div>
@@ -111,7 +111,7 @@ export function FragmentedChapter() {
             <h3 className="font-sans text-sm font-bold uppercase tracking-wide">
               Table-to-Kitchen Gaps
             </h3>
-            <p className="text-xs text-gray-400 leading-relaxed font-light font-sans">
+            <p className="text-xs text-gray-400 leading-relaxed font-normal font-sans">
               Waiters log orders on pads, cashiers key checkout items manually, and kitchens track orders on paper tickets. Discrepancies lead to leakage and delays.
             </p>
           </div>
@@ -123,9 +123,28 @@ export function FragmentedChapter() {
             <h3 className="font-sans text-sm font-bold uppercase tracking-wide">
               Siloed Blocker Checks
             </h3>
-            <p className="text-xs text-gray-400 leading-relaxed font-light font-sans">
+            <p className="text-xs text-gray-400 leading-relaxed font-normal font-sans">
               Critical project handoffs and architectural decision approvals stall inside private Slack channels. Blocking paths remain invisible.
             </p>
+          </div>
+        </div>
+
+        {/* Fit Audience Segment */}
+        <div className="mt-12 pt-12 border-t border-[#dedbc8]/10 flex flex-col gap-6">
+          <h3 className="type-heading text-xl md:text-2xl text-[#dedbc8] tracking-tight">
+            Built for teams whose work has outgrown its tools
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-sm text-gray-300">
+            <ul className="list-disc pl-5 flex flex-col gap-2.5">
+              <li>Critical operational processes live scattered across separate spreadsheets and messages.</li>
+              <li>Multiple roles repeatedly hand information to one another with high friction.</li>
+              <li>Managers cannot see bottlenecks, task ownership, or operational exceptions clearly.</li>
+            </ul>
+            <ul className="list-disc pl-5 flex flex-col gap-2.5">
+              <li>Existing software does not match the actual, real-world human workflow of the team.</li>
+              <li>Information is entered manually more than once across different disconnected files.</li>
+              <li>Key operational reports arrive too late to guide day-to-day decisions.</li>
+            </ul>
           </div>
         </div>
       </div>

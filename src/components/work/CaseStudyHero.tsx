@@ -59,6 +59,14 @@ export function CaseStudyHero({ study }: CaseStudyHeroProps) {
     <div ref={containerRef} className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center py-10 w-full">
       {/* Left Column: Metadata & Positioning */}
       <div className="lg:col-span-5 flex flex-col gap-5">
+        {/* Breadcrumbs */}
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-mono text-gray-500 uppercase tracking-wider mb-2">
+          <Link href="/" className="hover:text-[#dedbc8] transition-colors">Home</Link>
+          <span>/</span>
+          <Link href="/work" className="hover:text-[#dedbc8] transition-colors">Work</Link>
+          <span>/</span>
+          <span className="text-[#dedbc8] font-bold" aria-current="page">{study.name}</span>
+        </nav>
         <div className="flex flex-wrap gap-2.5 items-center">
           <Badge variant="available">{study.industry}</Badge>
           <Badge variant="referenceBuild">{study.status}</Badge>

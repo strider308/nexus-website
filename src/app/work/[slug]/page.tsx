@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DETAILED_CASE_STUDIES } from "@/content/case-studies";
 import { CaseStudyClient } from "@/components/work/CaseStudyClient";
+import { METADATA } from "@/content/nexus";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -40,5 +41,50 @@ export default async function Page({ params }: PageProps) {
 
   const related = DETAILED_CASE_STUDIES.filter((item) => item.slug !== slug).slice(0, 3);
 
-  return <CaseStudyClient study={study} related={related} />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": METADATA.canonicalUrl
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Work",
+            "item": `${METADATA.canonicalUrl}/work`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": study.name,
+            "item": `${METADATA.canonicalUrl}/work/${study.slug}`
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": study.name,
+        "applicationCategory": study.slug === "aarogya" ? "HealthApplication" : study.slug === "securescan" ? "DeveloperApplication" : "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": study.shortDefinition,
+        "url": `${METADATA.canonicalUrl}/work/${study.slug}`
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <CaseStudyClient study={study} related={related} />
+    </>
+  );
 }

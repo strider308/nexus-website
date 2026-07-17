@@ -17,11 +17,22 @@ export function ProofChapter() {
           [ PROVEN ARCHITECTURES ]
         </span>
         <h2 className="type-heading text-3xl md:text-5xl text-[#dedbc8] tracking-tight">
-          Shipped System Proofs
+          Seven Proof Systems
         </h2>
-        <p className="type-body text-base text-gray-300 leading-relaxed max-w-xl">
-          Below is the evidence of our engineering. We build functional systems tailored to complex workflow environments.
-        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mt-2">
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">What we build</h3>
+            <p className="type-body text-[14px] text-gray-300 leading-relaxed">
+              Workflow diagnostics, system blueprints, prototypes, private betas, operational custom software builds, automated process layers, role-aware internal tools, and system integrations.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">What the seven systems represent</h3>
+            <p className="type-body text-[14px] text-gray-300 leading-relaxed">
+              These seven systems demonstrate how we map workflows, define roles and states, design interfaces, and build connected operational software. They are not presented as a fixed catalogue of off-the-shelf products.
+            </p>
+          </div>
+        </div>
       </div>
 
       <SevenProofSystems />

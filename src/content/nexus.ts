@@ -16,19 +16,50 @@ export interface ServiceItem {
   description: string;
 }
 
-export const BRAND = {
-  name: "Nexus",
-  primaryStatement: "Custom software and automation for complex workflows.",
-  supportingStatement: "We map fragmented operations, design the system around them, and build the software that connects the work.",
+// Single-source branding and operations configuration
+export const BRAND_CONFIG = {
+  // Brand name and identity keys (configure here to change brand site-wide)
+  shortName: "Nexus",
+  logoText: "NEXUS",
+  methodologyName: "The Nexus Method",
+  tagline: "Custom Workflow Systems & Automation",
+  
+  // Operational details (marked as placeholders until confirmed)
+  legalName: "[DECISION REQUIRED: Legal Entity Name]", 
+  tradingName: "[DECISION REQUIRED: Trading Name]",
+  domain: "nexus-workflows.com",
+  email: "hello@nexus-workflows.com",
+  operatingCountry: "India",
+  location: "[DECISION REQUIRED: Service Location]",
+  
+  // Social profile pointers (cleared if unverified)
+  socials: {
+    x: "", // [DECISION REQUIRED: Social Profile URL]
+    linkedin: "", // [DECISION REQUIRED: Social Profile URL]
+    github: "" // [DECISION REQUIRED: Social Profile URL]
+  },
+  
+  // CTA hierarchy
+  primaryCTA: "Request a workflow diagnostic",
+  secondaryCTA: "Explore the systems",
+  
+  // Date and copyright values
+  estYear: "2026",
+  copyright: "© 2026 [DECISION REQUIRED: Legal Entity Name]. All rights reserved.",
+  
+  // Process steps (using methodology language)
   process: [
     { step: "01", title: "Map the workflow.", desc: "Document roles, states, inputs, and handoffs." },
     { step: "02", title: "Design the system.", desc: "Construct a clean logical stack built for operational clarity." },
     { step: "03", title: "Build the software.", desc: "Deliver role-aware web platforms and robust automations." }
   ],
-  proofStatement: "Seven systems across five industries.",
-  primaryCTA: "Bring us the workflow.",
-  secondaryCTA: "Explore the systems."
+  primaryStatement: "Custom software and automation for complex workflows.",
+  supportingStatement: "We map fragmented operations, design the system around them, and build the software that connects the work.",
+  proofStatement: "Seven proof systems across five industries."
 };
+
+// Deprecated alias for backwards compatibility
+export const BRAND = BRAND_CONFIG;
 
 export const PROOF_SYSTEMS: ProofSystem[] = [
   {
@@ -119,16 +150,20 @@ export const SERVICES: ServiceItem[] = [
 
 export const LEGAL = {
   privacyPolicy: [
-    "1. Information Collection: Nexus respects your privacy. We only collect the minimal personal information you explicitly choose to share when contacting us via email. We do not use third-party analytics cookies or trackers to log your browsing patterns on this website.",
-    "2. How We Use Data: Any details or workflow descriptions you send us are used solely to evaluate your custom software requirements, prepare diagnostic blueprints, and carry out our engineering obligations.",
-    "3. Information Sharing: We do not sell, trade, or transfer your operational data to outside parties. We only share information with third parties when necessary to fulfill software hosting configurations or as explicitly required by law.",
-    "4. Security: We apply industry-standard security measures, including transport-layer encryption (HTTPS) and access controls, to safeguard all communications and diagnostic inputs."
+    "Last Updated: July 17, 2026",
+    "1. Data Collection and Processing Principles: Nexus (operating as a professional B2B custom software design studio) enforces strict data minimization. We only collect name, business email, company details, and workflow information that you explicitly submit through our online intake form or send directly to our email hello@nexus-workflows.com. We do not use third-party behavioral cookies, tracking pixels, or cross-site advertisement trackers.",
+    "2. Scope and Legal Basis: Processing of your contact details is performed under the legal basis of pre-contractual steps and contract performance (GDPR Article 6(1)(b)) or legitimate interests in addressing commercial queries. We use your details solely to review your system requirements, conduct workflow diagnostics, draft software architecture blueprints, and communicate about our custom integration services.",
+    "3. Storage and Data Retention: We store lead submission records and diagnostic data securely on encrypted, access-restricted databases. We do not sell or trade your details to marketing list brokers or external aggregators. Lead records that do not proceed to a formal commercial contract engagement are systematically purged from our active files within 180 days of final communication, or immediately upon user request.",
+    "4. Security and Server Infrastructure: All client communications and form transfers are encrypted in transit using transport layer security (HTTPS TLS 1.3). In case of database integration or hosting transitions, data is held strictly on infrastructure located in certified Vercel or AWS server regions. Access to diagnostic drafts is restricted exclusively to authorized development engineers subject to strict non-disclosure obligations.",
+    "5. Your Data Rights: Depending on your jurisdiction (such as the European Economic Area under GDPR or India under DPDP Act), you have the right to request access to, correction of, porting of, or deletion of your personal data. To exercise these rights, or to submit a data processing query, contact our privacy officer at hello@nexus-workflows.com."
   ],
   termsOfService: [
-    "1. Acceptance of Terms: By using this site, you agree to these Terms of Service. If you do not accept these terms, you must discontinue using our services and website.",
-    "2. Scope of Service: Nexus designs, prototypes, and builds custom role-aware software platforms, database triggers, and operational dashboards. We do not sell pre-configured packages; all outcomes are custom integrations.",
-    "3. Limits of Responsibility: Our custom scanning tools do not replace certified penetration testing. Aarogya does not provide medical diagnostic advice. SafeDate is a companion tool and cannot guarantee physical safety. The user assumes full responsibility for the configuration, adoption, and operational oversight of these workflows.",
-    "4. Governing Law: These terms and any custom software development agreements are governed by the laws of India, without regard to conflicts of law rules."
+    "Last Updated: July 17, 2026",
+    "1. Acceptance of Terms: By accessing this website or submitting a diagnostic request, you accept and agree to be bound by these Terms of Service. If you disagree with any portion of these terms, you must immediately cease accessing this site.",
+    "2. Scope of Custom Services: Nexus provides custom software engineering, automation strategy, and API integration consultancy. The seven systems presented in our catalog (ClinicOS, Aarogya, RestaurantOS, ShipWright, SecureScan, SafeDate, BuildPublic) are demonstration builds, prototypes, and reference systems showcasing our engineering capability. They are not off-the-shelf software-as-a-service products, nor does this catalog constitute a public offering of pre-packaged licenses.",
+    "3. Liability Limitations & Important Disclaimers: All proof systems are provided 'as is' without warranties of any kind. SecureScan is a repository scanning utility and is not a substitute for certified third-party penetration testing or compliance auditing. Aarogya is a personal tracker and does not provide clinical or medical diagnostic guidance. SafeDate is a companion scheduling helper and does not guarantee physical security or protection. The client assumes full liability and operational responsibility for the configuration, deployment, compliance, and oversight of any software delivered by Nexus.",
+    "4. Intellectual Property: The design layouts, custom three-dimensional animations, and source code patterns exhibited on this website are the intellectual property of Nexus. Case study names and screenshots serve as reference portfolios of custom software architectures built by our studio.",
+    "5. Dispute Resolution & Governing Law: These terms, along with any separate professional software development agreements, are governed by the laws of India, without regard to conflicts of law provisions. Any legal disputes arising out of the use of this website shall be resolved exclusively within the courts of New Delhi, India."
   ]
 };
 
@@ -151,14 +186,10 @@ export interface SiteMetadata {
 }
 
 export const METADATA: SiteMetadata = {
-  title: "Nexus — Custom Workflow Systems & Automation",
-  description: "Nexus builds custom software and automation for complex workflows. See seven shipped proof systems built end-to-end — clinics, restaurants, security, teams, and more — then bring us yours.",
-  canonicalUrl: "https://nexus-workflows.com",
-  email: "hello@nexus-workflows.com",
-  domain: "nexus-workflows.com",
-  socials: {
-    x: "https://x.com/nexus_workflows",
-    linkedin: "https://linkedin.com/company/nexus-workflows",
-    github: "https://github.com/nexus-workflows"
-  }
+  title: `${BRAND_CONFIG.shortName} — ${BRAND_CONFIG.tagline}`,
+  description: `${BRAND_CONFIG.shortName} builds custom software and automation for complex workflows. See seven proof systems built end-to-end — clinics, restaurants, security, teams, and more — then request a workflow diagnostic.`,
+  canonicalUrl: `https://${BRAND_CONFIG.domain}`,
+  email: BRAND_CONFIG.email,
+  domain: BRAND_CONFIG.domain,
+  socials: BRAND_CONFIG.socials
 };
