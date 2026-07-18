@@ -5,8 +5,6 @@ import { useMotionPreference } from "@/components/providers/MotionPreferenceProv
 
 interface NarrativeControlsProps {
   activeChapter: number;
-  isMotionPaused: boolean;
-  onToggleMotion: () => void;
   onSkipExperience: () => void;
 }
 

@@ -30,7 +30,7 @@ import { useMotionPreference } from "@/components/providers/MotionPreferenceProv
 
 export function CinematicExperience({ children }: CinematicExperienceProps) {
   const [activeChapter, setActiveChapter] = useState<number>(0);
-  const { isPaused: isMotionPaused, togglePaused: handleToggleMotion, shouldReduceMotion: reducedMotion } = useMotionPreference();
+  const { shouldReduceMotion: reducedMotion } = useMotionPreference();
   const scrollProgressRef = React.useRef<number>(0);
   const tier = usePerformanceTier();
 
@@ -45,7 +45,7 @@ export function CinematicExperience({ children }: CinematicExperienceProps) {
   const rangesRef = React.useRef<ChapterRange[]>([]);
 
   // Force fallback static 2D design for low-tier devices, reduced motion, or paused motion
-  const quality = (reducedMotion || isMotionPaused) ? "fallback" : tier;
+  const quality = reducedMotion ? "fallback" : tier;
 
   return (
     <div className="relative min-h-screen bg-[#070707]">
@@ -64,8 +64,6 @@ export function CinematicExperience({ children }: CinematicExperienceProps) {
       {/* 3. Narrative UI Controls overlay */}
       <NarrativeControls
         activeChapter={activeChapter}
-        isMotionPaused={isMotionPaused}
-        onToggleMotion={handleToggleMotion}
         onSkipExperience={handleSkipExperience}
       />
 

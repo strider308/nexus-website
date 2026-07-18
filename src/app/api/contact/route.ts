@@ -36,7 +36,8 @@ export async function POST(req: Request) {
     }
 
     // 3. Simple Rate Limiting based on IP address
-    const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "anonymous";
+    const rawIp = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "anonymous";
+    const ip = rawIp.split(",")[0].trim();
     if (isRateLimited(ip)) {
       return NextResponse.json(
         { error: "Too many submission attempts. Please try again later or email us directly." },
@@ -45,7 +46,12 @@ export async function POST(req: Request) {
     }
 
     // Parse request body
-    const body = await req.json();
+    let body;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON payload structure." }, { status: 400 });
+    }
     const { name, email, company, engagement, workflow, honeypot } = body;
 
     // 4. Honeypot check (anti-abuse)

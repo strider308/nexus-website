@@ -83,16 +83,17 @@ export function MotionPreferenceProvider({ children }: { children: React.ReactNo
     setPaused(!isPaused);
   };
 
+  const contextValue = React.useMemo(() => ({
+    isPaused,
+    isOSReduced,
+    shouldReduceMotion,
+    setPaused,
+    togglePaused,
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [isPaused, isOSReduced, shouldReduceMotion]);
+
   return (
-    <MotionPreferenceContext.Provider
-      value={{
-        isPaused,
-        isOSReduced,
-        shouldReduceMotion,
-        setPaused,
-        togglePaused,
-      }}
-    >
+    <MotionPreferenceContext.Provider value={contextValue}>
       {children}
     </MotionPreferenceContext.Provider>
   );
