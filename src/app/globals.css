@@ -1,16 +1,17 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "../styles/tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-serif: var(--font-serif);
-  --font-display: var(--font-sans);
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-manrope);
+  --font-heading: var(--font-manrope);
+  --font-mono: var(--font-plex-mono);
   
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -52,69 +53,60 @@
 }
 
 :root {
-  --background: #000000;
-  --foreground: #E1E0CC;
+  --background: #070707;
+  --foreground: #dedbc8;
   
-  --card: #101010;
-  --card-foreground: #E1E0CC;
+  --card: #0d0d0d;
+  --card-foreground: #dedbc8;
   
-  --popover: #101010;
-  --popover-foreground: #E1E0CC;
+  --popover: #0d0d0d;
+  --popover-foreground: #dedbc8;
   
-  --primary: #DEDBC8;
-  --primary-foreground: #000000;
+  --primary: #dedbc8;
+  --primary-foreground: #070707;
   
-  --secondary: #212121;
-  --secondary-foreground: #E1E0CC;
+  --secondary: #0d0d0d;
+  --secondary-foreground: #dedbc8;
   
-  --muted: #101010;
-  --muted-foreground: #94a3b8;
+  --muted: #0d0d0d;
+  --muted-foreground: #8b8b84;
   
   --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(225, 224, 204, 0.1);
-  --input: rgba(225, 224, 204, 0.15);
-  --ring: #DEDBC8;
+  --border: rgba(222, 219, 200, 0.14);
+  --input: rgba(222, 219, 200, 0.14);
+  --ring: #dedbc8;
   
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 0px; /* Restrained border-radius: no excessive rounded corners as per design specs */
   
-  --sidebar: #101010;
-  --sidebar-foreground: #E1E0CC;
-  --sidebar-primary: #DEDBC8;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #212121;
-  --sidebar-accent-foreground: #E1E0CC;
-  --sidebar-border: rgba(225, 224, 204, 0.1);
-  --sidebar-ring: #DEDBC8;
-  
-  /* Shared Product Colors */
-  --c-clinicos: #4A7BC4;
-  --c-aarogya: #6FA876;
-  --c-restaurant: #C87B3A;
-  --c-shipwright: #8B7BC4;
-  --c-securescan: #3A9EAA;
-  --c-safedate: #C44A7A;
-  --c-buildpublic: #4A8A5A;
+  --sidebar: #0d0d0d;
+  --sidebar-foreground: #dedbc8;
+  --sidebar-primary: #dedbc8;
+  --sidebar-primary-foreground: #070707;
+  --sidebar-accent: #0d0d0d;
+  --sidebar-accent-foreground: #dedbc8;
+  --sidebar-border: rgba(222, 219, 200, 0.14);
+  --sidebar-ring: #dedbc8;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   }
   body {
     @apply bg-background text-foreground transition-colors duration-300;
+    font-family: var(--font-manrope), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  input, button, textarea, select {
+    font-family: inherit;
   }
   html {
-    @apply scroll-smooth;
-  }
-  .font-serif {
-    font-family: var(--font-serif), 'Instrument Serif', Georgia, serif;
-    font-style: italic;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 }
 
@@ -157,15 +149,61 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .interactive-action {
-    transition: none !important;
     transform: none !important;
+    transition: 
+      color 120ms ease,
+      background-color 120ms ease,
+      border-color 120ms ease,
+      opacity 120ms ease,
+      box-shadow 120ms ease !important;
   }
   .interactive-action:hover, .interactive-action:active {
     transform: none !important;
   }
 }
 
+html.motion-paused .interactive-action {
+  transform: none !important;
+  transition: 
+    color 120ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease,
+    opacity 120ms ease,
+    box-shadow 120ms ease !important;
+}
+html.motion-paused .interactive-action:hover,
+html.motion-paused .interactive-action:active {
+  transform: none !important;
+}
+
 /* Custom Typography Utilities */
+.type-display {
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+}
+
+.type-heading {
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.type-body {
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.type-label {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .text-body {
   font-size: 0.875rem; /* 14px */
   line-height: 1.5rem;
@@ -205,4 +243,192 @@
 .text-diagram-label {
   font-size: 0.75rem;
   color: rgba(225, 224, 204, 0.8);
+}
+
+.proof-system-visual svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+}
+
+.proof-system-visual text,
+.proof-system-visual line,
+.proof-system-visual rect,
+.proof-system-visual path {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Scoped Motion Controls when motion is paused or reduced */
+@media (prefers-reduced-motion: reduce) {
+  [data-motion="decorative"],
+  [data-motion="scroll"],
+  [data-motion="ambient"] {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  [data-motion="interaction"] {
+    transform: none !important;
+    transition: 
+      color 120ms ease,
+      background-color 120ms ease,
+      border-color 120ms ease,
+      opacity 120ms ease,
+      box-shadow 120ms ease !important;
+  }
+  
+  html {
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-pulse,
+  .animate-ping,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
+html.motion-paused [data-motion="decorative"],
+html.motion-paused [data-motion="scroll"],
+html.motion-paused [data-motion="ambient"] {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+html.motion-paused [data-motion="interaction"] {
+  transform: none !important;
+  transition: 
+    color 120ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease,
+    opacity 120ms ease,
+    box-shadow 120ms ease !important;
+}
+
+html.motion-paused {
+  scroll-behavior: auto !important;
+}
+
+html.motion-paused .animate-pulse,
+html.motion-paused .animate-ping,
+html.motion-paused .animate-bounce {
+  animation: none !important;
+}
+
+/* High contrast mode progressive overrides */
+@media (prefers-contrast: more) {
+  /* Increase readability of body and muted copy text without flattening all details */
+  .text-body-muted,
+  .text-card-copy,
+  .text-gray-300,
+  .text-gray-400 {
+    color: #f0edda !important;
+  }
+  
+  .text-gray-500,
+  .text-meta {
+    color: rgba(222, 219, 200, 0.75) !important;
+  }
+
+  /* Sharpen focus indicators, buttons and control borders */
+  input, 
+  textarea, 
+  select,
+  .border,
+  .border-border,
+  .border-\[\#dedbc8\]\/10,
+  .border-\[\#dedbc8\]\/14,
+  .border-\[\#dedbc8\]\/20 {
+    border-color: rgba(222, 219, 200, 0.45) !important;
+  }
+  
+  .bg-\[\#0d0d0d\]\/80 {
+    background-color: #000000 !important;
+  }
+}
+
+/* Forced Colors Mode overrides */
+@media (forced-colors: active) {
+  input,
+  textarea,
+  select,
+  button,
+  a.border,
+  div.border {
+    border: 1.5px solid CanvasText !important;
+  }
+  *:focus-visible {
+    outline: 2px solid Highlight !important;
+  }
+}
+
+/* Progressive enhancement for header backdrop blur */
+@supports (backdrop-filter: blur(1px)) {
+  header {
+    backdrop-filter: blur(4px) !important;
+  }
+}
+
+/* Reduced transparency support */
+@media (prefers-reduced-transparency: reduce) {
+  header {
+    background-color: #070707 !important;
+    backdrop-filter: none !important;
+  }
+  
+  [data-slot="sheet-overlay"] {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: none !important;
+  }
+  
+  .bg-\[\#0d0d0d\]\/80 {
+    background-color: #0d0d0d !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* Suspend drawer sliding under reduced/paused motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="sheet-content"] {
+    transform: none !important;
+    transition: opacity var(--motion-duration-popover) var(--motion-ease-out) !important;
+  }
+}
+
+html.motion-paused [data-slot="sheet-content"] {
+  transform: none !important;
+  transition: opacity var(--motion-duration-popover) var(--motion-ease-out) !important;
+}
+
+@keyframes successFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-success-fade {
+  animation: successFadeIn var(--motion-duration-state) var(--motion-ease-out) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-success-fade {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+html.motion-paused .animate-success-fade {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }

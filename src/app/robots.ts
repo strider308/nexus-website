@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { METADATA } from '@/lib/content/nexus';
+import { METADATA } from '@/content/nexus';
 
 export default function robots(): MetadataRoute.Robots {
   return {
