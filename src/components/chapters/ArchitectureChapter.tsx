@@ -90,7 +90,7 @@ export function ArchitectureChapter() {
               <button
                 key={layer.id}
                 onClick={() => setActiveIdx(idx)}
-                className={`z-20 w-full min-h-[85px] p-3 text-left border transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] flex flex-col justify-between ${gridPos[idx]} ${
+                className={`z-20 w-full min-h-[85px] p-3 text-left border transition-[color,background-color,border-color,box-shadow] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] outline-none focus:ring-1 focus:ring-[#dedbc8] flex flex-col justify-between ${gridPos[idx]} ${
                   isActive 
                     ? "bg-[#2a7d8a]/5 border-[#2a7d8a] shadow-[0_0_15px_rgba(42,125,138,0.08)]" 
                     : "bg-[#070707] border-[#dedbc8]/10 hover:border-[#dedbc8]/30"

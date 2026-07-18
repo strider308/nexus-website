@@ -35,7 +35,7 @@ export function NarrativeControls({
       {/* 1. Skip Experience Button */}
       <button
         onClick={onSkipExperience}
-        className="bg-[#0d0d0d]/80 border border-[#dedbc8]/20 px-3.5 py-2 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8] hover:text-[#070707] transition-all duration-300 outline-none focus:ring-2 focus:ring-[#dedbc8] rounded shadow-lg"
+        className="bg-[#0d0d0d]/80 border border-[#dedbc8]/20 px-3.5 py-2 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8] hover:text-[#070707] transition-[color,background-color,border-color,box-shadow] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] outline-none focus:ring-2 focus:ring-[#dedbc8] rounded shadow-lg"
         aria-label="Skip to final conversation"
       >
         Skip Experience
@@ -63,7 +63,7 @@ export function NarrativeControls({
               >
                 {/* Hover Labels */}
                 <span 
-                  className={`font-mono text-xs uppercase tracking-wider text-right transition-all duration-300 absolute right-6 whitespace-nowrap bg-[#0d0d0d] px-2 py-1 border border-[#dedbc8]/10 rounded shadow-md pointer-events-none ${
+                  className={`font-mono text-xs uppercase tracking-wider text-right transition-[opacity,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] absolute right-6 whitespace-nowrap bg-[#0d0d0d] px-2 py-1 border border-[#dedbc8]/10 rounded shadow-md pointer-events-none ${
                     isHovered || isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"
                   } ${isActive ? "text-[#dedbc8] border-[#dedbc8]/30 font-bold" : "text-gray-400"}`}
                 >
@@ -73,7 +73,7 @@ export function NarrativeControls({
                 {/* Interactive Indicator Dot */}
                 <button
                   onClick={() => handleJumpToChapter(config.index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 border focus:ring-2 focus:ring-[#dedbc8] outline-none ${
+                  className={`w-2.5 h-2.5 rounded-full transition-[color,background-color,border-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] border focus:ring-2 focus:ring-[#dedbc8] outline-none ${
                     isActive 
                       ? "bg-[#dedbc8] border-[#dedbc8] scale-125" 
                       : "bg-[#070707] border-gray-600 hover:border-[#dedbc8]"
@@ -90,7 +90,7 @@ export function NarrativeControls({
       {/* 3. Pause / Resume Motion Toggle */}
       <button
         onClick={onToggleMotion}
-        className="bg-[#0d0d0d]/80 border border-[#dedbc8]/20 px-3 py-2 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:border-[#dedbc8] transition-all duration-300 flex items-center gap-1.5 outline-none focus:ring-2 focus:ring-[#dedbc8] rounded shadow-lg"
+        className="bg-[#0d0d0d]/80 border border-[#dedbc8]/20 px-3 py-2 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:border-[#dedbc8] transition-[color,border-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] flex items-center gap-1.5 outline-none focus:ring-2 focus:ring-[#dedbc8] rounded shadow-lg"
         aria-label={isMotionPaused ? "Resume page animations" : "Pause page animations and WebGL"}
       >
         <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />

@@ -96,7 +96,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
                     key={act.id}
                     href={act.target}
                     onClick={(e) => handleScrollToAct(act.target, e)}
-                    className={`font-mono text-xs uppercase tracking-wider px-3 py-1 transition-all duration-300 ${
+                    className={`font-mono text-xs uppercase tracking-wider px-3 py-1 transition-[color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] ${
                       isActive 
                         ? "text-[#070707] bg-[#dedbc8] font-bold" 
                         : "text-gray-400 hover:text-gray-200 hover:bg-[#dedbc8]/5"
@@ -377,13 +377,13 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
             <div className="flex flex-col sm:flex-row gap-4 mt-2">
               <Link
                 href="/contact"
-                className="border border-[#dedbc8] bg-[#dedbc8] px-6 py-3 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none text-center"
+                className="border border-[#dedbc8] bg-[#dedbc8] px-6 py-3 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-[color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none text-center"
               >
                 Describe your workflow &rarr;
               </Link>
               <Link
                 href="/work"
-                className="border border-[#dedbc8]/20 px-6 py-3 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none text-center"
+                className="border border-[#dedbc8]/20 px-6 py-3 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-[border-color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none text-center"
               >
                 Back to Work Index
               </Link>

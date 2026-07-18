@@ -27,7 +27,7 @@ export function SiteHeader() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 border-b border-[#dedbc8]/10 bg-[#070707]/90 backdrop-blur-xs px-6 md:px-12 py-3.5 transition-all duration-300">
+    <header className="fixed top-0 left-0 w-full z-50 border-b border-[#dedbc8]/10 bg-[#070707]/90 backdrop-blur-xs px-6 md:px-12 py-3.5">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link 
@@ -52,7 +52,7 @@ export function SiteHeader() {
                 {link.label}
                 {isActive && (
                   <span
-                    className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#2a7d8a] transition-all duration-300"
+                    className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#2a7d8a]"
                     style={{ transformOrigin: "left" }}
                   />
                 )}

@@ -94,7 +94,7 @@ export function WorkflowJourney({ stages, accentColor }: WorkflowJourneyProps) {
                 <button
                   key={idx}
                   onClick={() => setActiveStageIdx(idx)}
-                  className={`text-left p-3 border transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] flex justify-between items-center ${
+                  className={`text-left p-3 border transition-[color,background-color,border-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] outline-none focus:ring-1 focus:ring-[#dedbc8] flex justify-between items-center ${
                     isActive 
                       ? "border-[#dedbc8] bg-[#0d0d0d] text-white" 
                       : "border-transparent bg-transparent text-gray-500 hover:text-gray-300"

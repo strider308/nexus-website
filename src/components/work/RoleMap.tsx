@@ -60,7 +60,7 @@ export function RoleMap({ users, accentColor }: RoleMapProps) {
                 key={idx}
                 onClick={() => setActiveIdx(idx)}
                 onFocus={() => setActiveIdx(idx)}
-                className={`absolute z-20 px-3 py-1.5 border font-mono text-xs uppercase tracking-wider transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] ${
+                className={`absolute z-20 px-3 py-1.5 border font-mono text-xs uppercase tracking-wider transition-[color,background-color,border-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] outline-none focus:ring-1 focus:ring-[#dedbc8] ${
                   isActive
                     ? "bg-[#2a7d8a]/5 border-[#2a7d8a] text-white"
                     : "bg-[#070707] border-gray-700 text-gray-500 hover:border-gray-500 hover:text-gray-300"

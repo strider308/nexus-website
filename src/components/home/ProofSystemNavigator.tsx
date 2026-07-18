@@ -24,7 +24,7 @@ export function ProofSystemNavigator({ projects, activeIndex, onSelect }: ProofS
               key={project.slug}
               onClick={() => onSelect(idx)}
               onFocus={() => onSelect(idx)}
-              className={`text-left p-3.5 border transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] ${
+              className={`text-left p-3.5 border transition-[color,background-color,border-color,padding-left] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] outline-none focus:ring-1 focus:ring-[#dedbc8] ${
                 isActive
                   ? "border-[#dedbc8] bg-[#0d0d0d] pl-6 text-[#dedbc8]"
                   : "border-transparent bg-transparent text-gray-500 hover:text-gray-300"

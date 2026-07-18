@@ -29,13 +29,13 @@ export default function NotFoundPage() {
         <div className="flex flex-col sm:flex-row gap-4 mt-6">
           <Link
             href="/work"
-            className="border border-[#dedbc8] bg-[#dedbc8] px-6 py-3.5 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none text-center"
+            className="border border-[#dedbc8] bg-[#dedbc8] px-6 py-3.5 text-xs font-mono font-bold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-[color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none text-center"
           >
             {BRAND_CONFIG.secondaryCTA}
           </Link>
           <Link
             href="/contact"
-            className="border border-[#dedbc8]/20 px-6 py-3.5 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-all duration-300 rounded-none text-center"
+            className="border border-[#dedbc8]/20 px-6 py-3.5 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-[border-color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none text-center"
           >
             Request Diagnostic
           </Link>

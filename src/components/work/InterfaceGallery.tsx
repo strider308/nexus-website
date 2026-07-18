@@ -123,7 +123,7 @@ export function InterfaceGallery({ systemId, frames, accentColor }: InterfaceGal
             <button
               key={idx}
               onClick={() => handleTabChange(idx)}
-              className={`px-3 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 outline-none focus:ring-1 focus:ring-[#dedbc8] ${
+              className={`px-3 py-2 font-mono text-xs uppercase tracking-wider transition-[color,border-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] outline-none focus:ring-1 focus:ring-[#dedbc8] ${
                 isActive ? "text-[#dedbc8] font-bold border-b-2" : "text-gray-400 hover:text-gray-200"
               }`}
               style={{
@@ -143,9 +143,9 @@ export function InterfaceGallery({ systemId, frames, accentColor }: InterfaceGal
             {frames.map((frame, idx) => {
               const isActive = activeFrameIdx === idx;
               return (
-                <CarouselItem key={idx} className="basis-full transition-all duration-500 ease-out transform">
+                <CarouselItem key={idx} className="basis-full">
                   <div 
-                    className={`w-full transition-all duration-500 ${
+                    className={`w-full transition-[opacity,transform,filter] duration-500 ease-out ${
                       isActive ? "scale-100 opacity-100" : "scale-[0.97] opacity-40 blur-xs"
                     }`}
                   >

@@ -255,7 +255,7 @@ export default function ContactPage() {
                   <Button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="border border-[#dedbc8] bg-[#dedbc8] text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-all duration-300 rounded-none w-full py-6 cursor-pointer"
+                    className="border border-[#dedbc8] bg-[#dedbc8] text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-[color,background-color,border-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none w-full py-6 cursor-pointer"
                   >
                     {status === "submitting" ? "Submitting Request..." : BRAND_CONFIG.primaryCTA}
                   </Button>
