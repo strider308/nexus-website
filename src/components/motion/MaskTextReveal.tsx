@@ -51,7 +51,7 @@ export function MaskTextReveal({
         }
       );
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   return (

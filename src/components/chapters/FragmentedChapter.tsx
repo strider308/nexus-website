@@ -67,7 +67,7 @@ export function FragmentedChapter() {
         }
       );
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   return (

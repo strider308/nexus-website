@@ -1,5 +1,7 @@
-import { useMediaQuery } from "./useMediaQuery";
+import { useContext } from "react";
+import { MotionPreferenceContext } from "@/components/providers/MotionPreferenceProvider";
 
 export function useReducedMotion(): boolean {
-  return useMediaQuery("(prefers-reduced-motion: reduce)", false);
+  const context = useContext(MotionPreferenceContext);
+  return context ? context.shouldReduceMotion : false;
 }

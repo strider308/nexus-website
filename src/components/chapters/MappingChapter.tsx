@@ -71,7 +71,7 @@ export function MappingChapter() {
         });
       });
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   const steps = [

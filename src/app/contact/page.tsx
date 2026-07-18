@@ -23,7 +23,6 @@ export default function ContactPage() {
   const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [serverErrorMessage, setServerErrorMessage] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<SVGPathElement>(null);
 
@@ -32,6 +31,7 @@ export default function ContactPage() {
       const params = new URLSearchParams(window.location.search);
       const engagementParam = params.get("engagement");
       if (engagementParam && ["diagnostic", "prototype", "build", "modernization"].includes(engagementParam)) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setFormData((prev) => ({ ...prev, engagement: engagementParam }));
       }
     }
@@ -56,7 +56,6 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    setServerErrorMessage("");
 
     // Basic Client validation
     const newErrors: Record<string, string> = {};
@@ -98,10 +97,9 @@ export default function ContactPage() {
         workflow: "",
         engagement: "diagnostic",
       });
-    } catch (err: any) {
+    } catch (err) {
       setStatus("error");
-      const msg = err?.message || "Submission failed. Please check connection and try again.";
-      setServerErrorMessage(msg);
+      const msg = (err as Error)?.message || "Submission failed. Please check connection and try again.";
       toast.error(msg);
     }
   };

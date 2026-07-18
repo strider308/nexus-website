@@ -73,7 +73,7 @@ export function DrawPath({
         });
       }
     },
-    { scope: pathRef }
+    { scope: pathRef, dependencies: [isReduced] }
   );
 
   return (

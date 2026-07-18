@@ -8,32 +8,12 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 
+import { useMotionPreference } from "@/components/providers/MotionPreferenceProvider";
+
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [isMotionPaused, setIsMotionPaused] = useState(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const saved = localStorage.getItem("nexus_motion_paused");
-        return saved === "true";
-      } catch {
-        return false;
-      }
-    }
-    return false;
-  });
-
-  const handleToggleMotion = () => {
-    const nextVal = !isMotionPaused;
-    setIsMotionPaused(nextVal);
-    try {
-      localStorage.setItem("nexus_motion_paused", String(nextVal));
-      // Force page reload to apply changes cleanly across GSAP states
-      window.location.reload();
-    } catch {
-      // safe fallback
-    }
-  };
+  const { isPaused: isMotionPaused, togglePaused: handleToggleMotion } = useMotionPreference();
 
   // Close sheet when route changes
   useEffect(() => {
@@ -151,7 +131,7 @@ export function SiteHeader() {
                   </span>
                 </button>
                 <div className="text-xs font-mono text-gray-500 uppercase tracking-wider text-center">
-                  {BRAND_CONFIG.shortName.toUpperCase()} // EST {BRAND_CONFIG.estYear}
+                  {BRAND_CONFIG.shortName.toUpperCase()} {"// EST"} {BRAND_CONFIG.estYear}
                 </div>
               </div>
             </SheetContent>

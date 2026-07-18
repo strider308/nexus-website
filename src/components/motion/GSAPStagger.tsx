@@ -57,7 +57,7 @@ export function GSAPStagger({
         }
       );
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   return (

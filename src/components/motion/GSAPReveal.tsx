@@ -49,7 +49,7 @@ export function GSAPReveal({
         }
       );
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   return (

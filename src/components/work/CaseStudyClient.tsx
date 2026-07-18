@@ -65,14 +65,14 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
         },
       });
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   const handleScrollToAct = (target: string, e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.querySelector(target);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: isReduced ? "auto" : "smooth" });
     }
   };
 

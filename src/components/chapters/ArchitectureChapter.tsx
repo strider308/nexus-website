@@ -37,7 +37,7 @@ export function ArchitectureChapter() {
         ease: "none",
       });
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   return (

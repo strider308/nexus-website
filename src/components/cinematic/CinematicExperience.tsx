@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { usePerformanceTier } from "@/hooks/usePerformanceTier";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { ScrollDirector } from "./ScrollDirector";
 import { CinematicFallback } from "./CinematicFallback";
 import { NarrativeControls } from "./NarrativeControls";
@@ -27,41 +26,19 @@ interface CinematicExperienceProps {
   children: React.ReactNode;
 }
 
+import { useMotionPreference } from "@/components/providers/MotionPreferenceProvider";
+
 export function CinematicExperience({ children }: CinematicExperienceProps) {
   const [activeChapter, setActiveChapter] = useState<number>(0);
-  const [isMotionPaused, setIsMotionPaused] = useState<boolean>(false);
+  const { isPaused: isMotionPaused, togglePaused: handleToggleMotion, shouldReduceMotion: reducedMotion } = useMotionPreference();
   const scrollProgressRef = React.useRef<number>(0);
   const tier = usePerformanceTier();
-  const reducedMotion = useReducedMotion();
-
-  // Load initial motion preference
-  React.useEffect(() => {
-    try {
-      const saved = localStorage.getItem("nexus_motion_paused");
-      if (saved !== null) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setIsMotionPaused(saved === "true");
-      }
-    } catch {
-      // safe fallback
-    }
-  }, []);
-
-  const handleToggleMotion = () => {
-    const nextVal = !isMotionPaused;
-    setIsMotionPaused(nextVal);
-    try {
-      localStorage.setItem("nexus_motion_paused", String(nextVal));
-    } catch {
-      // safe fallback
-    }
-  };
 
   const handleSkipExperience = () => {
     // Scroll directly to the final chapter
     const element = document.querySelector('[data-chapter-index="6"]');
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
     }
   };
 

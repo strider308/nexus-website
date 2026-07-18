@@ -44,14 +44,14 @@ export function CaseStudyHero({ study }: CaseStudyHeroProps) {
         }
       );
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   const handleScrollToWorkflow = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const element = document.querySelector("#workflow-section");
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: isReduced ? "auto" : "smooth" });
     }
   };
 

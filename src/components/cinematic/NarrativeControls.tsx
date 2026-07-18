@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { CHAPTER_CONFIGS } from "@/lib/cinematic/config";
 
+import { useMotionPreference } from "@/components/providers/MotionPreferenceProvider";
+
 interface NarrativeControlsProps {
   activeChapter: number;
   isMotionPaused: boolean;
@@ -17,13 +19,14 @@ export function NarrativeControls({
   onSkipExperience,
 }: NarrativeControlsProps) {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const { shouldReduceMotion } = useMotionPreference();
 
   const configs = Object.values(CHAPTER_CONFIGS).sort((a, b) => a.index - b.index);
 
   const handleJumpToChapter = (index: number) => {
     const element = document.querySelector(`[data-chapter-index="${index}"]`);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: shouldReduceMotion ? "auto" : "smooth" });
     }
   };
 

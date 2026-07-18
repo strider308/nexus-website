@@ -29,7 +29,7 @@ export function ScrollProgress({
         scrub: true,
       },
     });
-  }, { scope: barRef });
+  }, { scope: barRef, dependencies: [isReduced] });
 
   if (isReduced) return null;
 

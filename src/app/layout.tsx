@@ -5,6 +5,7 @@ import { METADATA } from "@/content/nexus";
 import { MotionConfig } from "motion/react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { MotionPreferenceProvider } from "@/components/providers/MotionPreferenceProvider";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -160,19 +161,21 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground animate-fade-in">
-        <a 
-          href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#DEDBC8] text-black px-4 py-2 rounded-full z-[200] font-mono font-bold text-xs uppercase tracking-wider outline-none focus:ring-2 focus:ring-[#DEDBC8] focus:ring-offset-2 focus:ring-offset-black"
-        >
-          Skip to main content
-        </a>
-        <main id="main-content" className="flex-1 flex flex-col w-full">
-          <MotionConfig reducedMotion="user">
-            {children}
-          </MotionConfig>
-        </main>
-        <Analytics />
-        <SpeedInsights />
+        <MotionPreferenceProvider>
+          <a 
+            href="#main-content" 
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-[#DEDBC8] text-black px-4 py-2 rounded-full z-[200] font-mono font-bold text-xs uppercase tracking-wider outline-none focus:ring-2 focus:ring-[#DEDBC8] focus:ring-offset-2 focus:ring-offset-black"
+          >
+            Skip to main content
+          </a>
+          <main id="main-content" className="flex-1 flex flex-col w-full">
+            <MotionConfig reducedMotion="user">
+              {children}
+            </MotionConfig>
+          </main>
+          <Analytics />
+          <SpeedInsights />
+        </MotionPreferenceProvider>
       </body>
     </html>
   );

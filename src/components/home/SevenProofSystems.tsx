@@ -10,32 +10,19 @@ import { Badge } from "@/components/ui/badge";
 import { InterfaceFrame } from "@/components/work/InterfaceFrame";
 import { gsap, useGSAP } from "@/lib/gsap/register";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAPReducedMotion } from "@/hooks/useGSAPReducedMotion";
+import { useMotionPreference } from "@/components/providers/MotionPreferenceProvider";
 
 export function SevenProofSystems() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const leftRailRef = useRef<HTMLDivElement>(null);
   const rightVisualRef = useRef<HTMLDivElement>(null);
-  const isReduced = useGSAPReducedMotion();
+  const { shouldReduceMotion: isReduced } = useMotionPreference();
 
   // Ref arrays for ScrollTrigger binding
   const blocksRefs = useRef<(HTMLDivElement | null)[]>([]);
   const visualsRefs = useRef<(HTMLDivElement | null)[]>([]);
   const lastActiveIndexRef = useRef<number>(0);
-
-  // Load global pause motion state
-  const [isMotionPaused] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const saved = localStorage.getItem("nexus_motion_paused");
-        return saved === "true";
-      } catch {
-        return false;
-      }
-    }
-    return false;
-  });
 
   useGSAP(
     () => {
@@ -43,7 +30,7 @@ export function SevenProofSystems() {
       blocksRefs.current = blocksRefs.current.slice(0, DETAILED_CASE_STUDIES.length);
       visualsRefs.current = visualsRefs.current.slice(0, DETAILED_CASE_STUDIES.length);
 
-      const isMotionDisabled = isReduced || isMotionPaused;
+      const isMotionDisabled = isReduced;
 
       if (isMotionDisabled) {
         // Fallback: simple ScrollTrigger to update active navigator index
@@ -157,18 +144,18 @@ export function SevenProofSystems() {
         });
       });
     },
-    { scope: containerRef, dependencies: [isReduced, isMotionPaused] }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   const handleSelectProject = (idx: number) => {
     setActiveIndex(idx);
     const element = document.querySelector(`#proof-block-${idx}`);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: isReduced ? "auto" : "smooth" });
     }
   };
 
-  const isMotionDisabled = isReduced || isMotionPaused;
+  const isMotionDisabled = isReduced;
 
   return (
     <div ref={containerRef} className="w-full relative select-text">

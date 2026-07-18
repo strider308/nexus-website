@@ -51,14 +51,14 @@ export function OpeningChapter() {
           "-=0.2"
         );
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   const handleSkipToSystems = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const element = document.querySelector("#fragmentation");
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: isReduced ? "auto" : "smooth" });
     }
   };
 

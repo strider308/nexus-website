@@ -48,7 +48,7 @@ export function MediaExpansion({
         }
       );
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   return (

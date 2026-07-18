@@ -119,8 +119,8 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ success: true, message: "Intake successfully received." });
-  } catch (err: any) {
-    console.error("[CONTACT ERROR] Lead capture failed:", err?.message || err);
+  } catch (err) {
+    console.error("[CONTACT ERROR] Lead capture failed:", (err as Error)?.message || err);
     return NextResponse.json(
       { error: "Lead processing failed. Please contact hello@nexus-workflows.com directly." },
       { status: 500 }

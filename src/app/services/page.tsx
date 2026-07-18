@@ -126,14 +126,14 @@ export default function ServicesPage() {
         });
       });
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isReduced] }
   );
 
   const handleScrollToStage = (idx: number, e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     e.preventDefault();
     const element = document.querySelector(`#stage-section-${idx}`);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: isReduced ? "auto" : "smooth" });
     }
   };
 

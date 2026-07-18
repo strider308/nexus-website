@@ -42,7 +42,7 @@ export default function AccessibilityPage() {
                 <strong>Keyboard Accessibility:</strong> All interactive components, including menus, links, and forms, can be navigated using standard keyboards.
               </li>
               <li>
-                <strong>Reduced Motion Support:</strong> The website respects the user's OS preference (`prefers-reduced-motion`). When active, all high-framerate WebGL rendering, GSAP camera movements, transitions, and scroll animations are automatically paused or replaced with high-contrast static equivalents.
+                <strong>Reduced Motion Support:</strong> The website respects the user&apos;s OS preference (`prefers-reduced-motion`). When active, all high-framerate WebGL rendering, GSAP camera movements, transitions, and scroll animations are automatically paused or replaced with high-contrast static equivalents.
               </li>
               <li>
                 <strong>Screen Reader Compatibility:</strong> We use semantic HTML elements (headings, navigation landmarks, main content regions, label elements) to ensure standard compatibility with Jaws, NVDA, VoiceOver, and TalkBack screen readers.
