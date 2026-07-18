@@ -100,6 +100,7 @@ export function SiteHeader() {
                       <Link
                         key={link.href}
                         href={link.href}
+                        onClick={() => setOpen(false)}
                         className={`font-sans text-base tracking-wide ${
                           isActive ? "text-[#2a7d8a] font-semibold" : "text-gray-300 hover:text-[#dedbc8]"
                         }`}
@@ -110,6 +111,7 @@ export function SiteHeader() {
                   })}
                   <Link
                     href="/contact"
+                    onClick={() => setOpen(false)}
                     className={`font-sans text-base tracking-wide ${
                       pathname === "/contact" ? "text-[#2a7d8a] font-semibold" : "text-gray-300 hover:text-[#dedbc8]"
                     }`}

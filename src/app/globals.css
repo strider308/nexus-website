@@ -392,3 +392,16 @@ html.motion-paused [class*="animate-"] {
     backdrop-filter: none !important;
   }
 }
+
+/* Suspend drawer sliding under reduced/paused motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="sheet-content"] {
+    transform: none !important;
+    transition: opacity var(--motion-duration-popover) var(--motion-ease-out) !important;
+  }
+}
+
+html.motion-paused [data-slot="sheet-content"] {
+  transform: none !important;
+  transition: opacity var(--motion-duration-popover) var(--motion-ease-out) !important;
+}
