@@ -37,6 +37,15 @@ export default function ContactPage() {
     }
   }, []);
 
+  // Manage programmatic focus transitions for accessibility on status changes
+  useEffect(() => {
+    if (status === "success") {
+      document.getElementById("success-heading")?.focus();
+    } else if (status === "idle") {
+      document.getElementById("name")?.focus();
+    }
+  }, [status]);
+
   useGSAP(
     () => {
       if (!lineRef.current) return;
@@ -132,8 +141,16 @@ export default function ContactPage() {
           {/* Left Column: Form Intake (Primary Side) */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             {status === "success" ? (
-              <div className="border border-[#2a7d8a] bg-[#2a7d8a]/5 p-8 flex flex-col gap-4">
-                <h2 className="text-sm font-mono uppercase tracking-widest text-[#2a7d8a] font-bold">
+              <div
+                role="status"
+                aria-live="polite"
+                className="animate-success-fade border border-[#2a7d8a] bg-[#2a7d8a]/5 p-8 flex flex-col gap-4 focus:outline-none"
+              >
+                <h2
+                  id="success-heading"
+                  tabIndex={-1}
+                  className="text-sm font-mono uppercase tracking-widest text-[#2a7d8a] font-bold outline-none"
+                >
                   Diagnostic Intake Received
                 </h2>
                 <p className="text-xs text-gray-300 leading-relaxed font-normal font-sans">
@@ -142,7 +159,7 @@ export default function ContactPage() {
                 <div className="h-[1px] bg-[#2a7d8a]/20 my-2" />
                 <button
                   onClick={() => setStatus("idle")}
-                  className="text-xs font-mono text-[#dedbc8] hover:underline text-left outline-none"
+                  className="text-xs font-mono text-[#dedbc8] hover:underline text-left outline-none focus-visible:ring-1 focus-visible:ring-[#dedbc8]"
                 >
                   &larr; Submit another inquiry
                 </button>

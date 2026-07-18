@@ -405,3 +405,32 @@ html.motion-paused [data-slot="sheet-content"] {
   transform: none !important;
   transition: opacity var(--motion-duration-popover) var(--motion-ease-out) !important;
 }
+
+@keyframes successFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-success-fade {
+  animation: successFadeIn var(--motion-duration-state) var(--motion-ease-out) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-success-fade {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+html.motion-paused .animate-success-fade {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
