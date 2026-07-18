@@ -152,7 +152,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${manrope.variable} ${plexMono.variable} h-full antialiased`}
-      style={{ scrollBehavior: "smooth", scrollPaddingTop: "80px" }}
+      style={{ scrollPaddingTop: "80px" }}
     >
       <head>
         <script

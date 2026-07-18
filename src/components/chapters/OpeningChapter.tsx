@@ -105,7 +105,7 @@ export function OpeningChapter() {
 
       {/* Subtle scroll cue */}
       <div className="opening-anim cue-anim absolute bottom-8 left-6 md:left-12 flex items-center gap-3 font-mono text-xs text-gray-500 uppercase tracking-widest opacity-0">
-        <div className="w-1.5 h-1.5 bg-[#2a7d8a] rounded-full animate-ping" />
+        <div className="w-1.5 h-1.5 bg-[#2a7d8a] rounded-full" />
         <span>SCROLL TO DISCOVER FLOWS</span>
       </div>
     </section>

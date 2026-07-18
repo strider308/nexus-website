@@ -105,7 +105,8 @@
     font-family: inherit;
   }
   html {
-    @apply scroll-smooth;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 }
 
@@ -318,4 +319,76 @@ html.motion-paused .animate-ping,
 html.motion-paused .animate-bounce,
 html.motion-paused [class*="animate-"] {
   animation: none !important;
+}
+
+/* High contrast mode progressive overrides */
+@media (prefers-contrast: more) {
+  /* Increase readability of body and muted copy text without flattening all details */
+  .text-body-muted,
+  .text-card-copy,
+  .text-gray-300,
+  .text-gray-400 {
+    color: #f0edda !important;
+  }
+  
+  .text-gray-500,
+  .text-meta {
+    color: rgba(222, 219, 200, 0.75) !important;
+  }
+
+  /* Sharpen focus indicators, buttons and control borders */
+  input, 
+  textarea, 
+  select,
+  .border,
+  .border-border,
+  .border-\[\#dedbc8\]\/10,
+  .border-\[\#dedbc8\]\/14,
+  .border-\[\#dedbc8\]\/20 {
+    border-color: rgba(222, 219, 200, 0.45) !important;
+  }
+  
+  .bg-\[\#0d0d0d\]\/80 {
+    background-color: #000000 !important;
+  }
+}
+
+/* Forced Colors Mode overrides */
+@media (forced-colors: active) {
+  input,
+  textarea,
+  select,
+  button,
+  a.border,
+  div.border {
+    border: 1.5px solid CanvasText !important;
+  }
+  *:focus-visible {
+    outline: 2px solid Highlight !important;
+  }
+}
+
+/* Progressive enhancement for header backdrop blur */
+@supports (backdrop-filter: blur(1px)) {
+  header {
+    backdrop-filter: blur(4px) !important;
+  }
+}
+
+/* Reduced transparency support */
+@media (prefers-reduced-transparency: reduce) {
+  header {
+    background-color: #070707 !important;
+    backdrop-filter: none !important;
+  }
+  
+  [data-slot="sheet-overlay"] {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: none !important;
+  }
+  
+  .bg-\[\#0d0d0d\]\/80 {
+    background-color: #0d0d0d !important;
+    backdrop-filter: none !important;
+  }
 }
