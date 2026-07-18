@@ -35,7 +35,8 @@ export function NarrativeControls({
       {/* 1. Skip Experience Button */}
       <button
         onClick={onSkipExperience}
-        className="bg-[#0d0d0d]/80 border border-[#dedbc8]/20 px-3.5 py-2 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8] hover:text-[#070707] transition-[color,background-color,border-color,box-shadow] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] outline-none focus:ring-2 focus:ring-[#dedbc8] rounded shadow-lg"
+        data-motion="interaction"
+        className="bg-[#0d0d0d]/80 border border-[#dedbc8]/20 px-3.5 py-2 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8] hover:text-[#070707] transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] disabled:active:scale-100 outline-none focus:ring-2 focus:ring-[#dedbc8] rounded shadow-lg"
         aria-label="Skip to final conversation"
       >
         Skip Experience
@@ -90,7 +91,8 @@ export function NarrativeControls({
       {/* 3. Pause / Resume Motion Toggle */}
       <button
         onClick={onToggleMotion}
-        className="bg-[#0d0d0d]/80 border border-[#dedbc8]/20 px-3 py-2 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:border-[#dedbc8] transition-[color,border-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] flex items-center gap-1.5 outline-none focus:ring-2 focus:ring-[#dedbc8] rounded shadow-lg"
+        data-motion="interaction"
+        className="bg-[#0d0d0d]/80 border border-[#dedbc8]/20 px-3 py-2 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:border-[#dedbc8] transition-[color,border-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] disabled:active:scale-100 flex items-center gap-1.5 outline-none focus:ring-2 focus:ring-[#dedbc8] rounded shadow-lg"
         aria-label={isMotionPaused ? "Resume page animations" : "Pause page animations and WebGL"}
       >
         <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />

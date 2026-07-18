@@ -33,13 +33,15 @@ export function FinalChapter() {
         <GSAPReveal yOffset={15} duration={0.8} delay={0.3} className="mt-6 flex flex-col sm:flex-row gap-4">
           <Link
             href="/contact"
-            className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-[color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] text-center rounded-none"
+            data-motion="interaction"
+            className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-[color,background-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] text-center active:scale-[0.98] rounded-none"
           >
             {BRAND_CONFIG.primaryCTA}
           </Link>
           <Link
             href="/work"
-            className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-[border-color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] text-center rounded-none"
+            data-motion="interaction"
+            className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-[border-color,background-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] text-center active:scale-[0.98] rounded-none"
           >
             {BRAND_CONFIG.secondaryCTA}
           </Link>

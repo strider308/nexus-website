@@ -93,14 +93,16 @@ export function CaseStudyHero({ study }: CaseStudyHeroProps) {
         <div className="flex flex-wrap gap-3 mt-4">
           <Link
             href="/contact"
-            className="border border-[#dedbc8] bg-[#dedbc8] px-5 py-3 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-[color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none text-center"
+            data-motion="interaction"
+            className="border border-[#dedbc8] bg-[#dedbc8] px-5 py-3 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-[color,background-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] rounded-none text-center"
           >
             Start consult
           </Link>
           <a
             href="#workflow-section"
             onClick={handleScrollToWorkflow}
-            className="border border-[#dedbc8]/20 px-5 py-3 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-[border-color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none text-center"
+            data-motion="interaction"
+            className="border border-[#dedbc8]/20 px-5 py-3 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-[border-color,background-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] rounded-none text-center"
           >
             View workflow &darr;
           </a>

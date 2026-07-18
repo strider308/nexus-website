@@ -88,14 +88,16 @@ export function OpeningChapter() {
           <div className="flex flex-wrap gap-4 items-center">
             <Link
               href="/contact"
-              className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-[color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none"
+              data-motion="interaction"
+              className="border border-[#dedbc8] bg-[#dedbc8] px-8 py-4 text-xs font-sans font-semibold uppercase text-[#070707] hover:bg-transparent hover:text-[#dedbc8] transition-[color,background-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] rounded-none"
             >
               {BRAND_CONFIG.primaryCTA} &rarr;
             </Link>
             <a
               href="#fragmentation"
               onClick={handleSkipToSystems}
-              className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-[border-color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none"
+              data-motion="interaction"
+              className="border border-[#dedbc8]/20 px-8 py-4 text-xs font-sans font-semibold uppercase text-[#dedbc8] hover:border-[#dedbc8] hover:bg-[#dedbc8]/5 transition-[border-color,background-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] rounded-none"
             >
               {BRAND_CONFIG.secondaryCTA}
             </a>

@@ -75,7 +75,8 @@ export function SiteHeader() {
           {/* Quick Pause Motion control */}
           <button
             onClick={handleToggleMotion}
-            className="border border-[#dedbc8]/14 px-2 py-1 text-xs font-mono uppercase tracking-wider text-gray-400 hover:border-gray-500 hover:text-white transition-colors"
+            data-motion="interaction"
+            className="border border-[#dedbc8]/14 px-2 py-1 text-xs font-mono uppercase tracking-wider text-gray-400 hover:border-gray-500 hover:text-white transition-[color,border-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] disabled:active:scale-100"
             title="Toggle global animation scrubbers"
           >
             {isMotionPaused ? "Resume Motion" : "Pause Motion"}
@@ -125,7 +126,8 @@ export function SiteHeader() {
               <div className="flex flex-col gap-6 border-t border-[#dedbc8]/5 pt-6">
                 <button
                   onClick={handleToggleMotion}
-                  className="w-full flex items-center justify-between border border-[#dedbc8]/14 p-3 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:bg-[#dedbc8]/5"
+                  data-motion="interaction"
+                  className="w-full flex items-center justify-between border border-[#dedbc8]/14 p-3 text-xs font-mono uppercase tracking-wider text-[#dedbc8] hover:bg-[#dedbc8]/5 transition-[color,background-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] disabled:active:scale-100"
                 >
                   <span>Animation System</span>
                   <span className="text-[#2a7d8a] font-bold">

@@ -137,7 +137,8 @@ export function SevenProjectShowcase() {
               <div className="anim-cta mt-2 opacity-0">
                 <Link
                   href={`/work/${project.slug}`}
-                  className="inline-block border border-[#dedbc8] px-6 py-3 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:bg-[#dedbc8] hover:text-[#070707] transition-[color,background-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] rounded-none"
+                  data-motion="interaction"
+                  className="inline-block border border-[#dedbc8] px-6 py-3 text-xs font-mono font-bold uppercase text-[#dedbc8] hover:bg-[#dedbc8] hover:text-[#070707] transition-[color,background-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] rounded-none"
                 >
                   Read Detailed Case Study &rarr;
                 </Link>
