@@ -88,9 +88,9 @@ export function MappingChapter() {
       id="mapping"
       data-chapter-index={2}
       ref={containerRef}
-      className="min-h-[140vh] relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text py-24"
+      className="min-h-0 md:min-h-[140vh] relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text py-16 md:py-24"
     >
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start relative w-full">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start relative w-full">
         {/* Left Side: Editorial context */}
         <div ref={pinRef} className="md:col-span-5 flex flex-col gap-6 w-full">
           <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
@@ -105,7 +105,7 @@ export function MappingChapter() {
         </div>
 
         {/* Right Side: Interactive path stepper */}
-        <div className="md:col-span-7 flex relative flex-col gap-12 pl-8 md:pl-16 border-l border-[#dedbc8]/5">
+        <div className="md:col-span-7 flex relative flex-col gap-6 md:gap-12 pl-0 border-l-0 md:pl-16 md:border-l md:border-[#dedbc8]/5">
           {/* Connector Line SVG overlay */}
           <div className="absolute left-[3px] top-4 bottom-4 w-[2px] pointer-events-none hidden md:block">
             <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 2 1000">
@@ -127,7 +127,7 @@ export function MappingChapter() {
               className="step-node flex flex-col gap-2 relative bg-[#070707] py-2 opacity-25"
             >
               {/* Stepper node circle */}
-              <div className="absolute -left-[39px] md:-left-[71px] top-3.5 size-4 bg-[#070707] border-2 border-gray-600 rounded-full flex items-center justify-center z-10 transition-colors duration-300">
+              <div className="absolute -left-[39px] md:-left-[71px] top-3.5 size-4 bg-[#070707] border-2 border-gray-600 rounded-full flex items-center justify-center z-10 transition-colors duration-300 hidden md:flex">
                 <span className="size-1.5 bg-transparent rounded-full" />
               </div>
 

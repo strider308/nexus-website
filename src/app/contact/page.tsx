@@ -25,6 +25,7 @@ export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const containerRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<SVGPathElement>(null);
+  const prevStatusRef = useRef<string>("idle");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -41,9 +42,10 @@ export default function ContactPage() {
   useEffect(() => {
     if (status === "success") {
       document.getElementById("success-heading")?.focus();
-    } else if (status === "idle") {
+    } else if (status === "idle" && prevStatusRef.current === "success") {
       document.getElementById("name")?.focus();
     }
+    prevStatusRef.current = status;
   }, [status]);
 
   useGSAP(

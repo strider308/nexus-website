@@ -33,7 +33,7 @@ export function CapabilityMatrix() {
       </div>
 
       {/* Desktop/Tablet Viewport Table */}
-      <div className="hidden lg:block overflow-x-auto border border-[#dedbc8]/10 bg-[#0d0d0d] mt-4">
+      <div className="hidden md:block overflow-x-auto border border-[#dedbc8]/10 bg-[#0d0d0d] mt-4">
         <table className="w-full text-left font-mono text-xs text-gray-300 divide-y divide-[#dedbc8]/10">
           <thead className="bg-[#070707] text-[#dedbc8] font-bold">
             <tr>
@@ -64,8 +64,8 @@ export function CapabilityMatrix() {
         </table>
       </div>
 
-      {/* Mobile/Tablet Stacked List Viewport Fallback */}
-      <div className="lg:hidden flex flex-col gap-6 mt-4">
+      {/* Mobile Stacked List Viewport Fallback */}
+      <div className="md:hidden flex flex-col gap-6 mt-4">
         {CAPABILITY_MATRIX_ROWS.map((row, idx) => (
           <div 
             key={idx}

@@ -1,6 +1,5 @@
 import React from "react";
 import { CinematicExperience } from "@/components/cinematic/CinematicExperience";
-import { CinematicEntrance } from "@/components/ui/CinematicEntrance";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 
 // Import HTML narrative chapters
@@ -16,13 +15,10 @@ import { SiteFooter } from "@/components/ui/SiteFooter";
 export default function Home() {
   return (
     <>
-      {/* 1. Cinematic entrance logo intro overlay */}
-      <CinematicEntrance />
-
-      {/* 2. Global header navigation */}
+      {/* 1. Global header navigation */}
       <SiteHeader />
 
-      {/* 3. Infinite scrolling narrative experience */}
+      {/* 2. Infinite scrolling narrative experience */}
       <CinematicExperience>
         <div className="flex flex-col w-full">
           <OpeningChapter />

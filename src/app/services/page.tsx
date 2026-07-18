@@ -144,7 +144,7 @@ export default function ServicesPage() {
       {/* Background Noise Layer */}
       <div className="absolute inset-0 opacity-[0.04] bg-noise pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto flex flex-col gap-24 relative z-10 px-6 md:px-12 pb-24 mt-12">
+      <div className="max-w-5xl mx-auto flex flex-col gap-16 relative z-10 px-6 md:px-12 pb-24 mt-12">
         {/* Page Header */}
         <div className="border-b border-[#dedbc8]/14 pb-8 flex flex-col gap-4">
           <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
@@ -155,27 +155,13 @@ export default function ServicesPage() {
           </h1>
           <div className="flex flex-col gap-6 max-w-4xl mt-2">
             <p className="type-body text-base text-gray-300 leading-relaxed max-w-2xl">
-              We design, prototype, and build custom role-aware software platforms, automated process layers, internal tools, and operational dashboards. We do not sell pre-configured packages; all outcomes are custom integrations.
+              We design, prototype, and build custom role-aware software platforms, automated process layers, internal tools, and operational dashboards. Our engagement structures are built around specific milestones, from initial diagnostic mapping through to the delivery of custom, production-ready systems.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-[#dedbc8]/10 pt-6">
-              <div>
-                <h2 className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">What we build</h2>
-                <p className="type-body text-[14px] text-gray-300 leading-relaxed">
-                  Workflow diagnostics, system blueprints, prototypes, private betas, operational custom software builds, automated process layers, role-aware internal tools, and system integrations.
-                </p>
-              </div>
-              <div>
-                <h2 className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">What the seven systems represent</h2>
-                <p className="type-body text-[14px] text-gray-300 leading-relaxed">
-                  The systems showcased in our catalog demonstrate how we map workflows, define roles and states, design interfaces, and build operational software. They are not off-the-shelf catalog products.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* 5-Stage Stepper Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start relative w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start relative w-full">
           
           {/* Left: Sticky progress list (Desktop only) */}
           <div ref={leftRailRef} className="hidden lg:flex lg:col-span-4 flex-col gap-4 pr-6 border-r border-[#dedbc8]/10 min-h-[350px]">
@@ -206,14 +192,14 @@ export default function ServicesPage() {
           </div>
 
           {/* Right: Stages details (Desktop scrolls past, Mobile renders accordion) */}
-          <div className="col-span-12 lg:col-span-8 flex flex-col gap-12 lg:gap-24 w-full">
+          <div className="col-span-12 lg:col-span-8 flex flex-col gap-8 lg:gap-16 w-full">
             {/* Desktop continuous vertical scroll blocks */}
-            <div className="hidden lg:flex flex-col gap-20">
+            <div className="hidden lg:flex flex-col gap-12">
               {STAGES.map((stage, idx) => (
                 <div 
                   key={stage.id}
                   id={`stage-section-${idx}`}
-                  className="flex flex-col gap-4 border border-[#dedbc8]/10 bg-[#0d0d0d] p-8 shadow-[0_4px_30px_rgba(0,0,0,0.3)] min-h-[380px] justify-between"
+                  className="flex flex-col gap-4 border border-[#dedbc8]/10 bg-[#0d0d0d] p-8 shadow-[0_4px_30px_rgba(0,0,0,0.3)] min-h-[280px] justify-between"
                 >
                   <div className="flex flex-col gap-4">
                     <div className="flex justify-between items-center border-b border-[#dedbc8]/5 pb-3">
@@ -250,7 +236,7 @@ export default function ServicesPage() {
                     </div>
                   </div>
 
-                  <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-xs font-mono text-gray-500 uppercase">
+                  <div className="border-t border-[#dedbc8]/10 pt-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2 text-xs font-mono text-gray-500 uppercase">
                     <span>GATE: {stage.typicalDecisionGate}</span>
                     <span>NEXT: {stage.whatComesNext}</span>
                   </div>
@@ -270,14 +256,14 @@ export default function ServicesPage() {
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="pb-4">
-                      <div className="flex flex-col gap-4 font-sans text-xs text-gray-300 mt-2 leading-relaxed">
+                      <div className="flex flex-col gap-3 font-sans text-xs text-gray-300 mt-2 leading-relaxed">
                         <p><strong>Best For:</strong> {stage.bestFor}</p>
                         <p><strong>Inputs:</strong> {stage.inputs}</p>
                         <p><strong>Activities:</strong> {stage.activities}</p>
                         <p><strong>Deliverables:</strong> {stage.deliverables}</p>
-                        <div className="border-t border-[#dedbc8]/5 pt-3 font-mono text-xs text-gray-500 uppercase">
+                        <div className="border-t border-[#dedbc8]/5 pt-3 font-mono text-[10px] text-gray-500 uppercase flex flex-col gap-1.5">
                           <p>Gate: {stage.typicalDecisionGate}</p>
-                          <p className="mt-1">Next: {stage.whatComesNext}</p>
+                          <p>Next: {stage.whatComesNext}</p>
                         </div>
                       </div>
                     </AccordionContent>

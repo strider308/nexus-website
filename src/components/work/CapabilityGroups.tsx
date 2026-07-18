@@ -14,18 +14,9 @@ export function CapabilityGroups({ groups, accentColor }: CapabilityGroupsProps)
   const [activeTab, setActiveTab] = useState<string>("0");
 
   return (
-    <div className="flex flex-col gap-6 py-8 border-t border-[#dedbc8]/10 w-full select-none">
-      <div className="flex flex-col gap-2">
-        <span className="text-xs font-mono tracking-wider text-gray-500 uppercase font-bold">
-          System Capability Groups
-        </span>
-        <h2 className="type-heading text-3xl text-[#dedbc8] tracking-tight">
-          What the system organizes
-        </h2>
-      </div>
-
+    <div className="flex flex-col gap-6 w-full select-none mt-2">
       {/* Desktop Layout: Tabs */}
-      <div className="hidden md:block mt-4 w-full">
+      <div className="hidden md:block w-full">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex gap-8">
           <TabsList className="flex flex-col gap-2 bg-transparent border-r border-[#dedbc8]/10 pr-6 shrink-0 min-w-[200px]">
             {groups.map((group, idx) => (

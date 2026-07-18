@@ -117,15 +117,8 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
       </div>
 
       {/* Main Content Area */}
-      <div className="max-w-5xl mx-auto flex flex-col gap-24 relative z-10 px-6 md:px-12 pb-24 mt-16 md:mt-28">
+      <div className="max-w-5xl mx-auto flex flex-col gap-16 lg:gap-20 relative z-10 px-6 md:px-12 pb-24 mt-16 md:mt-28">
         
-        {/* Navigation Breadcrumb */}
-        <div className="flex gap-2 items-center text-xs font-mono text-gray-500 uppercase">
-          <Link href="/work" className="hover:text-white transition-colors">WORK INDEX</Link>
-          <span>/</span>
-          <span className="text-gray-300 font-bold">{study.name}</span>
-        </div>
-
         {/* Hero Header */}
         <div className="border-b border-[#dedbc8]/14 pb-8">
           <CaseStudyHero study={study} />
@@ -134,7 +127,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
         {/* ==========================================
             ACT 1 — Context
             ========================================== */}
-        <section id="act-context" className="flex flex-col gap-12 pt-8">
+        <section id="act-context" className="flex flex-col gap-8 pt-8">
           <div className="flex flex-col gap-3">
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 01 // SYSTEM CONTEXT
@@ -175,7 +168,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
         {/* ==========================================
             ACT 2 — Workflow
             ========================================== */}
-        <section id="act-workflow" className="border-t border-[#dedbc8]/10 pt-16 flex flex-col gap-12">
+        <section id="act-workflow" className="border-t border-[#dedbc8]/10 pt-12 flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 02 // OPERATIONS WORKFLOW
@@ -199,7 +192,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
         {/* ==========================================
             ACT 3 — Product
             ========================================== */}
-        <section id="act-product" className="border-t border-[#dedbc8]/10 pt-16 flex flex-col gap-12">
+        <section id="act-product" className="border-t border-[#dedbc8]/10 pt-12 flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 03 // THE BUILD SYSTEM
@@ -268,7 +261,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
         {/* ==========================================
             ACT 4 — Boundaries
             ========================================== */}
-        <section id="act-boundaries" className="border-t border-[#dedbc8]/10 pt-16 flex flex-col gap-12">
+        <section id="act-boundaries" className="border-t border-[#dedbc8]/10 pt-12 flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 04 // CLEAR BOUNDARIES
@@ -327,7 +320,7 @@ export function CaseStudyClient({ study, related }: CaseStudyClientProps) {
         {/* ==========================================
             ACT 5 — Proof
             ========================================== */}
-        <section id="act-proof" className="border-t border-[#dedbc8]/10 pt-16 flex flex-col gap-12">
+        <section id="act-proof" className="border-t border-[#dedbc8]/10 pt-12 flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
               ACT 05 // SYSTEM VERDICT

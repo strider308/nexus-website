@@ -16,7 +16,7 @@ export function IntegrationBoundary({
   safetyNotes,
 }: IntegrationBoundaryProps) {
   return (
-    <div className="flex flex-col gap-10 py-8 border-t border-[#dedbc8]/10 w-full select-none">
+    <div className="flex flex-col gap-6 w-full select-none mt-2">
       
       {/* Integrations & Limits grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">

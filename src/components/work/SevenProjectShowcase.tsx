@@ -70,7 +70,7 @@ export function SevenProjectShowcase() {
   );
 
   return (
-    <div ref={containerRef} className="flex flex-col gap-32 py-12">
+    <div ref={containerRef} className="flex flex-col gap-20 lg:gap-24 py-12">
       {DETAILED_CASE_STUDIES.map((project, idx) => {
         const isEven = idx % 2 === 0;
         const projectNum = String(idx + 1).padStart(2, "0");
@@ -79,7 +79,7 @@ export function SevenProjectShowcase() {
           <div
             key={project.slug}
             id={`project-row-${idx}`}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start border-b border-[#dedbc8]/10 pb-24 project-section-card w-full"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start border-b border-[#dedbc8]/10 pb-16 project-section-card w-full"
           >
             {/* Left/Right Text column */}
             <div className={`lg:col-span-6 flex flex-col gap-6 ${isEven ? "lg:order-1" : "lg:order-2"}`}>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { InterfaceFrame } from "./InterfaceFrame";
 import type { CarouselApi } from "@/components/ui/carousel";
 
@@ -18,7 +18,7 @@ export function InterfaceGallery({ systemId, frames, accentColor }: InterfaceGal
   // Synchronize Embla slide change to Active Tab index
   useEffect(() => {
     if (!api) return;
-    
+
     const onSelect = () => {
       setActiveFrameIdx(api.selectedScrollSnap());
     };
@@ -144,7 +144,7 @@ export function InterfaceGallery({ systemId, frames, accentColor }: InterfaceGal
               const isActive = activeFrameIdx === idx;
               return (
                 <CarouselItem key={idx} className="basis-full">
-                  <div 
+                  <div
                     className={`w-full transition-[opacity,transform,filter] duration-500 ease-out ${
                       isActive ? "scale-100 opacity-100" : "scale-[0.97] opacity-40 blur-xs"
                     }`}
@@ -159,16 +159,34 @@ export function InterfaceGallery({ systemId, frames, accentColor }: InterfaceGal
               );
             })}
           </CarouselContent>
-          <div className="absolute -bottom-10 right-12 flex gap-4">
-            <CarouselPrevious className="relative translate-y-0 translate-x-0 border border-[#dedbc8]/20 text-[#dedbc8] hover:bg-[#dedbc8]/5 hover:text-white rounded-none" />
-            <CarouselNext className="relative translate-y-0 translate-x-0 border border-[#dedbc8]/20 text-[#dedbc8] hover:bg-[#dedbc8]/5 hover:text-white rounded-none" />
+
+          {/* Controls and Frame Status in Normal Flow */}
+          <div className="mt-6 flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-t border-[#dedbc8]/10 pt-4 w-full font-mono text-xs text-gray-500 uppercase">
+            <div className="flex items-center gap-2">
+              <span>EXCERPT FRAME INDEX: 0{activeFrameIdx + 1} / 0{frames.length}</span>
+              <span className="text-[#2a7d8a] font-bold">{"// SPEC"}</span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => api?.scrollPrev()}
+                className="border border-[#dedbc8]/20 px-3.5 py-1.5 text-xs text-[#dedbc8] hover:bg-[#dedbc8]/5 hover:text-white outline-none focus:ring-1 focus:ring-[#dedbc8] transition-colors"
+                aria-label="Previous frame"
+              >
+                &larr; PREV
+              </button>
+              <button
+                type="button"
+                onClick={() => api?.scrollNext()}
+                className="border border-[#dedbc8]/20 px-3.5 py-1.5 text-xs text-[#dedbc8] hover:bg-[#dedbc8]/5 hover:text-white outline-none focus:ring-1 focus:ring-[#dedbc8] transition-colors"
+                aria-label="Next frame"
+              >
+                NEXT &rarr;
+              </button>
+            </div>
           </div>
         </Carousel>
-      </div>
-
-      <div className="mt-8 font-mono text-xs text-gray-500 uppercase flex justify-between items-center pr-12">
-        <span>EXCERPT FRAME INDEX: 0{activeFrameIdx + 1} / 0{frames.length}</span>
-        <span>VERIFY LOG: COMPLETE</span>
       </div>
     </div>
   );

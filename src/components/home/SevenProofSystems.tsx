@@ -173,7 +173,7 @@ export function SevenProofSystems() {
         </div>
 
         {/* Center Scroll Narrative content (Col span 4) */}
-        <div className="col-span-4 flex flex-col gap-24 py-8">
+        <div className="col-span-4 flex flex-col gap-16 py-8">
           {DETAILED_CASE_STUDIES.map((project, idx) => {
             const projectNum = String(idx + 1).padStart(2, "0");
             return (
@@ -183,10 +183,10 @@ export function SevenProofSystems() {
                 ref={(el) => {
                   blocksRefs.current[idx] = el;
                 }}
-                className="flex flex-col gap-5 min-h-[500px] border-b border-[#dedbc8]/5 pb-16 justify-center"
+                className="flex flex-col gap-5 min-h-[320px] border-b border-[#dedbc8]/5 pb-10 justify-center"
               >
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-[#2a7d8a] font-semibold">{projectNum} {"//"} DEPLOYED SYSTEM</span>
+                  <span className="font-mono text-xs text-[#2a7d8a] font-semibold">{projectNum} {"//"} {project.status.toUpperCase()}</span>
                   <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.accentColor }} />
                   <span className="font-mono text-xs uppercase text-gray-400 font-semibold tracking-wider">{project.category}</span>
                 </div>

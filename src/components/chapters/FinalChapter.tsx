@@ -12,7 +12,7 @@ export function FinalChapter() {
     <section 
       data-chapter-index={6}
       ref={containerRef}
-      className="min-h-screen flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text py-24"
+      className="min-h-0 flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text py-16 md:py-24"
     >
       <div className="flex flex-col gap-6 max-w-2xl">
         <GSAPReveal yOffset={25} duration={0.8}>

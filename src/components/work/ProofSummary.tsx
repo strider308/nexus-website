@@ -10,7 +10,7 @@ interface ProofSummaryProps {
 
 export function ProofSummary({ points, architecturalNotes, accentColor }: ProofSummaryProps) {
   return (
-    <div className="flex flex-col gap-6 py-8 border-t border-[#dedbc8]/10">
+    <div className="flex flex-col gap-6 mt-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* What this proves */}
         <div className="flex flex-col gap-4">

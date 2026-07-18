@@ -77,7 +77,8 @@ export function SiteHeader() {
             onClick={handleToggleMotion}
             data-motion="interaction"
             className="border border-[#dedbc8]/14 px-2 py-1 text-xs font-mono uppercase tracking-wider text-gray-400 hover:border-gray-500 hover:text-white transition-[color,border-color,transform] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] active:scale-[0.98] disabled:active:scale-100"
-            title="Toggle global animation scrubbers"
+            title={isMotionPaused ? "Resume site motion" : "Pause site motion"}
+            aria-label={isMotionPaused ? "Resume site motion" : "Pause site motion"}
           >
             {isMotionPaused ? "Resume Motion" : "Pause Motion"}
           </button>
@@ -86,7 +87,7 @@ export function SiteHeader() {
         {/* Mobile Navigation Drawer */}
         <div className="md:hidden flex items-center gap-3">
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger render={<Button variant="ghost" size="icon" className="text-[#dedbc8] border-none" />}>
+            <SheetTrigger render={<Button variant="ghost" size="icon" aria-label="Open navigation" className="text-[#dedbc8] border-none" />}>
               <Menu className="size-5" />
             </SheetTrigger>
             <SheetContent side="right" className="bg-[#070707] border-l border-[#dedbc8]/10 p-6 flex flex-col justify-between h-full">

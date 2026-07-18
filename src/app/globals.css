@@ -286,8 +286,7 @@ html.motion-paused .interactive-action:active {
   
   .animate-pulse,
   .animate-ping,
-  .animate-bounce,
-  [class*="animate-"] {
+  .animate-bounce {
     animation: none !important;
   }
 }
@@ -316,8 +315,7 @@ html.motion-paused {
 
 html.motion-paused .animate-pulse,
 html.motion-paused .animate-ping,
-html.motion-paused .animate-bounce,
-html.motion-paused [class*="animate-"] {
+html.motion-paused .animate-bounce {
   animation: none !important;
 }
 

@@ -130,7 +130,7 @@ export function FragmentedChapter() {
         </div>
 
         {/* Fit Audience Segment */}
-        <div className="mt-12 pt-12 border-t border-[#dedbc8]/10 flex flex-col gap-6">
+        <div className="mt-8 pt-8 border-t border-[#dedbc8]/10 flex flex-col gap-6">
           <h3 className="type-heading text-xl md:text-2xl text-[#dedbc8] tracking-tight">
             Built for teams whose work has outgrown its tools
           </h3>

@@ -41,12 +41,12 @@ export function ArchitectureChapter() {
   );
 
   return (
-    <section 
+    <section
       data-chapter-index={3}
       ref={containerRef}
-      className="min-h-screen flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text py-24"
+      className="min-h-0 lg:min-h-screen flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto select-text py-16 md:py-24"
     >
-      <div className="flex flex-col gap-6 mb-12">
+      <div className="flex flex-col gap-6 mb-8 md:mb-12">
         <span className="text-xs font-mono tracking-widest text-[#2a7d8a] uppercase font-bold">
           [ SYSTEM ARCHITECTURE ]
         </span>
@@ -58,32 +58,70 @@ export function ArchitectureChapter() {
         </p>
       </div>
 
-      {/* CPU Architecture Interactive Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
+      {/* Mobile & Tablet select-accordion (Below lg) */}
+      <div className="lg:hidden flex flex-col gap-3 w-full">
+        {LAYERS.map((layer, idx) => {
+          const isActive = activeIdx === idx;
+          return (
+            <div
+              key={layer.id}
+              className={`border transition-colors duration-200 ${
+                isActive ? "border-[#2a7d8a] bg-[#2a7d8a]/5" : "border-[#dedbc8]/10 bg-[#0d0d0d]"
+              }`}
+            >
+              <button
+                onClick={() => setActiveIdx(idx)}
+                className="w-full p-4 text-left flex items-center justify-between outline-none focus:ring-1 focus:ring-[#dedbc8]"
+                aria-label={`Toggle description for ${layer.name}`}
+                aria-expanded={isActive}
+              >
+                <div className="flex flex-col gap-1">
+                  <span className="font-mono text-[10px] text-gray-500 uppercase">STAGE 0{layer.id}</span>
+                  <h4 className="font-sans text-sm font-bold uppercase tracking-wide text-white">
+                    {layer.name}
+                  </h4>
+                </div>
+                <span className={`text-[#2a7d8a] text-xs font-mono transition-transform duration-200 ${isActive ? "rotate-90" : ""}`}>
+                  &rarr;
+                </span>
+              </button>
+              {isActive && (
+                <div className="px-4 pb-4 bg-[#070707]/30 text-xs flex flex-col gap-2 border-t border-[#dedbc8]/5 pt-3">
+                  <span className="font-mono text-[#2a7d8a] font-bold text-[11px]">{layer.desc}</span>
+                  <p className="text-gray-300 leading-relaxed font-sans">{layer.details}</p>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Desktop Interactive Grid (Only lg and above) */}
+      <div className="hidden lg:grid grid-cols-12 gap-12 items-center">
+
         {/* Left: CPU Blueprint Grid */}
-        <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-6 relative p-6 bg-[#0d0d0d] border border-[#dedbc8]/10 rounded-none overflow-hidden min-h-[380px] justify-items-center items-center">
-          
+        <div className="col-span-7 grid grid-cols-3 gap-6 relative p-6 bg-[#0d0d0d] border border-[#dedbc8]/10 rounded-none overflow-hidden min-h-[380px] justify-items-center items-center">
+
           {/* Central Workflow Engine Hub Core */}
-          <div className="md:col-start-2 md:row-start-2 z-20 size-32 bg-[#070707] border-2 border-[#2a7d8a] flex flex-col items-center justify-center p-3 text-center shadow-[0_0_24px_rgba(42,125,138,0.15)] select-none">
+          <div className="col-start-2 row-start-2 z-20 size-32 bg-[#070707] border-2 border-[#2a7d8a] flex flex-col items-center justify-center p-3 text-center shadow-[0_0_24px_rgba(42,125,138,0.15)] select-none">
             <span className="font-mono text-xs text-[#2a7d8a] uppercase tracking-wider font-bold">CORE ENGINE</span>
             <span className="font-sans text-xs font-bold uppercase tracking-wide text-white mt-1">WORKFLOW</span>
-            <span className="font-mono text-xs text-gray-500 uppercase mt-0.5 tracking-widest">ACTIVE PORT: 08</span>
+            <span className="font-mono text-xs text-gray-500 mt-0.5 tracking-widest">ACTIVE</span>
           </div>
 
           {/* Surrounding Nodes */}
           {LAYERS.map((layer, idx) => {
             const isActive = activeIdx === idx;
-            
+
             // Map indexes to layout positions
             // 0: top-left, 1: top-mid, 2: top-right, 3: bottom-left, 4: bottom-mid, 5: bottom-right
             const gridPos = [
-              "md:col-start-1 md:row-start-1", // Node 1
-              "md:col-start-2 md:row-start-1", // Node 2
-              "md:col-start-3 md:row-start-1", // Node 3
-              "md:col-start-1 md:row-start-3", // Node 4
-              "md:col-start-2 md:row-start-3", // Node 5
-              "md:col-start-3 md:row-start-3", // Node 6
+              "col-start-1 row-start-1", // Node 1
+              "col-start-2 row-start-1", // Node 2
+              "col-start-3 row-start-1", // Node 3
+              "col-start-1 row-start-3", // Node 4
+              "col-start-2 row-start-3", // Node 5
+              "col-start-3 row-start-3", // Node 6
             ];
 
             return (
@@ -91,8 +129,8 @@ export function ArchitectureChapter() {
                 key={layer.id}
                 onClick={() => setActiveIdx(idx)}
                 className={`z-20 w-full min-h-[85px] p-3 text-left border transition-[color,background-color,border-color,box-shadow] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] outline-none focus:ring-1 focus:ring-[#dedbc8] flex flex-col justify-between ${gridPos[idx]} ${
-                  isActive 
-                    ? "bg-[#2a7d8a]/5 border-[#2a7d8a] shadow-[0_0_15px_rgba(42,125,138,0.08)]" 
+                  isActive
+                    ? "bg-[#2a7d8a]/5 border-[#2a7d8a] shadow-[0_0_15px_rgba(42,125,138,0.08)]"
                     : "bg-[#070707] border-[#dedbc8]/10 hover:border-[#dedbc8]/30"
                 }`}
                 aria-label={`Show details for ${layer.name}`}
@@ -109,17 +147,17 @@ export function ArchitectureChapter() {
           })}
 
           {/* Connection Lines overlay */}
-          <div className="absolute inset-0 pointer-events-none hidden md:block z-0">
+          <div className="absolute inset-0 pointer-events-none z-0">
             <svg className="w-full h-full" viewBox="0 0 500 380">
               {/* Lines linking to center core (center is x: 250, y: 190) */}
               {/* top-left line */}
               <path d="M 80,95 L 250,190" stroke="rgba(222,219,200,0.06)" strokeWidth="1.5" />
               <path className="cpu-line" d="M 80,95 L 250,190" stroke="#2a7d8a" strokeWidth="1.5" strokeDasharray="6 14" strokeDashoffset="0" />
-              
+
               {/* top-mid line */}
               <path d="M 250,95 L 250,190" stroke="rgba(222,219,200,0.06)" strokeWidth="1.5" />
               <path className="cpu-line" d="M 250,95 L 250,190" stroke="#2a7d8a" strokeWidth="1.5" strokeDasharray="6 14" strokeDashoffset="0" />
-              
+
               {/* top-right line */}
               <path d="M 420,95 L 250,190" stroke="rgba(222,219,200,0.06)" strokeWidth="1.5" />
               <path className="cpu-line" d="M 420,95 L 250,190" stroke="#2a7d8a" strokeWidth="1.5" strokeDasharray="6 14" strokeDashoffset="0" />
@@ -127,11 +165,11 @@ export function ArchitectureChapter() {
               {/* bottom-left line */}
               <path d="M 80,285 L 250,190" stroke="rgba(222,219,200,0.06)" strokeWidth="1.5" />
               <path className="cpu-line" d="M 80,285 L 250,190" stroke="#2a7d8a" strokeWidth="1.5" strokeDasharray="6 14" strokeDashoffset="0" />
-              
+
               {/* bottom-mid line */}
               <path d="M 250,285 L 250,190" stroke="rgba(222,219,200,0.06)" strokeWidth="1.5" />
               <path className="cpu-line" d="M 250,285 L 250,190" stroke="#2a7d8a" strokeWidth="1.5" strokeDasharray="6 14" strokeDashoffset="0" />
-              
+
               {/* bottom-right line */}
               <path d="M 420,285 L 250,190" stroke="rgba(222,219,200,0.06)" strokeWidth="1.5" />
               <path className="cpu-line" d="M 420,285 L 250,190" stroke="#2a7d8a" strokeWidth="1.5" strokeDasharray="6 14" strokeDashoffset="0" />
@@ -140,7 +178,7 @@ export function ArchitectureChapter() {
         </div>
 
         {/* Right: Active Layer Description Panel */}
-        <div className="lg:col-span-5 flex flex-col gap-5 border border-[#dedbc8]/10 bg-[#0d0d0d] p-8 min-h-[380px] justify-between">
+        <div className="col-span-5 flex flex-col gap-5 border border-[#dedbc8]/10 bg-[#0d0d0d] p-8 min-h-[380px] justify-between">
           <div className="flex flex-col gap-4">
             <span className="font-mono text-xs text-[#2a7d8a] uppercase tracking-widest font-bold">
               NODE SPECIFICATION // STACK 0{LAYERS[activeIdx].id}
@@ -157,8 +195,8 @@ export function ArchitectureChapter() {
           </div>
 
           <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-xs font-mono text-gray-500 uppercase">
-            <span>PORT_STATE: LOCKED</span>
-            <span>ENCRYPT: SHA-256</span>
+            <span>Status: Active</span>
+            <span>Verification: Validated</span>
           </div>
         </div>
 
@@ -166,4 +204,5 @@ export function ArchitectureChapter() {
     </section>
   );
 }
+
 export default ArchitectureChapter;

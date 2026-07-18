@@ -24,30 +24,42 @@ export function SiteFooter() {
         </div>
 
         {/* Right Side: Navigation Links & Copyright */}
-        <div className="flex flex-col md:items-end gap-4">
-          <nav className="flex flex-wrap gap-x-6 gap-y-2">
-            <Link href="/work" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
-              Work
-            </Link>
-            <Link href="/services" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
-              Services
-            </Link>
-            <Link href="/contact" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
-              Contact
-            </Link>
-            <Link href="/privacy-policy" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms-of-service" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
-              Terms of Service
-            </Link>
-            <Link href="/accessibility" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
-              Accessibility
-            </Link>
-          </nav>
+        <div className="flex flex-col md:items-end gap-6 w-full md:w-auto">
+          {/* Mobile structure: two-column grid, Desktop structure: single row */}
+          <div className="grid grid-cols-2 md:flex md:flex-row gap-8 md:gap-x-6 md:gap-y-2 w-full md:w-auto">
+            {/* Main Navigation Column/Row */}
+            <div className="flex flex-col md:flex-row gap-3 md:gap-6">
+              <span className="md:hidden font-mono text-[10px] text-gray-500 uppercase tracking-widest font-bold border-b border-[#dedbc8]/5 pb-1 mb-1">Navigation</span>
+              <Link href="/work" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
+                Work
+              </Link>
+              <Link href="/services" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
+                Services
+              </Link>
+              <Link href="/contact" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
+                Contact
+              </Link>
+            </div>
 
-          <div className="flex flex-col md:items-end gap-1 text-xs font-mono text-gray-400">
-            <span>{BRAND_CONFIG.email}</span>
+            {/* Legal Links Column/Row */}
+            <div className="flex flex-col md:flex-row gap-3 md:gap-6">
+              <span className="md:hidden font-mono text-[10px] text-gray-500 uppercase tracking-widest font-bold border-b border-[#dedbc8]/5 pb-1 mb-1">Legal</span>
+              <Link href="/privacy-policy" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms-of-service" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/accessibility" className="font-sans text-[13px] font-medium tracking-wide text-gray-300 hover:text-[#dedbc8] transition-colors">
+                Accessibility
+              </Link>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:items-end gap-1 text-xs font-mono text-gray-400 mt-2 md:mt-0">
+            <a href={`mailto:${BRAND_CONFIG.email}`} className="text-gray-300 hover:text-[#2a7d8a] transition-colors font-mono font-bold">
+              {BRAND_CONFIG.email}
+            </a>
             <span>&copy; {currentYear} {BRAND_CONFIG.shortName}. All rights reserved.</span>
           </div>
         </div>

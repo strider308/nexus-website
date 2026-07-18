@@ -32,8 +32,8 @@ export function RoleMap({ users, accentColor }: RoleMapProps) {
         </h2>
       </div>
 
-      {/* Desktop Layout: CPU-style circular surrounding role nodes map */}
-      <div className="hidden md:grid grid-cols-12 gap-10 items-center mt-6">
+      {/* Desktop Layout: CPU-style circular surrounding role nodes map (lg and above) */}
+      <div className="hidden lg:grid grid-cols-12 gap-10 items-center mt-6">
         
         {/* Left: CPU surrounding nodes graph representation */}
         <div className="col-span-7 relative bg-[#0d0d0d] border border-[#dedbc8]/10 p-6 overflow-hidden min-h-[350px] flex items-center justify-center">
@@ -116,15 +116,15 @@ export function RoleMap({ users, accentColor }: RoleMapProps) {
           </div>
 
           <div className="border-t border-[#dedbc8]/10 pt-4 flex justify-between items-center text-xs font-mono text-gray-500 uppercase">
-            <span>PERMS: L1_ACCESS</span>
-            <span>TOKEN: LOCKED</span>
+            <span>Access: Granted</span>
+            <span>Status: Verified</span>
           </div>
         </div>
 
       </div>
 
-      {/* Mobile Layout: Simple Accordion */}
-      <div className="md:hidden mt-4">
+      {/* Mobile/Tablet Layout: Simple Accordion (Below lg) */}
+      <div className="lg:hidden mt-4">
         <Accordion defaultValue={["role-0"]} className="w-full border border-[#dedbc8]/10 bg-[#0d0d0d] p-4">
           {parsedRoles.map((role, idx) => (
             <AccordionItem key={idx} value={`role-${idx}`} className="border-b border-[#dedbc8]/5">

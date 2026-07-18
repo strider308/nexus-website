@@ -11,7 +11,7 @@ export function TrustChapter() {
     <section 
       data-chapter-index={4}
       ref={containerRef}
-      className="min-h-[85vh] flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto py-24 select-text"
+      className="min-h-0 flex flex-col justify-center relative z-10 px-6 md:px-12 max-w-5xl mx-auto py-16 md:py-24 select-text"
     >
       <div className="flex flex-col gap-8 max-w-3xl">
         <GSAPReveal yOffset={20} duration={0.8}>

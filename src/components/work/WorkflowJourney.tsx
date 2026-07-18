@@ -15,6 +15,7 @@ interface WorkflowJourneyProps {
 export function WorkflowJourney({ stages, accentColor }: WorkflowJourneyProps) {
   const [activeStageIdx, setActiveStageIdx] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const activeIdxRef = useRef<number>(0);
   const isReduced = useGSAPReducedMotion();
 
   useGSAP(
@@ -33,14 +34,20 @@ export function WorkflowJourney({ stages, accentColor }: WorkflowJourneyProps) {
             Math.floor(rawProgress * stages.length),
             stages.length - 1
           );
-          if (idx !== activeStageIdx && idx >= 0) {
+          if (idx !== activeIdxRef.current && idx >= 0) {
+            activeIdxRef.current = idx;
             setActiveStageIdx(idx);
           }
         },
       });
     },
-    { dependencies: [activeStageIdx, stages], scope: containerRef }
+    { dependencies: [stages], scope: containerRef }
   );
+
+  const handleSelectStage = (idx: number) => {
+    activeIdxRef.current = idx;
+    setActiveStageIdx(idx);
+  };
 
   return (
     <div ref={containerRef} className="flex flex-col gap-8 py-8 border-t border-[#dedbc8]/10 w-full">
@@ -93,7 +100,7 @@ export function WorkflowJourney({ stages, accentColor }: WorkflowJourneyProps) {
               return (
                 <button
                   key={idx}
-                  onClick={() => setActiveStageIdx(idx)}
+                  onClick={() => handleSelectStage(idx)}
                   className={`text-left p-3 border transition-[color,background-color,border-color] duration-[var(--motion-duration-control)] ease-[var(--motion-ease-out)] outline-none focus:ring-1 focus:ring-[#dedbc8] flex justify-between items-center ${
                     isActive 
                       ? "border-[#dedbc8] bg-[#0d0d0d] text-white" 

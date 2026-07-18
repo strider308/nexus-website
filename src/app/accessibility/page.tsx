@@ -21,7 +21,7 @@ export default function AccessibilityPage() {
           className="flex flex-col gap-6"
         >
           <span className="text-xs font-mono tracking-[0.2em] text-[#2a7d8a] uppercase font-bold">
-            COMPLIANCE STATEMENT
+            ACCESSIBILITY PRACTICES
           </span>
           <h1 className="type-heading text-4xl md:text-5xl tracking-tight text-[#dedbc8]">
             Accessibility Statement
@@ -30,25 +30,28 @@ export default function AccessibilityPage() {
           
           <div className="flex flex-col gap-6 text-sm md:text-base font-normal text-gray-300 leading-relaxed font-sans">
             <p>
-              Nexus is committed to ensuring digital accessibility for individuals with disabilities. We continually improve the user experience for everyone and apply relevant accessibility standards to achieve WCAG 2.2 Level AA compliance.
+              Nexus is committed to digital accessibility. We design our web pages with Web Content Accessibility Guidelines (WCAG) 2.2 Level AA principles in mind to improve the user experience for everyone.
+            </p>
+            <p>
+              The website undergoes ongoing review and refinement to ensure that usability and access are steadily improved. We welcome feedback on our current implementation.
             </p>
             
             <h2 className="text-xl font-mono uppercase tracking-wider text-[#dedbc8] mt-4 font-bold">
-              Key Features Supported
+              Accessibility Features Support
             </h2>
             
             <ul className="list-disc pl-6 flex flex-col gap-3">
               <li>
-                <strong>Keyboard Accessibility:</strong> All interactive components, including menus, links, and forms, can be navigated using standard keyboards.
+                <strong>Keyboard Navigation:</strong> Standard keyboard access can be used to navigate interactive components, menus, and forms.
               </li>
               <li>
-                <strong>Reduced Motion Support:</strong> The website respects the user&apos;s OS preference (`prefers-reduced-motion`). When active, all high-framerate WebGL rendering, GSAP camera movements, transitions, and scroll animations are automatically paused or replaced with high-contrast static equivalents.
+                <strong>Reduced Motion Support:</strong> The website respects operating-system preferences for reduced motion (`prefers-reduced-motion`). When active, all camera panning, high-framerate WebGL scene motion, GSAP timeline animations, and scroll-linked effects are paused or replaced with static layouts.
               </li>
               <li>
-                <strong>Screen Reader Compatibility:</strong> We use semantic HTML elements (headings, navigation landmarks, main content regions, label elements) to ensure standard compatibility with Jaws, NVDA, VoiceOver, and TalkBack screen readers.
+                <strong>Semantic HTML Structure:</strong> The interface is structured using semantic HTML headings, landmarks, lists, and form labels to support compatibility with standard screen readers and assistive systems.
               </li>
               <li>
-                <strong>Contrast and Typography:</strong> Text sizes and color contrast meet or exceed the WCAG 2.2 AA target ratio (4.5:1 for regular text, 3:1 for large text).
+                <strong>Contrast and Typography:</strong> Text size, layout structure, and font choices are designed to support legibility and clear contrast ratios across the site.
               </li>
             </ul>
 
@@ -56,7 +59,7 @@ export default function AccessibilityPage() {
               Feedback and Contact
             </h2>
             <p>
-              If you experience accessibility difficulties on our website or wish to request further assistance, please contact us at: <a href="mailto:hello@nexus-workflows.com" className="text-[#2a7d8a] hover:underline font-mono">hello@nexus-workflows.com</a>.
+              If you experience accessibility difficulties or wish to request assistance, please share your feedback with us at: <a href="mailto:hello@nexus-workflows.com" className="text-[#2a7d8a] hover:underline font-mono font-bold">hello@nexus-workflows.com</a>.
             </p>
           </div>
         </motion.div>
