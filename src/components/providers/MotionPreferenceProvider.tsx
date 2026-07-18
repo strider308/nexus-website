@@ -63,6 +63,9 @@ export function MotionPreferenceProvider({ children }: { children: React.ReactNo
     } else {
       document.documentElement.classList.remove("motion-paused");
     }
+    return () => {
+      document.documentElement.classList.remove("motion-paused");
+    };
   }, [shouldReduceMotion]);
 
   const setPaused = (paused: boolean) => {

@@ -148,12 +148,31 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .interactive-action {
-    transition: none !important;
     transform: none !important;
+    transition: 
+      color 120ms ease,
+      background-color 120ms ease,
+      border-color 120ms ease,
+      opacity 120ms ease,
+      box-shadow 120ms ease !important;
   }
   .interactive-action:hover, .interactive-action:active {
     transform: none !important;
   }
+}
+
+html.motion-paused .interactive-action {
+  transform: none !important;
+  transition: 
+    color 120ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease,
+    opacity 120ms ease,
+    box-shadow 120ms ease !important;
+}
+html.motion-paused .interactive-action:hover,
+html.motion-paused .interactive-action:active {
+  transform: none !important;
 }
 
 /* Custom Typography Utilities */
@@ -238,4 +257,65 @@
 .proof-system-visual rect,
 .proof-system-visual path {
   vector-effect: non-scaling-stroke;
+}
+
+/* Scoped Motion Controls when motion is paused or reduced */
+@media (prefers-reduced-motion: reduce) {
+  [data-motion="decorative"],
+  [data-motion="scroll"],
+  [data-motion="ambient"] {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  [data-motion="interaction"] {
+    transform: none !important;
+    transition: 
+      color 120ms ease,
+      background-color 120ms ease,
+      border-color 120ms ease,
+      opacity 120ms ease,
+      box-shadow 120ms ease !important;
+  }
+  
+  html {
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-pulse,
+  .animate-ping,
+  .animate-bounce,
+  [class*="animate-"] {
+    animation: none !important;
+  }
+}
+
+html.motion-paused [data-motion="decorative"],
+html.motion-paused [data-motion="scroll"],
+html.motion-paused [data-motion="ambient"] {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+html.motion-paused [data-motion="interaction"] {
+  transform: none !important;
+  transition: 
+    color 120ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease,
+    opacity 120ms ease,
+    box-shadow 120ms ease !important;
+}
+
+html.motion-paused {
+  scroll-behavior: auto !important;
+}
+
+html.motion-paused .animate-pulse,
+html.motion-paused .animate-ping,
+html.motion-paused .animate-bounce,
+html.motion-paused [class*="animate-"] {
+  animation: none !important;
 }
