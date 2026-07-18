@@ -142,8 +142,6 @@ export default function ContactPage() {
           <div className="lg:col-span-7 flex flex-col gap-6">
             {status === "success" ? (
               <div
-                role="status"
-                aria-live="polite"
                 className="animate-success-fade border border-[#2a7d8a] bg-[#2a7d8a]/5 p-8 flex flex-col gap-4 focus:outline-none"
               >
                 <h2
