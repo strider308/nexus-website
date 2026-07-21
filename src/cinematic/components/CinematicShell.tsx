@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { QualitySliceContainer } from "./QualitySliceContainer";
+import { NarrativeQualitySlice } from "./NarrativeQualitySlice";
 
 export function CinematicShell() {
-  return <QualitySliceContainer />;
+  return <NarrativeQualitySlice />;
 }
