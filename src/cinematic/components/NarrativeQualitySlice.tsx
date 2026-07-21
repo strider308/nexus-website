@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowLeft, Play, Pause, ExternalLink, Activity } from "lucide-react";
 import Link from "next/link";
+import { ContentParityReferenceSection } from "./ContentParityReferenceSection";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -236,6 +237,9 @@ export function NarrativeQualitySlice() {
           </div>
         </div>
       </div>
+
+      {/* Layer 2 & 3: Complete Website Reference Deck & Contextual Deep Dives */}
+      <ContentParityReferenceSection />
     </div>
   );
 }
