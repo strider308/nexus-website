@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Cpu, Layers, ShieldCheck, Database, FileText, ExternalLink, X, ArrowRight, CheckCircle2, Award, Users, Lock } from "lucide-react";
+import { Cpu, Layers, ShieldCheck, Database, X, Award } from "lucide-react";
 import Link from "next/link";
 
 interface DetailDrawerProps {
