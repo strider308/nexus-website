@@ -1,6 +1,3 @@
-import { getSiteMode } from "@/lib/site-mode";
-import { CinematicShell } from "@/cinematic/components/CinematicShell";
-
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { LayoutExtras } from "@/components/site/LayoutExtras";
@@ -19,24 +16,20 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 import { ResourcesPreview } from "@/components/sections/ResourcesPreview";
 import { SectionMinimap } from "@/components/three/SectionMinimap";
 
-interface HomeProps {
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
-}
-
-export default async function Home({ searchParams }: HomeProps) {
-  const resolvedParams = searchParams ? await searchParams : undefined;
-  const siteMode = getSiteMode(resolvedParams);
-
-  // If mode is cinematic, render the Cinematic Scroll-World Experience
-  if (siteMode === "cinematic") {
-    return <CinematicShell />;
-  }
-
-  // Fail-safe Default: Render the preserved Classic Website Baseline
+export default function ClassicPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-background text-foreground">
+      {/* Banner indicating preserved classic mode */}
+      <div className="bg-[#18181B] border-b border-[#27272A] px-4 py-2 text-center text-xs font-mono text-[#A1A1AA] flex items-center justify-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <span>PRESERVED CLASSIC WEBSITE BASELINE — AUTHORITATIVE EXPERIENCE</span>
+      </div>
+
+      {/* Client layout extras */}
       <LayoutExtras />
       <SectionMinimap />
+
+      {/* Sticky Top Header */}
       <SiteHeader />
 
       <main id="main-content" className="flex-grow">
@@ -54,7 +47,10 @@ export default async function Home({ searchParams }: HomeProps) {
         <FinalCTA />
       </main>
 
+      {/* Persistent Bottom shortcuts navigation */}
       <FloatingProductNav />
+
+      {/* Footer */}
       <SiteFooter />
     </div>
   );
