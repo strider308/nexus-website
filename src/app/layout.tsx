@@ -3,7 +3,6 @@ import { Almarai, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { METADATA } from "@/lib/content/nexus";
 import { MotionConfig } from "motion/react";
-import { CinematicClientShell } from "@/components/cinematic/CinematicClientShell";
 
 const almarai = Almarai({
   variable: "--font-sans",
@@ -166,9 +165,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <MotionConfig reducedMotion="user">
-          <CinematicClientShell>
-            {children}
-          </CinematicClientShell>
+          {children}
         </MotionConfig>
       </body>
     </html>
