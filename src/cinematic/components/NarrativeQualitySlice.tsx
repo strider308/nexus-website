@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowLeft, Play, Pause, ExternalLink, Activity, Network, AlertTriangle, Eye, ArrowRight } from "lucide-react";
+import { ArrowLeft, Play, Pause, ExternalLink, Activity } from "lucide-react";
 import Link from "next/link";
 
 if (typeof window !== "undefined") {
