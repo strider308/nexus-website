@@ -1,5 +1,6 @@
 import { getSiteMode } from "@/lib/site-mode";
 import { CinematicShell } from "@/cinematic/components/CinematicShell";
+import { PreviewExperienceChooser } from "@/components/cinematic/PreviewExperienceChooser";
 
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -27,12 +28,16 @@ export default async function Home({ searchParams }: HomeProps) {
   const resolvedParams = searchParams ? await searchParams : undefined;
   const siteMode = getSiteMode(resolvedParams);
 
-  // If mode is cinematic, render the Cinematic Scroll-World Experience
+  // If query parameter or env specifies preview chooser or cinematic
+  if (resolvedParams?.mode === "preview" || process.env.NEXT_PUBLIC_NEXUS_SITE_MODE === "preview" || process.env.VERCEL_ENV === "preview") {
+    return <PreviewExperienceChooser />;
+  }
+
   if (siteMode === "cinematic") {
     return <CinematicShell />;
   }
 
-  // Fail-safe Default: Render the preserved Classic Website Baseline
+  // Fail-safe Default: Render preserved Classic Website Baseline
   return (
     <div className="flex flex-col min-h-screen">
       <LayoutExtras />
