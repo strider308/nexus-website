@@ -3,7 +3,6 @@ import { METADATA } from '@/lib/content/nexus';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = METADATA.canonicalUrl;
-  if (!baseUrl) return [];
   return [
     {
       url: baseUrl,

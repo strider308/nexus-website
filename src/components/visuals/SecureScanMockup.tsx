@@ -83,7 +83,7 @@ export function SecureScanMockup() {
       <text x="436" y="196" fontFamily="monospace" fontSize="10" fill="#94A3B8">22 |  const query = req.query.q;</text>
       <text x="436" y="212" fontFamily="monospace" fontSize="10" fill="#EF4444">23 |  const sql = `SELECT * FROM items` + </text>
       <text x="436" y="228" fontFamily="monospace" fontSize="10" fill="#EF4444">24 |              `WHERE name LIKE &apos;%{"${query}"}%&apos;`;</text>
-      <text x="436" y="244" fontFamily="monospace" fontSize="10" fill="#F59E0B">25 |  // sanitize input parameters</text>
+      <text x="436" y="244" fontFamily="monospace" fontSize="10" fill="#F59E0B">25 |  // TODO: sanitize input parameters</text>
       <text x="436" y="260" fontFamily="monospace" fontSize="10" fill="#94A3B8">26 |  const result = await db.execute(sql);</text>
       <text x="436" y="276" fontFamily="monospace" fontSize="10" fill="#94A3B8">27 |  return res.json(result);</text>
     </svg>
