@@ -17,9 +17,9 @@ export function ShipWrightMockup() {
       <text x="630" y="36" fontFamily="sans-serif" fontSize="9" fill="white" opacity=".6" textAnchor="end">62% done</text>
  
       {/* Three-column kanban */}
-      {/* TODO column */}
+      {/* To do column */}
       <rect x="16" y="56" width="240" height="272" rx="8" fill="#E8E4F4"/>
-      <text x="28" y="78" fontFamily="sans-serif" fontSize="11" fontWeight="700" fill="#5B4B8A">TODO</text>
+      <text x="28" y="78" fontFamily="sans-serif" fontSize="11" fontWeight="700" fill="#5B4B8A">TO DO</text>
       <rect x="220" y="66" width="22" height="18" rx="9" fill="#5B4B8A" opacity=".3"/>
       <text x="231" y="79" fontFamily="sans-serif" fontSize="10" fontWeight="700" fill="#5B4B8A" textAnchor="middle">3</text>
  

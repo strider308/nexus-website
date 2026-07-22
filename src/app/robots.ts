@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${METADATA.canonicalUrl}/sitemap.xml`,
+    ...(METADATA.canonicalUrl ? { sitemap: `${METADATA.canonicalUrl}/sitemap.xml` } : {}),
   };
 }

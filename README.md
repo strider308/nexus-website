@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexus website
 
-## Getting Started
+Nexus is a static Next.js marketing site for a founder-led workflow software studio.
 
-First, run the development server:
+## Local development
 
-```bash
+```powershell
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npx tsc --noEmit
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Public identity configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The site intentionally fails closed for public identity. To publish a canonical URL, contact inbox, and social links, the owner must verify and set:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```text
+NEXT_PUBLIC_SITE_URL_VERIFIED=true
+NEXT_PUBLIC_SITE_URL=https://...
+NEXT_PUBLIC_CONTACT_VERIFIED=true
+NEXT_PUBLIC_CONTACT_EMAIL=...
+NEXT_PUBLIC_CONTACT_URL=...
+NEXT_PUBLIC_X_URL=...
+NEXT_PUBLIC_LINKEDIN_URL=...
+NEXT_PUBLIC_GITHUB_URL=...
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Do not add values that are not owner-verified. The marketing site uses no analytics or non-essential cookies.

@@ -45,32 +45,34 @@ export interface CaseStudy {
 export interface SiteMetadata {
   title: string;
   description: string;
-  canonicalUrl: string;
-  email: string;
-  domain: string;
+  canonicalUrl?: string;
+  email?: string;
+  domain?: string;
   socials: {
-    x: string;
-    linkedin: string;
-    github: string;
+    x?: string;
+    linkedin?: string;
+    github?: string;
   };
 }
 
-// Dynamic environment variables with safe static fallbacks for build-time compilation
-// TODO: Define these variables in your deployment dashboard (e.g. Vercel) before building
-const siteUrl = typeof process !== 'undefined' ? (process.env.NEXT_PUBLIC_SITE_URL || "https://nexus-workflows.com") : "https://nexus-workflows.com";
-const contactEmail = typeof process !== 'undefined' ? (process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@nexus-workflows.com") : "hello@nexus-workflows.com";
-const contactUrl = typeof process !== 'undefined' ? (process.env.NEXT_PUBLIC_CONTACT_URL || `mailto:${contactEmail}`) : `mailto:${contactEmail}`;
-const xUrl = typeof process !== 'undefined' ? (process.env.NEXT_PUBLIC_X_URL || "https://x.com/nexus") : "https://x.com/nexus";
-const linkedinUrl = typeof process !== 'undefined' ? (process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://linkedin.com/company/nexus") : "https://linkedin.com/company/nexus";
-const githubUrl = typeof process !== 'undefined' ? (process.env.NEXT_PUBLIC_GITHUB_URL || "https://github.com/nexus") : "https://github.com/nexus";
-
-// TODO: Replace placeholders with your actual production domain and email settings before deployment.
+// Public identity values fail closed. Publishing a guessed domain, inbox, or social
+// profile is worse than withholding it until the owner has verified it.
+const publicSiteIsVerified = process.env.NEXT_PUBLIC_SITE_URL_VERIFIED === "true";
+const siteUrl = publicSiteIsVerified ? process.env.NEXT_PUBLIC_SITE_URL : undefined;
+const publicContactIsVerified = process.env.NEXT_PUBLIC_CONTACT_VERIFIED === "true";
+const contactEmail = publicContactIsVerified ? process.env.NEXT_PUBLIC_CONTACT_EMAIL : undefined;
+const contactUrl = publicContactIsVerified
+  ? process.env.NEXT_PUBLIC_CONTACT_URL || (contactEmail ? `mailto:${contactEmail}` : undefined)
+  : undefined;
+const xUrl = publicContactIsVerified ? process.env.NEXT_PUBLIC_X_URL : undefined;
+const linkedinUrl = publicContactIsVerified ? process.env.NEXT_PUBLIC_LINKEDIN_URL : undefined;
+const githubUrl = publicContactIsVerified ? process.env.NEXT_PUBLIC_GITHUB_URL : undefined;
 export const METADATA: SiteMetadata = {
   title: "Nexus — Custom Workflow Systems & Automation",
   description: "Nexus builds custom software and automation for complex workflows. See seven shipped proof systems built end-to-end — clinics, restaurants, security, teams, and more — then bring us yours.",
   canonicalUrl: siteUrl,
   email: contactEmail,
-  domain: siteUrl.replace(/^https?:\/\//, ""),
+  domain: siteUrl?.replace(/^https?:\/\//, ""),
   socials: {
     x: xUrl,
     linkedin: linkedinUrl,
@@ -80,14 +82,40 @@ export const METADATA: SiteMetadata = {
 
 export const HERO = {
   eyebrow: "Custom Workflow Systems",
-  title: "Nexus",
-  tagline: "We build custom software and automation for complex workflows. The seven systems below are shipped proof of range.",
+  title: "Make the work easier to run.",
+  tagline: "Nexus designs and builds custom workflow software for founders and operators outgrowing spreadsheets, chats, and manual handoffs.",
   proofTagline: "Seven systems shipped. Five industries. Built by one founder.",
-  ctaText: "Start a conversation",
+  ctaText: "Map my workflow",
   ctaUrl: contactUrl,
   version: "22 June 2026",
   metaCount: "7 shipped proof systems · 5 industries"
 };
+
+export const CTAS = {
+  primary: { label: "Map my workflow", href: "/contact" },
+  proof: { label: "View case studies", href: "/case-studies" },
+  demo: { label: "Open demo library", href: "/demo" },
+  resources: { label: "Use the checklist", href: "/resources" },
+} as const;
+
+export const SERVICE_FAMILIES = [
+  { title: "Workflow mapping", description: "Clarify the real handoffs, roles, decisions, and records before committing to a build." },
+  { title: "Operational systems", description: "Build role-aware software that keeps the work, its status, and ownership connected." },
+  { title: "Product pilots", description: "Shape a focused first release for real users, with clear scope and responsible rollout boundaries." },
+  { title: "Automation and hardening", description: "Remove repetitive handoffs and strengthen the workflows that must be dependable." },
+] as const;
+
+export const ENGAGEMENT_LEVELS = [
+  { title: "Map", description: "A structured view of the current workflow, risks, and narrowest useful next system." },
+  { title: "Build", description: "A scoped product or operational system built around the roles that use it." },
+  { title: "Strengthen", description: "A focused pass to make an existing workflow clearer, safer, and easier to operate." },
+] as const;
+
+export const RESOURCE_CHECKLISTS = [
+  { id: "workflow-map", title: "Workflow mapping checklist", description: "Make the current handoffs visible before solutioning.", items: ["Name the trigger that starts the work.", "List the people who touch it.", "Mark every status change.", "Find where information is copied or lost.", "Choose the record that should hold the current truth."] },
+  { id: "handoff-audit", title: "Handoff audit", description: "Find the transitions that create delay, uncertainty, or owner intervention.", items: ["Trace one real request from start to finish.", "Identify who owns each transition.", "Record the information each handoff needs.", "Note every manual follow-up.", "Define how a stalled item becomes visible."] },
+  { id: "pilot-scope", title: "Pilot scope worksheet", description: "Keep a first build specific enough to learn from.", items: ["State the one workflow the pilot must improve.", "Choose the first user roles.", "List what stays manual for now.", "Define the evidence that would justify expanding it.", "Write the fallback when the system is unavailable."] },
+] as const;
 
 export const PROOF_STRIP = [
   "7 systems shipped",
