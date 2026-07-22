@@ -1,7 +1,6 @@
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { LayoutExtras } from "@/components/site/LayoutExtras";
-import { FloatingProductNav } from "@/components/site/FloatingProductNav";
 import { Hero } from "@/components/sections/Hero";
 import { ProofStrip } from "@/components/sections/ProofStrip";
 import { ProblemSection } from "@/components/sections/ProblemSection";
@@ -38,7 +37,6 @@ export default function Home() {
         <FinalCTA />
       </main>
 
-      <FloatingProductNav />
       <SiteFooter />
     </div>
   );

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Check, ArrowUpRight, Workflow, Cpu, Layers, BarChart3 } from "lucide-react";
 import { WordsPullUpMultiStyle } from "../ui/words-pull-up";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -300,20 +300,18 @@ export function ServicesSection() {
                   onBlur={() => setHoveredLayer(null)}
                   tabIndex={0}
                   className={cn(
-                    "bg-[#101010] border rounded-[12px] p-5 flex flex-col justify-between relative group outline-none focus-visible:ring-2 focus-visible:ring-[#DEDBC8] min-h-[180px] transition-all duration-300",
+                    "bg-[#101010] border rounded-[12px] p-5 flex flex-col justify-between relative group outline-none focus-visible:ring-2 focus-visible:ring-[#DEDBC8] min-h-[180px] transition-[border-color,box-shadow,transform,opacity] duration-200 ease-out",
                     isHighlighted ? "border-[#2A7D8A] shadow-[0_0_15px_rgba(42,125,138,0.15)] scale-[1.02]" : "border-[#DEDBC8]/10",
                     activeService !== null && !isHighlighted && "opacity-35"
                   )}
                 >
-                  <AnimatePresence>
-                    {hoveredLayer === layer.layerId && (
-                      <motion.div
-                        layoutId="blueprintHoverPill"
-                        className="absolute inset-0 bg-[#DEDBC8]/5 border border-[#DEDBC8]/25 rounded-[12px] pointer-events-none z-0"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </AnimatePresence>
+                  <motion.div
+                    aria-hidden="true"
+                    initial={false}
+                    animate={{ opacity: hoveredLayer === layer.layerId ? 1 : 0 }}
+                    transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute inset-0 rounded-[12px] border border-[#DEDBC8]/25 bg-[#DEDBC8]/5 pointer-events-none z-0"
+                  />
 
                   <div className="relative z-10">
                     <span className={cn(
