@@ -36,10 +36,16 @@ async function gh<T>(url: string): Promise<T | null> {
   return res.json() as Promise<T>;
 }
 
-async function text(url: string): Promise<string | null> {
-  const res = await fetch(url, { headers: ghHeaders, cache: "no-store" });
-  if (!res.ok) return null;
-  return res.text();
+async function progressFile(fullName: string, ref: string): Promise<string | null> {
+  const data = await gh<{ content?: string; encoding?: string }>(
+    `https://api.github.com/repos/${fullName}/contents/.codex-progress.json?ref=${encodeURIComponent(ref)}`
+  );
+  if (!data?.content) return null;
+  try {
+    return Buffer.from(data.content.replace(/\\n/g, ""), data.encoding === "base64" ? "base64" : "utf8").toString("utf8");
+  } catch {
+    return null;
+  }
 }
 
 export async function GET(req: NextRequest) {
@@ -71,7 +77,7 @@ export async function GET(req: NextRequest) {
     candidates.map(async (repo) => {
       const ref = configured.get(repo.full_name) || repo.default_branch;
       const [progressText, commits, runs] = await Promise.all([
-        text(`https://raw.githubusercontent.com/${repo.full_name}/${ref}/.codex-progress.json?t=${Date.now()}`),
+        progressFile(repo.full_name, ref),
         gh<any[]>(`https://api.github.com/repos/${repo.full_name}/commits?sha=${encodeURIComponent(ref)}&per_page=1`),
         gh<any>(`https://api.github.com/repos/${repo.full_name}/actions/runs?branch=${encodeURIComponent(ref)}&per_page=5`),
       ]);
