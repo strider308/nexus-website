@@ -1,14 +1,14 @@
 {
   "taskId": "codex-task-monitor-integration",
   "title": "Build & integrate Codex Task Monitor",
-  "status": "implementation",
-  "phase": "implementation",
-  "progress": 68,
+  "status": "review",
+  "phase": "review",
+  "progress": 92,
   "startedAt": "2026-09-24T23:40:00+05:30",
-  "updatedAt": "2026-09-24T23:58:00+05:30",
-  "estimatedMinutesRemaining": 25,
-  "confidence": "medium",
-  "currentAction": "Integrating live GitHub signals and the Codex progress contract on an isolated feature branch.",
+  "updatedAt": "2026-09-25T08:45:00+05:30",
+  "estimatedMinutesRemaining": 10,
+  "confidence": "high",
+  "currentAction": "Final preview verification of the multi-project Codex Control Centre and project-detail routing.",
   "blockers": [],
   "tests": {
     "passing": 0,
@@ -23,6 +23,14 @@
     {
       "at": "2026-09-24T23:58:00+05:30",
       "text": "Dashboard route and Codex progress contract added."
+    },
+    {
+      "at": "2026-09-25T08:44:00+05:30",
+      "text": "Multi-project control centre, GitHub aggregation API, project pinning, stalled-work detection, and repository-level Codex reporting rules implemented."
+    },
+    {
+      "at": "2026-09-25T08:45:00+05:30",
+      "text": "Feature-branch progress-file reads and project-detail deep links fixed; final preview build verification pending."
     }
   ]
 }
