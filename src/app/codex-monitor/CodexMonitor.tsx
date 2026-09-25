@@ -118,6 +118,14 @@ export default function CodexMonitor() {
   }, [repo, branch]);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const selectedRepo = params.get("repo");
+    const selectedBranch = params.get("branch");
+    if (selectedRepo) setRepo(selectedRepo);
+    if (selectedBranch) setBranch(selectedBranch);
+  }, []);
+
+  useEffect(() => {
     refresh();
     const id = window.setInterval(refresh, 30000);
     return () => window.clearInterval(id);
